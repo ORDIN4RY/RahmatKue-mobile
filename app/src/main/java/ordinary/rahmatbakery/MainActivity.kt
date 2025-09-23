@@ -42,10 +42,6 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent, options.toBundle())
             this.finish()
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
-//            ActivityOptionsCompat.makeCustomAnimation(this,R.anim.fade_in, R.anim.fade_out)
-
         }
 
         btnRegister.setOnClickListener {

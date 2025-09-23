@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DashboardActivity : AppCompatActivity() {
@@ -23,14 +24,28 @@ class DashboardActivity : AppCompatActivity() {
             insets
         }
 
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, BerandaFragment())
+                .commit()
+        }
+
+        fun replaceFragment(fragment: Fragment) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, fragment)
+                .commit()
+        }
+
+
         navbar = findViewById(R.id.bottomNav)
         navbar.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    // aksi Home
+                    replaceFragment(BerandaFragment())
                     true
                 }
                 R.id.menu -> {
+                    replaceFragment(MenuFragment())
                     // aksi Profile
                     true
                 }

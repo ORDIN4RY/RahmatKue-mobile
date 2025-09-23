@@ -3,4 +3,6 @@
     <string name="headline">Dapatkan kue terbaik untuk menemani acara spesialmu sekarang juga! </string>
     <string name="deskLogin">Selamat datang kembali pelanggan setia Rahmat Kue</string>
     <string name="deskRegis">Coming soon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">tesFragment</string>
 </resources>
