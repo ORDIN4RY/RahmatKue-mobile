@@ -6,13 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical"
-    android:padding="50dp"
-    android:gravity="center_horizontal"
     android:background="@drawable/tes_gradient"
+    android:orientation="vertical"
     >
 
 <!--        android:layout_marginBottom="25dp"-->
+<LinearLayout
+    android:id="@+id/content"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    android:gravity="center_horizontal"
+    >
+
+
     <ImageView
         android:layout_marginTop="25dp"
         android:layout_width="236dp"
@@ -44,7 +52,7 @@
         android:id="@+id/tombolLogin"
         android:layout_width="214dp"
         android:layout_height="wrap_content"
-        android:text="login"
+        android:text="Login"
         android:backgroundTint="@color/krem"
         android:textColor="@color/maroon"
         android:textStyle="bold"
@@ -67,22 +75,7 @@
 
 
 
-<!--    <EditText-->
-<!--        android:id="@+id/inputName"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Masukkan Username"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:textColor="@color/white"-->
-<!--    />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/inputPass"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Masukkan Password"-->
-<!--        android:textColor="@color/white"-->
-<!--    />-->
+</LinearLayout>
 
 
 </LinearLayout>

@@ -2,11 +2,14 @@ package ordinary.rahmatbakery
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -14,8 +17,10 @@ class LoginActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-    var tombolBack : ImageButton? = null
+        var tombolBack : ImageButton? = null
         var textRegis : TextView? = null
+        var tombolLogin : Button?=null
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
@@ -25,16 +30,58 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
+        val loginCard = findViewById<CardView>(R.id.cardlogin)
+
+        tombolLogin = findViewById(R.id.btnLogin)
+        tombolLogin.setOnClickListener {
+            val intent = Intent(this, DashboardActivity::class.java)
+            startActivity(intent)
+            this.finish()
+        }
+
+        loginCard.animate()
+                    .translationY(0f)
+                    .alpha(1f)
+                    .setDuration(600)
+                    .start()
+
         tombolBack = findViewById(R.id.back)
         tombolBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            loginCard.animate()
+                .translationY(200f)
+                .alpha(0f)
+                .setDuration(200)
+                .withEndAction {
+                    val intent = Intent(this, MainActivity::class.java)
+                    val options = ActivityOptionsCompat.makeCustomAnimation(
+                        this,                // Context
+                        R.anim.fade_in,      // animasi masuk
+                        R.anim.fade_out      // animasi keluar
+                    )
+                    startActivity(intent, options.toBundle())
+                    this.finish()
+                }
+                .start()
+
         }
 
         textRegis = findViewById(R.id.keRegis)
         textRegis.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            loginCard.animate()
+                .translationY(200f)
+                .alpha(0f)
+                .setDuration(200)
+                .withEndAction {
+                    val intent = Intent(this, RegisterActivity::class.java)
+                    val options = ActivityOptionsCompat.makeCustomAnimation(
+                        this,                // Context
+                        R.anim.fade_in,      // animasi masuk
+                        R.anim.fade_out      // animasi keluar
+                    )
+                    startActivity(intent, options.toBundle())
+                    this.finish()
+                }
+                .start()
         }
     }
 }

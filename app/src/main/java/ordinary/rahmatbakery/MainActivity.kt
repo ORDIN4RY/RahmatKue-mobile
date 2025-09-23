@@ -2,9 +2,11 @@ package ordinary.rahmatbakery
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -27,14 +29,36 @@ class MainActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.tombolLogin)
         btnRegister = findViewById(R.id.tombolRegister)
 
+        val contentLayout = findViewById<View>(R.id.content)
+
         btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                this,                // Context
+                R.anim.fade_in,      // animasi masuk
+                R.anim.fade_out      // animasi keluar
+            )
+
+            startActivity(intent, options.toBundle())
+            this.finish()
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//            ActivityOptionsCompat.makeCustomAnimation(this,R.anim.fade_in, R.anim.fade_out)
+
         }
 
         btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                this,                // Context
+                R.anim.fade_in,      // animasi masuk
+                R.anim.fade_out      // animasi keluar
+            )
+
+            startActivity(intent, options.toBundle())
+            this.finish()
         }
 
 
