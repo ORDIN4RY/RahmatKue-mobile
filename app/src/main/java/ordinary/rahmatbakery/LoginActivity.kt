@@ -34,15 +34,27 @@ class LoginActivity : AppCompatActivity() {
 
         tombolLogin = findViewById(R.id.btnLogin)
         tombolLogin.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java)
-            startActivity(intent)
-            this.finish()
+            loginCard.animate()
+//                .scaleY(3f)
+////                .translationY(-200f)
+//                .alpha(0f)
+//                .setDuration(200)
+//                .withEndAction {
+                    val intent = Intent(this, DashboardActivity::class.java)
+                    val options = ActivityOptionsCompat.makeCustomAnimation(
+                        this,                // Context
+                        R.anim.fade_in,      // animasi masuk
+                        R.anim.fade_out      // animasi keluar
+                    )
+                    startActivity(intent, options.toBundle())
+                    this.finish()
+//                }.start()
         }
 
         loginCard.animate()
                     .translationY(0f)
                     .alpha(1f)
-                    .setDuration(600)
+                    .setDuration(400)
                     .start()
 
         tombolBack = findViewById(R.id.back)

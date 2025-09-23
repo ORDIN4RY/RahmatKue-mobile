@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
         regisCard.animate()
             .translationY(0f)
             .alpha(1f)
-            .setDuration(600)
+            .setDuration(400)
             .start()
 
         tombolBack = findViewById(R.id.back)
@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
             regisCard.animate()
                 .translationY(200f)
                 .alpha(0f)
-                .setDuration(200)
+                .setDuration(300)
                 .withEndAction {
                     val intent = Intent(this, MainActivity::class.java)
                     val options = ActivityOptionsCompat.makeCustomAnimation(
@@ -57,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
             regisCard.animate()
                 .translationY(200f)
                 .alpha(0f)
-                .setDuration(200)
+                .setDuration(300)
                 .withEndAction {
                     val intent = Intent(this, LoginActivity::class.java)
                     val options = ActivityOptionsCompat.makeCustomAnimation(

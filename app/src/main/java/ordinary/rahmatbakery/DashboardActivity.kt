@@ -38,6 +38,7 @@ class DashboardActivity : AppCompatActivity() {
 
 
         navbar = findViewById(R.id.bottomNav)
+
         navbar.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
