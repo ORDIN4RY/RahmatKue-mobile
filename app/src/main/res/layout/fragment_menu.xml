@@ -1,14 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuFragment">
+    tools:context=".MenuFragment"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Judul Fragment -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="menu" />
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu Produk"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true" />
 
-</FrameLayout>
+    <!-- Search Bar -->
+    <EditText
+        android:id="@+id/SearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="12dp"
+        android:paddingStart="10dp"
+        android:hint="Cari produk..."
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:drawablePadding="6dp"
+        android:background ="@drawable/input_rounded"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SearchBar"
+        android:text="Semua"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btnPromo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SearchBar"
+        android:text="Promo"
+        android:layout_toRightOf="@id/btnAll"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btnMinuman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SearchBar"
+        android:text="Paket"
+        android:layout_toRightOf="@id/btnPromo"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/subkategori1"
+        android:layout_marginTop="9dp"
+        android:background="#CCCCCC" />
+
+    <TextView
+        android:id="@+id/subkategori1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="15dp"
+        android:text="Kue A"
+        android:textColor="@color/maroon"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="34dp"
+        android:layout_toRightOf="@id/subkategori1"
+        android:background="#CCCCCC"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/subkategori1"
+        android:layout_marginStart="50dp"
+        android:text="Kue A"
+        android:textColor="@color/maroon"/>
+
+    <!-- Card Produk Pertama -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardProduct1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/cardview_light_background"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/imgProduct1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/logo"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvProductName1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Produk A"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/maroon"
+                android:layout_toRightOf="@id/imgProduct1"
+                android:layout_marginStart="12dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="250dp"
+                android:backgroundTint="@color/maroon"
+                android:text="Pesan"
+                android:textColor="@color/cardview_light_background"
+                android:textAlignment="center"
+                android:textSize="10dp">
+
+            </Button>
+
+            <TextView
+                android:id="@+id/ProductPrice1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 50.000"
+                android:layout_below="@id/tvProductName1"
+                android:layout_toRightOf="@id/imgProduct1"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/maroon" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card Produk Kedua -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardProduct2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardProduct1"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/cardview_light_background"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/imgProduct2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/logo"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/ProductName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Produk B"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/maroon"
+                android:layout_toRightOf="@id/imgProduct2"
+                android:layout_marginStart="12dp" />
+
+            <TextView
+                android:id="@+id/ProductPrice2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 75.000"
+                android:layout_below="@id/ProductName2"
+                android:layout_toRightOf="@id/imgProduct2"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/maroon" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="250dp"
+                android:backgroundTint="@color/maroon"
+                android:text="Pesan"
+                android:textColor="@color/cardview_light_background"
+                android:textAlignment="center"
+                android:textSize="10dp">
+
+            </Button>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
