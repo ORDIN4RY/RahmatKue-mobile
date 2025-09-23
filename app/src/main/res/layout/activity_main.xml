@@ -12,67 +12,77 @@
     android:background="@drawable/tes_gradient"
     >
 
-<!--    <TextView-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="32sp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Login"-->
-<!--    />-->
-
-
+<!--        android:layout_marginBottom="25dp"-->
     <ImageView
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="25dp"
         android:layout_width="236dp"
         android:layout_height="236dp"
-        android:src="@drawable/teslogo" />
+        android:src="@drawable/logo" />
 
-    <EditText
-        android:id="@+id/inputName"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Masukkan Username"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/white"
-    />
-
-    <EditText
-        android:id="@+id/inputPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Masukkan Password"
-        android:textColor="@color/white"
-    />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        >
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_weight="1"
-        app:cornerRadius="0dp"
-        android:layout_margin="4dp"
-        />
-    <Button
-        android:id="@+id/btnReg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="register"
-        android:layout_weight="1"
-        app:cornerRadius="0dp"
-        android:layout_margin="4dp"
+        android:textColor="@color/krem"
+        android:text="Selamat Datang!"
+        android:textStyle="bold"
+        android:textSize="32sp"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/krem"
+        android:text="@string/headline"
+        android:textSize="18sp"
+        android:layout_marginBottom="25dp"
+        android:textAlignment="center"
+        android:paddingHorizontal="20dp"
+        />
+<!--        android:textStyle="bold"-->
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/tombolLogin"
+        android:layout_width="214dp"
+        android:layout_height="wrap_content"
+        android:text="login"
+        android:backgroundTint="@color/krem"
+        android:textColor="@color/maroon"
+        android:textStyle="bold"
+        android:textSize="18sp"
+    android:layout_marginBottom="12dp"
+        />
+
+    <Button
+        android:id="@+id/tombolRegister"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="214dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/maroon"
+        android:text="Register"
+        android:textColor="@color/krem"
+        android:textSize="18sp"
+
+        android:textStyle="bold" />
 
 
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/inputName"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Masukkan Username"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:textColor="@color/white"-->
+<!--    />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/inputPass"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Masukkan Password"-->
+<!--        android:textColor="@color/white"-->
+<!--    />-->
 
 
 </LinearLayout>

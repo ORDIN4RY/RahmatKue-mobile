@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:background="@drawable/tes_gradient"
+        android:paddingTop="30dp"
+    >
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/back"
+        android:paddingHorizontal="10dp"
+        android:background="@color/maroon"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/krem"
+        android:text="Login"
+        android:textStyle="bold"
+        android:paddingHorizontal="30dp"
+        android:textSize="32sp"
+        android:layout_marginTop="30dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/krem"
+        android:text="@string/deskLogin"
+        android:textSize="18sp"
+        android:layout_marginBottom="25dp"
+        android:paddingHorizontal="30dp"
+        />
+<!--        android:textAlignment="center"-->
+
+
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent" -->
+<!--    >-->
+<!--        android:paddingVertical="90dp"-->
+    <LinearLayout
+    android:background="@drawable/card_login_reg"
+    android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan Email"
+            android:textColor="@color/maroon"
+            android:background="@drawable/input_rounded"
+            android:textColorHint="@color/maroon"
+            />
+        <EditText
+            android:textColorHint="@color/maroon"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan Password"
+            android:textColor="@color/maroon"
+            android:background="@drawable/input_rounded"
+            />
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/krem"
+            android:text="Login"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:id="@+id/keRegis"
+            android:layout_marginTop="5sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/maroon"
+            android:text="Belum punya akun? Register"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+<!--    </androidx.cardview.widget.CardView>-->
+</LinearLayout>
