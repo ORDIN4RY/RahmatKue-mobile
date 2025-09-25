@@ -14,9 +14,9 @@
     <item
         android:id="@+id/map"
         android:icon="@drawable/location"
-        android:title="Lokasi" />
+        android:title="Pesanan" />
     <item
         android:id="@+id/contact"
         android:icon="@drawable/customer_service"
-        android:title="Contact" />
+        android:title="Pengaturan" />
 </menu>

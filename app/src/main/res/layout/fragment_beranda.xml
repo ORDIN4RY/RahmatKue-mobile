@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hai Mamad!"
-        android:textColor="@color/maroon"
+        android:textColor="@color/primary"
         style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
         />
 
@@ -45,12 +45,12 @@
         >
         <TextView
             android:gravity="center"
-            android:background="@color/maroon"
+            android:background="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:text="anggep aja carousel"
             android:textAlignment="center"
-            android:textColor="@color/krem"
+            android:textColor="@color/background"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -74,8 +74,8 @@
             android:layout_height="wrap_content"
             android:text="Delivery"
             app:icon="@drawable/delivery"
-            android:textColor="@color/krem"
-            android:iconTint="@color/krem"
+            android:textColor="@color/background"
+            android:iconTint="@color/background"
             app:cornerRadius="50dp"
             app:strokeWidth="0dp"
             android:layout_marginRight="30dp"
@@ -85,8 +85,8 @@
             android:layout_height="wrap_content"
             android:text="Take Away"
             app:icon="@drawable/takeaway"
-            android:textColor="@color/krem"
-            android:iconTint="@color/krem"
+            android:textColor="@color/background"
+            android:iconTint="@color/background"
             app:cornerRadius="50dp"
             app:strokeWidth="0dp"
             />

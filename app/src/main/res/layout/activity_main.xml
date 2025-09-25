@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/tes_gradient"
+    android:background="@color/background"
     android:orientation="vertical"
     >
 
@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/krem"
+        android:textColor="@color/maroon"
         android:text="Selamat Datang!"
         android:textStyle="bold"
         android:textSize="32sp"
@@ -39,7 +39,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/krem"
+        android:textColor="@color/maroon"
         android:text="@string/headline"
         android:textSize="18sp"
         android:layout_marginBottom="25dp"
@@ -53,8 +53,8 @@
         android:layout_width="214dp"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:backgroundTint="@color/krem"
-        android:textColor="@color/maroon"
+        android:backgroundTint="@color/maroon"
+        android:textColor="@color/background"
         android:textStyle="bold"
         android:textSize="18sp"
     android:layout_marginBottom="12dp"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/maroon"
         android:text="Register"
-        android:textColor="@color/krem"
+        android:textColor="@color/background"
         android:textSize="18sp"
 
         android:textStyle="bold" />

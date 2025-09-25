@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:orientation="vertical"
-    android:background="@drawable/tes_gradient"
+    android:background="@color/background"
         android:paddingTop="30dp"
     >
 
@@ -18,24 +18,24 @@
         android:contentDescription="TODO"
         android:src="@drawable/back"
         android:paddingHorizontal="10dp"
-        android:background="@color/maroon"
+        android:background="@android:color/transparent"
         />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/krem"
+        android:textColor="@color/maroon"
         android:text="Login"
         android:textStyle="bold"
         android:paddingHorizontal="30dp"
         android:textSize="32sp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/krem"
+        android:textColor="@color/primary"
         android:text="@string/deskLogin"
         android:textSize="18sp"
         android:layout_marginBottom="25dp"
@@ -54,8 +54,8 @@
         android:id="@+id/cardlogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="@color/maroon"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@android:color/transparent"
         app:cardElevation="8dp"
         android:translationY="200dp"
         android:alpha="0"
@@ -74,17 +74,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan Email"
-            android:textColor="@color/maroon"
+            android:textColor="@color/primary"
             android:background="@drawable/input_rounded"
-            android:textColorHint="@color/maroon"
+            android:textColorHint="@color/primary"
             />
         <EditText
-            android:textColorHint="@color/maroon"
+            android:textColorHint="@color/primary"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan Password"
-            android:textColor="@color/maroon"
+            android:textColor="@color/primary"
             android:background="@drawable/input_rounded"
             />
         <Button
@@ -92,7 +92,7 @@
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/krem"
+            android:textColor="@color/background"
             android:text="Login"
             android:textSize="18sp"
             />
