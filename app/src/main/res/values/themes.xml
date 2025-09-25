@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.RahmatBakery" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/maroon</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/maroon</item>
-        <item name="colorOnSecondary">@color/white</item>
+         <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/background</item>
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorOnSecondary">@color/background</item>
     </style>
 
     <style name="Theme.RahmatBakery" parent="Base.Theme.RahmatBakery" />

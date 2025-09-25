@@ -33,7 +33,7 @@
         app:itemTextAppearanceActive="@style/BottomNavTextActive"
         app:itemTextAppearanceInactive="@style/BottomNavTextInactive"
         app:itemBackground="@drawable/nav_item_background"
-        app:itemIconSize="18dp"
+        app:itemIconSize="24dp"
         app:itemGravity="center"
         android:paddingBottom="5dp"
 
