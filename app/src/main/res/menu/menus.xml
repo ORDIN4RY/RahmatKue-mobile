@@ -12,11 +12,11 @@
         android:icon="@drawable/box"
         android:title="Menu" />
     <item
-        android:id="@+id/map"
+        android:id="@+id/order"
         android:icon="@drawable/pesanan"
         android:title="Pesanan" />
     <item
-        android:id="@+id/contact"
+        android:id="@+id/setting"
         android:icon="@drawable/mdi_gear"
         android:title="Pengaturan" />
 </menu>

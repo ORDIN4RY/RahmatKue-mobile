@@ -50,26 +50,26 @@ class DashboardActivity : AppCompatActivity() {
                     // aksi Profile
                     true
                 }
-                R.id.map -> {
+                R.id.order -> {
                     // aksi Profile
                     true
                 }
-                R.id.contact -> {
+                R.id.setting -> {
                     // kirim pesan ke WhatsApp
-                    val message = "saya ingin membagikan pesan berikut."
-
-                    try {
-                        val share = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_TEXT, message)
-                            type = "text/plain"
-                        }
-                        startActivity(Intent.createChooser(share, "bagikan melalui:"))
-
-                    } catch (e: Exception) {
-                        Toast.makeText(this, "tidak ada aplikasi yang tersedia untuk berbagi", Toast.LENGTH_SHORT).show()
-                    }
-
+//                    val message = "saya ingin membagikan pesan berikut."
+//
+//                    try {
+//                        val share = Intent().apply {
+//                            action = Intent.ACTION_SEND
+//                            putExtra(Intent.EXTRA_TEXT, message)
+//                            type = "text/plain"
+//                        }
+//                        startActivity(Intent.createChooser(share, "bagikan melalui:"))
+//
+//                    } catch (e: Exception) {
+//                        Toast.makeText(this, "tidak ada aplikasi yang tersedia untuk berbagi", Toast.LENGTH_SHORT).show()
+//                    }
+                    replaceFragment(PengaturanFragment())
 
                     true
                 }

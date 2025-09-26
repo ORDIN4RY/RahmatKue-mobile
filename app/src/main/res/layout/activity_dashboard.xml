@@ -26,8 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="10dp"
-        android:background="@drawable/nav_background"
+        android:background="@color/background"
         app:itemIconTint="@color/nav_item_color"
         app:itemTextColor="@color/nav_item_color"
         app:itemTextAppearanceActive="@style/BottomNavTextActive"
@@ -35,7 +34,6 @@
         app:itemBackground="@drawable/nav_item_background"
         app:itemIconSize="24dp"
         app:itemGravity="center"
-        android:paddingBottom="5dp"
 
         />
 <!--        app:itemTextAppearanceActive="@style/BottomNavText"-->

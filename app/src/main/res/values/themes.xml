@@ -6,6 +6,7 @@
         <item name="colorOnPrimary">@color/background</item>
         <item name="colorSecondary">@color/primary</item>
         <item name="colorOnSecondary">@color/background</item>
+
     </style>
 
     <style name="Theme.RahmatBakery" parent="Base.Theme.RahmatBakery" />

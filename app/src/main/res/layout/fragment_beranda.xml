@@ -9,38 +9,58 @@
 <!--    android:padding="10dp"-->
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="20dp"
+        android:padding="10dp"
         >
 
     <ImageView
+        android:id="@+id/img_profil"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:src="@drawable/profil"
         android:padding="10dp"
         android:background="@drawable/circle_background"
         android:clipToOutline="true"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         />
 
     <TextView
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hai Mamad!"
         android:textColor="@color/primary"
         style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+        android:layout_toRightOf="@id/img_profil"
         />
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_toLeftOf="@id/icon_notif"
+            android:src="@drawable/cart"
+            android:layout_marginRight="20dp"/>
+
+        <ImageView
+            android:id="@+id/icon_notif"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/notif"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/card_light_bg">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,6 +93,10 @@
     android:layout_marginTop="10dp"
     android:layout_marginHorizontal="15dp"
     />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,6 +144,8 @@
 
     </LinearLayout>
 
+    </ScrollView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,7 +159,7 @@
         android:gravity="center"
         android:background="@color/primary"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="15dp"
         android:layout_height="150dp"
         android:text="promo"
         android:textAlignment="center"
@@ -152,7 +178,7 @@
         android:gravity="center"
         android:background="@color/primary"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="15dp"
         android:layout_height="150dp"
         android:text="menu"
         android:textAlignment="center"
