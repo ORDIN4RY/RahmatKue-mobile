@@ -56,7 +56,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
         android:backgroundTint="@android:color/transparent"
-        app:cardElevation="8dp"
         android:translationY="200dp"
         android:alpha="0"
         >
