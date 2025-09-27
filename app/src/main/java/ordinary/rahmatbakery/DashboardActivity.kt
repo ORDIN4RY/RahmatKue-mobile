@@ -51,6 +51,7 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.order -> {
+                    replaceFragment(PesananFragment())
                     // aksi Profile
                     true
                 }

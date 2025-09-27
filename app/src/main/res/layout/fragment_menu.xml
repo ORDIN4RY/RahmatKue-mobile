@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuFragment"
-    android:padding="16dp">
+    tools:context=".MenuFragment">
+
 
     <!-- Judul Fragment -->
     <TextView
@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Menu Produk"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true" />
@@ -21,10 +22,10 @@
     <EditText
         android:id="@+id/SearchBar"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_below="@id/tvTitle"
         android:layout_marginTop="12dp"
-        android:paddingStart="10dp"
+        android:paddingStart="20dp"
         android:hint="Cari produk..."
         android:drawableStart="@android:drawable/ic_menu_search"
         android:drawablePadding="6dp"
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/SearchBar"
         android:text="Semua"
+        android:background="@drawable/button"
         android:layout_marginTop="10dp"/>
 
     <Button
@@ -51,16 +53,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/SearchBar"
         android:text="Promo"
+        android:background="@drawable/button"
         android:layout_toRightOf="@id/btnAll"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"/>
 
     <Button
-        android:id="@+id/btnMinuman"
+        android:id="@+id/btnPaket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/SearchBar"
         android:text="Paket"
+        android:background="@drawable/button"
         android:layout_toRightOf="@id/btnPromo"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"/>
@@ -92,6 +96,7 @@
         android:layout_marginStart="25dp" />
 
     <TextView
+        android:id="@+id/subkategori2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnAll"
@@ -101,13 +106,92 @@
         android:text="Kue A"
         android:textColor="@color/maroon"/>
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="34dp"
+        android:layout_toRightOf="@id/subkategori2"
+        android:background="#CCCCCC"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp" />
+
+    <TextView
+        android:id="@+id/subkategori3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/subkategori2"
+        android:layout_marginStart="50dp"
+        android:text="Kue A"
+        android:textColor="@color/maroon"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="34dp"
+        android:layout_toRightOf="@id/subkategori3"
+        android:background="#CCCCCC"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp" />
+
+    <TextView
+        android:id="@+id/subkategori4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/subkategori3"
+        android:layout_marginStart="50dp"
+        android:text="Kue A"
+        android:textColor="@color/maroon"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="34dp"
+        android:layout_toRightOf="@id/subkategori4"
+        android:background="#CCCCCC"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp" />
+
+    <TextView
+        android:id="@+id/subkategori5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAll"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/subkategori4"
+        android:layout_marginStart="40dp"
+        android:text="Kue A"
+        android:textColor="@color/maroon"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/subkategori1"
+        android:layout_marginTop="10dp"
+        android:layout_alignEnd="@id/subkategori5"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:id="@+id/dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Pilih jenis Acara"
+            android:textSize="12sp"
+            android:textColor="@color/cardview_light_background"
+            android:background="@color/primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
     <!-- Card Produk Pertama -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardProduct1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnAll"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/subkategori1"
+        android:layout_marginTop="80dp"
         android:backgroundTint="@color/cardview_light_background"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp">
@@ -137,16 +221,13 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="250dp"
-                android:backgroundTint="@color/maroon"
+                android:background="@drawable/button"
                 android:text="Pesan"
-                android:textColor="@color/cardview_light_background"
                 android:textAlignment="center"
-                android:textSize="10dp">
-
-            </Button>
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/ProductPrice1"
@@ -208,16 +289,14 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="250dp"
                 android:backgroundTint="@color/maroon"
                 android:text="Pesan"
                 android:textColor="@color/cardview_light_background"
                 android:textAlignment="center"
-                android:textSize="10dp">
-
-            </Button>
+                android:textSize="18dp"/>
 
 
         </RelativeLayout>
