@@ -56,17 +56,18 @@
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
         android:backgroundTint="@android:color/transparent"
+        app:cardElevation="0dp"
         android:translationY="200dp"
         android:alpha="0"
         >
 
 
     <LinearLayout
-        android:background="@drawable/card_login_reg"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@drawable/card_login_reg"
         android:paddingHorizontal="30dp">
 
         <EditText

@@ -16,27 +16,15 @@
         android:gravity="center_vertical"
         android:padding="10dp"
         >
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beranda"
+            android:textColor="@color/primary"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+            />
 
-    <ImageView
-        android:id="@+id/img_profil"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/profil"
-        android:padding="10dp"
-        android:background="@drawable/circle_background"
-        android:clipToOutline="true"
-        android:layout_marginLeft="10dp"
-        />
-
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hai Mamad!"
-        android:textColor="@color/primary"
-        style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
-        android:layout_toRightOf="@id/img_profil"
-        />
 
         <ImageView
             android:layout_width="28dp"
@@ -65,23 +53,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        >
-        <TextView
-            android:gravity="center"
-            android:background="@color/primary"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:text="anggep aja carousel"
-            android:textAlignment="center"
-            android:textColor="@color/background"
-        />
-    </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        >
+        <ImageView
+            android:id="@+id/img_profil"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/profil"
+            android:padding="10dp"
+            android:background="@drawable/circle_background"
+            android:clipToOutline="true"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hai Mamad!"
+            android:textColor="@color/primary"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+            android:layout_toRightOf="@id/img_profil"
+            />
+    </RelativeLayout>
+
+            <TextView
+                android:gravity="center"
+                android:background="@color/primary"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:text="anggep aja carousel"
+                android:textAlignment="center"
+                android:textColor="@color/background"
+                />
 
 
     <TextView

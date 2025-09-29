@@ -1,50 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="PesananFragment">
+    tools:context="PesananFragment"
+    android:orientation="vertical">
 
 
     <!-- Judul Fragment -->
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Daftar Pesanan"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="50dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:padding="10dp"
+        >
 
-    <ImageView
-        android:id="@+id/notif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/notif"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daftar Pesanan"
+            android:textColor="@color/primary"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+            />
 
-    <ImageView
-        android:id="@+id/keranjang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/cart"
-        android:layout_alignRight="@id/notif"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="20dp"
-        android:layout_toLeftOf="@id/notif"
+        <ImageView
+            android:id="@+id/icon_cart"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/cart"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/icon_notif"
+            />
 
-        />
+        <ImageView
+            android:id="@+id/icon_notif"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/notif"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
 
     <Button
         android:id="@+id/buttonsemua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button"
-        android:layout_below="@id/Title"
-        android:layout_marginTop="65dp"
         android:layout_marginStart="40dp"
         android:text="Semua" />
 
@@ -52,8 +63,6 @@
         android:id="@+id/buttonproses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Title"
-        android:layout_marginTop="65dp"
         android:background="@drawable/button"
         android:layout_toRightOf="@id/buttonsemua"
         android:layout_marginStart="20dp"
@@ -63,8 +72,6 @@
         android:id="@+id/buttonselesai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Title"
-        android:layout_marginTop="65dp"
         android:background="@drawable/button"
         android:layout_toRightOf="@id/buttonproses"
         android:layout_marginStart="20dp"
@@ -224,3 +231,5 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
+
+</LinearLayout>

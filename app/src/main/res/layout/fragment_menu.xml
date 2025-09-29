@@ -1,29 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuFragment">
+    tools:context=".MenuFragment"
+    android:orientation="vertical">
 
 
     <!-- Judul Fragment -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Menu Produk"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true" />
+        android:padding="10dp"
+        >
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu Produk"
+            android:textColor="@color/primary"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+            />
+
+        <ImageView
+            android:id="@+id/icon_cart"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/cart"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/icon_notif"
+            />
+
+        <ImageView
+            android:id="@+id/icon_notif"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/notif"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+
 
     <!-- Search Bar -->
     <EditText
         android:id="@+id/SearchBar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_below="@id/tvTitle"
         android:layout_marginTop="12dp"
         android:paddingStart="20dp"
         android:hint="Cari produk..."
@@ -302,4 +335,5 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
