@@ -8,4 +8,6 @@
         <item name="colorOnSecondary">@color/background</item>
 
     </style>
+
+    <style name="Theme.RahmatBakery" parent="Base.Theme.RahmatBakery" />
 </resources>

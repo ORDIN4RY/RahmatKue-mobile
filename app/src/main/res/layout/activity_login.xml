@@ -71,6 +71,7 @@
         android:paddingHorizontal="30dp">
 
         <EditText
+            android:id="@+id/inputEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan Email"
@@ -79,6 +80,7 @@
             android:textColorHint="@color/primary"
             />
         <EditText
+            android:id="@+id/inputPass"
             android:textColorHint="@color/primary"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -86,7 +88,9 @@
             android:hint="Masukkan Password"
             android:textColor="@color/primary"
             android:background="@drawable/input_rounded"
+            android:inputType="textPassword"
             />
+
         <Button
             android:id="@+id/btnLogin"
             android:layout_marginTop="30dp"

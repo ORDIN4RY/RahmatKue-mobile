@@ -1,10 +1,12 @@
 package ordinary.rahmatbakery
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,9 +35,18 @@ class MenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
-    }
+        val rootView = inflater.inflate(R.layout.fragment_menu, container, false)
+
+        // Ambil tombol dari layout fragment
+        val btnNotif = rootView.findViewById<ImageView>(R.id.icon_notif)
+
+        // Set aksi klik
+        btnNotif.setOnClickListener {
+            val intent = Intent(requireContext(), NotifActivity::class.java)
+            startActivity(intent)
+        }
+
+        return rootView}
 
     companion object {
         /**

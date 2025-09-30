@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RahmatBakery">
         <activity
+            android:name=".NotifActivity"
+            android:exported="false" />
+        <activity
             android:name=".DashboardActivity"
             android:exported="true" />
         <activity

@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -16,10 +18,14 @@ import androidx.core.view.WindowInsetsCompat
 class LoginActivity : AppCompatActivity() {
 
 
+    var tombolBack : ImageButton? = null
+    var textRegis : TextView? = null
+    var tombolLogin : Button? = null
+
+    var inputEmail : EditText? = null
+    var inputPass : EditText? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        var tombolBack : ImageButton? = null
-        var textRegis : TextView? = null
-        var tombolLogin : Button?=null
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,16 +36,17 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
-        val loginCard = findViewById<CardView>(R.id.cardlogin)
+        inputPass = findViewById(R.id.inputPass)
+        inputEmail = findViewById(R.id.inputEmail)
 
+        val loginCard = findViewById<CardView>(R.id.cardlogin)
         tombolLogin = findViewById(R.id.btnLogin)
-        tombolLogin.setOnClickListener {
+        tombolLogin?.setOnClickListener {
+            if(inputEmail?.text.toString().isEmpty() || inputPass?.text.toString().isEmpty()){
+                Toast.makeText(this, "Mohon isi semua data", Toast.LENGTH_SHORT).show()
+            }else{
             loginCard.animate()
-//                .scaleY(3f)
-////                .translationY(-200f)
-//                .alpha(0f)
-//                .setDuration(200)
-//                .withEndAction {
+                .withEndAction {
                     val intent = Intent(this, DashboardActivity::class.java)
                     val options = ActivityOptionsCompat.makeCustomAnimation(
                         this,                // Context
@@ -48,7 +55,9 @@ class LoginActivity : AppCompatActivity() {
                     )
                     startActivity(intent, options.toBundle())
                     this.finish()
-//                }.start()
+                }
+                .start()
+            }
         }
 
         loginCard.animate()
@@ -58,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                     .start()
 
         tombolBack = findViewById(R.id.back)
-        tombolBack.setOnClickListener {
+        tombolBack?.setOnClickListener {
             loginCard.animate()
                 .translationY(200f)
                 .alpha(0f)
@@ -78,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         textRegis = findViewById(R.id.keRegis)
-        textRegis.setOnClickListener {
+        textRegis?.setOnClickListener {
             loginCard.animate()
                 .translationY(200f)
                 .alpha(0f)
