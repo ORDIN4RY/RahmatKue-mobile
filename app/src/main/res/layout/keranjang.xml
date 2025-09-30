@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="14dp"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        >
+        <TextView
+            android:id="@+id/judul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keranjang Saya"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@id/back"
+            />
+    
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back"
+            />
+
+        <ImageView
+            android:id="@+id/notif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notif"
+            android:layout_alignParentRight="true"
+            />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/back"
+            android:paddingTop="20dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="12dp"
+            android:backgroundTint="@color/cardview_light_background"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                >
+
+                <ImageView
+                    android:id="@+id/imgProduct1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/logo"
+                    android:scaleType="centerCrop"
+                    />
+                <TextView
+                    android:id="@+id/judulproduct1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="KUE AMD"
+                    android:layout_toRightOf="@id/imgProduct1"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/itemtambahan1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/judulproduct1"
+                    android:text="Item Tambahan
+                                  \n- Lilin "
+                    android:layout_toRightOf="@id/imgProduct1"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:id="@+id/btnMinus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:layout_below="@id/itemtambahan1"
+                    android:layout_toRightOf="@id/imgProduct1"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24sp"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginEnd="8dp"/>
+
+                <!-- Angka -->
+                <TextView
+                    android:id="@+id/txtCount"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_below="@id/itemtambahan1"
+                    android:layout_toRightOf="@id/btnMinus"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/bg_counter"
+                    android:text="15"
+                    android:textStyle="bold"
+                    android:textSize="13sp" />
+
+                <!-- Tombol Plus -->
+                <TextView
+                    android:id="@+id/btnPlus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:layout_below="@id/itemtambahan1"
+                    android:layout_toRightOf="@id/txtCount"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24sp"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginStart="8dp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp. 200.000"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignBottom="@id/btnPlus"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X"
+                    android:layout_alignParentRight="true"
+                    android:textStyle="bold"
+
+
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+
+</LinearLayout>
