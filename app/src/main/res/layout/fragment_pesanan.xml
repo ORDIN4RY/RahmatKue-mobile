@@ -46,54 +46,64 @@
 
     </RelativeLayout>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp">
 
-    <Button
-        android:id="@+id/buttonsemua"
+    <!-- buttons -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:layout_marginStart="40dp"
-        android:text="Semua" />
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:padding="10dp">
+        <Button
+            android:id="@+id/btnAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SearchBar"
+            android:text="Semua"
+            android:background="@drawable/button"
+            android:layout_marginHorizontal="10dp"/>
 
-    <Button
-        android:id="@+id/buttonproses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:layout_toRightOf="@id/buttonsemua"
-        android:layout_marginStart="20dp"
-        android:text="Proses" />
+        <Button
+            android:id="@+id/btnProses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SearchBar"
+            android:text="Proses"
+            android:background="@drawable/button"
+            android:layout_toRightOf="@id/btnAll"
+            android:layout_marginHorizontal="10dp"/>
 
-    <Button
-        android:id="@+id/buttonselesai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:layout_toRightOf="@id/buttonproses"
-        android:layout_marginStart="20dp"
-        android:text="Selesai"/>
+        <Button
+            android:id="@+id/btnSelesai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SearchBar"
+            android:text="Selesai"
+            android:background="@drawable/button"
+            android:layout_toRightOf="@id/btnPromo"
+            android:layout_marginHorizontal="10dp"/>
+    </LinearLayout>
 
-    <View
-        android:id="@+id/divider1"
+    <!--    pesanan    -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/buttonsemua"
-        android:layout_marginTop="11dp"
-        android:background="@color/black" />
+        android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+<!--        card pesanan        -->
+        <androidx.cardview.widget.CardView
         android:id="@+id/pesanan1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/divider1"
-        android:layout_marginTop="20dp"
         android:backgroundTint="@color/cardview_light_background"
         app:cardElevation="4dp"
-        app:cardCornerRadius="12dp">
+        app:cardCornerRadius="12dp"
+        android:layout_marginBottom="10dp">
 
         <RelativeLayout
         android:layout_width="match_parent"
@@ -157,79 +167,8 @@
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/pesanan2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pesanan1"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/cardview_light_background"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="12dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:id="@+id/imgProduct2"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/logo"
-                android:scaleType="centerCrop" />
-
-            <TextView
-                android:id="@+id/namakue2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/imgProduct2"
-                android:layout_marginStart="10dp"
-                android:text="KUE A"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="KUE gggg"/>
-
-            <TextView
-                android:id="@+id/itemtambahan2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/imgProduct2"
-                android:layout_marginStart="10dp"
-                android:textSize="8sp"
-                android:layout_below="@id/namakue2"
-                android:text="Item Tambahan :"/>
-
-            <TextView
-                android:id="@+id/statuspembayaran2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imgProduct2"
-                android:layout_marginTop="10dp"
-                android:text="Lunas"/>
-
-            <TextView
-                android:id="@+id/totalpesanan2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/statuspembayaran2"
-                android:layout_marginStart="10dp"
-                android:gravity="right"
-                android:text="Total Pesanan :Rp.200.000"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/totalpesanan2"
-                android:text="X1"
-                android:gravity="right"/>
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>
