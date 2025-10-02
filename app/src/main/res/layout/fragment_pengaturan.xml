@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".PengaturanFragment"
+    tools:context=".pelanggan.PengaturanFragment"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -122,60 +122,60 @@
         android:paddingVertical="20dp"
         >
         <TextView
+            android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
             android:textColor="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Voucher Dimiliki"
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:layout_marginBottom="10dp"
-            android:elevation="3dp"
-            android:background="@color/white"/>
+            android:background="@drawable/outline_btn"/>
         <TextView
+            android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
             android:textColor="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Alamat Tersimpan"
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:layout_marginBottom="10dp"
-            android:elevation="3dp"
-            android:background="@color/white"/>
+            android:background="@drawable/outline_btn"/>
         <TextView
+            android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
             android:textColor="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pengaturan Aplikasi"
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:layout_marginBottom="10dp"
-            android:elevation="3dp"
-            android:background="@color/white"/>
+            android:background="@drawable/outline_btn"/>
         <TextView
+            android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
             android:textColor="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bantuan"
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:layout_marginBottom="10dp"
-            android:elevation="3dp"
-            android:background="@color/white"/>
+            android:background="@drawable/outline_btn"/>
         <TextView
+            android:id="@+id/logout"
+            android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
             android:textColor="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
-            android:layout_marginBottom="10dp"
-            android:elevation="3dp"
-            android:background="@color/white"/>
+            android:background="@drawable/outline_btn"/>
     </LinearLayout>
 
     </ScrollView>

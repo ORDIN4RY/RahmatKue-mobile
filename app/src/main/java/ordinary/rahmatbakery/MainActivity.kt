@@ -9,15 +9,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ordinary.rahmatbakery.pelanggan.DashboardActivity
+import ordinary.rahmatbakery.util.PrefManager
 
 class MainActivity : AppCompatActivity() {
 
 
+        private var btnLogin : Button? = null
+        private var btnRegister : Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-    var btnLogin : Button? = null
-    var btnRegister : Button? = null;
+
         super.onCreate(savedInstanceState)
+        val prefManager = PrefManager(this@MainActivity)
+        if(prefManager.isLoggedIn()) {
+            startActivity(Intent(this@MainActivity, DashboardActivity::class.java))
+            finish()
+            return
+        }
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -31,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         val contentLayout = findViewById<View>(R.id.content)
 
-        btnLogin.setOnClickListener {
+        btnLogin?.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
 
             val options = ActivityOptionsCompat.makeCustomAnimation(
@@ -44,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             this.finish()
         }
 
-        btnRegister.setOnClickListener {
+        btnRegister?.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
 
             val options = ActivityOptionsCompat.makeCustomAnimation(

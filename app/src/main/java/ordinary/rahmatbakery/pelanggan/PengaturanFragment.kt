@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery
+package ordinary.rahmatbakery.pelanggan
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import ordinary.rahmatbakery.LoginActivity
+import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.util.PrefManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -15,10 +19,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [MenuFragment.newInstance] factory method to
+ * Use the [PengaturanFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PesananFragment  : Fragment() {
+class PengaturanFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,10 +39,11 @@ class PesananFragment  : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_pesanan, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_pengaturan, container, false)
 
         // Ambil tombol dari layout fragment
         val btnNotif = rootView.findViewById<ImageView>(R.id.icon_notif)
+        val logout = rootView.findViewById<TextView>(R.id.logout)
 
         // Set aksi klik
         btnNotif.setOnClickListener {
@@ -46,7 +51,16 @@ class PesananFragment  : Fragment() {
             startActivity(intent)
         }
 
-        return rootView}
+        logout.setOnClickListener {
+            val prefManager : PrefManager = PrefManager(requireContext())
+            prefManager.logout()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            requireActivity().finish()
+            startActivity(intent)
+        }
+
+        return rootView
+    }
 
     companion object {
         /**
@@ -55,12 +69,12 @@ class PesananFragment  : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment MenuFragment.
+         * @return A new instance of fragment PengaturanFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            MenuFragment().apply {
+            PengaturanFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
