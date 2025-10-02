@@ -64,6 +64,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingHorizontal="30dp"
+        android:elevation="3dp"
         >
 
         <EditText

@@ -24,18 +24,15 @@ class DashboardActivity : AppCompatActivity() {
             insets
         }
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, BerandaFragment())
-                .commit()
-        }
-
         fun replaceFragment(fragment: Fragment) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.frameLayout, fragment)
                 .commit()
         }
 
+        if (savedInstanceState == null) {
+            replaceFragment(BerandaFragment())
+        }
 
         navbar = findViewById(R.id.bottomNav)
 
