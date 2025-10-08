@@ -7,9 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.pelanggan.adapter.PesananTerakhirAdapter
+import ordinary.rahmatbakery.pelanggan.model.PesananTerakhir
 
 class BerandaFragment : Fragment() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: PesananTerakhirAdapter
+    private val listPesanan = mutableListOf<PesananTerakhir>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -33,7 +41,26 @@ class BerandaFragment : Fragment() {
             startActivity(intent)
         }
 
+        // Inisialisasi RecyclerView
+        recyclerView = rootView.findViewById(R.id.rvPesananTerakhir)
+        adapter = PesananTerakhirAdapter(listPesanan)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        // nanti bagian ini diganti dengan data dari API
+        dummyData()
+
         return rootView
+    }
+
+    private fun dummyData() {
+        listPesanan.add(PesananTerakhir("Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
+        listPesanan.add(PesananTerakhir("Kue Keju", "https://contoh.com/kue_keju.jpg"))
+        listPesanan.add(PesananTerakhir("Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
+        listPesanan.add(PesananTerakhir("Kue Keju", "https://contoh.com/kue_keju.jpg"))
+        listPesanan.add(PesananTerakhir("Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
+        listPesanan.add(PesananTerakhir("Kue Keju", "https://contoh.com/kue_keju.jpg"))
+        adapter.notifyDataSetChanged()
     }
 
 }

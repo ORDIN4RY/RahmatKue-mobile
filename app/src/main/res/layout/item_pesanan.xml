@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="15dp"
+    android:elevation="2dp"
+    android:layout_margin="5dp"
+    android:background="@color/card_light_bg">
+
+    <ImageView
+        android:id="@+id/productImg"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/productName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Produk B"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/primary"
+        android:layout_toEndOf="@id/productImg"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:id="@+id/detail_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="item Tambahan"
+        android:layout_below="@id/productName"
+        android:layout_toRightOf="@id/productImg"
+        android:layout_marginStart="12sp"
+        android:textColor="#424242" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_item"
+        android:layout_toEndOf="@id/productImg"
+        android:layout_marginStart="12dp"
+        tools:itemCount="4"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="10/06/2025"
+        />
+
+    <TextView
+        android:id="@+id/hargaPesanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Pesanan : Rp. 200.000 "
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lunas"
+        android:layout_above="@id/hargaPesanan"
+        android:layout_alignParentEnd="true"/>
+
+
+
+
+</RelativeLayout>

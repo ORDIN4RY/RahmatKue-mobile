@@ -140,9 +140,9 @@ class LoginActivity : AppCompatActivity() {
                         val prefManager = PrefManager(this@LoginActivity)
 
                         val username = response.body()?.username ?: ""
-                        val token = response.body()?.token ?: ""
+                        val userId = response.body()?.user_id ?: 0
 
-                        prefManager.saveLogin(username, token)
+                        prefManager.saveLogin(username, userId)
 
                         Toast.makeText(
                             this@LoginActivity,

@@ -106,51 +106,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        android:layout_marginTop="10dp"
-    >
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/circle_background"
-            android:src="@drawable/logo"
-            android:layout_marginRight="10dp"
-        />
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/circle_background"
-            android:src="@drawable/logo"
-            android:layout_marginRight="10dp"
-        />
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/circle_background"
-            android:src="@drawable/logo"
-            android:layout_marginRight="10dp"
-        />
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/circle_background"
-            android:src="@drawable/logo"
-            android:layout_marginRight="10dp"
-        />
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/circle_background"
-            android:src="@drawable/logo"
-            android:layout_marginRight="10dp"
-        />
-
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPesananTerakhir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            />
 
     </ScrollView>
 

@@ -7,7 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.pelanggan.adapter.KategoriAdapter
+import ordinary.rahmatbakery.pelanggan.adapter.MenuProdukAdapter
+import ordinary.rahmatbakery.pelanggan.adapter.PesananTerakhirAdapter
+import ordinary.rahmatbakery.pelanggan.model.Kategori
+import ordinary.rahmatbakery.pelanggan.model.MenuProduk
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,16 +27,18 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MenuFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var rvProduct: RecyclerView
+    private lateinit var adapterProduct: MenuProdukAdapter
+    private val listMenu = mutableListOf<MenuProduk>()
+
+    private lateinit var rvKategori: RecyclerView
+    private lateinit var adapterKategori: KategoriAdapter
+    private val listKategori = mutableListOf<Kategori>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -47,25 +56,42 @@ class MenuFragment : Fragment() {
             startActivity(intent)
         }
 
-        return rootView}
+        // Inisialisasi RecyclerView
+        // Produk
+        rvProduct = rootView.findViewById(R.id.rvProduct)
+        adapterProduct = MenuProdukAdapter(listMenu)
+        rvProduct.adapter = adapterProduct
+        rvProduct.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        // Kategori
+        rvKategori = rootView.findViewById(R.id.rvKategori)
+        adapterKategori = KategoriAdapter(listKategori)
+        rvKategori.adapter = adapterKategori
+        rvKategori.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MenuFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MenuFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        // nanti bagian ini diganti dengan data dari API
+        dummyProduct()
+        dummyKategori()
+
+        return rootView
     }
+
+    private fun dummyProduct() {
+        listMenu.add(MenuProduk("Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
+        listMenu.add(MenuProduk("Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
+        listMenu.add(MenuProduk("Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
+        listMenu.add(MenuProduk("Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
+        listMenu.add(MenuProduk("Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
+        listMenu.add(MenuProduk("Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
+        adapterProduct.notifyDataSetChanged()
+    }
+    private fun dummyKategori() {
+        listKategori.add(Kategori(1, "kategori 1"))
+        listKategori.add(Kategori(1, "kategori 2"))
+        listKategori.add(Kategori(1, "kategori 1"))
+        listKategori.add(Kategori(1, "kategori 2"))
+        listKategori.add(Kategori(1, "kategori 1"))
+        listKategori.add(Kategori(1, "kategori 2"))
+        adapterKategori.notifyDataSetChanged()
+    }
+
 }

@@ -1,16 +1,24 @@
 package ordinary.rahmatbakery.pelanggan
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.ngetes.WebSocketClient
+import ordinary.rahmatbakery.util.PrefManager
 
 class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val prefManager = PrefManager(this)
+        val socketClient = WebSocketClient("ws://10.10.180.210:8080?user_id=${prefManager.getId()}", this@DashboardActivity)
+        socketClient.connect()
 
         var navbar : BottomNavigationView? = null
 
