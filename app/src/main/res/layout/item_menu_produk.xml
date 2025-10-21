@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:elevation="2dp"
@@ -9,12 +10,15 @@
     android:background="@color/card_light_bg"
     >
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/productImg"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/logo"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded"
+
+    />
 
         <TextView
             android:id="@+id/productName"

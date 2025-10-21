@@ -7,9 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Columns
+import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.adapter.KategoriAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.MenuProdukAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.PesananTerakhirAdapter
@@ -69,29 +75,50 @@ class MenuFragment : Fragment() {
         rvKategori.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         // nanti bagian ini diganti dengan data dari API
-        dummyProduct()
-        dummyKategori()
+        loadProduct("")
+        loadKategori()
 
         return rootView
     }
 
-    private fun dummyProduct() {
-        listMenu.add(MenuProduk(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
-        listMenu.add(MenuProduk(1,"Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
-        listMenu.add(MenuProduk(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
-        listMenu.add(MenuProduk(1,"Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
-        listMenu.add(MenuProduk(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
-        listMenu.add(MenuProduk(1,"Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
-        adapterProduct.notifyDataSetChanged()
+    fun loadKategori() {
+        lifecycleScope.launch {
+            val kategories = SupabaseManager.client.from("kategori")
+                .select(columns = Columns.raw(
+                    """kategoriId : id_kategori,
+                kategoriName : nama_kategori""".trimIndent()
+                )) // Select all columns, or specify with Columns.list("name", "country_id")
+                .decodeList<Kategori>()
+
+            if(!kategories.isEmpty()){
+                for (kategori in kategories) {
+                    listKategori.add(Kategori(kategori.kategoriId,kategori.kategoriName))
+                }
+                adapterKategori.notifyDataSetChanged()
+            }
+        }
+
     }
-    private fun dummyKategori() {
-        listKategori.add(Kategori(1, "kategori 1"))
-        listKategori.add(Kategori(1, "kategori 2"))
-        listKategori.add(Kategori(1, "kategori 1"))
-        listKategori.add(Kategori(1, "kategori 2"))
-        listKategori.add(Kategori(1, "kategori 1"))
-        listKategori.add(Kategori(1, "kategori 2"))
-        adapterKategori.notifyDataSetChanged()
+
+    fun loadProduct(kategori : String) {
+        lifecycleScope.launch {
+        val produk = SupabaseManager.client.from("produk")
+            .select(columns = Columns.raw(
+                """id : id_produk,
+                productName : nama_produk,
+                productImg : foto_produk,
+                productPrice : harga""".trimIndent()
+            )) // Select all columns, or specify with Columns.list("name", "country_id")
+            .decodeList<MenuProduk>()
+
+            if(!produk.isEmpty()){
+                for (menuProduk in produk) {
+                    listMenu.add(MenuProduk(menuProduk.id,menuProduk.productName, menuProduk.productImg,menuProduk.productPrice))
+                }
+                adapterProduct.notifyDataSetChanged()
+            }
+        }
+
     }
 
 }

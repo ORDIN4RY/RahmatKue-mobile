@@ -69,28 +69,12 @@ class LoginActivity : AppCompatActivity() {
             val email = inputEmail?.text.toString()
             val password = inputPass?.text.toString()
 
-            if (inputEmail?.text.toString().isEmpty() || inputPass?.text.toString().isEmpty()) {
+            if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Mohon isi semua data", Toast.LENGTH_SHORT).show()
             } else {
-
-                loginUser(inputEmail?.text.toString(), inputPass?.text.toString())
-
-//                loginCard.animate()
-//                .withEndAction {
-//                    val intent = Intent(this, DashboardActivity::class.java)
-//                    val options = ActivityOptionsCompat.makeCustomAnimation(
-//                        this,                // Context
-//                        R.anim.fade_in,      // animasi masuk
-//                        R.anim.fade_out      // animasi keluar
-//                    )
-//
-//                    startActivity(intent, options.toBundle())
-//                    this.finish()
-//                }
-//                .start()
-
-
+                loginUser(email, password)
             }
+        }
 
             tombolBack = findViewById(R.id.back)
             tombolBack?.setOnClickListener {
@@ -132,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
 
-        }
+
 
     }
 
@@ -151,14 +135,22 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "Login berhasil!", Toast.LENGTH_SHORT).show()
 
                     // Pindah ke DashboardActivity
-                    val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-                    val options = ActivityOptionsCompat.makeCustomAnimation(
-                        this@LoginActivity,
-                        R.anim.fade_in,
-                        R.anim.fade_out
-                    )
-                    startActivity(intent, options.toBundle())
-                    finish()
+                    val loginCard = findViewById<CardView>(R.id.cardlogin)
+                    loginCard.animate()
+                        .translationY(200f)
+                        .alpha(0f)
+                        .setDuration(200)
+                        .withEndAction {
+                            val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+                            val options = ActivityOptionsCompat.makeCustomAnimation(
+                                this@LoginActivity,
+                                R.anim.fade_in,
+                                R.anim.fade_out
+                            )
+                            startActivity(intent, options.toBundle())
+                            finish()
+                        }
+                        .start()
                 } else {
                     Toast.makeText(
                         this@LoginActivity,

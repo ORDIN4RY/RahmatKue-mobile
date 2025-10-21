@@ -17,4 +17,9 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.App.CornerSizeRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item> <!-- Adjust your desired corner radius -->
+    </style>
+
 </resources>

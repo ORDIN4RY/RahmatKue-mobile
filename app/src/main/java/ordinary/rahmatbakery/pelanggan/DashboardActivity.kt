@@ -16,10 +16,6 @@ import ordinary.rahmatbakery.util.PrefManager
 class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val prefManager = PrefManager(this)
-        val socketClient = WebSocketClient("ws://10.10.180.210:8080?user_id=${prefManager.getId()}", this@DashboardActivity)
-        socketClient.connect()
-
         var navbar : BottomNavigationView? = null
 
         super.onCreate(savedInstanceState)

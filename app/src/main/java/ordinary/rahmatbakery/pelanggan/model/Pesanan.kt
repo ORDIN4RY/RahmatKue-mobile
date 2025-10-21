@@ -2,7 +2,7 @@ package ordinary.rahmatbakery.pelanggan.model
 
 data class Pesanan(
 
-    val idPesanan: Int,
+    val idPesanan: String,
     val namaPesanan: String,
     val pesananImg : String,
     val status : String,
