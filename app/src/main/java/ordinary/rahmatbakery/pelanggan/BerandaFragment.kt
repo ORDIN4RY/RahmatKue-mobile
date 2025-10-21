@@ -54,12 +54,12 @@ class BerandaFragment : Fragment() {
     }
 
     private fun dummyData() {
-        listPesanan.add(PesananTerakhir("Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
-        listPesanan.add(PesananTerakhir("Kue Keju", "https://contoh.com/kue_keju.jpg"))
-        listPesanan.add(PesananTerakhir("Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
-        listPesanan.add(PesananTerakhir("Kue Keju", "https://contoh.com/kue_keju.jpg"))
-        listPesanan.add(PesananTerakhir("Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
-        listPesanan.add(PesananTerakhir("Kue Keju", "https://contoh.com/kue_keju.jpg"))
+        listPesanan.add(PesananTerakhir(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
+        listPesanan.add(PesananTerakhir(1,"Kue Keju", "https://contoh.com/kue_keju.jpg"))
+        listPesanan.add(PesananTerakhir(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
+        listPesanan.add(PesananTerakhir(1,"Kue Keju", "https://contoh.com/kue_keju.jpg"))
+        listPesanan.add(PesananTerakhir(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
+        listPesanan.add(PesananTerakhir(1,"Kue Keju", "https://contoh.com/kue_keju.jpg"))
         adapter.notifyDataSetChanged()
     }
 

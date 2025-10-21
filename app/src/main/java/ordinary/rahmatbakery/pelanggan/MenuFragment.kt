@@ -76,12 +76,12 @@ class MenuFragment : Fragment() {
     }
 
     private fun dummyProduct() {
-        listMenu.add(MenuProduk("Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
-        listMenu.add(MenuProduk("Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
-        listMenu.add(MenuProduk("Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
-        listMenu.add(MenuProduk("Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
-        listMenu.add(MenuProduk("Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
-        listMenu.add(MenuProduk("Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
+        listMenu.add(MenuProduk(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
+        listMenu.add(MenuProduk(1,"Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
+        listMenu.add(MenuProduk(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
+        listMenu.add(MenuProduk(1,"Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
+        listMenu.add(MenuProduk(1,"Roti Coklat", "https://contoh.com/roti_coklat.jpg",12000))
+        listMenu.add(MenuProduk(1,"Kue Keju", "https://contoh.com/kue_keju.jpg",12000))
         adapterProduct.notifyDataSetChanged()
     }
     private fun dummyKategori() {
