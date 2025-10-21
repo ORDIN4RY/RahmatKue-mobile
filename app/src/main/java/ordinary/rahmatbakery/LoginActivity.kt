@@ -22,17 +22,25 @@ import ordinary.rahmatbakery.util.PrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.widget.*
+import androidx.activity.enableEdgeToEdge
+import androidx.lifecycle.lifecycleScope
+import  ordinary.rahmatbakery.api.SupabaseManager
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.gotrue.auth
+import io.github.jan.supabase.gotrue.providers.builtin.Email
+import kotlinx.coroutines.launch
 
 
 class LoginActivity : AppCompatActivity() {
 
 
-    var tombolBack : ImageButton? = null
-    var textRegis : TextView? = null
-    var tombolLogin : Button? = null
+    var tombolBack: ImageButton? = null
+    var textRegis: TextView? = null
+    var tombolLogin: Button? = null
 
-    var inputEmail : EditText? = null
-    var inputPass : EditText? = null
+    var inputEmail: EditText? = null
+    var inputPass: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -58,6 +66,9 @@ class LoginActivity : AppCompatActivity() {
 
         tombolLogin = findViewById(R.id.btnLogin)
         tombolLogin?.setOnClickListener {
+            val email = inputEmail?.text.toString()
+            val password = inputPass?.text.toString()
+
             if (inputEmail?.text.toString().isEmpty() || inputPass?.text.toString().isEmpty()) {
                 Toast.makeText(this, "Mohon isi semua data", Toast.LENGTH_SHORT).show()
             } else {
@@ -124,58 +135,44 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-    fun loginUser(username: String, password: String) {
-        val api = RetrofitClient.instance
-        val request = LoginRequest(username, password)
 
-        api.login(request).enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(
-                call: Call<LoginResponse>,
-                response: Response<LoginResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    if (loginResponse?.status == "success") {
-                        // Simpan ke SharedPreferences
-                        val prefManager = PrefManager(this@LoginActivity)
+    // AuthViewModel.kt (lanjutan)
+    private fun loginUser(email: String, password: String) {
+        lifecycleScope.launch {
+            try {
+                val result = SupabaseManager.client.auth.signInWith(Email) {
+                    this.email = email
+                    this.password = password
+                }
 
-                        val username = response.body()?.username ?: ""
-                        val userId = response.body()?.user_id ?: 0
+                // Jika berhasil
+                val session = SupabaseManager.client.auth.currentSessionOrNull()
+                if (session != null) {
+                    Toast.makeText(this@LoginActivity, "Login berhasil!", Toast.LENGTH_SHORT).show()
 
-                        prefManager.saveLogin(username, userId)
-
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Login Berhasil, Selamat datang ${loginResponse.username}",
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                        // Pindah ke Dashboard
-                        startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
-                        finish()
-                    } else {
-                        Toast.makeText(
-                            this@LoginActivity,
-                            loginResponse?.message ?: "Login gagal",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    // Pindah ke DashboardActivity
+                    val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+                    val options = ActivityOptionsCompat.makeCustomAnimation(
+                        this@LoginActivity,
+                        R.anim.fade_in,
+                        R.anim.fade_out
+                    )
+                    startActivity(intent, options.toBundle())
+                    finish()
                 } else {
                     Toast.makeText(
                         this@LoginActivity,
-                        "Response tidak valid dari server",
+                        "Session tidak ditemukan!",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(
-                    this@LoginActivity,
-                    " ${t.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+            } catch (e: Exception) {
+                Toast.makeText(this@LoginActivity, "Login gagal: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
-        })
+        }
     }
 }
+
+
