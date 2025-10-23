@@ -15,7 +15,10 @@ object SupabaseManager {
         supabaseUrl = SUPABASE_URL,
         supabaseKey = SUPABASE_KEY
     ) {
-        install(Auth)
+        install(Auth){
+            alwaysAutoRefresh = true
+            autoSaveToStorage = true
+        }
         install(Postgrest)
         defaultSerializer = KotlinXSerializer()
         //install other modules

@@ -54,34 +54,46 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:padding="10dp">
-        <Button
-            android:id="@+id/btnAll"
+        <TextView
+            android:id="@+id/btn_semua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/SearchBar"
             android:text="Semua"
-            android:background="@drawable/button"
-            android:layout_marginHorizontal="10dp"/>
+            android:textColor="@color/primary"
+            android:background="@drawable/btn_outline"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            />
 
-        <Button
-            android:id="@+id/btnProses"
+        <TextView
+            android:id="@+id/btn_proses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/SearchBar"
             android:text="Proses"
-            android:background="@drawable/button"
-            android:layout_toRightOf="@id/btnAll"
-            android:layout_marginHorizontal="10dp"/>
+            android:textColor="@color/white"
+            android:background="@drawable/btn_full"
+            android:layout_toRightOf="@id/btn_semua"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            />
 
-        <Button
-            android:id="@+id/btnSelesai"
+        <TextView
+            android:id="@+id/btn_selesai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/SearchBar"
             android:text="Selesai"
-            android:background="@drawable/button"
-            android:layout_toRightOf="@id/btnPromo"
-            android:layout_marginHorizontal="10dp"/>
+            android:textColor="@color/white"
+            android:background="@drawable/btn_full"
+            android:layout_toRightOf="@id/btn_proses"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            />
     </LinearLayout>
 
     <!--    pesanan    -->

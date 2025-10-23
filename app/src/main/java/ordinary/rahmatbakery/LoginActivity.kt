@@ -2,61 +2,56 @@ package ordinary.rahmatbakery
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import ordinary.rahmatbakery.api.ApiService
-import ordinary.rahmatbakery.api.RetrofitClient
-import ordinary.rahmatbakery.model.LoginRequest
-import ordinary.rahmatbakery.model.LoginResponse
-import ordinary.rahmatbakery.pelanggan.DashboardActivity
-import ordinary.rahmatbakery.util.PrefManager
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import android.widget.*
-import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
-import  ordinary.rahmatbakery.api.SupabaseManager
-import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.auth.auth
-import io.github.jan.supabase.auth.providers.builtin.Email
 import kotlinx.coroutines.launch
-
+import ordinary.rahmatbakery.model.Profile
+import ordinary.rahmatbakery.pelanggan.DashboardActivity
 
 class LoginActivity : AppCompatActivity() {
 
 
-    var tombolBack: ImageButton? = null
-    var textRegis: TextView? = null
-    var tombolLogin: Button? = null
-
-    var inputEmail: EditText? = null
-    var inputPass: EditText? = null
+    private val viewModel: LoginViewModel by viewModels()
+    private lateinit var inputEmail: EditText
+    private lateinit var inputPass: EditText
+    private lateinit var tombolLogin: Button
+    private lateinit var tombolBack: ImageButton
+    private lateinit var textRegis: TextView
+    private lateinit var loginCard: CardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        inputPass = findViewById(R.id.inputPass)
+        //inisialisasi
         inputEmail = findViewById(R.id.inputEmail)
-
-        val loginCard = findViewById<CardView>(R.id.cardlogin)
+        inputPass = findViewById(R.id.inputPass)
+        tombolLogin = findViewById(R.id.btnLogin)
+        tombolBack = findViewById(R.id.back)
+        textRegis = findViewById(R.id.keRegis)
+        loginCard = findViewById(R.id.cardlogin)
 
         loginCard.animate()
             .translationY(0f)
@@ -64,107 +59,116 @@ class LoginActivity : AppCompatActivity() {
             .setDuration(400)
             .start()
 
-        tombolLogin = findViewById(R.id.btnLogin)
-        tombolLogin?.setOnClickListener {
-            val email = inputEmail?.text.toString()
-            val password = inputPass?.text.toString()
+        lifecycleScope.launch {
+            viewModel.state.collect { state ->
+                when (state) {
+                    is LoginViewModel.AuthState.Idle -> showLoading(false)
+                    is LoginViewModel.AuthState.Loading -> showLoading(true)
+                    is LoginViewModel.AuthState.Success -> {
+                        showLoading(false)
+                        Toast.makeText(this@LoginActivity, "Login berhasil!", Toast.LENGTH_SHORT).show()
+                        goToDashboard(state.profile)
+                    }
+                    is LoginViewModel.AuthState.Error -> {
+                        showLoading(false)
+                        Toast.makeText(this@LoginActivity, state.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
 
+
+        tombolLogin.setOnClickListener {
+            val email = inputEmail.text.toString()
+            val password = inputPass.text.toString()
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Mohon isi semua data", Toast.LENGTH_SHORT).show()
             } else {
-                loginUser(email, password)
+                viewModel.login(email, password)
             }
         }
 
-            tombolBack = findViewById(R.id.back)
-            tombolBack?.setOnClickListener {
-                loginCard.animate()
-                    .translationY(200f)
-                    .alpha(0f)
-                    .setDuration(200)
-                    .withEndAction {
-                        val intent = Intent(this, MainActivity::class.java)
-                        val options = ActivityOptionsCompat.makeCustomAnimation(
-                            this,                // Context
-                            R.anim.fade_in,      // animasi masuk
-                            R.anim.fade_out      // animasi keluar
-                        )
-                        startActivity(intent, options.toBundle())
-                        this.finish()
-                    }
-                    .start()
+        tombolBack.setOnClickListener {
+            goBack()
+        }
 
-            }
-
-            textRegis = findViewById(R.id.keRegis)
-            textRegis?.setOnClickListener {
-                loginCard.animate()
-                    .translationY(200f)
-                    .alpha(0f)
-                    .setDuration(200)
-                    .withEndAction {
-                        val intent = Intent(this, RegisterActivity::class.java)
-                        val options = ActivityOptionsCompat.makeCustomAnimation(
-                            this,                // Context
-                            R.anim.fade_in,      // animasi masuk
-                            R.anim.fade_out      // animasi keluar
-                        )
-                        startActivity(intent, options.toBundle())
-                        this.finish()
-                    }
-                    .start()
-            }
-
-
-
+        textRegis.setOnClickListener {
+            goToRegister()
+        }
 
     }
 
-    // AuthViewModel.kt (lanjutan)
-    private fun loginUser(email: String, password: String) {
-        lifecycleScope.launch {
-            try {
-                val result = SupabaseManager.client.auth.signInWith(Email) {
-                    this.email = email
-                    this.password = password
-                }
+    private fun animateOut(onEnd: () -> Unit) {
+        loginCard.animate()
+            .translationY(200f)
+            .alpha(0f)
+            .setDuration(200)
+            .withEndAction(onEnd)
+            .start()
+    }
 
-                // Jika berhasil
-                val session = SupabaseManager.client.auth.currentSessionOrNull()
-                if (session != null) {
-                    Toast.makeText(this@LoginActivity, "Login berhasil!", Toast.LENGTH_SHORT).show()
+    private fun showLoading(show: Boolean) {
+        val overlay = findViewById<FrameLayout>(R.id.loadingOverlay)
+        val card = findViewById<CardView>(R.id.cardlogin)
 
-                    // Pindah ke DashboardActivity
-                    val loginCard = findViewById<CardView>(R.id.cardlogin)
-                    loginCard.animate()
-                        .translationY(200f)
-                        .alpha(0f)
-                        .setDuration(200)
-                        .withEndAction {
-                            val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-                            val options = ActivityOptionsCompat.makeCustomAnimation(
-                                this@LoginActivity,
-                                R.anim.fade_in,
-                                R.anim.fade_out
-                            )
-                            startActivity(intent, options.toBundle())
-                            finish()
-                        }
-                        .start()
-                } else {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Session tidak ditemukan!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-            } catch (e: Exception) {
-                Toast.makeText(this@LoginActivity, "Login gagal: ${e.message}", Toast.LENGTH_SHORT)
-                    .show()
-            }
+        if (show) {
+            overlay.alpha = 0f
+            overlay.visibility = View.VISIBLE
+            overlay.animate().alpha(1f).setDuration(200).start()
+            card.animate().alpha(0.5f).setDuration(200).start()
+        } else {
+            overlay.animate()
+                .alpha(0f)
+                .setDuration(200)
+                .withEndAction { overlay.visibility = View.GONE }
+                .start()
+            card.animate().alpha(1f).setDuration(200).start()
         }
     }
+
+    private fun goToDashboard(profile: Profile) {
+        animateOut {
+            val intent = Intent(this, DashboardActivity::class.java)
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                this,
+                R.anim.fade_in,
+                R.anim.fade_out
+            )
+            startActivity(intent, options.toBundle())
+            finish()
+        }
+    }
+
+    private fun goBack(){
+        animateOut {
+            val intent = Intent(this, MainActivity::class.java)
+
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                this,                // Context
+                R.anim.fade_in,      // animasi masuk
+                R.anim.fade_out      // animasi keluar
+            )
+
+            startActivity(intent, options.toBundle())
+            this.finish()
+        }
+    }
+
+    private fun goToRegister(){
+        animateOut {
+            val intent = Intent(this, RegisterActivity::class.java)
+
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                this,                // Context
+                R.anim.fade_in,      // animasi masuk
+                R.anim.fade_out      // animasi keluar
+            )
+
+            startActivity(intent, options.toBundle())
+            this.finish()
+        }
+    }
+
 }
 
 

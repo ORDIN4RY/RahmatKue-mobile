@@ -131,7 +131,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/outline_btn"/>
+            android:background="@drawable/btn_outline"/>
         <TextView
             android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
@@ -142,7 +142,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/outline_btn"/>
+            android:background="@drawable/btn_outline"/>
         <TextView
             android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
@@ -153,7 +153,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/outline_btn"/>
+            android:background="@drawable/btn_outline"/>
         <TextView
             android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
@@ -164,7 +164,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/outline_btn"/>
+            android:background="@drawable/btn_outline"/>
         <TextView
             android:id="@+id/logout"
             android:elevation="3dp"
@@ -175,7 +175,7 @@
             android:text="Logout"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
-            android:background="@drawable/outline_btn"/>
+            android:background="@drawable/btn_outline"/>
     </LinearLayout>
 
     </ScrollView>

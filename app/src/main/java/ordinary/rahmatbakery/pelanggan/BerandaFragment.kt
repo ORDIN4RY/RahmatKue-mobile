@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
@@ -18,6 +19,11 @@ class BerandaFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PesananTerakhirAdapter
     private val listPesanan = mutableListOf<PesananTerakhir>()
+
+    private val parentActivity: DashboardActivity?
+        get() = activity as? DashboardActivity
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -34,10 +40,24 @@ class BerandaFragment : Fragment() {
 
         // Ambil tombol dari layout fragment
         val btnNotif = rootView.findViewById<ImageView>(R.id.icon_notif)
+        val btnCart = rootView.findViewById<ImageView>(R.id.icon_cart)
+        val nameText = rootView.findViewById<TextView>(R.id.nickname)
+        val pointText = rootView.findViewById<TextView>(R.id.user_point)
+
+        val username = parentActivity?.profile?.username
+        val point = parentActivity?.profile?.point
+
+        nameText.setText("Hi, ${username?: "Pengguna"} !")
+        pointText.setText("${point?: 0} Points")
+
 
         // Set aksi klik
         btnNotif.setOnClickListener {
             val intent = Intent(requireContext(), NotifActivity::class.java)
+            startActivity(intent)
+        }
+        btnCart.setOnClickListener {
+            val intent = Intent(requireContext(), KeranjangActivity::class.java)
             startActivity(intent)
         }
 

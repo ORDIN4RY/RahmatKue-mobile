@@ -114,4 +114,16 @@
     </androidx.cardview.widget.CardView>
 
 <!--    </androidx.cardview.widget.CardView>-->
+    <FrameLayout
+    android:id="@+id/loadingOverlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:gravity="center">
+
+    <ProgressBar
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+    </FrameLayout>
 </LinearLayout>
+

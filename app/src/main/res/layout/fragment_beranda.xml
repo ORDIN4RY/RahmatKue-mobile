@@ -1,46 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".pelanggan.BerandaFragment"
-    android:orientation="vertical">
-<!--    android:padding="10dp"-->
+    android:orientation="vertical"
+    tools:context=".pelanggan.BerandaFragment">
+    <!--    android:padding="10dp"-->
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="10dp"
-        >
+        android:orientation="horizontal"
+        android:padding="10dp">
+
         <TextView
-            android:layout_marginLeft="10dp"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="Beranda"
-            android:textColor="@color/primary"
-            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
-            />
+            android:textColor="@color/primary" />
 
 
         <ImageView
+            android:id="@+id/icon_cart"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_toLeftOf="@id/icon_notif"
-            android:src="@drawable/cart"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@id/icon_notif"
+            android:src="@drawable/cart" />
 
         <ImageView
             android:id="@+id/icon_notif"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/notif"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            />
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/notif" />
 
     </RelativeLayout>
 
@@ -49,113 +48,123 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        >
-        <ImageView
-            android:id="@+id/img_profil"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/profil"
-            android:padding="10dp"
-            android:background="@drawable/circle_background"
-            android:clipToOutline="true"
-            android:layout_marginLeft="10dp"
-            />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp">
 
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hai Mamad!"
-            android:textColor="@color/primary"
-            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
-            android:layout_toRightOf="@id/img_profil"
-            />
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/img_profil"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/circle_background"
+                    android:clipToOutline="true"
+                    android:padding="10dp"
+                    android:src="@drawable/profil" />
+
+                <TextView
+                    android:id="@+id/nickname"
+                    style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/img_profil"
+                    android:text="Hai Mamad!"
+                    android:textColor="@color/primary" />
+
+                <TextView
+                    android:id="@+id/user_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_points"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="0 Points"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </RelativeLayout>
 
             <TextView
-                android:gravity="center"
-                android:background="@color/primary"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:background="@color/primary"
+                android:gravity="center"
                 android:text="anggep aja carousel"
                 android:textAlignment="center"
-                android:textColor="@color/background"
-                />
+                android:textColor="@color/background" />
 
 
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Pesanan Terakhir > "
-    android:textColor="@color/primary"
-    style="@style/TextAppearance.AppCompat.Title"
-    android:layout_marginTop="10dp"
-    android:layout_marginHorizontal="15dp"
-    />
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Pesanan Terakhir > "
+                android:textColor="@color/primary" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPesananTerakhir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPesananTerakhir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp" />
 
+            </ScrollView>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Promo Terbaru > "
+                android:textColor="@color/primary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@color/primary"
+                android:gravity="center"
+                android:text="promo"
+                android:textAlignment="center"
+                android:textColor="@color/background" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Menu Terbaru > "
+                android:textColor="@color/primary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@color/primary"
+                android:gravity="center"
+                android:text="menu"
+                android:textAlignment="center"
+                android:textColor="@color/background" />
+        </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Promo Terbaru > "
-        android:textColor="@color/primary"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="15dp"
-    />
-    <TextView
-        android:gravity="center"
-        android:background="@color/primary"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="15dp"
-        android:layout_height="150dp"
-        android:text="promo"
-        android:textAlignment="center"
-        android:textColor="@color/background"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Menu Terbaru > "
-        android:textColor="@color/primary"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="15dp"
-    />
-    <TextView
-        android:gravity="center"
-        android:background="@color/primary"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="15dp"
-        android:layout_height="150dp"
-        android:text="menu"
-        android:textAlignment="center"
-        android:textColor="@color/background"
-        />
-        </LinearLayout>
-</ScrollView>
-
-    </LinearLayout>
+</LinearLayout>

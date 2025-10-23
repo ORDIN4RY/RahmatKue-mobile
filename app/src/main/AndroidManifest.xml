@@ -17,6 +17,9 @@
             android:name=".pelanggan.NotifActivity"
             android:exported="false" />
         <activity
+            android:name=".pelanggan.KeranjangActivity"
+            android:exported="false" />
+        <activity
             android:name=".pelanggan.DashboardActivity"
             android:exported="true" />
         <activity
@@ -28,9 +31,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
