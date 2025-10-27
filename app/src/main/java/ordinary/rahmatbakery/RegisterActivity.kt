@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -21,12 +22,16 @@ import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.DashboardActivity
 
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var tombolShow: ImageView
+    private lateinit var tombolBack : ImageButton
+    private lateinit var textLogin : TextView
+    private lateinit var tombolRegister: Button
+    private lateinit var inputEmail: EditText
+    private lateinit var inputPass: EditText
+    private lateinit var regisCard : CardView
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        var tombolBack : ImageButton? = null
-        var textLogin : TextView? = null
-        var tombolRegister: Button? = null
-        var inputEmail: EditText? = null
-        var inputPass: EditText? = null
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,9 +42,13 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
 
-        val regisCard = findViewById<CardView>(R.id.cardRegis)
+        regisCard = findViewById<CardView>(R.id.cardRegis)
         inputPass = findViewById(R.id.inputPass)
         inputEmail = findViewById(R.id.inputEmail)
+        tombolRegister = findViewById(R.id.btnRegister)
+        tombolBack = findViewById(R.id.back)
+        textLogin = findViewById(R.id.keLogin)
+        tombolShow = findViewById(R.id.btn_show)
 
         regisCard.animate()
             .translationY(0f)
@@ -47,10 +56,9 @@ class RegisterActivity : AppCompatActivity() {
             .setDuration(400)
             .start()
 
-        tombolRegister = findViewById(R.id.btnRegister)
-        tombolRegister?.setOnClickListener {
-            val email = inputEmail?.text.toString()
-            val password = inputPass?.text.toString()
+        tombolRegister.setOnClickListener {
+            val email = inputEmail.text.toString()
+            val password = inputPass.text.toString()
 
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Mohon isi semua data", Toast.LENGTH_SHORT).show()
@@ -59,42 +67,22 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        tombolBack = findViewById(R.id.back)
         tombolBack.setOnClickListener {
-            regisCard.animate()
-                .translationY(200f)
-                .alpha(0f)
-                .setDuration(300)
-                .withEndAction {
-                    val intent = Intent(this, MainActivity::class.java)
-                    val options = ActivityOptionsCompat.makeCustomAnimation(
-                        this,                // Context
-                        R.anim.fade_in,      // animasi masuk
-                        R.anim.fade_out      // animasi keluar
-                    )
-                    startActivity(intent, options.toBundle())
-                    this.finish()
-                }
-                .start()
+            goBack()
         }
 
-        textLogin = findViewById(R.id.keLogin)
         textLogin.setOnClickListener {
-            regisCard.animate()
-                .translationY(200f)
-                .alpha(0f)
-                .setDuration(300)
-                .withEndAction {
-                    val intent = Intent(this, LoginActivity::class.java)
-                    val options = ActivityOptionsCompat.makeCustomAnimation(
-                        this,                // Context
-                        R.anim.fade_in,      // animasi masuk
-                        R.anim.fade_out      // animasi keluar
-                    )
-                    startActivity(intent, options.toBundle())
-                    this.finish()
-                }
-                .start()
+            goToLogin()
+        }
+
+        tombolShow.setOnClickListener {
+            if(inputPass.inputType == 129){
+                inputPass.inputType = 1
+                tombolShow.setImageResource(R.drawable.eye_hide)
+            }else{
+                inputPass.inputType = 129
+                tombolShow.setImageResource(R.drawable.eye_show)
+            }
         }
 
     }
@@ -107,40 +95,55 @@ class RegisterActivity : AppCompatActivity() {
                     this.password = password
                 }
 
-                // Jika berhasil
-                val session = SupabaseManager.client.auth.currentSessionOrNull()
-                if (session != null) {
-                    Toast.makeText(this@RegisterActivity, "berhasil mendaftar!", Toast.LENGTH_SHORT).show()
-
-                    // Pindah ke DashboardActivity
-                    val regisCard = findViewById<CardView>(R.id.cardRegis)
-                    regisCard.animate()
-                        .translationY(200f)
-                        .alpha(0f)
-                        .setDuration(300)
-                        .withEndAction {
-                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                            val options = ActivityOptionsCompat.makeCustomAnimation(
-                                this@RegisterActivity,
-                                R.anim.fade_in,
-                                R.anim.fade_out
-                            )
-                            startActivity(intent, options.toBundle())
-                            finish()
-                        }
-                        .start()
-                } else {
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Session tidak ditemukan!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+//                inputEmail.setText(result.toString())
+                Toast.makeText(this@RegisterActivity, "silahkan aktivasi melalui link yang dikirim di email", Toast.LENGTH_SHORT).show()
+                // Pindah ke login
+                goToLogin()
+                
 
             } catch (e: Exception) {
                 Toast.makeText(this@RegisterActivity, "gagal Mendaftar: ${e.message}", Toast.LENGTH_SHORT)
                     .show()
             }
+        }
+    }
+
+    private fun animateOut(onEnd: () -> Unit) {
+        regisCard.animate()
+            .translationY(200f)
+            .alpha(0f)
+            .setDuration(200)
+            .withEndAction(onEnd)
+            .start()
+    }
+
+    private fun goToLogin(){
+        animateOut {
+            val intent = Intent(this, LoginActivity::class.java)
+
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                this,                // Context
+                R.anim.fade_in,      // animasi masuk
+                R.anim.fade_out      // animasi keluar
+            )
+
+            startActivity(intent, options.toBundle())
+            this.finish()
+        }
+    }
+
+    private fun goBack(){
+        animateOut {
+            val intent = Intent(this, MainActivity::class.java)
+
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                this,                // Context
+                R.anim.fade_in,
+                R.anim.fade_out
+            )
+
+            startActivity(intent, options.toBundle())
+            this.finish()
         }
     }
 

@@ -4,5 +4,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Keranjang (
     val keranjangId: String,
-    val produk: MenuProduk
+    val produk : MenuProduk,
+    var selected : Boolean = false,
+    var jumlah : Int = 15
 )

@@ -49,7 +49,7 @@
         android:id="@+id/cardRegis"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@android:color/transparent"
         app:cardElevation="0dp"
         android:translationY="200dp"
@@ -59,10 +59,10 @@
 
     <LinearLayout
         android:background="@drawable/card_login_reg"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingTop="50dp"
         android:paddingHorizontal="30dp"
         android:elevation="3dp"
         >
@@ -76,16 +76,32 @@
             android:background="@drawable/input_rounded"
             android:textColorHint="@color/primary"
             />
-        <EditText
-            android:id="@+id/inputPass"
-            android:textColorHint="@color/primary"
-            android:layout_marginTop="10dp"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Masukkan Password"
-            android:textColor="@color/primary"
-            android:background="@drawable/input_rounded"
-            />
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/inputPass"
+                android:textColorHint="@color/primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Password"
+                android:textColor="@color/primary"
+                android:background="@drawable/input_rounded"
+                android:inputType="textPassword"
+                android:layout_centerVertical="true" />
+
+            <ImageView
+                android:id="@+id/btn_show"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/eye_show"
+                android:layout_centerVertical="true"
+                android:layout_alignEnd="@+id/inputPass"
+                android:layout_marginEnd="18dp"/>
+        </RelativeLayout>
+
         <Button
             android:id="@+id/btnRegister"
             android:layout_marginTop="30dp"

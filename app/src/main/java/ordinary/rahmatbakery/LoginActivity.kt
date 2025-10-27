@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -32,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var tombolBack: ImageButton
     private lateinit var textRegis: TextView
     private lateinit var loginCard: CardView
+    private lateinit var tombolShow: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -52,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
         tombolBack = findViewById(R.id.back)
         textRegis = findViewById(R.id.keRegis)
         loginCard = findViewById(R.id.cardlogin)
+        tombolShow = findViewById(R.id.btn_show)
+
 
         loginCard.animate()
             .translationY(0f)
@@ -96,6 +100,17 @@ class LoginActivity : AppCompatActivity() {
             goToRegister()
         }
 
+        tombolShow.setOnClickListener {
+            if(inputPass.inputType == 129){
+                inputPass.inputType = 1
+                tombolShow.setImageResource(R.drawable.eye_hide)
+            }else{
+                inputPass.inputType = 129
+                tombolShow.setImageResource(R.drawable.eye_show)
+            }
+        }
+
+
     }
 
     private fun animateOut(onEnd: () -> Unit) {
@@ -112,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
         val card = findViewById<CardView>(R.id.cardlogin)
 
         if (show) {
-            overlay.alpha = 0f
+            overlay.alpha = 1f
             overlay.visibility = View.VISIBLE
             overlay.animate().alpha(1f).setDuration(200).start()
             card.animate().alpha(0.5f).setDuration(200).start()
@@ -145,8 +160,8 @@ class LoginActivity : AppCompatActivity() {
 
             val options = ActivityOptionsCompat.makeCustomAnimation(
                 this,                // Context
-                R.anim.fade_in,      // animasi masuk
-                R.anim.fade_out      // animasi keluar
+                R.anim.fade_in,
+                R.anim.fade_out
             )
 
             startActivity(intent, options.toBundle())

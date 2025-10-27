@@ -6,6 +6,7 @@ import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.serializer.KotlinXSerializer
 
+
 object SupabaseManager {
 
     private const val SUPABASE_URL = "https://fsiuefdwcbdhunfhbiwl.supabase.co"

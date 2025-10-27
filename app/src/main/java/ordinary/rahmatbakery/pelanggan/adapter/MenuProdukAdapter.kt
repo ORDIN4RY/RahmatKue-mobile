@@ -10,14 +10,27 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.pelanggan.model.PesananTerakhir
+import java.text.NumberFormat
+import java.util.Locale
 
 class MenuProdukAdapter(
     private val listProduk: List<MenuProduk>)
     : RecyclerView.Adapter<MenuProdukAdapter.ViewHolder>()  {
+
+    var localeID: Locale = Locale("in", "ID")
+    var formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID).apply {
+        maximumFractionDigits = 0
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImg: ImageView = itemView.findViewById(R.id.productImg)
         val productName: TextView = itemView.findViewById(R.id.productName)
         val productPrice: TextView = itemView.findViewById(R.id.productPrice)
+        val btnPesan: TextView = itemView.findViewById(R.id.btn_pesan)
+        val counterContainer: View = itemView.findViewById(R.id.counter_container)
+        val iconMinus: ImageView = itemView.findViewById(R.id.icon_minus)
+        val inputCount: TextView = itemView.findViewById(R.id.input_count)
+        val iconPlus: ImageView = itemView.findViewById(R.id.icon_plus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuProdukAdapter.ViewHolder {
@@ -29,13 +42,19 @@ class MenuProdukAdapter(
     override fun onBindViewHolder(holder: MenuProdukAdapter.ViewHolder, position: Int) {
         val item = listProduk[position]
         holder.productName.text = item.productName
-        holder.productPrice.text = "Rp. " + item.productPrice.toString()
+        holder.productPrice.text = formatRupiah.format(item.productPrice)
 
         holder.productImg.load(item.productImg) {
             crossfade(true) // animasi lembut saat gambar muncul
             placeholder(R.drawable.placeholder) // opsional: gambar sementara
             error(R.drawable.error_image)       // opsional: jika gagal load
         }
+
+        holder.btnPesan.setOnClickListener {
+            holder.counterContainer.visibility = View.VISIBLE
+            holder.btnPesan.visibility = View.GONE
+        }
+
     }
 
     override fun getItemCount() = listProduk.size

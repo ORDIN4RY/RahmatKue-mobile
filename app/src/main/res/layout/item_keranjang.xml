@@ -13,7 +13,8 @@
         android:paddingTop="20dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
-        android:layout_margin="5dp">
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,60 +40,53 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_toEndOf="@+id/img_product"
-                android:layout_marginStart="5dp"/>
+                android:layout_marginStart="10dp"/>
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/counter_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/img_product"
-                android:layout_alignBottom="@+id/img_product"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="5dp"
-                >
-                <TextView
-                    android:textColor="@color/primary"
-                    android:id="@+id/btnMinus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="-"
-                    android:textSize="24sp"/>
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_toEndOf="@id/img_product"
+                android:layout_alignBottom="@+id/img_product">
 
-                <!-- Angka -->
-                <TextView
+                <ImageView
+                    android:id="@+id/icon_minus"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/circle_outline"
+                    android:src="@drawable/icon_minus" />
+
+                <EditText
                     android:textColor="@color/primary"
-                    android:id="@+id/txtCount"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/btnMinus"
-                    android:background="@drawable/bg_counter"
-                    android:gravity="center"
-                    android:text="15"
-                    android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_centerVertical="true"/>
+                    android:id="@+id/input_count"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:background="@drawable/bg_counter"
+                    android:text="8"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:paddingHorizontal="5dp"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:inputType="number"
+                    />
 
-                <!-- Tombol Plus -->
-                <TextView
-                    android:textColor="@color/primary"
-                    android:id="@+id/btnPlus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toRightOf="@id/txtCount"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="+"
-                    android:textSize="24sp" />
+                <ImageView
+                    android:id="@+id/icon_plus"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/circle_outline"
+                    android:src="@drawable/icon_plus" />
 
-            </RelativeLayout>
-
+            </LinearLayout>
 
             <TextView
                 android:textColor="@color/primary"
-                android:id="@+id/textView"
+                android:id="@+id/txt_harga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/img_product"
@@ -100,6 +94,7 @@
                 android:text="Rp. 200.000" />
 
             <CheckBox
+                android:id="@+id/cb_pilih"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
