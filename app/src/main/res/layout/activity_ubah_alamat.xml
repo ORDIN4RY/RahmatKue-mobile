@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alamat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Alamat"
+    android:background="@color/background"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/back"
+            />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubah Alamat"
+            android:textColor="@color/primary"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+            android:layout_toEndOf="@id/back"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+
+        <TextView
+            android:id="@+id/judul_nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Lengkap"
+            android:layout_marginTop="5dp"
+            />
+
+        <EditText
+            android:id="@+id/edit_nama"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Ahmad Syahroni"
+            android:textSize="12sp"
+            android:layout_below="@id/judul_nama"/>
+
+        <TextView
+            android:id="@+id/judul_nomor_hp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nomor Telepon"
+            android:layout_below="@id/edit_nama"
+            android:layout_marginTop="10dp"
+            />
+
+        <EditText
+            android:id="@+id/edit_no_hp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Ahmad Syahroni"
+            android:textSize="12sp"
+            android:layout_below="@id/judul_nomor_hp"/>
+
+        <TextView
+            android:id="@+id/judul_alamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Lengkap"
+            android:layout_below="@id/edit_no_hp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/edit_alamat"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Ahmad Syahroni"
+            android:textSize="12sp"
+            android:layout_below="@id/judul_alamat"/>
+
+    </RelativeLayout>
+    <Switch
+        android:id="@+id/switchMaterial"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:text="Jadikan sebagai Alamat Utama"
+       />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Simpan"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        />
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:text="Hapus Alamat"
+            android:layout_marginStart="20dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>
