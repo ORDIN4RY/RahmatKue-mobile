@@ -30,8 +30,8 @@
             android:layout_height="28dp"
             android:background="@android:color/transparent"
             android:src="@drawable/cart"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@id/icon_notif"
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@id/icon_notif"
             />
 
         <ImageView
@@ -41,7 +41,7 @@
             android:background="@android:color/transparent"
             android:src="@drawable/notif"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             />
 
     </RelativeLayout>
@@ -66,34 +66,43 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:padding="10dp">
-        <Button
-            android:id="@+id/btnAll"
+
+        <TextView
+            android:id="@+id/btn_semua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/SearchBar"
             android:text="Semua"
-            android:background="@drawable/button"
-            android:layout_marginHorizontal="10dp"/>
+            android:textColor="@color/primary"
+            android:background="@drawable/btn_outline"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            />
 
-        <Button
-            android:id="@+id/btnPromo"
+        <TextView
+            android:id="@+id/btn_satuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/SearchBar"
-            android:text="Promo"
-            android:background="@drawable/button"
-            android:layout_toRightOf="@id/btnAll"
-            android:layout_marginHorizontal="10dp"/>
+            android:text="Satuan"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_full"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            />
 
-        <Button
-            android:id="@+id/btnPaket"
+        <TextView
+            android:id="@+id/btn_paket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/SearchBar"
             android:text="Paket"
-            android:background="@drawable/button"
-            android:layout_toRightOf="@id/btnPromo"
-            android:layout_marginHorizontal="10dp"/>
+            android:textColor="@color/white"
+            android:background="@drawable/btn_full"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            />
+
     </LinearLayout>
 
     <!--    kategori    -->

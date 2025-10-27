@@ -55,10 +55,15 @@ class MenuFragment : Fragment() {
 
         // Ambil tombol dari layout fragment
         val btnNotif = rootView.findViewById<ImageView>(R.id.icon_notif)
+        val btnCart = rootView.findViewById<ImageView>(R.id.icon_cart)
 
         // Set aksi klik
         btnNotif.setOnClickListener {
             val intent = Intent(requireContext(), NotifActivity::class.java)
+            startActivity(intent)
+        }
+        btnCart.setOnClickListener {
+            val intent = Intent(requireContext(), KeranjangActivity::class.java)
             startActivity(intent)
         }
 

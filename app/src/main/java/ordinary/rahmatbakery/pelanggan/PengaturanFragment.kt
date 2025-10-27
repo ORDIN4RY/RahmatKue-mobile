@@ -8,8 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import io.github.jan.supabase.auth.auth
+import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.util.PrefManager
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,6 +48,7 @@ class PengaturanFragment : Fragment() {
 
         // Ambil tombol dari layout fragment
         val btnNotif = rootView.findViewById<ImageView>(R.id.icon_notif)
+        val btnCart = rootView.findViewById<ImageView>(R.id.icon_cart)
         val logout = rootView.findViewById<TextView>(R.id.logout)
 
         // Set aksi klik
@@ -50,13 +56,25 @@ class PengaturanFragment : Fragment() {
             val intent = Intent(requireContext(), NotifActivity::class.java)
             startActivity(intent)
         }
+        btnCart.setOnClickListener {
+            val intent = Intent(requireContext(), KeranjangActivity::class.java)
+            startActivity(intent)
+        }
 
         logout.setOnClickListener {
-            val prefManager : PrefManager = PrefManager(requireContext())
-            prefManager.logout()
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            requireActivity().finish()
-            startActivity(intent)
+
+            lifecycleScope.launch {
+                try {
+                    val response = SupabaseManager.client.auth.signOut()
+                    // atau SessionManager.logout(context)
+                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    requireActivity().finish()
+                    startActivity(intent)
+
+                } catch (e: Exception) {
+                    Toast.makeText(requireActivity(), "Gagal logout: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         return rootView

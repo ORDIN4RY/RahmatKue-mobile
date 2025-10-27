@@ -9,12 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import ordinary.rahmatbakery.ngetes.WebSocketClient
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import ordinary.rahmatbakery.model.Profile
 import ordinary.rahmatbakery.pelanggan.DashboardActivity
+import ordinary.rahmatbakery.util.AuthRepository
 import ordinary.rahmatbakery.util.PrefManager
 
 class MainActivity : AppCompatActivity() {
-
 
         private var btnLogin : Button? = null
         private var btnRegister : Button? = null
@@ -22,12 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        val prefManager = PrefManager(this@MainActivity)
-        if(prefManager.isLoggedIn()) {
-            startActivity(Intent(this@MainActivity, DashboardActivity::class.java))
-            finish()
-            return
-        }
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -67,6 +64,10 @@ class MainActivity : AppCompatActivity() {
             this.finish()
         }
 
-
+    }
+    private fun goToDashboard(profile: Profile) {
+        val intent = Intent(this, DashboardActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
