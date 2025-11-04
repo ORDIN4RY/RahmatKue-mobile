@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +17,8 @@ import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.adapter.KategoriAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.MenuProdukAdapter
-import ordinary.rahmatbakery.pelanggan.adapter.PesananTerakhirAdapter
 import ordinary.rahmatbakery.pelanggan.model.Kategori
-import ordinary.rahmatbakery.pelanggan.model.MenuProduk
+import ordinary.rahmatbakery.pelanggan.model.Produk
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +34,7 @@ class MenuFragment : Fragment() {
 
     private lateinit var rvProduct: RecyclerView
     private lateinit var adapterProduct: MenuProdukAdapter
-    private val listMenu = mutableListOf<MenuProduk>()
+    private val listMenu = mutableListOf<Produk>()
 
     private lateinit var rvKategori: RecyclerView
     private lateinit var adapterKategori: KategoriAdapter
@@ -90,14 +88,14 @@ class MenuFragment : Fragment() {
         lifecycleScope.launch {
             val kategories = SupabaseManager.client.from("kategori")
                 .select(columns = Columns.raw(
-                    """kategoriId : id_kategori,
-                kategoriName : nama_kategori""".trimIndent()
+                    """id : id_kategori,
+                nama : nama_kategori""".trimIndent()
                 )) // Select all columns, or specify with Columns.list("name", "country_id")
                 .decodeList<Kategori>()
 
             if(!kategories.isEmpty()){
                 for (kategori in kategories) {
-                    listKategori.add(Kategori(kategori.kategoriId,kategori.kategoriName))
+                    listKategori.add(Kategori(kategori.id,kategori.nama))
                 }
                 adapterKategori.notifyDataSetChanged()
             }
@@ -109,16 +107,20 @@ class MenuFragment : Fragment() {
         lifecycleScope.launch {
         val produk = SupabaseManager.client.from("produk")
             .select(columns = Columns.raw(
-                """id : id_produk,
-                productName : nama_produk,
-                productImg : foto_produk,
-                productPrice : harga""".trimIndent()
+                """
+                id : id_produk,
+                nama : nama_produk,
+                deskripsi : deskripsi,
+                gambar : foto_produk,
+                harga : harga
+                
+                """.trimIndent()
             )) // Select all columns, or specify with Columns.list("name", "country_id")
-            .decodeList<MenuProduk>()
+            .decodeList<Produk>()
 
             if(!produk.isEmpty()){
                 for (menuProduk in produk) {
-                    listMenu.add(MenuProduk(menuProduk.id,menuProduk.productName, menuProduk.productImg,menuProduk.productPrice))
+                    listMenu.add(Produk(menuProduk.id,menuProduk.nama, menuProduk.deskripsi,menuProduk.gambar, menuProduk.harga))
                 }
                 adapterProduct.notifyDataSetChanged()
             }

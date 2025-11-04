@@ -4,7 +4,9 @@ import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.realtime.Realtime
 import io.github.jan.supabase.serializer.KotlinXSerializer
+import kotlinx.serialization.json.Json
 
 
 object SupabaseManager {
@@ -19,9 +21,14 @@ object SupabaseManager {
         install(Auth){
             alwaysAutoRefresh = true
             autoSaveToStorage = true
+
         }
         install(Postgrest)
-        defaultSerializer = KotlinXSerializer()
+        defaultSerializer = KotlinXSerializer(Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        })
+        install(Realtime)
         //install other modules
     }
 }

@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.pelanggan.model.Alamat
 import ordinary.rahmatbakery.pelanggan.model.Kategori
 
 class KategoriAdapter (
-    private val listProduk: List<Kategori>)
+    private val listProduk: List<Kategori>
+)
     : RecyclerView.Adapter<KategoriAdapter.ViewHolder>()  {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val kategText: TextView = itemView.findViewById(R.id.textKategori)
@@ -25,9 +27,13 @@ class KategoriAdapter (
 
         override fun onBindViewHolder(holder: KategoriAdapter.ViewHolder, position: Int) {
             val item = listProduk[position]
-            holder.kategText.text = item.kategoriName
+            holder.kategText.text = item.nama
 
         }
 
         override fun getItemCount() = listProduk.size
+}
+
+interface KategoriClickListener {
+    fun onKategoriClicked(kategori: Kategori)
 }

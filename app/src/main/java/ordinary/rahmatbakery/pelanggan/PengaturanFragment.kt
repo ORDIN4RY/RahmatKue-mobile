@@ -50,6 +50,9 @@ class PengaturanFragment : Fragment() {
         val btnNotif = rootView.findViewById<ImageView>(R.id.icon_notif)
         val btnCart = rootView.findViewById<ImageView>(R.id.icon_cart)
         val logout = rootView.findViewById<TextView>(R.id.logout)
+        val btnVoucher = rootView.findViewById<TextView>(R.id.btn_voucher)
+        val btnAlamat = rootView.findViewById<TextView>(R.id.btn_alamat)
+
 
         // Set aksi klik
         btnNotif.setOnClickListener {
@@ -60,6 +63,11 @@ class PengaturanFragment : Fragment() {
             val intent = Intent(requireContext(), KeranjangActivity::class.java)
             startActivity(intent)
         }
+        btnAlamat.setOnClickListener {
+            val intent = Intent(requireContext(), AlamatActivity::class.java)
+            startActivity(intent)
+        }
+
 
         logout.setOnClickListener {
 
@@ -78,25 +86,5 @@ class PengaturanFragment : Fragment() {
         }
 
         return rootView
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PengaturanFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PengaturanFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

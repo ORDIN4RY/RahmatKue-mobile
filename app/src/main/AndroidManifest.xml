@@ -15,16 +15,10 @@
         android:theme="@style/Theme.RahmatBakery"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Voucher"
+            android:name=".pelanggan.UbahTambahAlamatActivity"
             android:exported="false" />
         <activity
-            android:name=".UbahAlamat"
-            android:exported="false" />
-        <activity
-            android:name=".pelanggan.model.AlamatAdapter"
-            android:exported="false" />
-        <activity
-            android:name=".Alamat"
+            android:name=".pelanggan.AlamatActivity"
             android:exported="false" />
         <activity
             android:name=".pelanggan.NotifActivity"

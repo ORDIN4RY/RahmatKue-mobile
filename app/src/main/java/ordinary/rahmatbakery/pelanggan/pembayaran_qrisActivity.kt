@@ -1,10 +1,11 @@
-package ordinary.rahmatbakery
+package ordinary.rahmatbakery.pelanggan
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ordinary.rahmatbakery.R
 
 class pembayaran_qrisActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

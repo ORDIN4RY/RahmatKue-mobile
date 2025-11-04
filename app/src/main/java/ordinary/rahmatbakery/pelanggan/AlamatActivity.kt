@@ -1,0 +1,120 @@
+package ordinary.rahmatbakery.pelanggan
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Columns
+import kotlinx.coroutines.launch
+import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.pelanggan.adapter.AlamatAdapter
+import ordinary.rahmatbakery.pelanggan.adapter.AlamatClickListener
+import ordinary.rahmatbakery.pelanggan.model.Alamat
+import ordinary.rahmatbakery.util.AuthRepository
+
+class AlamatActivity(
+    private val repo: AuthRepository = AuthRepository()
+) : AppCompatActivity(), AlamatClickListener {
+
+    private lateinit var adapterAlamat: AlamatAdapter
+    private lateinit var btnAddAlamat: Button
+    private lateinit var btnBack: ImageView
+    private val listAlamat = mutableListOf<Alamat>()
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_alamat)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        btnAddAlamat = findViewById(R.id.btn_add_alamat)
+        btnBack = findViewById(R.id.back)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
+
+        btnAddAlamat.setOnClickListener {
+            val intent = Intent(this, UbahTambahAlamatActivity::class.java)
+            alamatResultLauncher.launch(intent)
+        }
+
+        setupRecyclerView()
+        loadAlamat()
+    }
+
+    private fun setupRecyclerView() {
+        val recyclerView: RecyclerView = findViewById(R.id.rvAlamat) // Ganti ID
+        adapterAlamat = AlamatAdapter(listAlamat, this)
+        recyclerView.adapter = adapterAlamat
+
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    }
+
+    fun loadAlamat() {
+        lifecycleScope.launch {
+            val currentUser = repo.getCurrentProfile()
+
+            if (currentUser == null) {
+                Toast.makeText(
+                    this@AlamatActivity,
+                    "Gagal memuat sesi pengguna.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+                return@launch
+            }
+
+            val listAlamatFromDb = SupabaseManager.client.from("alamat")
+                .select(columns = Columns.list("id_alamat",
+                    "id_user",
+                    "nama_lengkap",
+                    "no_hp_penerima",
+                    "alamat_rumah",
+                    "alamat_utama"))
+                 {
+                    filter {
+                        eq("id_user", currentUser.id)
+                    }
+                }
+                .decodeList<Alamat>()
+
+            listAlamat.clear()
+
+            listAlamat.addAll(listAlamatFromDb)
+
+            adapterAlamat.notifyDataSetChanged()
+        }
+    }
+
+    private val alamatResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        // Cek apakah hasilnya OK (yang akan kita atur dari UbahTambahAlamatActivity)
+        if (result.resultCode == RESULT_OK) {
+            loadAlamat() // Panggil kembali fungsi untuk me-refresh data dari Supabase
+        }
+    }
+    override fun onAlamatClicked(alamat: Alamat) {
+        val intent = Intent(this, UbahTambahAlamatActivity::class.java)
+        intent.putExtra("EXTRA_ALAMAT", alamat)
+        alamatResultLauncher.launch(intent) // Gunakan launcher untuk memulai activity
+    }
+
+}

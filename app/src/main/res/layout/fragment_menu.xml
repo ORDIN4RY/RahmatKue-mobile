@@ -57,7 +57,8 @@
         android:drawableStart="@android:drawable/ic_menu_search"
         android:drawablePadding="6dp"
         android:background ="@drawable/input_rounded"
-        android:layout_marginHorizontal="10dp"/>
+        android:layout_marginHorizontal="10dp"
+        android:textColor="@color/primary"/>
 
     <!-- buttons -->
     <LinearLayout
@@ -71,7 +72,7 @@
             android:id="@+id/btn_semua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Semua"
+            android:text="Satuan"
             android:textColor="@color/primary"
             android:background="@drawable/btn_outline"
             android:textSize="16sp"
@@ -83,7 +84,7 @@
             android:id="@+id/btn_satuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Satuan"
+            android:text="Paket"
             android:textColor="@color/white"
             android:background="@drawable/btn_full"
             android:textSize="16sp"
@@ -95,7 +96,7 @@
             android:id="@+id/btn_paket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Paket"
+            android:text="Kustom"
             android:textColor="@color/white"
             android:background="@drawable/btn_full"
             android:textSize="16sp"

@@ -1,69 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="15dp"
-    android:elevation="2dp"
-    android:layout_margin="5dp"
-    android:background="@color/card_light_bg"
-    >
+    android:layout_margin="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:backgroundTint="@color/card_light_bg">
 
-<RelativeLayout
-    android:id="@+id/top"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/nama"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ahmad Syahroni |"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="@color/primary"
-        android:layout_marginStart="12dp" />
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/nomor_telepon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/nama"
-        android:text="08531413721"
-        android:layout_marginTop="2dp"
-        android:textSize="12sp"
-        android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Ahmad Syahroni |"
+            android:textColor="@color/primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/alamat_lengkap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jl. Ahmad Yani 20, Tanggul Kulon (Sebelah Alfamart )"
-        android:textSize="12sp"
-        android:layout_below="@id/nama"
-        android:layout_marginStart="12dp"
-        android:textColor="@color/primary" />
+        <TextView
+            android:id="@+id/nomor_telepon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/nama"
+            android:text="08531413721"
+            android:textSize="12sp"
+            android:textColor="@color/primary"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="Ubah > "
-        android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/alamat_lengkap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nama"
+            android:layout_marginStart="12dp"
+            android:text="Jl. Ahmad Yani 20, Tanggul Kulon (Sebelah Alfamart )"
+            android:textColor="@color/primary"
+            android:textSize="12sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alamat Utama"
-        android:textSize="10sp"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentEnd="true"/>
-</RelativeLayout>
+        <TextView
+            android:id="@+id/ubah_alamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Ubah > "
+            android:textSize="12sp" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/top"
-        android:layout_marginTop="10dp"
-        android:text="+ Tambah Alamat Baru"
-       />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/alamat_utama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alamat_lengkap"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:text="Alamat Utama"
+            android:textSize="10sp"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+

@@ -1,6 +1,6 @@
 package ordinary.rahmatbakery.pelanggan.adapter
 
-import ordinary.rahmatbakery.pelanggan.model.MenuProduk
+import ordinary.rahmatbakery.pelanggan.model.Produk
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.pelanggan.model.PesananTerakhir
 import java.text.NumberFormat
 import java.util.Locale
 
 class MenuProdukAdapter(
-    private val listProduk: List<MenuProduk>)
+    private val listProduk: List<Produk>)
     : RecyclerView.Adapter<MenuProdukAdapter.ViewHolder>()  {
 
     var localeID: Locale = Locale("in", "ID")
@@ -41,10 +40,10 @@ class MenuProdukAdapter(
 
     override fun onBindViewHolder(holder: MenuProdukAdapter.ViewHolder, position: Int) {
         val item = listProduk[position]
-        holder.productName.text = item.productName
-        holder.productPrice.text = formatRupiah.format(item.productPrice)
+        holder.productName.text = item.nama
+        holder.productPrice.text = formatRupiah.format(item.harga)
 
-        holder.productImg.load(item.productImg) {
+        holder.productImg.load(item.gambar) {
             crossfade(true) // animasi lembut saat gambar muncul
             placeholder(R.drawable.placeholder) // opsional: gambar sementara
             error(R.drawable.error_image)       // opsional: jika gagal load

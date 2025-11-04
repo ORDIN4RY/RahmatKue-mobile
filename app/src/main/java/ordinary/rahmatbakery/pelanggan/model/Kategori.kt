@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Kategori (
-    val kategoriId: String,
-    val kategoriName: String
+    val id: String,
+    val nama: String
 )

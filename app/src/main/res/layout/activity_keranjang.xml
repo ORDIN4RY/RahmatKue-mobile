@@ -50,6 +50,11 @@
         android:layout_height="match_parent"
         android:layout_below="@id/header">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvKeranjang"
             android:layout_width="match_parent"
@@ -57,6 +62,15 @@
             android:orientation="vertical"
             android:paddingBottom="50dp"
             />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tes"
+            android:visibility="gone"/>
+
+        </LinearLayout>
+
     </ScrollView>
 
     <RelativeLayout
@@ -67,7 +81,7 @@
                 android:background="@color/primary" >
 
             <CheckBox
-                android:id="@+id/checkboxTotal"
+                android:id="@+id/cb_pilih_semua"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -78,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pilih semua"
-                android:layout_alignStart="@+id/checkboxTotal"
+                android:layout_alignStart="@+id/cb_pilih_semua"
                 android:layout_marginStart="25dp"
                 android:layout_centerVertical="true"
                 android:padding="15dp"

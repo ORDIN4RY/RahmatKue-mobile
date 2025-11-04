@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pelanggan.AlamatActivity"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/top_bar"
+        >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubah Alamat"
+            android:textColor="@color/primary"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+            android:layout_toEndOf="@id/back" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/top_bar"
+        android:id="@+id/input_form"
+        android:padding="10dp">
+
+
+        <TextView
+            android:textColor="@color/primary"
+            android:id="@+id/judul_nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Lengkap"/>
+
+        <EditText
+            android:textColor="@color/primary"
+            android:id="@+id/input_nama"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textSize="12sp"
+            android:layout_below="@id/judul_nama"
+            />
+
+        <TextView
+            android:textColor="@color/primary"
+            android:id="@+id/judul_nomor_hp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nomor Telepon"
+            android:layout_below="@id/input_nama"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:textColor="@color/primary"
+            android:id="@+id/input_no_hp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textSize="12sp"
+            android:layout_below="@id/judul_nomor_hp" />
+
+        <TextView
+            android:textColor="@color/primary"
+            android:id="@+id/judul_alamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat Lengkap"
+            android:layout_below="@id/input_no_hp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:textColor="@color/primary"
+            android:id="@+id/input_alamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_below="@id/judul_alamat"
+            android:gravity="top"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:textColor="@color/primary"
+        android:id="@+id/judul_alamat_utama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jadikan Alamat Utama"
+        android:layout_below="@id/input_form"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/cb_alamat_utama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_toEndOf="@+id/judul_alamat_utama"
+        android:layout_below="@id/input_form"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+
+        <Button
+            android:id="@+id/btn_hapus"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:text="Hapus Alamat"
+            android:layout_marginEnd="20dp"/>
+
+        <Button
+            android:id="@+id/btn_simpan"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:text="Simpan"/>
+
+    </LinearLayout>
+</RelativeLayout>
