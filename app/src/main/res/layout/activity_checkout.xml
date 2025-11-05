@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/checkout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CheckoutActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/back_white" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data Pelanggan"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:elevation="10dp"
+                android:padding="15dp"
+                app:cardBackgroundColor="#7E8A8A8A"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/nama_pelanggan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="15dp"
+                        android:text="Ahmad Febri"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/no_hp_pelanggan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="40dp"
+                        android:text="08571525454"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/alamat_pelanggan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="65dp"
+                        android:text="Jl. Sultan Agung No. 90, Selatan Balai Desa "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="5dp"
+                        android:text="Pilih >" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/primary" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:elevation="10dp"
+                android:padding="15dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/gambar_produk"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/logo" />
+
+                    <TextView
+                        android:id="@+id/nama_produk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/gambar_produk"
+                        android:text="Kue AMD "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nama_produk"
+                        android:layout_toRightOf="@id/gambar_produk"
+                        android:text="Rp. 200.000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:padding="10dp"
+                        android:text="10x" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/primary" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/judul_opsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Pilih Opsi" />
+
+                <CheckBox
+                    android:id="@+id/checkbox1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/judul_opsi"
+                    android:text="Di Antar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkbox1"
+                    android:text="*gratis ongkir maks 10km,  > 10km dikenakan biaya"
+                    android:textSize="7sp" />
+
+                <CheckBox
+                    android:id="@+id/checkbox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/judul_opsi"
+                    android:layout_marginStart="50dp"
+                    android:layout_toRightOf="@id/checkbox1"
+                    android:text="Di Ambil" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Voucher" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:elevation="10dp"
+                android:padding="15dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/gambar_voucher"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/logo" />
+
+                    <TextView
+                        android:id="@+id/judul_voucher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/gambar_voucher"
+                        android:text="Ramadhan 2026 - Diskon 20k" />
+
+                    <TextView
+                        android:id="@+id/deskripsi_voucher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/judul_voucher"
+                        android:layout_toRightOf="@id/gambar_voucher"
+                        android:text="Diskon 20k dengan minimal transaksi Rp. 200.000"
+                        android:textSize="6dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/judul_voucher"
+                        android:layout_marginTop="50dp"
+                        android:layout_toRightOf="@id/gambar_voucher"
+                        android:text="Berlaku sampai 20 Februari 2026"
+                        android:textSize="10sp" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/primary" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/judul_pembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Pilih Opsi" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/judul_pembayaran"
+                    android:text="DP (Minimal 50%)" />
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/judul_pembayaran"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/checkbox_dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkbox_dp"
+                    android:text="*gratis ongkir maks 10km,  > 10km dikenakan biaya"
+                    android:textSize="7sp" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_lunas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/judul_pembayaran"
+                    android:layout_marginStart="120dp"
+                    android:layout_toRightOf="@id/checkbox_dp"
+                    android:text="Lunas" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/primary" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/judul_tanggal_waktu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Tanggal dan Waktu" />
+
+                <DatePicker
+                    android:id="@+id/tanggal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/judul_tanggal_waktu"
+                    android:layout_marginTop="10dp" />
+
+                <TimePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tanggal"
+                    android:layout_marginTop="10dp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/primary" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/judul_rincian_pembayaran"
+                    android:layout_width="wrap_content"
+                    android:text="Rincian Pembayaran"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_below="@id/judul_rincian_pembayaran"
+                    android:id="@+id/subtotal_pesanan"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subtotatal Pesanan :" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/subtotal_pesanan"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_below="@id/judul_rincian_pembayaran"
+                    android:text="Rp. 200.000"/>
+
+                <TextView
+                    android:id="@+id/subtotal_pengiriman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/subtotal_pesanan"
+                    android:text="Subtotatal Pengiriman :" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/subtotal_pengiriman"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_below="@id/judul_rincian_pembayaran"
+                    android:text="Rp. 200.000"/>
+
+                <TextView
+                    android:id="@+id/pembayaran_awal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/subtotal_pengiriman"
+                    android:text="Pembayaran Awal :" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/pembayaran_awal"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_below="@id/judul_rincian_pembayaran"
+                    android:text="Rp. 200.000"/>
+
+                <TextView
+                    android:id="@+id/potongan_harga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pembayaran_awal"
+                    android:text="Potongan Harga :" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/potongan_harga"
+                    android:layout_marginTop="65dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_below="@id/judul_rincian_pembayaran"
+                    android:text="Rp. 200.000"/>
+
+                <View
+                    android:id="@+id/garis_pembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/potongan_harga"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/primary" />
+                <TextView
+                    android:id="@+id/total_pembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Pembayaran : "
+                    android:layout_below="@id/garis_pembayaran"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/total_pembayaran"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Rp. 200.000"
+                    android:layout_below="@id/garis_pembayaran"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:background="@color/primary"/>
+                <TextView
+                    android:id="@+id/total_pesan"
+                    android:layout_toLeftOf="@id/btn_pesan"
+                    android:layout_marginEnd="120dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Pembayaran :"
+                    android:layout_alignParentRight="true"
+                  android:textColor="@color/white"/>
+                <TextView
+                    android:layout_toLeftOf="@id/btn_pesan"
+                    android:layout_marginEnd="120dp"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/total_pesan"
+                    android:layout_height="wrap_content"
+                    android:text="Rp. 200.000"
+                    android:layout_alignParentRight="true"
+                  android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/btn_pesan"
+                    android:layout_width="50dp"
+                    android:layout_height="70dp"
+                    android:text="Buat Pesanan"
+                    android:background="@drawable/button2"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>
