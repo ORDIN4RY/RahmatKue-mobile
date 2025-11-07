@@ -5,16 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.AlamatActivity"
     android:background="@color/background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".pelanggan.AlamatActivity">
 
     <RelativeLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:id="@+id/top_bar"
-        >
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/back"
@@ -24,120 +23,226 @@
             android:src="@drawable/back" />
 
         <TextView
-            android:layout_marginLeft="10dp"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/back"
             android:text="Ubah Alamat"
-            android:textColor="@color/primary"
-            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
-            android:layout_toEndOf="@id/back" />
+            android:textColor="@color/primary" />
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/top_bar"
-        android:id="@+id/input_form"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_below="@+id/top_bar">
 
-
-        <TextView
-            android:textColor="@color/primary"
-            android:id="@+id/judul_nama"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Lengkap"/>
-
-        <EditText
-            android:textColor="@color/primary"
-            android:id="@+id/input_nama"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:textSize="12sp"
-            android:layout_below="@id/judul_nama"
-            />
-
-        <TextView
-            android:textColor="@color/primary"
-            android:id="@+id/judul_nomor_hp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nomor Telepon"
-            android:layout_below="@id/input_nama"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:textColor="@color/primary"
-            android:id="@+id/input_no_hp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:textSize="12sp"
-            android:layout_below="@id/judul_nomor_hp" />
-
-        <TextView
-            android:textColor="@color/primary"
-            android:id="@+id/judul_alamat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alamat Lengkap"
-            android:layout_below="@id/input_no_hp"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:textColor="@color/primary"
-            android:id="@+id/input_alamat"
+        <RelativeLayout
+            android:id="@+id/input_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_below="@id/judul_alamat"
-            android:gravity="top"/>
+            android:paddingBottom="70dp">
 
-    </RelativeLayout>
 
-    <TextView
-        android:textColor="@color/primary"
-        android:id="@+id/judul_alamat_utama"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jadikan Alamat Utama"
-        android:layout_below="@id/input_form"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        />
+            <TextView
+                android:id="@+id/judul_nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Lengkap"
+                android:textColor="@color/primary" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/cb_alamat_utama"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_toEndOf="@+id/judul_alamat_utama"
-        android:layout_below="@id/input_form"
-        />
+            <EditText
+                android:id="@+id/input_nama"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/judul_nama"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/judul_nomor_hp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_nama"
+                android:layout_marginTop="10dp"
+                android:text="Nomor Telepon"
+                android:textColor="@color/primary" />
+
+            <EditText
+                android:id="@+id/input_no_hp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/judul_nomor_hp"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/judul_patokan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_no_hp"
+                android:layout_marginTop="10dp"
+                android:text="Detail lainnya (Cth: Blok / Unit No., Patokan)"
+                android:textColor="@color/primary" />
+
+            <EditText
+                android:id="@+id/input_patokan"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/judul_patokan"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/judul_alamat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_patokan"
+                android:layout_marginTop="10dp"
+                android:text="Alamat Lengkap"
+                android:textColor="@color/primary" />
+
+            <EditText
+                android:id="@+id/input_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/judul_alamat"
+                android:gravity="top"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:id="@+id/koordinat_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_alamat"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/teksAltitude"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Latitude"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/teksLongitude"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Longitude"
+                        android:textColor="@color/primary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/input_latitude"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:textColor="@color/primary" />
+
+                    <EditText
+                        android:id="@+id/input_longitude"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:textColor="@color/primary" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/pilih_alamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_outline"
+                    android:text="Gunakan Peta"
+                    android:textColor="@color/primary" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/judul_alamat_utama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mapPreview"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Jadikan Alamat Utama"
+                android:textColor="@color/primary"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/cb_alamat_utama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mapPreview"
+                android:layout_marginHorizontal="10dp"
+                android:layout_toEndOf="@+id/judul_alamat_utama" />
+
+            <TextView
+                android:layout_below="@id/input_alamat"
+                android:id="@+id/label_peta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peta Lokasi"
+                android:textColor="@color/primary"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"/>
+
+            <org.maplibre.android.maps.MapView
+                android:layout_below="@+id/label_peta"
+                android:id="@+id/mapPreview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="16dp" />
+
+        </RelativeLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
         android:gravity="center_horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_hapus"
             android:layout_width="140dp"
             android:layout_height="50dp"
-            android:text="Hapus Alamat"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginEnd="20dp"
+            android:text="Hapus Alamat" />
 
         <Button
             android:id="@+id/btn_simpan"
             android:layout_width="140dp"
             android:layout_height="50dp"
-            android:text="Simpan"/>
+            android:text="Simpan" />
 
     </LinearLayout>
 </RelativeLayout>

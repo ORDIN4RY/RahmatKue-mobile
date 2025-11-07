@@ -53,6 +53,10 @@ dependencies {
 
     implementation("io.ktor:ktor-client-android:3.0.0-rc-1")
 
+    implementation("org.maplibre.gl:android-sdk:11.13.5")
+
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -21,10 +21,16 @@ data class Alamat (
     @SerialName("no_hp_penerima")
     val noHp: String,
 
+    @SerialName("detail_lain")
+    val detail: String ?= "",
+
     @SerialName("alamat_rumah")
     val alamat: String,
 
     @SerialName("alamat_utama")
     val isUtama: Boolean,
 
+    val latitude: Double ?= 0.0,
+
+    val longitude: Double ?= 0.0
 ) : Parcelable
