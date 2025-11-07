@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailVoucherActivity"
+    android:padding="10dp">
+
+<LinearLayout
+    android:id="@+id/top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/back"
+        />
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detail Voucher"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textColor="@color/primary"
+        android:layout_toEndOf="@id/back"
+        />
+</LinearLayout>
+
+    <ImageView
+        android:id="@+id/gambar_voucher"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/profil"
+        android:layout_below="@id/top"
+        android:layout_marginTop="25dp"/>
+    
+    <TextView
+        android:id="@+id/nama_voucher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gambar_voucher"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Ramadhan 2026 - Diskon 20K"/>
+
+    <TextView
+        android:id="@+id/poin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Poin"
+        android:textSize="16sp"
+        android:layout_below="@id/nama_voucher"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:id="@+id/jumlah_poin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50 poin"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/nama_voucher"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Berlaku Sampai"
+        android:layout_below="@id/poin"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/masa_berlaku"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20 Februari 2026 - 20 Maret 2026"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/poin"
+        android:layout_marginTop="15dp"/>
+
+    <View
+        android:id="@+id/garis_pembatas"
+        android:layout_width="450dp"
+        android:background="@color/black"
+        android:layout_height="1dp"
+        android:layout_below="@id/masa_berlaku"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deskripsi"
+        android:layout_below="@id/garis_pembatas"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/deskripsi_voucher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diskon 20k dengan minimal transaksi Rp. 200.000"
+        android:layout_below="@id/garis_pembatas"
+        android:layout_marginTop="40dp"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Syarat dan Ketentuan"
+        android:layout_below="@id/deskripsi_voucher"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <ListView
+        android:id="@+id/list_snk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/deskripsi_voucher"
+        android:layout_marginTop="40dp"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:elevation="2dp"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="10sp"
+    android:background="@color/card_light_bg"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/voucher_image"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded"
+        />
+
+    <TextView
+        android:id="@+id/nama_voucher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@id/voucher_image"
+        android:text="Ramadhan 2026 - Diskon 20K"
+        android:textColor="@color/primary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/deskripsi_voucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Potongan harga sebesar Rp. 10.000 Untuk kategori kue donut"
+            android:textSize="9sp"
+            android:layout_below="@id/nama_voucher"
+            android:layout_toRightOf="@id/voucher_image"
+            android:textColor="@color/primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail >"
+            android:textSize="10sp"
+            android:layout_below="@id/deskripsi_voucher"
+            android:layout_marginTop="50dp"
+            android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Berlaku sampai 1 November 2025"
+            android:textSize="10sp"
+            android:layout_toRightOf="@id/voucher_image"
+            android:layout_below="@id/deskripsi_voucher"
+            android:layout_marginTop="50dp"
+
+            />
+</RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+

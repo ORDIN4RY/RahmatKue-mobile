@@ -18,6 +18,19 @@
         android:theme="@style/Theme.RahmatBakery"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CheckoutActivity"
+            android:exported="false"
+            android:theme="@style/Theme.RahmatBakery" />
+        <activity
+            android:name=".BantuanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailVoucherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Voucher"
+            android:exported="false" />
+        <activity
             android:name=".pelanggan.PilihLokasiActivity"
             android:exported="false" />
         <activity
@@ -43,13 +56,12 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

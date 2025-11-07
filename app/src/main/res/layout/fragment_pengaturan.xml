@@ -122,7 +122,7 @@
         android:paddingVertical="20dp"
         >
         <TextView
-            android:id="@+id/btn_voucher"
+            android:id="@+id/voucher_dimiliki"
             android:elevation="3dp"
             style="@style/TextAppearance.Material3.ActionBar.Subtitle"
             android:textColor="@color/primary"
