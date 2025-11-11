@@ -5,44 +5,49 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.NotifActivity"
+    android:background="@color/background"
     android:orientation="vertical"
-    android:background="@color/background">
+    tools:context=".pelanggan.NotifActivity">
 
-    <!-- Judul Fragment -->
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        >
+        android:elevation="15dp"
+        app:cardBackgroundColor="@color/background">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/back"
-            />
-
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Notifikasi"
-            android:textColor="@color/primary"
-            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
-            android:layout_toEndOf="@id/back"
-            />
+            android:padding="10dp">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/back" />
+
+            <TextView
+                style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@id/back"
+                android:text="Notifikasi"
+                android:textColor="@color/primary" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-<!--pesanan siap, pesanan telah dikonfirmasi, pesanan telah dikirim, pesanan telah diterima, pesanan dibatalkan-->
+            <!--pesanan siap, pesanan telah dikonfirmasi, pesanan telah dikirim, pesanan telah diterima, pesanan dibatalkan-->
 
         </LinearLayout>
     </ScrollView>
