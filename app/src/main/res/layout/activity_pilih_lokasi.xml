@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.PilihLokasiActivity">
+    tools:context=".pelanggan.activity.PilihLokasiActivity">
 
     <org.maplibre.android.maps.MapView
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.pelanggan
+package ordinary.rahmatbakery.pelanggan.activity
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -25,7 +25,7 @@ import io.github.jan.supabase.realtime.RealtimeChannel
 import io.github.jan.supabase.realtime.channel
 import io.github.jan.supabase.realtime.postgresChangeFlow
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.delay
 
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
@@ -309,7 +309,7 @@ class KeranjangActivity : AppCompatActivity() {
                     is PostgresAction.Insert,
                     is PostgresAction.Update,
                     is PostgresAction.Delete -> {
-                        kotlinx.coroutines.delay(200)
+                        delay(200)
                         loadKeranjang()
                     }
 

@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,35 +17,38 @@
         android:theme="@style/Theme.RahmatBakery"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".CheckoutActivity"
+            android:name=".pelanggan.activity.DetailItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pelanggan.activity.CheckoutActivity"
             android:exported="false"
             android:theme="@style/Theme.RahmatBakery" />
         <activity
-            android:name=".BantuanActivity"
+            android:name=".pelanggan.activity.BantuanActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailVoucherActivity"
+            android:name=".pelanggan.activity.DetailVoucherActivity"
             android:exported="false" />
         <activity
-            android:name=".Voucher"
+            android:name=".pelanggan.activity.VoucherActivity"
             android:exported="false" />
         <activity
-            android:name=".pelanggan.PilihLokasiActivity"
+            android:name=".pelanggan.activity.PilihLokasiActivity"
             android:exported="false" />
         <activity
-            android:name=".pelanggan.UbahTambahAlamatActivity"
+            android:name=".pelanggan.activity.UbahTambahAlamatActivity"
             android:exported="false" />
         <activity
-            android:name=".pelanggan.AlamatActivity"
+            android:name=".pelanggan.activity.AlamatActivity"
             android:exported="false" />
         <activity
-            android:name=".pelanggan.NotifActivity"
+            android:name=".pelanggan.activity.NotifActivity"
             android:exported="false" />
         <activity
-            android:name=".pelanggan.KeranjangActivity"
+            android:name=".pelanggan.activity.KeranjangActivity"
             android:exported="false" />
         <activity
-            android:name=".pelanggan.DashboardActivity"
+            android:name=".pelanggan.activity.DashboardActivity"
             android:exported="true" />
         <activity
             android:name=".RegisterActivity"
@@ -62,6 +64,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

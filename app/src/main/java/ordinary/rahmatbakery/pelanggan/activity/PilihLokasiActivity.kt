@@ -1,11 +1,11 @@
-package ordinary.rahmatbakery.pelanggan
+package ordinary.rahmatbakery.pelanggan.activity
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -13,14 +13,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import ordinary.rahmatbakery.R
-import org.json.JSONArray
 import org.maplibre.android.MapLibre
 import org.maplibre.android.annotations.MarkerOptions
 import org.maplibre.android.camera.CameraUpdateFactory
@@ -31,8 +26,6 @@ import org.maplibre.android.maps.MapView
 import org.maplibre.android.offline.OfflineManager
 import org.maplibre.android.offline.OfflineRegion
 import org.maplibre.android.offline.OfflineTilePyramidRegionDefinition
-import java.net.URL
-import java.net.URLEncoder
 
 class PilihLokasiActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
@@ -70,7 +63,7 @@ class PilihLokasiActivity : AppCompatActivity() {
 
             if (!existingLat.isNaN() && !existingLon.isNaN()) {
                 val point = LatLng(existingLat, existingLon)
-                map.addMarker(org.maplibre.android.annotations.MarkerOptions().position(point))
+                map.addMarker(MarkerOptions().position(point))
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 16.0))
             }
 
@@ -198,9 +191,9 @@ class PilihLokasiActivity : AppCompatActivity() {
     }
 
     private fun isLocationEnabled(): Boolean {
-        val lm = getSystemService(LOCATION_SERVICE) as android.location.LocationManager
-        return lm.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER) ||
-                lm.isProviderEnabled(android.location.LocationManager.NETWORK_PROVIDER)
+        val lm = getSystemService(LOCATION_SERVICE) as LocationManager
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
     private fun cacheOfflineMap() {

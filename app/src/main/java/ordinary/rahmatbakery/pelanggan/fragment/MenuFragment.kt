@@ -1,12 +1,10 @@
-package ordinary.rahmatbakery.pelanggan
+package ordinary.rahmatbakery.pelanggan.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,16 +18,6 @@ import ordinary.rahmatbakery.pelanggan.adapter.MenuProdukAdapter
 import ordinary.rahmatbakery.pelanggan.model.Kategori
 import ordinary.rahmatbakery.pelanggan.model.Produk
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MenuFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MenuFragment : Fragment() {
 
     private lateinit var rvProduct: RecyclerView
@@ -50,20 +38,6 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_menu, container, false)
-
-        // Ambil tombol dari layout fragment
-        val btnNotif = rootView.findViewById<ImageView>(R.id.icon_notif)
-        val btnCart = rootView.findViewById<ImageView>(R.id.icon_cart)
-
-        // Set aksi klik
-        btnNotif.setOnClickListener {
-            val intent = Intent(requireContext(), NotifActivity::class.java)
-            startActivity(intent)
-        }
-        btnCart.setOnClickListener {
-            val intent = Intent(requireContext(), KeranjangActivity::class.java)
-            startActivity(intent)
-        }
 
         // Inisialisasi RecyclerView
         // Produk

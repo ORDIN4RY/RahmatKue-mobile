@@ -12,8 +12,7 @@ import io.github.jan.supabase.auth.status.SessionStatus
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.api.SupabaseManager
-import ordinary.rahmatbakery.pelanggan.DashboardActivity
-import ordinary.rahmatbakery.util.AuthRepository
+import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
 
 class SplashActivity : AppCompatActivity() {
 

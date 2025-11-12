@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.pelanggan
+package ordinary.rahmatbakery.pelanggan.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -82,12 +82,7 @@ class AlamatActivity(
             }
 
             val listAlamatFromDb = SupabaseManager.client.from("alamat")
-                .select(columns = Columns.list("id_alamat",
-                    "id_user",
-                    "nama_lengkap",
-                    "no_hp_penerima",
-                    "alamat_rumah",
-                    "alamat_utama"))
+                .select(Columns.ALL)
                  {
                     filter {
                         eq("id_user", currentUser.id)
