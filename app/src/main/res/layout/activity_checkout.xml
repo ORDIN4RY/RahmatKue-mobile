@@ -8,6 +8,12 @@
     android:orientation="vertical"
     tools:context=".pelanggan.activity.CheckoutActivity">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="15dp"
+        app:cardBackgroundColor="@color/background">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,6 +30,7 @@
             android:src="@drawable/back_white" />
 
     </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
     <ScrollView
         android:layout_width="match_parent"
