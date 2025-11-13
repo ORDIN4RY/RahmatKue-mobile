@@ -161,47 +161,6 @@ class KeranjangActivity : AppCompatActivity() {
         isUpdatingSelectAll = false
     }
 
-//    private fun loadKeranjang() {
-//        lifecycleScope.launch {
-//            try {
-//                val data = SupabaseManager.client.from("keranjang").select(
-//                    Columns.raw(
-//                        """
-//                        id:id_keranjang,
-//                        jumlah,
-//                        produk:id_produk(id:id_produk, nama:nama_produk, deskripsi, gambar:foto_produk, harga),
-//                        paket:id_paket(
-//                            id:id_paket,
-//                            nama:nama_paket,
-//                            deskripsi,
-//                            foto:foto_paket,
-//                            harga:harga_paket,
-//                            detail:detail_paket(
-//                                jumlah,
-//                                produk:id_produk(id:id_produk, nama:nama_produk, deskripsi, gambar:foto_produk, harga)
-//                            )
-//                        )
-//                        """
-//                    )
-//                ).decodeList<Keranjang>()
-//
-//                listKeranjang.clear()
-//                listKeranjang.addAll(
-//                    data.map { item ->
-//                        val tipe = if (item.produk != null) "produk" else "paket"
-//                        item.copy(tipe = tipe)
-//                    }
-//                )
-//                adapterKeranjang.notifyDataSetChanged()
-//
-//                updateTotalHargaUI()
-//            } catch (e: Exception) {
-//                Toast.makeText(this@KeranjangActivity, "Gagal memuat: ${e.message}", Toast.LENGTH_LONG).show()
-//                findViewById<EditText>(R.id.tes).setText(e.message)
-//            }
-//        }
-//    }
-
     private fun loadKeranjang() {
         lifecycleScope.launch {
             try {

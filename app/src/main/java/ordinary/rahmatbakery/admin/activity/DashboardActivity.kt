@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.pelanggan.activity
+package ordinary.rahmatbakery.admin.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +17,8 @@ import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.model.Profile
+import ordinary.rahmatbakery.pelanggan.activity.KeranjangActivity
+import ordinary.rahmatbakery.pelanggan.activity.NotifActivity
 import ordinary.rahmatbakery.pelanggan.fragment.BerandaFragment
 import ordinary.rahmatbakery.pelanggan.fragment.MenuFragment
 import ordinary.rahmatbakery.pelanggan.fragment.PengaturanFragment
@@ -33,7 +35,7 @@ class DashboardActivity(
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_pelanggan_dashboard)
+        setContentView(R.layout.activity_admin_dashboard)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -42,7 +44,6 @@ class DashboardActivity(
 
         var navbar = findViewById<BottomNavigationView>(R.id.bottomNav)
         var btnNotif = findViewById<ImageView>(R.id.icon_notif)
-        var btnCart = findViewById<ImageView>(R.id.icon_cart)
         var judul = findViewById<TextView>(R.id.judul_halaman)
 
         lifecycleScope.launch{
@@ -66,7 +67,7 @@ class DashboardActivity(
             }
             if (savedInstanceState == null) {
                 replaceFragment(BerandaFragment())
-                judul.setText("Beranda")
+                judul.setText("Beranda Admin")
             }
         }
 
@@ -77,7 +78,7 @@ class DashboardActivity(
                     judul.setText("Beranda")
                     true
                 }
-                R.id.menu -> {
+                R.id.analytic -> {
                     replaceFragment(MenuFragment())
                     judul.setText("Menu Produk")
                     true
@@ -87,7 +88,7 @@ class DashboardActivity(
                     judul.setText("Daftar Pesanan")
                     true
                 }
-                R.id.setting -> {
+                R.id.logout -> {
                     replaceFragment(PengaturanFragment())
                     judul.setText("Pengaturan")
                     true
@@ -99,10 +100,6 @@ class DashboardActivity(
 
         btnNotif.setOnClickListener {
             val intent = Intent(this, NotifActivity::class.java)
-            startActivity(intent)
-        }
-        btnCart.setOnClickListener {
-            val intent = Intent(this, KeranjangActivity::class.java)
             startActivity(intent)
         }
 

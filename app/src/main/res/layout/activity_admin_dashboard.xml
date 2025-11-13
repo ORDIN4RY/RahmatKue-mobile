@@ -26,16 +26,6 @@
             />
 
         <ImageView
-            android:id="@+id/icon_cart"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/cart"
-            android:layout_marginEnd="20dp"
-            android:layout_toStartOf="@id/icon_notif"
-            />
-
-        <ImageView
             android:id="@+id/icon_notif"
             android:layout_width="28dp"
             android:layout_height="28dp"
@@ -61,7 +51,7 @@
         app:itemActiveIndicatorStyle="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/menus"
+        app:menu="@menu/admin_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,8 +65,8 @@
         app:itemGravity="center"
 
         />
-<!--        app:itemTextAppearanceActive="@style/BottomNavText"-->
-<!--        app:itemTextAppearanceInactive="@style/BottomNavText"-->
+    <!--        app:itemTextAppearanceActive="@style/BottomNavText"-->
+    <!--        app:itemTextAppearanceInactive="@style/BottomNavText"-->
 
 
 

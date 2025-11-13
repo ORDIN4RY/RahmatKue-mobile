@@ -52,14 +52,15 @@
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
         android:backgroundTint="@android:color/transparent"
-        android:translationY="200dp"
-        android:alpha="0"
-        app:cardElevation="0dp">
+        app:cardElevation="0dp"
+        >
+<!--        android:translationY="200dp"-->
+<!--        android:alpha="0"-->
 
 
 
         <LinearLayout
-            android:paddingTop="50dp"
+            android:paddingTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -67,40 +68,56 @@
             android:paddingHorizontal="30dp"
             android:elevation="3dp">
 
-            <EditText
-                android:id="@+id/inputEmail"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Masukkan Email"
-                android:textColor="@color/primary"
-                android:background="@drawable/input_rounded"
-                android:textColorHint="@color/primary" />
+                android:layout_marginTop="10dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxStrokeColor="@color/primary"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/primary">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/inputPass"
-                    android:textColorHint="@color/primary"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Masukkan Password"
-                    android:textColor="@color/primary"
-                    android:background="@drawable/input_rounded"
-                    android:inputType="textPassword"
-                    android:layout_centerVertical="true" />
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:paddingVertical="10dp"
+                    android:textColor="@color/primary" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageView
-                    android:id="@+id/btn_show"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/eye_show"
-                    android:layout_centerVertical="true"
-                    android:layout_alignEnd="@+id/inputPass"
-                    android:layout_marginEnd="18dp"/>
-            </RelativeLayout>
+            <!-- 3. Bungkus EditText password dengan TextInputLayout -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxStrokeColor="@color/primary"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/primary"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/primary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingVertical="10dp"
+                    android:textColor="@color/primary" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnLogin"

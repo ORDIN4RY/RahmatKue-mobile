@@ -5,32 +5,29 @@
     android:id="@+id/voucher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.activity.VoucherActivity"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".Voucher">
+    tools:context=".pelanggan.activity.VoucherActivity">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="15dp"
+        app:cardBackgroundColor="@color/background">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/top"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="15dp"
-            app:cardBackgroundColor="@color/background">
+            android:paddingVertical="10dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:elevation="10dp" />
 
             <ImageView
                 android:id="@+id/back"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/back" />
 
@@ -38,85 +35,63 @@
                 style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="35dp"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/back"
                 android:text="Voucher "
                 android:textColor="@color/primary" />
-        </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="120dp"
-            android:layout_height="70dp"
-            android:layout_below="@id/top"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="15dp">
 
             <TextView
-                android:id="@+id/total_voucher"
+                android:id="@+id/user_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Total Poin Saya"
-                android:textSize="15dp" />
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_points"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="0 Points"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="0 Poin"
-                android:textSize="30dp" />
-        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/btnTukarVoucher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/top"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/border_tab"
-            android:padding="10dp"
-            android:text="Tukar Voucher"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp">
 
         <Button
             android:id="@+id/btnVoucherSaya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/top"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/btnTukarVoucher"
-            android:layout_weight="1"
             android:background="@drawable/border_tab"
             android:padding="10dp"
             android:text="Voucher Saya"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/primary"
+            android:layout_marginEnd="20dp"/>
+
+        <Button
+            android:id="@+id/btnTukarVoucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/btnVoucherSaya"
+            android:background="@drawable/border_tab"
+            android:padding="10dp"
+            android:text="Tukar Voucher"
+            android:textColor="@color/primary" />
     </RelativeLayout>
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Voucher Saya"
-            android:textSize="20dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
             android:paddingHorizontal="10dp" />
     </FrameLayout>
 

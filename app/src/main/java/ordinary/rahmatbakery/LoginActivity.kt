@@ -20,7 +20,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.model.Profile
-import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
+import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity as db_pelanggan
+import ordinary.rahmatbakery.admin.activity.DashboardActivity as db_admin
 
 class LoginActivity : AppCompatActivity() {
 
@@ -32,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var tombolBack: ImageButton
     private lateinit var textRegis: TextView
     private lateinit var loginCard: CardView
-    private lateinit var tombolShow: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -53,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
         tombolBack = findViewById(R.id.back)
         textRegis = findViewById(R.id.keRegis)
         loginCard = findViewById(R.id.cardlogin)
-        tombolShow = findViewById(R.id.btn_show)
 
 
         loginCard.animate()
@@ -99,16 +98,6 @@ class LoginActivity : AppCompatActivity() {
             goToRegister()
         }
 
-        tombolShow.setOnClickListener {
-            if(inputPass.inputType == 129){
-                inputPass.inputType = 1
-                tombolShow.setImageResource(R.drawable.eye_hide)
-            }else{
-                inputPass.inputType = 129
-                tombolShow.setImageResource(R.drawable.eye_show)
-            }
-        }
-
 
     }
 
@@ -142,7 +131,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToDashboard(profile: Profile) {
         animateOut {
-            val intent = Intent(this, DashboardActivity::class.java)
+            var intent = Intent(this, db_pelanggan::class.java)
+            if(profile.level == "admin"){
+                intent = Intent(this, db_admin::class.java)
+            } else{
+                intent = Intent(this, db_pelanggan::class.java)
+            }
+
             val options = ActivityOptionsCompat.makeCustomAnimation(
                 this,
                 R.anim.fade_in,
