@@ -7,6 +7,10 @@
     tools:context=".pelanggan.fragment.PesananFragment"
     android:orientation="vertical">
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
     <!-- buttons -->
     <LinearLayout
         android:layout_width="wrap_content"
@@ -14,6 +18,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:padding="10dp">
+
         <TextView
             android:id="@+id/btn_semua"
             android:layout_width="wrap_content"
@@ -27,6 +32,19 @@
             android:textAlignment="center"
             />
 
+        <TextView
+            android:id="@+id/btn_blm_dibayar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SearchBar"
+            android:text="Belum Dibayar"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_full"
+            android:layout_toRightOf="@id/btn_semua"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            />
         <TextView
             android:id="@+id/btn_proses"
             android:layout_width="wrap_content"
@@ -54,7 +72,9 @@
             android:layout_marginHorizontal="10dp"
             android:textAlignment="center"
             />
+
     </LinearLayout>
+    </HorizontalScrollView>
 
     <!--    pesanan    -->
     <ScrollView

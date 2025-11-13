@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".pelanggan.NotifActivity">
+    tools:context=".pelanggan.activity.BantuanActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/top"
