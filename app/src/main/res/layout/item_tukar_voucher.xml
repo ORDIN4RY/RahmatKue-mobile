@@ -1,53 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginHorizontal="12dp"
-    android:layout_marginVertical="10sp"
-    app:cardCornerRadius="10dp">
+    android:layout_margin="6dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="6dp"
+    card_view:cardUseCompatPadding="true"
+    android:foreground="?attr/selectableItemBackground">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <ImageView
-            android:id="@+id/gambar_voucher"
-            android:layout_width="200dp"
-            android:layout_height="75dp"
-            android:background="@drawable/profil"
-            />
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo"
+            android:background="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/nama_voucher"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ramadhan 2026 - Diskon 20k"
-            android:layout_below="@id/gambar_voucher"
-            android:textSize="15dp"
-            android:layout_marginTop="10dp"/>
-
+            android:text="Lebaran 2026 - diskon 20k"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:paddingTop="6dp" />
         <TextView
-            android:id="@+id/poin"
+            android:id="@+id/jumlah_poin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50 Poin"
-            android:layout_below="@id/nama_voucher"
             android:layout_marginTop="50dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=">"
-            android:textSize="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/nama_voucher"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="125dp"
-
-            />
-
-
-
-    </RelativeLayout>
+            android:background="@drawable/arrow_right"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
