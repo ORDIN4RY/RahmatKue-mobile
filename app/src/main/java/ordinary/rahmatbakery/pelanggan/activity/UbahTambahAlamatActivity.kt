@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.pelanggan
+package ordinary.rahmatbakery.pelanggan.activity
 
 import android.content.Intent
 import android.os.Build
@@ -17,12 +17,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
-import ordinary.rahmatbakery.pelanggan.PilihLokasiActivity
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.model.Alamat
 import ordinary.rahmatbakery.util.AuthRepository
 import org.maplibre.android.MapLibre
+import org.maplibre.android.annotations.MarkerOptions
 import org.maplibre.android.geometry.LatLng
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.MapLibreMap
@@ -46,6 +46,7 @@ class UbahTambahAlamatActivity(
 
     private lateinit var mapView: MapView
     private lateinit var map: MapLibreMap
+
     private val jemberCenter = LatLng(-8.1722, 113.6870)
 
     private var alamat: Alamat? = null
@@ -100,6 +101,17 @@ class UbahTambahAlamatActivity(
                 .build()
             map.animateCamera(CameraUpdateFactory.newCameraPosition(position))
 
+            alamat?.let {
+                val lat = it.latitude
+                val lon = it.longitude
+                if (lat != null && lon != null) {
+                    val point = LatLng(lat, lon)
+                    map.clear()
+                    map.addMarker(MarkerOptions().position(point))
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 16.0))
+                }
+            }
+
             map.addOnMapClickListener { latLng ->
                 val intent = Intent(this, PilihLokasiActivity::class.java).apply {
                     putExtra("latitude", inputLatitude.text.toString().toDoubleOrNull() ?: Double.NaN)
@@ -110,18 +122,6 @@ class UbahTambahAlamatActivity(
             }
         }
 
-        val latText = inputLatitude.text.toString().trim()
-        val lonText = inputLongitude.text.toString().trim()
-        if (latText.isNotEmpty() && lonText.isNotEmpty()) {
-            val lat = latText.toDoubleOrNull()
-            val lon = lonText.toDoubleOrNull()
-            if (lat != null && lon != null) {
-                val point = LatLng(lat, lon)
-                map.clear()
-                map.addMarker(org.maplibre.android.annotations.MarkerOptions().position(point))
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 16.0))
-            }
-        }
 
     }
 
@@ -136,7 +136,7 @@ class UbahTambahAlamatActivity(
                 inputLongitude.setText(lon.toString())
                 val point = LatLng(lat, lon)
                 map.clear()
-                map.addMarker(org.maplibre.android.annotations.MarkerOptions().position(point))
+                map.addMarker(MarkerOptions().position(point))
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 16.0))
             }
         }

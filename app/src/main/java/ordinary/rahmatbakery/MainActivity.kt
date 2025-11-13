@@ -9,12 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.model.Profile
-import ordinary.rahmatbakery.pelanggan.DashboardActivity
-import ordinary.rahmatbakery.util.AuthRepository
-import ordinary.rahmatbakery.util.PrefManager
+import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,8 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         btnLogin = findViewById(R.id.tombolLogin)
         btnRegister = findViewById(R.id.tombolRegister)
-
-        val contentLayout = findViewById<View>(R.id.content)
 
         btnLogin?.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -64,10 +58,5 @@ class MainActivity : AppCompatActivity() {
             this.finish()
         }
 
-    }
-    private fun goToDashboard(profile: Profile) {
-        val intent = Intent(this, DashboardActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }

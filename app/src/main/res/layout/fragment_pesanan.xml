@@ -4,48 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.PesananFragment"
+    tools:context=".pelanggan.fragment.PesananFragment"
     android:orientation="vertical">
-
-
-    <!-- Judul Fragment -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Daftar Pesanan"
-            android:textColor="@color/primary"
-            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
-            />
-
-        <ImageView
-            android:id="@+id/icon_cart"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/cart"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@id/icon_notif"
-            />
-
-        <ImageView
-            android:id="@+id/icon_notif"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/notif"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            />
-
-    </RelativeLayout>
-
 
     <!-- buttons -->
     <LinearLayout

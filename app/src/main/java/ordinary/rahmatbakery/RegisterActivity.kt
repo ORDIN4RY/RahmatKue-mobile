@@ -19,7 +19,6 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.api.SupabaseManager
-import ordinary.rahmatbakery.pelanggan.DashboardActivity
 
 class RegisterActivity : AppCompatActivity() {
 

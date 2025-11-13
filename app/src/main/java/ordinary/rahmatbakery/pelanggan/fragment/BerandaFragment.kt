@@ -1,16 +1,15 @@
-package ordinary.rahmatbakery.pelanggan
+package ordinary.rahmatbakery.pelanggan.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
 import ordinary.rahmatbakery.pelanggan.adapter.PesananTerakhirAdapter
 import ordinary.rahmatbakery.pelanggan.model.PesananTerakhir
 
@@ -39,8 +38,6 @@ class BerandaFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_beranda, container, false)
 
         // Ambil tombol dari layout fragment
-        val btnNotif = rootView.findViewById<ImageView>(R.id.icon_notif)
-        val btnCart = rootView.findViewById<ImageView>(R.id.icon_cart)
         val nameText = rootView.findViewById<TextView>(R.id.nickname)
         val pointText = rootView.findViewById<TextView>(R.id.user_point)
 
@@ -49,17 +46,6 @@ class BerandaFragment : Fragment() {
 
         nameText.setText("Hi, ${username?: "Pengguna"} !")
         pointText.setText("${point?: 0} Points")
-
-
-        // Set aksi klik
-        btnNotif.setOnClickListener {
-            val intent = Intent(requireContext(), NotifActivity::class.java)
-            startActivity(intent)
-        }
-        btnCart.setOnClickListener {
-            val intent = Intent(requireContext(), KeranjangActivity::class.java)
-            startActivity(intent)
-        }
 
         // Inisialisasi RecyclerView
         recyclerView = rootView.findViewById(R.id.rvPesananTerakhir)

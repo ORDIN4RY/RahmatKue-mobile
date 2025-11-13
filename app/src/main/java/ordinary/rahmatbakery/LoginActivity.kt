@@ -8,7 +8,6 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -21,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.model.Profile
-import ordinary.rahmatbakery.pelanggan.DashboardActivity
+import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
 
 class LoginActivity : AppCompatActivity() {
 

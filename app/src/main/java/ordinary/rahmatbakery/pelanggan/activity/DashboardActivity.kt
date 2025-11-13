@@ -1,8 +1,9 @@
-package ordinary.rahmatbakery.pelanggan
+package ordinary.rahmatbakery.pelanggan.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -11,14 +12,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.model.Profile
+import ordinary.rahmatbakery.pelanggan.fragment.BerandaFragment
+import ordinary.rahmatbakery.pelanggan.fragment.MenuFragment
+import ordinary.rahmatbakery.pelanggan.fragment.PengaturanFragment
+import ordinary.rahmatbakery.pelanggan.fragment.PesananFragment
 import ordinary.rahmatbakery.util.AuthRepository
-import ordinary.rahmatbakery.util.PrefManager
 
 class DashboardActivity(
     private val repo: AuthRepository = AuthRepository()
@@ -28,8 +31,6 @@ class DashboardActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        var navbar : BottomNavigationView? = null
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
@@ -38,6 +39,11 @@ class DashboardActivity(
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        var navbar = findViewById<BottomNavigationView>(R.id.bottomNav)
+        var btnNotif = findViewById<ImageView>(R.id.icon_notif)
+        var btnCart = findViewById<ImageView>(R.id.icon_cart)
+        var judul = findViewById<TextView>(R.id.judul_halaman)
 
         lifecycleScope.launch{
             profile = repo.getCurrentProfile()
@@ -60,31 +66,44 @@ class DashboardActivity(
             }
             if (savedInstanceState == null) {
                 replaceFragment(BerandaFragment())
+                judul.setText("Beranda")
             }
         }
-
-        navbar = findViewById(R.id.bottomNav)
 
         navbar.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
                     replaceFragment(BerandaFragment())
+                    judul.setText("Beranda")
                     true
                 }
                 R.id.menu -> {
                     replaceFragment(MenuFragment())
+                    judul.setText("Menu Produk")
                     true
                 }
                 R.id.order -> {
                     replaceFragment(PesananFragment())
+                    judul.setText("Daftar Pesanan")
                     true
                 }
                 R.id.setting -> {
                     replaceFragment(PengaturanFragment())
+                    judul.setText("Pengaturan")
                     true
                 }
                 else -> false
             }
+        }
+
+
+        btnNotif.setOnClickListener {
+            val intent = Intent(this, NotifActivity::class.java)
+            startActivity(intent)
+        }
+        btnCart.setOnClickListener {
+            val intent = Intent(this, KeranjangActivity::class.java)
+            startActivity(intent)
         }
 
     }
