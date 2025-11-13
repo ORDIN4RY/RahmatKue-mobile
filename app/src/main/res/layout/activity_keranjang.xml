@@ -9,42 +9,45 @@
 
 
 <!--     judul halaman  -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="15dp"
+        app:cardBackgroundColor="@color/background">
+    <!--     recycler Keranjang -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:id="@+id/header"
-        >
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/back"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/back"
-            />
+            android:src="@drawable/back" />
 
         <TextView
-            android:layout_marginStart="10dp"
+            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Keranjang"
-            android:textColor="@color/primary"
-            style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+            android:layout_marginStart="10dp"
             android:layout_toEndOf="@id/back"
-            />
+            android:text="Keranjang"
+            android:textColor="@color/primary" />
 
         <ImageView
+            android:id="@+id/btn_hapus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tes"
-            android:id="@+id/btn_hapus"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/trashbin"
-            android:layout_alignParentEnd="true"/>
+            android:text="tes" />
 
     </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-<!--     recycler Keranjang -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

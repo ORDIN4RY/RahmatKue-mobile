@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
+import ordinary.rahmatbakery.BantuanActivity
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
@@ -32,11 +33,16 @@ class PengaturanFragment : Fragment() {
         val logout = rootView.findViewById<TextView>(R.id.logout)
         val btnVoucher = rootView.findViewById<TextView>(R.id.btn_voucher)
         val btnAlamat = rootView.findViewById<TextView>(R.id.btn_alamat)
+        val btnBantuan = rootView.findViewById<TextView>(R.id.btn_bantuan)
 
 
         // Set aksi klik
         btnAlamat.setOnClickListener {
             val intent = Intent(requireContext(), AlamatActivity::class.java)
+            startActivity(intent)
+        }
+        btnBantuan.setOnClickListener {
+            val intent = Intent(requireContext(), BantuanActivity::class.java)
             startActivity(intent)
         }
 
