@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.pelanggan.adapter.DetailPaketAdapter
+import ordinary.rahmatbakery.pelanggan.adapter.DetailProdukAdapter
 import ordinary.rahmatbakery.pelanggan.model.Paket
 import ordinary.rahmatbakery.pelanggan.model.Produk
 
-class DetailItemActivity : AppCompatActivity() {
+class DetailProdukActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_detail_paket)
+        setContentView(R.layout.activity_detail_produk)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -28,10 +28,10 @@ class DetailItemActivity : AppCompatActivity() {
 
         val imgFoto: ImageView = findViewById(R.id.img_detail)
         val txtNama: TextView = findViewById(R.id.txt_nama_detail)
+        val txtHarga: TextView = findViewById(R.id.txt_harga_detail)
         val txtDeskripsi: TextView = findViewById(R.id.txt_deskripsi_detail)
         val rvDetailPaket: RecyclerView = findViewById(R.id.rv_detail_paket)
         val btnBack: ImageView = findViewById(R.id.btn_back_detail)
-
         btnBack.setOnClickListener { finish() }
 
         // Ambil data dari intent
@@ -58,7 +58,7 @@ class DetailItemActivity : AppCompatActivity() {
             }
 
             rvDetailPaket.layoutManager = LinearLayoutManager(this)
-            rvDetailPaket.adapter = DetailPaketAdapter(paket.detail)
+            rvDetailPaket.adapter = DetailProdukAdapter(paket.detail)
         }
 
     }

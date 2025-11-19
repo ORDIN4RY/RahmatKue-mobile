@@ -11,11 +11,11 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
-import ordinary.rahmatbakery.BantuanActivity
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.activity.AlamatActivity
+import ordinary.rahmatbakery.pelanggan.activity.BantuanActivity
 import ordinary.rahmatbakery.pelanggan.activity.VoucherActivity
 
 class PengaturanFragment : Fragment() {

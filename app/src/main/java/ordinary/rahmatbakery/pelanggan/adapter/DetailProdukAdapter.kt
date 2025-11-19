@@ -10,8 +10,8 @@ import coil.load
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.pelanggan.model.Detail
 
-class DetailPaketAdapter(private val listDetail: List<Detail>) :
-    RecyclerView.Adapter<DetailPaketAdapter.DetailViewHolder>() {
+class DetailProdukAdapter(private val listDetail: List<Detail>) :
+    RecyclerView.Adapter<DetailProdukAdapter.DetailViewHolder>() {
 
     inner class DetailViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgProduk: ImageView = view.findViewById(R.id.img_produk_detail)
@@ -21,7 +21,7 @@ class DetailPaketAdapter(private val listDetail: List<Detail>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_detail_paket, parent, false)
+            .inflate(R.layout.item_detail_produk, parent, false)
         return DetailViewHolder(view)
     }
 

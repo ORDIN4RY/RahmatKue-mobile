@@ -1,0 +1,154 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".pelanggan.activity.EditProfileActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:elevation="5dp"
+        app:cardCornerRadius="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/img_profil"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/circle_background"
+                android:clipToOutline="true"
+                android:padding="10dp"
+                android:src="@drawable/profil" />
+
+            <TextView
+                android:id="@+id/username"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/img_profil"
+                android:text="Ahmad Hananto"
+                android:textColor="@color/primary" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/img_profil"
+                android:text="08123332233"
+                android:textColor="@color/primary" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:elevation="3dp"
+        app:cardCornerRadius="20dp">
+
+
+        <RelativeLayout
+            android:id="@+id/input_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="70dp"
+            android:padding="8dp">
+
+
+            <TextView
+                android:id="@+id/judul_nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:textColor="@color/primary" />
+
+            <EditText
+                android:id="@+id/input_nama"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/judul_nama"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/judul_nomor_hp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_nama"
+                android:layout_marginTop="10dp"
+                android:text="Nomor Telepon"
+                android:textColor="@color/primary" />
+
+            <EditText
+                android:id="@+id/input_no_hp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/judul_nomor_hp"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/judul_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_no_hp"
+                android:layout_marginTop="10dp"
+                android:text="Password"
+                android:textColor="@color/primary" />
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/judul_password"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/judul_password_konfirmasi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_password"
+                android:layout_marginTop="10dp"
+                android:text="Konfirmasi Password"
+                android:textColor="@color/primary" />
+            <EditText
+                android:id="@+id/input_password_konfirmasi"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/judul_password_konfirmasi"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Simpan"
+            android:background="@drawable/btn_full" />
+    </RelativeLayout>
+</LinearLayout>
+
+

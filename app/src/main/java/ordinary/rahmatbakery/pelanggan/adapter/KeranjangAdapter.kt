@@ -1,7 +1,6 @@
 package ordinary.rahmatbakery.pelanggan.adapter
 
 import android.content.Intent
-import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.pelanggan.activity.DetailItemActivity
+import ordinary.rahmatbakery.pelanggan.activity.DetailProdukActivity
 import ordinary.rahmatbakery.pelanggan.model.Keranjang
 import java.text.NumberFormat
 import java.util.Locale
@@ -114,7 +113,7 @@ class KeranjangAdapter(
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
-            val intent = Intent(context, DetailItemActivity::class.java)
+            val intent = Intent(context, DetailProdukActivity::class.java)
             intent.putExtra("TIPE", item.tipe)
             if (item.tipe == "produk") intent.putExtra("PRODUK", item.produk)
             if (item.tipe == "paket") intent.putExtra("PAKET", item.paket)

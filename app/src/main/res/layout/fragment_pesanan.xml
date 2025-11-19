@@ -16,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center"
         android:padding="10dp">
 
         <TextView
@@ -87,78 +86,12 @@
         android:padding="10dp"
         android:orientation="vertical">
 
-<!--        card pesanan        -->
-        <androidx.cardview.widget.CardView
-        android:id="@+id/pesanan1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/cardview_light_background"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="12dp"
-        android:layout_marginBottom="10dp">
 
-        <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <ImageView
-            android:id="@+id/imgProduct1"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/logo"
-            android:scaleType="centerCrop" />
-
-            <TextView
-                android:id="@+id/namakue"
-                android:layout_width="match_parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_pesanan"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/imgProduct1"
-                android:layout_marginStart="10dp"
-                android:text="KUE A"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="KUE gggg"/>
-
-            <TextView
-                android:id="@+id/itemtambahan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/imgProduct1"
-                android:layout_marginStart="10dp"
-                android:textSize="8sp"
-                android:layout_below="@id/namakue"
-                android:text="Item Tambahan :"/>
-
-            <TextView
-                android:id="@+id/statuspembayaran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imgProduct1"
-                android:layout_marginTop="10dp"
-                android:text="Lunas"/>
-
-            <TextView
-                android:id="@+id/totalpesanan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/statuspembayaran"
-                android:layout_marginStart="10dp"
-                android:gravity="right"
-                android:text="Total Pesanan :Rp.200.000"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/totalpesanan"
-                android:text="X1"
-                android:gravity="right"/>
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                android:layout_marginTop="5dp"/>
     </LinearLayout>
 
     </ScrollView>

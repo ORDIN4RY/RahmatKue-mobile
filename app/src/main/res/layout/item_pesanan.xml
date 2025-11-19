@@ -1,82 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:padding="15dp"
-    android:elevation="2dp"
-    android:layout_margin="5dp"
-    android:background="@color/card_light_bg">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/productImg"
+    <ImageView
+        android:id="@+id/imgProduk"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/logo"
         android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded"
-        />
+        android:src="@drawable/ic_launcher_background" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/productName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Produk B"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="@color/primary"
-        android:layout_toEndOf="@id/productImg"
-        android:layout_marginStart="12dp" />
+        <TextView
+            android:id="@+id/txt_nama_produk_pesanan"
+            android:text="Nama Produk"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/detail_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="item Tambahan"
-        android:layout_below="@id/productName"
-        android:layout_toRightOf="@id/productImg"
-        android:layout_marginStart="12sp"
-        android:textColor="#424242" />
+        <TextView
+            android:id="@+id/txt_item_tambahan"
+            android:text="Item Tambahan :"
+            android:textSize="13sp"
+            android:textColor="#9E9E9E"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_item"
-        android:layout_toEndOf="@id/productImg"
-        android:layout_marginStart="12dp"
-        tools:itemCount="4"
-
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:text="10/06/2025"
-        />
-
-    <TextView
-        android:id="@+id/hargaPesanan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total Pesanan : Rp. 200.000 "
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lunas"
-        android:layout_above="@id/hargaPesanan"
-        android:layout_alignParentEnd="true"/>
+        <TextView
+            android:id="@+id/txt_qty_pesanan"
+            android:text="x1"
+            android:textSize="14sp"
+            android:textColor="#424242"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
 
+        <TextView
+            android:id="@+id/txt_harga_pesanan"
+            android:text="Rp33.950"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

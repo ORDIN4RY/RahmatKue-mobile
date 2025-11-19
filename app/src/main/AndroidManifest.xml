@@ -16,9 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RahmatBakery"
         android:usesCleartextTraffic="true">
-<!--        pelanggan       -->
         <activity
-            android:name=".pelanggan.activity.DetailItemActivity"
+            android:name=".admin.activity.PesananAdminActivity"
+            android:exported="false" />
+        <!-- pelanggan -->
+        <activity
+            android:name=".pelanggan.activity.DetailProdukActivity"
             android:exported="false" />
         <activity
             android:name=".pelanggan.activity.CheckoutActivity"
@@ -50,13 +53,10 @@
             android:exported="false" />
         <activity
             android:name=".pelanggan.activity.DashboardActivity"
-            android:exported="true" />
-<!--        admin       -->
+            android:exported="true" /> <!-- admin -->
         <activity
             android:name=".admin.activity.DashboardActivity"
-            android:exported="true" />
-
-<!--        global      -->
+            android:exported="true" /> <!-- global -->
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />

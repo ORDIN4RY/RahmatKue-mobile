@@ -47,15 +47,15 @@ class TukarVoucher : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rec_view_voucher)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2) // 2 kolom grid
 
-        // Contoh data (bisa kamu ganti nanti dengan data dari database / API)
-        val dataProduk = listOf(
-            TukarVoucher("Pupuk Organik", 25000, R.drawable.pupuk_organik),
-            TukarVoucher("Pupuk Urea", 30000, R.drawable.pupuk_urea),
-            TukarVoucher("Pupuk NPK", 35000, R.drawable.pupuk_npk)
-        )
-
-        // Set adapter-nya
-        recyclerView.adapter = ProdukAdapter(dataProduk)
+//        // Contoh data (bisa kamu ganti nanti dengan data dari database / API)
+//        val dataProduk = listOf(
+//            TukarVoucher("Pupuk Organik", 25000, R.drawable.pupuk_organik),
+//            TukarVoucher("Pupuk Urea", 30000, R.drawable.pupuk_urea),
+//            TukarVoucher("Pupuk NPK", 35000, R.drawable.pupuk_npk)
+//        )
+//
+//        // Set adapter-nya
+//        recyclerView.adapter = ProdukAdapter(dataProduk)
 
         return view
     }

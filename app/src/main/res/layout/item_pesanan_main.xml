@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/background"
+        android:padding="14dp">
+
+        <TextView
+            android:id="@+id/txt_tgl_pesan"
+            android:text="Tgl Pesanan : 35-09-2025"
+            android:textSize="13sp"
+            android:textColor="#9E9E9E"
+            android:layout_gravity="right|top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <include
+            android:id="@+id/rv_item_pesanan"
+            layout="@layout/item_pesanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_produk_lain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/btnLihatSemua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/txtLihatSemua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lihat Semua"
+                android:textColor="#424242"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/iconArrow"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txt_total_harga_semua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Total 2 produk: Rp59.700"
+            android:textColor="#222222"
+            android:layout_alignParentRight="true"
+            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/txt_status_pesanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lunas"/>
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
