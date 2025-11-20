@@ -95,14 +95,14 @@ class RegisterActivity : AppCompatActivity() {
                     this.password = password
                 }
 
-                SupabaseManager.client.postgrest.from("profiles").update({
-                    set("username", name)
-                }) {
-                    filter {
-                        eq("id", result!!.id)
-
-                    }
-                }
+//                SupabaseManager.client.postgrest.from("profiles").update({
+//                    set("username", name)
+//                }) {
+//                    filter {
+//                        eq("id", result!!.id)
+//
+//                    }
+//                }
 
                 Toast.makeText(
                     this@RegisterActivity,

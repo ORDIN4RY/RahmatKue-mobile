@@ -33,24 +33,12 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/btn_semua"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Satuan"
-            android:textColor="@color/primary"
-            android:background="@drawable/btn_outline"
-            android:textSize="16sp"
-            android:layout_marginHorizontal="10dp"
-            android:textAlignment="center"
-            />
-
-        <TextView
             android:id="@+id/btn_satuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Paket"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_full"
+            android:text="Satuan"
+            android:textColor="@drawable/btn_filter_produk"
+            android:background="@drawable/btn_filter_produk"
             android:textSize="16sp"
             android:layout_marginHorizontal="10dp"
             android:textAlignment="center"
@@ -60,9 +48,21 @@
             android:id="@+id/btn_paket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Paket"
+            android:textColor="@drawable/btn_filter_produk"
+            android:background="@drawable/btn_filter_produk"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:id="@+id/btn_custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Kustom"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_full"
+            android:textColor="@drawable/btn_filter_produk"
+            android:background="@drawable/btn_filter_produk"
             android:textSize="16sp"
             android:layout_marginHorizontal="10dp"
             android:textAlignment="center"

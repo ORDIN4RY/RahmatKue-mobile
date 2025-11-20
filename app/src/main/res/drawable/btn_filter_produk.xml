@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Text color when selected -->
+    <item android:state_selected="true"
+        android:color="@color/primary"
+        android:drawable="@drawable/btn_outline"
+        />
+
+    <!-- Text color when pressed -->
+    <item android:state_pressed="true"
+        android:color="@color/primary"
+        android:drawable="@drawable/btn_outline"/>
+
+    <!-- Default text color -->
+    <item
+        android:color="@color/card_light_bg"
+        android:drawable="@drawable/btn_full"/>
+</selector>

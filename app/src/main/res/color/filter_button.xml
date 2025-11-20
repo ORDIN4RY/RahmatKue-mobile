@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Text color when selected -->
+    <item android:state_selected="true" android:color="@color/white"/>
+
+    <!-- Text color when pressed -->
+    <item android:state_pressed="true" android:color="@color/white"/>
+
+    <!-- Default text color -->
+    <item android:color="@color/primary"/>
+</selector>

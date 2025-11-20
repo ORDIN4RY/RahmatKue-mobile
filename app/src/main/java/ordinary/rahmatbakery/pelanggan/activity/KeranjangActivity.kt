@@ -220,7 +220,7 @@ class KeranjangActivity : AppCompatActivity() {
                     "Gagal memuat: ${e.message}",
                     Toast.LENGTH_LONG
                 ).show()
-                // Baris ini sepertinya untuk debug, bisa dihapus jika ada EditText 'tes'
+                // cuma buat debugging kalau ada error
                 val tes = findViewById<EditText>(R.id.tes)
                 tes.setText(e.message)
                 tes.visibility = View.VISIBLE

@@ -1,7 +1,6 @@
 package ordinary.rahmatbakery.pelanggan.adapter
 
 import android.content.Intent
-import ordinary.rahmatbakery.pelanggan.model.Produk
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.pelanggan.activity.DetailProdukActivity
+import ordinary.rahmatbakery.pelanggan.model.Paket
 import java.text.NumberFormat
 import java.util.Locale
 
-class MenuProdukAdapter(
-    private val listProduk: List<Produk>)
-    : RecyclerView.Adapter<MenuProdukAdapter.ViewHolder>()  {
+class MenuPaketAdapter(
+    private val listPaket: List<Paket>
+) : RecyclerView.Adapter<MenuPaketAdapter.ViewHolder>() {
 
     var localeID: Locale = Locale("in", "ID")
     var formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID).apply {
@@ -28,39 +28,34 @@ class MenuProdukAdapter(
         val productName: TextView = itemView.findViewById(R.id.productName)
         val productPrice: TextView = itemView.findViewById(R.id.productPrice)
         val btnPesan: TextView = itemView.findViewById(R.id.btn_pesan)
-        val counterContainer: View = itemView.findViewById(R.id.counter_container)
-        val iconMinus: ImageView = itemView.findViewById(R.id.icon_minus)
-        val inputCount: TextView = itemView.findViewById(R.id.input_count)
-        val iconPlus: ImageView = itemView.findViewById(R.id.icon_plus)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuProdukAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_menu_produk, parent, false)
+            .inflate(R.layout.item_menu_paket, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MenuProdukAdapter.ViewHolder, position: Int) {
-        val item = listProduk[position]
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = listPaket[position]
         holder.productName.text = item.nama
         holder.productPrice.text = formatRupiah.format(item.harga)
 
-        holder.productImg.load(item.gambar) {
-            crossfade(true) // animasi lembut saat gambar muncul
-            placeholder(R.drawable.placeholder) // opsional: gambar sementara
-            error(R.drawable.error_image)       // opsional: jika gagal load
+        holder.productImg.load(item.foto) {
+            crossfade(true)
+            placeholder(R.drawable.placeholder)
+            error(R.drawable.error_image)
         }
 
         holder.btnPesan.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailProdukActivity::class.java)
-            intent.putExtra("TIPE", "produk")
-            intent.putExtra("PRODUK", item)
+            intent.putExtra("TIPE", "paket")
+            intent.putExtra("PAKET", item)
             intent.putExtra("FROM", "menu") // menandakan dari menu, bukan keranjang
             context.startActivity(intent)
         }
-
     }
 
-    override fun getItemCount() = listProduk.size
+    override fun getItemCount() = listPaket.size
 }

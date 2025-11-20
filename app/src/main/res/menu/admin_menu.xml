@@ -3,12 +3,12 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/home"
-        android:title="Dashboard"
+        android:title="Beranda"
         />
     <item
         android:id="@+id/analytic"
         android:icon="@drawable/box"
-        android:title="Analytic" />
+        android:title="Statistik" />
     <item
         android:id="@+id/order"
         android:icon="@drawable/pesanan"
