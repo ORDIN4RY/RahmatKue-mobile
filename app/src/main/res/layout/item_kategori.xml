@@ -12,6 +12,7 @@
         android:text="Produk"
         android:textSize="16sp"
         android:gravity="center"
+        android:padding="8dp"
         android:textColor="@color/primary"
         android:background="@drawable/bg_filter_kategori"
         android:paddingVertical="3dp"
