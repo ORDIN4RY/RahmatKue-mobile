@@ -89,7 +89,7 @@ class DashboardActivity(
                 }
                 R.id.setting -> {
                     replaceFragment(PengaturanFragment())
-                    judul.setText("Pengaturan")
+                    judul.setText("Profil")
                     true
                 }
                 else -> false

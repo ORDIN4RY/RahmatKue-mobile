@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RincianPesananActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:elevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/back" />
+
+            <TextView
+                style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@id/back"
+                android:text="Rincian Pesanan"
+                android:textColor="@color/primary" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:elevation="5dp"
+                app:cardCornerRadius="5dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:id="@+id/headline"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@color/primary" />
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Pesanan Selesai"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/headline"
+                        android:padding="10dp"
+                        android:text="Alamat" />
+
+                    <ImageView
+                        android:id="@+id/ic_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/headline"
+                        android:layout_marginLeft="17dp"
+                        android:layout_marginTop="35dp"
+                        android:background="@drawable/ic_location" />
+
+                    <TextView
+                        android:id="@+id/nama_penerima"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/headline"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_toRightOf="@id/ic_location"
+                        android:text="Ahmad Hananto"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/alamat_penerima"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nama_penerima"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/ic_location"
+                        android:text="Jl. Ahmad Yani Tanggul Kulon"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nama_penerima"
+                        android:layout_alignParentRight="true"
+                        android:padding="5dp"
+                        android:text="Lihat" />
+
+                    <View
+                        android:id="@+id/garis_pembatas_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_below="@id/alamat_penerima"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/background" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/garis_pembatas_1"
+                        android:padding="10dp"
+                        android:text="Metode Pengantaran " />
+
+                    <TextView
+                        android:id="@+id/metode_pengantaran"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/garis_pembatas_1"
+                        android:layout_marginTop="20dp"
+                        android:padding="10dp"
+                        android:text="Diambil" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/background"
+                android:elevation="5dp"
+                app:cardCornerRadius="5dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_rincian_pesanan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/total_pesanan"
+                        android:text="Catatan"
+                        android:padding="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/total_pesanan"
+                        android:text="-"
+                        android:layout_marginTop="30dp"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <View
+                        android:id="@+id/garis_pembatas_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_below="@id/rv_rincian_pesanan"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/background" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/garis_pembatas_2"
+                        android:layout_marginTop="10dp"
+                        android:layout_toLeftOf="@id/total_pesanan"
+                        android:text="Total Pesanan: " />
+
+                    <TextView
+                        android:id="@+id/total_pesanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/garis_pembatas_2"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentRight="true"
+                        android:text="Rp. 255000 " />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/background"
+                android:elevation="5dp"
+                app:cardCornerRadius="5dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/rincian_biaya"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Rincian: " />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rincian_biaya"
+                        android:paddingLeft="10dp"
+                        android:text="Subtotal Pesanan" />
+
+                    <TextView
+                        android:id="@+id/subtotal_pesanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rincian_biaya"
+                        android:layout_alignParentRight="true"
+                        android:text="Rp. 2510000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/subtotal_pesanan"
+                        android:paddingLeft="10dp"
+                        android:text="Subtotal Pengiriman" />
+
+                    <TextView
+                        android:id="@+id/subtotal_pengiriman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/subtotal_pesanan"
+                        android:layout_alignParentRight="true"
+                        android:text="Rp. 2000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/subtotal_pengiriman"
+                        android:paddingLeft="10dp"
+                        android:text="Pembayaran Awal" />
+
+                    <TextView
+                        android:id="@+id/pembayaran_awal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/subtotal_pengiriman"
+                        android:layout_alignParentRight="true"
+                        android:text="Rp. -" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pembayaran_awal"
+                        android:layout_marginTop="0dp"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Potongan Harga" />
+
+                    <TextView
+                        android:id="@+id/potongan_harga"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pembayaran_awal"
+                        android:layout_alignParentRight="true"
+                        android:text="Rp. -" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/background"
+                android:elevation="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No. Pesanan" />
+
+                    <TextView
+                        android:id="@+id/nomor_pesanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="ODR451548" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nomor_pesanan"
+                        android:text="Tanggal Pemesanan" />
+
+                    <TextView
+                        android:id="@+id/tgl_pemesanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nomor_pesanan"
+                        android:layout_alignParentRight="true"
+                        android:text="06-10-2026" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tanggal Pesanan Jadi"
+                        android:layout_below="@id/tgl_pemesanan"/>
+
+                    <TextView
+                        android:id="@+id/tgl_pesanan_jadi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tgl_pemesanan"
+                        android:text="09-10-2025"
+                        android:layout_alignParentRight="true"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Metode Pembayaran"
+                        android:layout_below="@id/tgl_pesanan_jadi"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Qris"
+                        android:layout_below="@id/tgl_pesanan_jadi"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Batalkan Pesanan"
+                android:background="@drawable/btn_outline"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

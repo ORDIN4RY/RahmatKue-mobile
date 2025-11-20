@@ -1,6 +1,7 @@
 package ordinary.rahmatbakery.pelanggan.activity
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -116,8 +117,9 @@ class KeranjangActivity : AppCompatActivity() {
                 Toast.makeText(this, "Pilih item untuk checkout", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            Toast.makeText(this, "Checkout ${selected.size} item", Toast.LENGTH_SHORT).show()
-            // TODO: lanjutkan ke halaman checkout
+         val intent = Intent(this, CheckoutActivity::class.java) // TODO: lanjutkan ke halaman checkout
+        startActivity(intent)
+
         }
 
         btnBack.setOnClickListener {

@@ -17,9 +17,14 @@
         android:theme="@style/Theme.RahmatBakery"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".admin.activity.PesananAdminActivity"
+            android:name=".RincianPesananActivity"
             android:exported="false" />
-        <!-- pelanggan -->
+        <activity
+            android:name=".GantiPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.activity.PesananAdminActivity"
+            android:exported="false" /> <!-- pelanggan -->
         <activity
             android:name=".pelanggan.activity.DetailProdukActivity"
             android:exported="false" />
