@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/txt_item_jumlah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1x"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:layout_marginEnd="8dp"/>
+
+    <TextView
+        android:id="@+id/txt_item_nama"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Nama Produk"
+        android:textColor="@color/primary"/>
+
+    <TextView
+        android:id="@+id/txt_item_harga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 15.000"
+        android:textColor="@color/primary"/>
+
+</LinearLayout>

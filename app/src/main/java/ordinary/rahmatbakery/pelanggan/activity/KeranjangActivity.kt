@@ -20,15 +20,11 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
-import io.github.jan.supabase.postgrest.query.filter.FilterOperator
-import io.github.jan.supabase.realtime.PostgresAction
-import io.github.jan.supabase.realtime.RealtimeChannel
-import io.github.jan.supabase.realtime.channel
-import io.github.jan.supabase.realtime.postgresChangeFlow
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.adapter.KeranjangAdapter
@@ -46,9 +42,6 @@ class KeranjangActivity : AppCompatActivity() {
     private lateinit var btnBack: ImageView
     private lateinit var cbPilihSemua: CheckBox
     private var isUpdatingSelectAll = false
-
-    private var realtimeChannel: RealtimeChannel? = null
-    private var realtimeJob: Job? = null
 
     private val formatRupiah = NumberFormat.getCurrencyInstance(Locale("in", "ID")).apply {
         maximumFractionDigits = 0
@@ -117,9 +110,13 @@ class KeranjangActivity : AppCompatActivity() {
                 Toast.makeText(this, "Pilih item untuk checkout", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-         val intent = Intent(this, CheckoutActivity::class.java) // TODO: lanjutkan ke halaman checkout
-        startActivity(intent)
+         val intent = Intent(this, CheckoutActivity::class.java)
+            val selectedItemsJson = Json.encodeToString(selected)
 
+            // 2. Kirim String JSON tersebut melalui Intent
+            intent.putExtra("KERANJANG_JSON", selectedItemsJson)
+
+            startActivity(intent)
         }
 
         btnBack.setOnClickListener {
@@ -250,48 +247,4 @@ class KeranjangActivity : AppCompatActivity() {
         }
     }
 
-
-    override fun onStart() {
-        super.onStart()
-
-        val userId = SupabaseManager.client.auth.currentUserOrNull()?.id ?: return
-
-        val channel = SupabaseManager.client.channel("keranjang-$userId") {
-        }
-
-        val changeFlow = channel.postgresChangeFlow<PostgresAction>(schema = "public") {
-            table = "keranjang"
-            filter("id_user", FilterOperator.EQ, userId)
-        }
-
-        realtimeJob = lifecycleScope.launch {
-            changeFlow.collect { action ->
-                when (action) {
-                    is PostgresAction.Insert,
-                    is PostgresAction.Update,
-                    is PostgresAction.Delete -> {
-                        delay(200)
-                        loadKeranjang()
-                    }
-
-                    else -> Unit
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            channel.subscribe()
-        }
-
-        realtimeChannel = channel
-    }
-
-
-    override fun onStop() {
-        super.onStop()
-        realtimeJob?.cancel()
-        lifecycleScope.launch {
-            realtimeChannel?.unsubscribe()
-        }
-    }
 }
