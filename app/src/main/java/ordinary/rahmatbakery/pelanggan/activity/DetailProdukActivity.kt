@@ -1,5 +1,6 @@
 package ordinary.rahmatbakery.pelanggan.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
@@ -19,6 +20,8 @@ import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.adapter.DetailProdukAdapter
@@ -147,6 +150,7 @@ class DetailProdukActivity : AppCompatActivity() {
                     ).show()
                     return@setOnClickListener
                 }
+                langsungCheckOut(produk, null)
             } else if (tipe == "paket") {
                 if (itemCounter.text.toString().toInt() < 1) {
                     Toast.makeText(
@@ -156,12 +160,12 @@ class DetailProdukActivity : AppCompatActivity() {
                     ).show()
                     return@setOnClickListener
                 }
+                langsungCheckOut(null, paket)
             }
         }
     }
 
     private fun tambahKeranjang(produk: Produk? = null, paket: Paket? = null) {
-
         lifecycleScope.launch {
             try {
 
@@ -195,5 +199,27 @@ class DetailProdukActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun langsungCheckOut(produk: Produk? = null, paket: Paket? = null) {
+        val itemLangsungCheckout = listOf(
+            Keranjang(
+                id = java.util.UUID.randomUUID().toString(),
+                jumlah = itemCounter.text.toString().toInt(),
+                tipe = if (produk != null) "produk" else "paket",
+                produk = produk,
+                paket = paket,
+                terpilih = true
+            )
+        )
+
+        val intent = Intent(this, CheckoutActivity::class.java)
+
+        val selectedItemsJson = Json.encodeToString(itemLangsungCheckout)
+
+        intent.putExtra("KERANJANG_JSON", selectedItemsJson)
+
+        startActivity(intent)
+    }
+
 
 }

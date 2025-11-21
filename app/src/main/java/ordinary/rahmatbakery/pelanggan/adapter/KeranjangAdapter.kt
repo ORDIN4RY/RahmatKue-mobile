@@ -185,7 +185,6 @@ class KeranjangAdapter(
             }
         }
 
-
         holder.txtNamaProduk.setOnClickListener {
             goToDetail(item, holder)
         }
