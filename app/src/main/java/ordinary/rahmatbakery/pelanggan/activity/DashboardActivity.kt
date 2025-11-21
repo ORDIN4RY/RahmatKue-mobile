@@ -87,7 +87,7 @@ class DashboardActivity(
                     judul.setText("Daftar Pesanan")
                     true
                 }
-                R.id.setting -> {
+                R.id.profil -> {
                     replaceFragment(PengaturanFragment())
                     judul.setText("Profil")
                     true

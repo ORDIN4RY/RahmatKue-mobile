@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
+import ordinary.rahmatbakery.GantiPasswordActivity
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
@@ -30,10 +32,11 @@ class PengaturanFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_pengaturan, container, false)
 
         // Ambil tombol dari layout fragment
-        val logout = rootView.findViewById<TextView>(R.id.logout)
-        val btnVoucher = rootView.findViewById<TextView>(R.id.btn_voucher)
-        val btnAlamat = rootView.findViewById<TextView>(R.id.btn_alamat)
-        val btnBantuan = rootView.findViewById<TextView>(R.id.btn_bantuan)
+        val logout = rootView.findViewById<LinearLayout>(R.id.logout)
+        val btnVoucher = rootView.findViewById<LinearLayout>(R.id.btn_voucher)
+        val btnAlamat = rootView.findViewById<LinearLayout>(R.id.btn_alamat)
+        val btnBantuan = rootView.findViewById<LinearLayout>(R.id.btn_bantuan)
+        val btnGantiPass = rootView.findViewById<LinearLayout>(R.id.btn_ganti_password)
 
 
         // Set aksi klik
@@ -48,6 +51,10 @@ class PengaturanFragment : Fragment() {
 
         btnVoucher.setOnClickListener {
             val intent = Intent(requireContext(), VoucherActivity::class.java)
+            startActivity(intent)
+        }
+        btnGantiPass.setOnClickListener {
+            val intent = Intent (requireContext(), GantiPasswordActivity::class.java)
             startActivity(intent)
         }
 

@@ -221,7 +221,7 @@
 
                 <!-- Menu Item 4: Logout -->
                 <LinearLayout
-                    android:id="@+id/ganti_password"
+                    android:id="@+id/btn_ganti_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
