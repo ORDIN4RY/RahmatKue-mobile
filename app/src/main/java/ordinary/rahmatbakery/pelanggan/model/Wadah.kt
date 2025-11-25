@@ -4,21 +4,17 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
+
 @Parcelize
 @Serializable
-data class Paket(
-    val id : String ?=null,
+data class Wadah(
+    val id: String,
     val nama: String,
-    val wadah: Wadah,
     val deskripsi: String,
     val foto: String = "foto.png",
+    val kapasitas: Int,
     val harga: Int,
-    val detail: List<Detail> = emptyList()
+    val varian: String
 ) : Parcelable
 
 
-@Parcelize
-@Serializable
-data class Detail(
-    val produk: Produk
-) : Parcelable

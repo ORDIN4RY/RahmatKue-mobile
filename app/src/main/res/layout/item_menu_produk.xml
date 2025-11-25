@@ -34,10 +34,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_toEndOf="@id/productImg"
-                android:text="Produk B"
+                android:text="Lemper"
                 android:textColor="@color/primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/productSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mini"
+                android:textSize="12sp"
+                android:textColor="@color/primary"
+                android:layout_toEndOf="@id/productName"
+                android:paddingHorizontal="3dp"
+                android:textAlignment="center"
+                android:layout_alignTop="@id/productName"
+                android:visibility="gone"
+                />
 
             <TextView
                 android:id="@+id/productPrice"

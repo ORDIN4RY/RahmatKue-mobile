@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import ordinary.rahmatbakery.pelanggan.adapter.MenuPaketAdapter
 import ordinary.rahmatbakery.pelanggan.model.Kategori
 import ordinary.rahmatbakery.pelanggan.model.Produk
 import ordinary.rahmatbakery.pelanggan.model.Paket
+import ordinary.rahmatbakery.pelanggan.model.Wadah
 
 class MenuFragment : Fragment() {
 
@@ -64,15 +66,17 @@ class MenuFragment : Fragment() {
         adapterProduct = MenuProdukAdapter(listMenu)
         adapterPaket = MenuPaketAdapter(listPaket)
 
-        rvProduct.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rvProduct.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         // Inisialisasi RecyclerView Kategori
         rvKategori = rootView.findViewById(R.id.rvKategori)
-        adapterKategori = KategoriAdapter(listKategori, currentKateg){kategori ->
+        adapterKategori = KategoriAdapter(listKategori, currentKateg) { kategori ->
             applyKategFilter(kategori.id)
         }
         rvKategori.adapter = adapterKategori
-        rvKategori.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rvKategori.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         // Setup filter buttons
         setupFilterButtons()
@@ -110,10 +114,12 @@ class MenuFragment : Fragment() {
                 loadProduct(currentKateg)
                 rvProduct.adapter = adapterProduct
             }
+
             "paket" -> {
                 loadPaket()
                 rvProduct.adapter = adapterPaket
             }
+
             "custom" -> {
                 // Untuk custom (kotak), akan diimplementasikan nanti
                 listMenu.clear()
@@ -125,16 +131,17 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun applyKategFilter(newKateg: String){
-        if(currentKateg != newKateg){
+    private fun applyKategFilter(newKateg: String) {
+        if (currentKateg != newKateg) {
             currentKateg = newKateg
-        }else{
+        } else {
             currentKateg = ""
         }
         loadProduct(currentKateg)
         rvProduct.adapter = adapterProduct
 
-        adapterKategori.updateSelected(currentKateg)}
+        adapterKategori.updateSelected(currentKateg)
+    }
 
     private fun updateButtonStates() {
         // Reset semua button ke state default
@@ -151,22 +158,23 @@ class MenuFragment : Fragment() {
     }
 
     private fun loadKategori() {
-        lifecycleScope.launch {        try {
-            // Panggil fungsi RPC yang sudah kita buat
-            val kategories = SupabaseManager.client.postgrest.rpc(
-                function = "get_kategori_with_products"
-            ).decodeList<Kategori>() // Gunakan data class Kategori yang sudah ada
+        lifecycleScope.launch {
+            try {
+                // Panggil fungsi RPC yang sudah kita buat
+                val kategories = SupabaseManager.client.postgrest.rpc(
+                    function = "get_kategori_with_products"
+                ).decodeList<Kategori>() // Gunakan data class Kategori yang sudah ada
 
-            // Logika selanjutnya tetap sama
-            if (kategories.isNotEmpty()) {
-                listKategori.clear()
-                listKategori.addAll(kategories)
-                adapterKategori.notifyDataSetChanged()
+                // Logika selanjutnya tetap sama
+                if (kategories.isNotEmpty()) {
+                    listKategori.clear()
+                    listKategori.addAll(kategories)
+                    adapterKategori.notifyDataSetChanged()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Mungkin tampilkan Toast jika gagal
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            // Mungkin tampilkan Toast jika gagal
-        }
         }
     }
 
@@ -174,63 +182,134 @@ class MenuFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val produk = SupabaseManager.client.from("produk")
-                    .select(columns = Columns.raw(
-                        """
-                        id : id_produk,
-                        nama : nama_produk,
-                        deskripsi : deskripsi,
-                        gambar : foto_produk,
-                        harga : harga
+                    .select(
+                        Columns.raw(
+                            """
+                        id:id_produk,
+                        nama:nama_produk,
+                        varian,
+                        kategori:id_kategori(
+                            id:id_kategori,
+                            nama:nama_kategori,
+                            minimal_pembelian
+                        ),
+                        deskripsi,
+                        gambar:foto_produk,
+                        harga
                         """.trimIndent()
-                    )){
+                        )
+                    ) {
                         if (kategori.isNotEmpty()) {
-                            filter {
-                                eq("id_kategori", kategori)
-                            }
+                            filter { eq("id_kategori", kategori) }
                         }
                     }
                     .decodeList<Produk>()
 
-                if (produk.isNotEmpty()) {
-                    listMenu.clear()
-                    listMenu.addAll(produk)
-                    rvKategori.visibility = View.VISIBLE
-                    adapterProduct.notifyDataSetChanged()
-                }
+                listMenu.clear()
+                listMenu.addAll(produk)
+                rvKategori.visibility = View.VISIBLE
+                adapterProduct.notifyDataSetChanged()
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
+
 
     private fun loadPaket() {
         lifecycleScope.launch {
             try {
                 val paket = SupabaseManager.client.from("paket")
-                    .select(columns = Columns.raw(
-                        """
-                        id:id_paket, 
-                            nama:nama_paket, 
-                            deskripsi, 
-                            foto:foto_paket, 
-                            harga:harga_paket, 
-                            detail:detail_paket(
-                                jumlah, 
-                                produk:id_produk(id:id_produk, nama:nama_produk, deskripsi, gambar:foto_produk, harga)
+                    .select(
+                        Columns.raw(
+                            """
+                        id:id_paket,
+                        nama:nama_paket,
+                        deskripsi,
+                        foto:foto_paket,
+                        harga:harga_paket,
+
+                        wadah:wadah(
+                            id:id_wadah,
+                            nama:nama_wadah,
+                            deskripsi,
+                            foto:foto_wadah,
+                            kapasitas,
+                            harga:harga_wadah,
+                            varian
+                        ),
+
+                        detail:detail_paket(
+                            produk:id_produk(
+                                id:id_produk,
+                                nama:nama_produk,
+                                varian,
+                                kategori:id_kategori(
+                                    id:id_kategori,
+                                    nama:nama_kategori,
+                                    minimal_pembelian
+                                ),
+                                deskripsi,
+                                gambar:foto_produk,
+                                harga
                             )
+                        )
                         """.trimIndent()
-                    ))
+                        )
+                    )
                     .decodeList<Paket>()
 
-                if (paket.isNotEmpty()) {
-                    listPaket.clear()
-                    listPaket.addAll(paket)
-                    rvKategori.visibility = View.GONE
-                    adapterPaket.notifyDataSetChanged()
-                }
+                listPaket.clear()
+                listPaket.addAll(paket)
+                rvKategori.visibility = View.GONE
+                adapterPaket.notifyDataSetChanged()
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
+
+
+
+//    private fun loadCustom() {
+//        lifecycleScope.launch {
+//            try {
+//                val wadah = SupabaseManager.client.from("wadah")
+//                    .select(
+//                        Columns.raw(
+//                            """
+//                        id:id_wadah,
+//                        nama:nama_wadah,
+//                        deskripsi,
+//                        foto:foto_wadah,
+//                        kapasitas,
+//                        harga:harga_wadah,
+//                        varian
+//                        """.trimIndent()
+//                        )
+//                    )
+//                    .decodeList<Wadah>()
+//
+//                // ganti adapter Product menjadi adapter Custom
+//                listMenu.clear()
+//                listPaket.clear()
+//
+//                // jika kamu punya adapter khusus custom → pasang di sini
+//                // rvProduct.adapter = adapterCustom
+//
+//                // sementara tampilkan dengan adapterProduct agar cepat
+//                // (silakan ganti jika sudah ada adapter Custom)
+//                // listMenuCustom.addAll(wadah)
+//
+//                rvKategori.visibility = View.GONE
+//
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+//        }
+//    }
+
+
 }

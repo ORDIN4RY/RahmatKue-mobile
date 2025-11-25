@@ -28,10 +28,7 @@ class MenuProdukAdapter(
         val productName: TextView = itemView.findViewById(R.id.productName)
         val productPrice: TextView = itemView.findViewById(R.id.productPrice)
         val btnPesan: TextView = itemView.findViewById(R.id.btn_pesan)
-        val counterContainer: View = itemView.findViewById(R.id.counter_container)
-        val iconMinus: ImageView = itemView.findViewById(R.id.icon_minus)
-        val inputCount: TextView = itemView.findViewById(R.id.input_count)
-        val iconPlus: ImageView = itemView.findViewById(R.id.icon_plus)
+        val miniText: TextView = itemView.findViewById(R.id.productSize)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuProdukAdapter.ViewHolder {
@@ -58,6 +55,12 @@ class MenuProdukAdapter(
             intent.putExtra("PRODUK", item)
             intent.putExtra("FROM", "menu") // menandakan dari menu, bukan keranjang
             context.startActivity(intent)
+        }
+
+        if (item.varian == "mini") {
+            holder.miniText.visibility = View.VISIBLE
+        } else {
+            holder.miniText.visibility = View.GONE
         }
 
     }
