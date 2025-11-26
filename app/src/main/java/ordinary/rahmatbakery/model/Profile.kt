@@ -9,6 +9,9 @@ data class Profile(
     val level: String? = "pelanggan",
     val point : Int?=0,
     @SerialName("created_at")
-    val createdAt: String?
+    val createdAt: String?,
+
+    @SerialName("is_blocked")
+    val isBanned : Boolean = false
 )
 

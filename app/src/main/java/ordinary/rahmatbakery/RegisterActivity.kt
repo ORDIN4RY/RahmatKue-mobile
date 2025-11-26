@@ -19,6 +19,8 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonObject
 import ordinary.rahmatbakery.api.SupabaseManager
 
 class RegisterActivity : AppCompatActivity() {
@@ -30,6 +32,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var regisCard: CardView
     private lateinit var inputConfirmPass: EditText
     private lateinit var inputName: EditText
+    private lateinit var inputPhone: EditText
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +55,7 @@ class RegisterActivity : AppCompatActivity() {
         textLogin = findViewById(R.id.keLogin)
         inputConfirmPass = findViewById(R.id.inputConfirmPass)
         inputName = findViewById(R.id.inputName)
+        inputPhone = findViewById(R.id.inputPhone)
 
 
         regisCard.animate()
@@ -64,17 +69,25 @@ class RegisterActivity : AppCompatActivity() {
             val password = inputPass.text.toString()
             val confirmPass = inputConfirmPass.text.toString()
             val name = inputName.text.toString()
+            val phoneInput = inputPhone.text.toString()
+
+            if (!isValidPhone(phoneInput)) {
+                Toast.makeText(this, "Nomor telepon tidak valid", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
 
             if (password != confirmPass) {
                 Toast.makeText(this, "Password tidak sama", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            val phone = normalizePhone(phoneInput)
 
-            if (email.isEmpty() || password.isEmpty() || confirmPass.isEmpty() || name.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty() || confirmPass.isEmpty() || name.isEmpty() || phone.isEmpty()) {
                 Toast.makeText(this, "Mohon isi semua data", Toast.LENGTH_SHORT).show()
             } else {
-                registerUser(email, password, name)
+                registerUser(email, password, name, phone)
             }
         }
 
@@ -87,22 +100,35 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun registerUser(email: String, password: String, name: String) {
+    fun isValidPhone(phone: String): Boolean {
+        val clean = phone.replace("-", "").replace(" ", "")
+
+        return clean.matches(Regex("^\\+?\\d{9,15}$"))
+    }
+
+    fun normalizePhone(phone: String): String {
+        var p = phone.replace(" ", "").replace("-", "")
+
+        return when {
+            p.startsWith("+") -> p
+            p.startsWith("0") -> "+62" + p.substring(1)
+            else -> "+62$p" // fallback
+        }
+    }
+
+
+    private fun registerUser(email: String, password: String, name: String, phone : String) {
         lifecycleScope.launch {
             try {
+
                 val result = SupabaseManager.client.auth.signUpWith(Email) {
                     this.email = email
                     this.password = password
+                    data = buildJsonObject {
+                        put("phone", JsonPrimitive(phone))    // <-- disimpan dalam user_metadata
+                        put("full_name", JsonPrimitive(name))
+                    }
                 }
-
-//                SupabaseManager.client.postgrest.from("profiles").update({
-//                    set("username", name)
-//                }) {
-//                    filter {
-//                        eq("id", result!!.id)
-//
-//                    }
-//                }
 
                 Toast.makeText(
                     this@RegisterActivity,

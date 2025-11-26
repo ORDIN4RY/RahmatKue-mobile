@@ -53,9 +53,9 @@
         android:layout_marginTop="50dp"
         android:backgroundTint="@android:color/transparent"
         app:cardElevation="0dp"
+        android:translationY="200dp"
+        android:alpha="0"
         >
-<!--        android:translationY="200dp"-->
-<!--        android:alpha="0"-->
 
 
 

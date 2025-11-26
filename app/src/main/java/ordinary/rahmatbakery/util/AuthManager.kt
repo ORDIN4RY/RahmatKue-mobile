@@ -19,7 +19,7 @@ class AuthRepository {
         val user = supabase.auth.currentUserOrNull()
             ?: throw Exception("User tidak ditemukan")
 
-        return supabase
+        val profile =  supabase
             .postgrest["profiles"]
             .select {
                 filter{
@@ -27,6 +27,10 @@ class AuthRepository {
                 }
             }
             .decodeSingle<Profile>()
+
+        if(profile.isBanned) throw Exception("Akun anda telah diblokir, harap hubungi admin!")
+
+        return profile
     }
 
     suspend fun getCurrentProfile(): Profile? {

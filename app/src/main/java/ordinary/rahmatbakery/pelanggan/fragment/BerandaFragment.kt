@@ -60,7 +60,7 @@ class BerandaFragment : Fragment() {
         val username = parentActivity?.profile?.username
         val point = parentActivity?.profile?.point
 
-        nameText.text = "Hi, ${username ?: "Pengguna"} !"
+        nameText.text = "Hi, ${ambilNamaPendek(username!!) ?: "Pengguna"} !"
         pointText.text = "${point ?: 0} Points"
 
         // RecyclerView pesanan terakhir
@@ -96,4 +96,19 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+    fun ambilNamaPendek(nama: String): String {
+        // Hilangkan spasi berlebih di awal/akhir
+        val bersih = nama.trim()
+
+        // Pisahkan berdasarkan spasi
+        val kata = bersih.split("\\s+".toRegex())
+
+        return if (kata.size >= 2) {
+            kata[0] // pakai nama depan
+        } else {
+            bersih // tetap nama asli jika hanya 1 kata
+        }
+    }
+
 }

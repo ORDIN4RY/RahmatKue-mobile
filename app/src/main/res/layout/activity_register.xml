@@ -46,11 +46,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
-        android:alpha="0"
         android:backgroundTint="@android:color/transparent"
-        android:translationY="200dp"
-        app:cardElevation="0dp">
+        app:cardElevation="0dp"
+        >
 
+<!--        android:alpha="0"-->
+<!--        android:translationY="200dp"-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,6 +85,32 @@
                     android:paddingVertical="10dp"
                     android:textColor="@color/primary" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxStrokeColor="@color/primary"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/primary"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nomor Telepon"
+                    android:inputType="phone"
+                    android:paddingVertical="10dp"
+                    android:textColor="@color/primary"
+                    android:maxLength="15"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <!-- 2. Bungkus EditText email dengan TextInputLayout -->
             <com.google.android.material.textfield.TextInputLayout

@@ -115,7 +115,7 @@ class DetailProdukActivity : AppCompatActivity() {
                     if (itemCounter.text.toString().toInt() < produk!!.kategori.minPembelian) {
                         Toast.makeText(
                             this,
-                            "Pembelian minimal ${produk!!.nama} adalah ${produk!!.kategori.minPembelian} pcs",
+                            "Pembelian minimal ${produk.kategori.nama} adalah ${produk.kategori.minPembelian} pcs",
                             Toast.LENGTH_SHORT
                         ).show()
                         return@setOnClickListener
@@ -132,20 +132,18 @@ class DetailProdukActivity : AppCompatActivity() {
                         ).show()
                         return@setOnClickListener
                     }
-
-
                     tambahKeranjang(null, paket)
-
                 }
+
             }
         }
 
         btnCheckOut.setOnClickListener {
             if (tipe == "produk") {
-                if (itemCounter.text.toString().toInt() < 15) {
+                if (itemCounter.text.toString().toInt() < produk!!.kategori.minPembelian) {
                     Toast.makeText(
                         this,
-                        "Pembelian minimal produk adalah 15 pcs",
+                        "Pembelian minimal ${produk.kategori.nama} adalah ${produk.kategori.minPembelian} pcs",
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -163,6 +161,31 @@ class DetailProdukActivity : AppCompatActivity() {
                 langsungCheckOut(null, paket)
             }
         }
+
+        iconPlus.setOnClickListener {
+            val currentCount = itemCounter.text.toString().toInt()
+            itemCounter.setText((currentCount + 1).toString())
+
+        }
+
+        iconMinus.setOnClickListener {
+            val currentCount = itemCounter.text.toString().toInt()
+
+            if (tipe == "produk") {
+                if (currentCount <= produk!!.kategori.minPembelian) {
+                    Toast.makeText(this, "Minimal pembelian kategori ${produk.kategori.nama} adalah ${produk.kategori.minPembelian} pcs", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+            }else{
+                if (currentCount <= 1){
+                    Toast.makeText(this, "Minimal paket adalah 1 pcs", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+            }
+
+            itemCounter.setText((currentCount - 1).toString())
+        }
+
     }
 
     private fun tambahKeranjang(produk: Produk? = null, paket: Paket? = null) {

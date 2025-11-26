@@ -95,13 +95,13 @@ class KeranjangAdapter(
             val current = listKeranjang[currentPos]
 
             if (current.tipe == "produk") {
-                if (current.jumlah <= 15) {
-                    Toast.makeText(holder.itemView.context, "Minimal Produk satuan adalah 15 biji", Toast.LENGTH_SHORT).show()
+                if (current.jumlah <= item.produk!!.kategori.minPembelian) {
+                    Toast.makeText(holder.itemView.context, "Minimal pembelian kategori ${item.produk.kategori.nama} adalah ${item.produk.kategori.minPembelian} pcs", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
             }else{
                 if (current.jumlah <= 1){
-                    Toast.makeText(holder.itemView.context, "Minimal paket adalah 1", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(holder.itemView.context, "Minimal paket adalah 1 pcs", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
             }
@@ -133,12 +133,12 @@ class KeranjangAdapter(
                         var validatedJumlah = newJumlah
                         var validationMessage: String? = null
 
-                        if (currentItem.tipe == "produk" && newJumlah < 15) {
-                            validatedJumlah = 15
-                            validationMessage = "Minimal produk satuan adalah 15 biji"
+                        if (currentItem.tipe == "produk" && newJumlah < currentItem.produk!!.kategori.minPembelian) {
+                            validatedJumlah = currentItem.produk.kategori.minPembelian
+                            validationMessage = "Minimal pembelian kategori ${currentItem.produk.kategori.nama} adalah ${currentItem.produk.kategori.minPembelian} pcs"
                         } else if (currentItem.tipe == "paket" && newJumlah < 1) {
                             validatedJumlah = 1
-                            validationMessage = "Minimal paket adalah 1"
+                            validationMessage = "Minimal pembelian paket adalah 1 pcs"
                         }
 
                         // Jika ada pesan validasi, tampilkan

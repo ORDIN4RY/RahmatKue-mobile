@@ -72,40 +72,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:id="@+id/btn_blatt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@drawable/btn_rectangle"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:foreground="?attr/selectableItemBackgroundBorderless" >
-
-                <ImageView
-                    android:id="@+id/btn_image"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/logo"
-                    android:layout_marginBottom="6dp"
-                    android:scaleType="centerInside"/>
-
-
-
-            </LinearLayout>
-            <TextView
-                android:id="@+id/btn_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Paket"
-                android:textSize="12sp"
-                android:textColor="@color/black"
-                android:layout_marginStart="25dp"
-                android:gravity="center"/>
-
             <TextView
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
