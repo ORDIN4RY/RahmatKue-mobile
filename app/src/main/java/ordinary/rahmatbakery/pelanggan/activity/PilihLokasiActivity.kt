@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -58,16 +59,19 @@ class PilihLokasiActivity : AppCompatActivity() {
             loadMapTilerStyle()
 
             map.setLatLngBoundsForCameraTarget(jatimBounds)
-            map.setMinZoomPreference(10.0)
-            map.setMaxZoomPreference(18.0)
+            map.setMinZoomPreference(15.0)
+            map.setMaxZoomPreference(20.0)
 
             if (!existingLat.isNaN() && !existingLon.isNaN()) {
                 val point = LatLng(existingLat, existingLon)
+                selectedLat = point.latitude
+                selectedLon = point.longitude
                 map.addMarker(MarkerOptions().position(point))
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 16.0))
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 18.0))
+            }else{
+                setupLocation()
             }
 
-            setupLocation()
             setupListeners()
         }
 
@@ -90,11 +94,12 @@ class PilihLokasiActivity : AppCompatActivity() {
     }
 
     private fun loadMapTilerStyle() {
-        val maptilerUrl = "https://api.maptiler.com/maps/hybrid/style.json?key=6IB7xtqOGn7dOvhXeKI7"
+//        val maptilerUrl = "https://api.maptiler.com/maps/hybrid/style.json?key=6IB7xtqOGn7dOvhXeKI7"
+        val maptilerUrl = "https://tiles.openfreemap.org/styles/liberty"
 
         try {
             map.setStyle(maptilerUrl) { style ->
-                Toast.makeText(this, "Peta MapTiler berhasil dimuat", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Peta MapTiler berhasil dimuat", Toast.LENGTH_SHORT).show()
                 cacheOfflineMap()
             }
 
@@ -148,14 +153,11 @@ class PilihLokasiActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
                 val pos = LatLng(location.latitude, location.longitude)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 14.5))
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 18.0))
                 selectedLat = pos.latitude
                 selectedLon = pos.longitude
-            } else {
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(jemberCenter, 15.5))
-                selectedLat = jemberCenter.latitude
-                selectedLon = jemberCenter.longitude
-                Toast.makeText(this, "Lokasi tidak ditemukan, menampilkan Jember", Toast.LENGTH_SHORT).show()
+
+                map.addMarker(MarkerOptions().position(pos))
             }
         }
     }
@@ -167,7 +169,9 @@ class PilihLokasiActivity : AppCompatActivity() {
             .setPositiveButton("Ya") { _, _ ->
                 startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
             }
-            .setNegativeButton("Tidak", null)
+            .setNegativeButton("Tidak"){ _, _ ->
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(jemberCenter, 15.0))
+            }
             .show()
     }
 
@@ -184,9 +188,9 @@ class PilihLokasiActivity : AppCompatActivity() {
     private fun pusatkanKeLokasi() {
         if (selectedLat != null && selectedLon != null) {
             val pos = LatLng(selectedLat!!, selectedLon!!)
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 14.0))
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 18.0))
         } else {
-            Toast.makeText(this, "Belum ada lokasi dipilih", Toast.LENGTH_SHORT).show()
+            setupLocation()
         }
     }
 

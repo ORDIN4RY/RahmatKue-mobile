@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="15dp"
-        app:cardBackgroundColor="@color/background">
+        app:cardBackgroundColor="@color/card_light_bg">
     <!--     recycler Keranjang -->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignParentBottom="true"
-        android:background="@color/primary"               >
+        android:background="@color/card_light_bg"               >
 
         <CheckBox
                 android:id="@+id/cb_pilih_semua"
@@ -99,13 +99,13 @@
                 android:layout_marginStart="25dp"
                 android:layout_centerVertical="true"
                 android:padding="15dp"
-                android:textColor="@color/white"
+                android:textColor="@color/primary"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/btn_checkout"
-                android:textColor="@color/white"
+                android:textColor="@color/primary"
                 android:text="Total Harga: \nRp0"
                 android:id="@+id/txt_total_harga_semua"
                 android:layout_centerVertical="true"/>
@@ -116,7 +116,8 @@
                 android:background="@drawable/btn_outline"
                 android:text="Checkout"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="5dp"/>
         </RelativeLayout>
 
 </RelativeLayout>

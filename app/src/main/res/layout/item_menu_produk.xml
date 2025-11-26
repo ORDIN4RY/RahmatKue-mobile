@@ -59,9 +59,22 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/productName"
                 android:layout_marginStart="12dp"
-                android:layout_toRightOf="@id/productImg"
+                android:layout_toEndOf="@id/productImg"
                 android:text="Rp 75.000"
                 android:textColor="@color/primary" />
+
+            <TextView
+                android:id="@+id/discounted_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/productPrice"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/productImg"
+                android:text=""
+                android:textColor="@color/primary"
+                />
+
+
 
             <TextView
                 android:id="@+id/btn_pesan"

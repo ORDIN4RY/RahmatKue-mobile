@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -116,7 +117,7 @@ class KeranjangActivity : AppCompatActivity() {
             // 2. Kirim String JSON tersebut melalui Intent
             intent.putExtra("KERANJANG_JSON", selectedItemsJson)
 
-            startActivity(intent)
+            COResultLauncher.launch(intent)
         }
 
         btnBack.setOnClickListener {
@@ -260,6 +261,15 @@ class KeranjangActivity : AppCompatActivity() {
                 tes.setText(e.message)
                 tes.visibility = View.VISIBLE
             }
+        }
+    }
+
+    private val COResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        // Cek apakah hasilnya OK (yang akan kita atur dari UbahTambahAlamatActivity)
+        if (result.resultCode == RESULT_OK) {
+            loadKeranjang() // Panggil kembali fungsi untuk me-refresh data dari Supabase
         }
     }
 

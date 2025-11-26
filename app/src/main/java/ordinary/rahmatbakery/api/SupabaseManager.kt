@@ -27,6 +27,7 @@ object SupabaseManager {
         defaultSerializer = KotlinXSerializer(Json {
             ignoreUnknownKeys = true
             isLenient = true
+            explicitNulls = false
         })
         install(Realtime)
         //install other modules

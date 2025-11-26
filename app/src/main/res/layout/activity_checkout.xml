@@ -72,13 +72,19 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:padding="20dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/data_pelanggan"
+                        android:visibility="gone"
+                        >
 
                     <TextView
                         android:id="@+id/nama_pelanggan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
                         android:text="Ahmad Febri"
                         android:textSize="14sp" />
 
@@ -96,10 +102,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/no_hp_pelanggan"
-                        android:layout_marginStart="25dp"
                         android:layout_marginTop="5dp"
                         android:text="Jl. Sultan Agung No. 90, Selatan Balai Desa "
                         android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/alamat_kosong"
+                        android:visibility="visible">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="BELUM ADA ALAMAT"/>
+
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/pilih"
@@ -109,6 +128,17 @@
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="5dp"
                         android:text="Pilih >" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BELUM ADA ALAMAT"/>
+
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -120,23 +150,31 @@
                 android:layout_marginTop="8dp"
                 app:cardCornerRadius="10dp">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="Pesanan" />
+                    android:text="Pesanan"
+                    android:id="@+id/judul_pesanan" />
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/judul_pesanan">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvPesanan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:layout_marginBottom="10dp"/>
                 </ScrollView>
+                </RelativeLayout>
+
             </androidx.cardview.widget.CardView>
 
 
@@ -278,13 +316,6 @@
                         android:layout_below="@id/judul_pembayaran"
                         android:text="DP (Minimal 50%)" />
 
-                    <EditText
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:layout_below="@id/judul_pembayaran"
-                        android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@id/checkbox_dp" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -297,7 +328,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/judul_pembayaran"
-                        android:layout_marginStart="120dp"
                         android:layout_toRightOf="@id/checkbox_dp"
                         android:text="Lunas" />
                 </RelativeLayout>
@@ -424,7 +454,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/pembayaran_awal"
-                        android:text="Potongan Harga " />
+                        android:text="Potongan Harga "
+                        android:id="@+id/text_diskon"
+                        />
 
                     <TextView
                         android:id="@+id/potongan_harga"
