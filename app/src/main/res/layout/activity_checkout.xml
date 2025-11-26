@@ -468,35 +468,35 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:background="@color/primary" />
+                    android:layout_height="50dp"
+                    android:background="@color/background"
+                    />
 
                 <TextView
                     android:id="@+id/total_pesan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="120dp"
                     android:layout_toLeftOf="@id/btn_pesan"
                     android:text="Total Pembayaran :"
-                    android:textColor="@color/white" />
+                    android:layout_marginRight="5dp"
+                    />
 
                 <TextView
                     android:id="@+id/total_pembayaran_final"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/total_pesan"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="120dp"
+                    android:layout_marginRight="5dp"
                     android:layout_toLeftOf="@id/btn_pesan"
                     android:text="Rp. 200.000"
-                    android:textColor="@color/white" />
+                     />
 
                 <Button
                     android:id="@+id/btn_pesan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/btn_outline"
                     android:text="Buat Pesanan" />
             </RelativeLayout>

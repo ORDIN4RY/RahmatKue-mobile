@@ -190,6 +190,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/button2"
-        android:text="Tambahkan Keranjang"/>
+        android:background="@drawable/btn_outline"
+        android:text="Tambahkan Keranjang"
+        />
 </RelativeLayout>

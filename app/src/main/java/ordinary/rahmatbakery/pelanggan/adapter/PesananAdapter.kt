@@ -1,5 +1,6 @@
 package ordinary.rahmatbakery.pelanggan.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.pelanggan.model.Pesanan
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.RincianPesananActivity
 
 class PesananAdapter(private val orderList: List<Pesanan>) :
     RecyclerView.Adapter<PesananAdapter.OrderViewHolder>() {
@@ -111,6 +113,13 @@ class PesananAdapter(private val orderList: List<Pesanan>) :
 
         override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
             holder.bind(orderList[position])
+
+
+            holder.itemView.setOnClickListener {
+                val context = holder.itemView.context
+                val intent = Intent(context, RincianPesananActivity::class.java)
+                context.startActivity(intent)
+            }
         }
 
         override fun getItemCount(): Int = orderList.size

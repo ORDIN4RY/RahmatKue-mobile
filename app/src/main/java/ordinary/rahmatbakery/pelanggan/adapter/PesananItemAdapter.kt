@@ -1,5 +1,6 @@
 package ordinary.rahmatbakery.pelanggan.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.pelanggan.model.PesananItem
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.RincianPesananActivity
+import ordinary.rahmatbakery.pelanggan.activity.DetailProdukActivity
+
 class PesananItemAdapter(private val items: List<PesananItem>) :
     RecyclerView.Adapter<PesananItemAdapter.ItemViewHolder>() {
 
@@ -32,6 +36,8 @@ class PesananItemAdapter(private val items: List<PesananItem>) :
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(items[position])
+
+
     }
 
     override fun getItemCount(): Int = items.size

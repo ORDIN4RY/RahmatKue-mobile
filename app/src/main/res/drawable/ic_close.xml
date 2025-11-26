@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Garis miring pertama -->
+    <item>
+        <rotate
+            android:fromDegrees="45"
+            android:toDegrees="45"
+            android:pivotX="50%"
+            android:pivotY="50%">
+            <shape android:shape="rectangle">
+                <size android:width="2dp" android:height="16dp"/>
+                <solid android:color="#000000"/>
+            </shape>
+        </rotate>
+    </item>
+
+    <!-- Garis miring kedua -->
+    <item>
+        <rotate
+            android:fromDegrees="-45"
+            android:toDegrees="-45"
+            android:pivotX="50%"
+            android:pivotY="50%">
+            <shape android:shape="rectangle">
+                <size android:width="2dp" android:height="16dp"/>
+                <solid android:color="#000000"/>
+            </shape>
+        </rotate>
+    </item>
+
+</layer-list>

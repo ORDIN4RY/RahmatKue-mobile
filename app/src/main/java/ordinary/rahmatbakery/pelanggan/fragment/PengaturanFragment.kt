@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
@@ -18,6 +19,7 @@ import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.activity.AlamatActivity
 import ordinary.rahmatbakery.pelanggan.activity.BantuanActivity
+import ordinary.rahmatbakery.pelanggan.activity.EditProfileActivity
 import ordinary.rahmatbakery.pelanggan.activity.VoucherActivity
 
 class PengaturanFragment : Fragment() {
@@ -37,6 +39,7 @@ class PengaturanFragment : Fragment() {
         val btnAlamat = rootView.findViewById<LinearLayout>(R.id.btn_alamat)
         val btnBantuan = rootView.findViewById<LinearLayout>(R.id.btn_bantuan)
         val btnGantiPass = rootView.findViewById<LinearLayout>(R.id.btn_ganti_password)
+        val btnProfil = rootView.findViewById<CardView>(R.id.profile_card)
 
 
         // Set aksi klik

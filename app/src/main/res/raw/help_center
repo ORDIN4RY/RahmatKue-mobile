@@ -1,14 +1,14 @@
 [
   {
     "question": "Bagaimana cara mengubah password?",
-    "answer": "Masuk ke menu Profil > Pengaturan > Ganti Password, lalu ikuti petunjuk yang diberikan."
+    "answer": "Masuk ke menu Profil > Ganti Password, lalu ikuti petunjuk yang diberikan."
   },
   {
     "question": "Bagaimana cara melihat status pesanan?",
-    "answer": "Buka menu Pesanan Saya, lalu pilih pesanan yang ingin dilihat statusnya."
+    "answer": "Buka menu Pesanan, lalu pilih pesanan yang ingin dilihat statusnya."
   },
   {
     "question": "Bagaimana cara menghubungi layanan pelanggan?",
-    "answer": "Kamu dapat menghubungi kami melalui menu Bantuan > Hubungi Kami."
+    "answer": "Kamu dapat menghubungi kami melalui menu Profil > Bantuan > Hubungi Kami."
   }
 ]
