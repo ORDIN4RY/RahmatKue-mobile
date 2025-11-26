@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        app:cardCornerRadius="5dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/img_product_kustom"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/logo"/>
+            <TextView
+                android:id="@+id/nama_produk_kostum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kue A"
+                android:layout_toRightOf="@id/img_product_kustom"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp. 2.000"
+                android:layout_toRightOf="@id/img_product_kustom"
+                android:layout_marginTop="50dp"/>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_close"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
