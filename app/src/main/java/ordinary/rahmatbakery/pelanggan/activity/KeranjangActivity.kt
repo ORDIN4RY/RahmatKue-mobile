@@ -177,23 +177,59 @@ class KeranjangActivity : AppCompatActivity() {
                 val data = SupabaseManager.client.from("keranjang").select(
                     Columns.raw(
                         """
-                        id:id_keranjang,
-                        jumlah,
-                        id_produk,
-                        id_paket,
-                        produk:id_produk(id:id_produk, nama:nama_produk, deskripsi, gambar:foto_produk, harga),
-                        paket:id_paket(
-                            id:id_paket, 
-                            nama:nama_paket, 
-                            deskripsi, 
-                            foto:foto_paket, 
-                            harga:harga_paket, 
-                            detail:detail_paket(
-                                jumlah, 
-                                produk:id_produk(id:id_produk, nama:nama_produk, deskripsi, gambar:foto_produk, harga)
-                            )
-                        )
-                        """
+            id:id_keranjang,
+            jumlah,
+            id_produk,
+            id_paket,
+
+            produk:id_produk(
+                id:id_produk,
+                nama:nama_produk,
+                varian,
+                kategori:id_kategori(
+                    id:id_kategori,
+                    nama:nama_kategori,
+                    minimal_pembelian
+                ),
+                deskripsi,
+                gambar:foto_produk,
+                harga
+            ),
+
+            paket:id_paket(
+                id:id_paket,
+                nama:nama_paket,
+                deskripsi,
+                foto:foto_paket,
+                harga:harga_paket,
+
+                wadah:wadah(
+                    id:id_wadah,
+                    nama:nama_wadah,
+                    deskripsi,
+                    foto:foto_wadah,
+                    kapasitas,
+                    harga:harga_wadah,
+                    varian
+                ),
+
+                detail:detail_paket(
+                    produk:id_produk(
+                        id:id_produk,
+                        nama:nama_produk,
+                        varian,
+                        kategori:id_kategori(
+                            id:id_kategori,
+                            nama:nama_kategori,
+                            minimal_pembelian
+                        ),
+                        deskripsi,
+                        gambar:foto_produk,
+                        harga
+                    )
+                )
+            )
+            """
                     )
                 ) {
                     // TAMBAHKAN FILTER INI

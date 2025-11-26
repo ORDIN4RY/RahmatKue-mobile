@@ -16,7 +16,6 @@ class DetailProdukAdapter(private val listDetail: List<Detail>) :
     inner class DetailViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgProduk: ImageView = view.findViewById(R.id.img_produk_detail)
         val txtNama: TextView = view.findViewById(R.id.txt_nama_produk_detail)
-        val txtJumlah: TextView = view.findViewById(R.id.txt_jumlah_produk_detail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
@@ -28,7 +27,6 @@ class DetailProdukAdapter(private val listDetail: List<Detail>) :
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
         val detail = listDetail[position]
         holder.txtNama.text = detail.produk.nama
-        holder.txtJumlah.text = "x${detail.jumlah}"
         holder.imgProduk.load(detail.produk.gambar) {
             crossfade(true) // animasi lembut saat gambar muncul
             placeholder(R.drawable.placeholder) // opsional: gambar sementara

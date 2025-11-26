@@ -112,10 +112,10 @@ class DetailProdukActivity : AppCompatActivity() {
             findViewById<LinearLayout>(R.id.counter).visibility = LinearLayout.VISIBLE
             btnAddKeranjang.setOnClickListener {
                 if (tipe == "produk") {
-                    if (itemCounter.text.toString().toInt() < 15) {
+                    if (itemCounter.text.toString().toInt() < produk!!.kategori.minPembelian) {
                         Toast.makeText(
                             this,
-                            "Pembelian minimal produk adalah 15 pcs",
+                            "Pembelian minimal ${produk!!.nama} adalah ${produk!!.kategori.minPembelian} pcs",
                             Toast.LENGTH_SHORT
                         ).show()
                         return@setOnClickListener
