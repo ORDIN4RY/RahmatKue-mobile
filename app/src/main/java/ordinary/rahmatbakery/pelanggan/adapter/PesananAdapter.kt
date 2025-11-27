@@ -7,121 +7,102 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ordinary.rahmatbakery.pelanggan.model.Pesanan
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.RincianPesananActivity
+import ordinary.rahmatbakery.pelanggan.model.Pesanan
+import ordinary.rahmatbakery.pelanggan.model.TampilanItemPesanan
 
-class PesananAdapter(private val orderList: List<Pesanan>) :
+class PesananAdapter(private val orderList: MutableList<Pesanan>) :
     RecyclerView.Adapter<PesananAdapter.OrderViewHolder>() {
 
     inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val txtNamaProduk = itemView.findViewById<TextView>(R.id.txt_nama_produk_pesanan)
-        val txtItemTambahan = itemView.findViewById<TextView>(R.id.txt_item_tambahan)
-        val txtQty = itemView.findViewById<TextView>(R.id.txt_qty_pesanan)
-        val txtHarga = itemView.findViewById<TextView>(R.id.txt_harga_pesanan)
+        // Deklarasi View dari layout item_pesanan_main.xml
+        private val txtTanggal: TextView = itemView.findViewById(R.id.txt_tgl_pesan)
+        private val txtStatus: TextView = itemView.findViewById(R.id.txt_status_pesanan)
+        private val txtTotal: TextView = itemView.findViewById(R.id.txt_total_harga_semua)
+        private val layoutProdukPertama: View = itemView.findViewById(R.id.rv_item_pesanan)
+        private val txtNamaProduk: TextView = itemView.findViewById(R.id.txt_nama_produk_pesanan)
+        private val txtItemTambahan: TextView = itemView.findViewById(R.id.txt_item_tambahan)
+        private val rvProdukLain: RecyclerView = itemView.findViewById(R.id.rv_produk_lain)
+        private val btnLihat: View = itemView.findViewById(R.id.btnLihatSemua)
+        private val txtLihat: TextView = itemView.findViewById(R.id.txtLihatSemua)
 
-        val txtTanggal: TextView = itemView.findViewById(R.id.txt_tgl_pesan)
-        val txtStatus: TextView = itemView.findViewById(R.id.txt_status_pesanan)
-        val txtTotal: TextView = itemView.findViewById(R.id.txt_total_harga_semua)
+        fun bind(pesanan: Pesanan) {
+            // --- 1. Bind data transaksi utama ---
+            txtTanggal.text = pesanan.createdAt.substringBefore("T") // Ambil tanggal saja
+            txtStatus.text = pesanan.status
+            txtTotal.text = "Rp ${String.format("%,d", pesanan.totalHarga)}"
 
-        val layoutProdukPertama = itemView.findViewById<View>(R.id.rv_item_pesanan)
-        val rvProduk: RecyclerView = itemView.findViewById(R.id.rv_produk_lain)
-        val btnLihat: View = itemView.findViewById(R.id.btnLihatSemua)
-        val txtLihat: TextView = itemView.findViewById(R.id.txtLihatSemua)
+            // --- 2. Gabungkan item produk dan paket menjadi satu list ---
+            val semuaItem = (pesanan.items.map {
+                TampilanItemPesanan(nama = it.produk.namaProduk, jumlah = it.jumlah, subtotal = it.subtotal)
+            } + pesanan.paketItems.map {
+                TampilanItemPesanan(nama = it.paket.namaPaket, jumlah = it.jumlah, subtotal = it.subtotal)
+            }).sortedBy { it.nama } // Urutkan berdasarkan nama
 
-
-        // STATE EXPAND
-        var expanded = false
-
-        fun bind(order: Pesanan) {
-            txtTanggal.text = order.date
-            txtStatus.text = order.status
-            txtTotal.text =
-                "Total ${order.items.size} produk: Rp${String.format("%,.0f", order.totalAmount)}"
-
-            val first = order.items[0]
-            txtNamaProduk.text = first.name
-            txtItemTambahan.text = first.description
-            txtQty.text = "${first.quantity}x"
-            txtHarga.text = "Rp ${String.format("%,.0f", first.price)}"
-            // ───────────────────────────────
-            // 1. Jika item cuma 1 → tampil full, hide tombol
-            // ───────────────────────────────
-            if (order.items.size == 1) {
-                // Hide tampilan utama produk pertama
+            // --- 3. Atur visibilitas dan data berdasarkan jumlah item ---
+            if (semuaItem.isEmpty()) {
                 layoutProdukPertama.visibility = View.GONE
-
-                // Hide tombol lihat semua
                 btnLihat.visibility = View.GONE
-
-                // Tampilkan item 1 di rv_produk_lain
-                rvProduk.visibility = View.VISIBLE
-
-                rvProduk.layoutManager = LinearLayoutManager(itemView.context)
-                rvProduk.adapter = PesananItemAdapter(order.items)
-
                 return
             }
 
-            // ───────────────────────────────
-            // 2. Jika item lebih dari 1 → tampil mode ringkas dulu
-            // ───────────────────────────────
+            // Tampilkan item pertama
             layoutProdukPertama.visibility = View.VISIBLE
+            txtNamaProduk.text = "${semuaItem.first().jumlah}x ${semuaItem.first().nama}"
 
-// Tampilkan tombol lihat semua
-            btnLihat.visibility = View.VISIBLE
+            if (semuaItem.size > 1) {
+                // Ada lebih dari 1 item, tampilkan tombol "Lihat Semua"
+                btnLihat.visibility = View.VISIBLE
+                txtItemTambahan.visibility = View.VISIBLE
+                txtItemTambahan.text = "+ ${semuaItem.size - 1} item lainnya"
 
-// Sembunyikan list tambahan
-            rvProduk.visibility = View.GONE
+                // Siapkan adapter untuk item sisanya
+                val itemLainAdapter = PesananItemAdapter(semuaItem.drop(1))
+                rvProdukLain.layoutManager = LinearLayoutManager(itemView.context)
+                rvProdukLain.adapter = itemLainAdapter
+                rvProdukLain.visibility = View.GONE // Sembunyikan pada awalnya
+                txtLihat.text = "Lihat semua"
 
-            btnLihat.setOnClickListener {
-                if (rvProduk.visibility == View.GONE) {
-                    rvProduk.visibility = View.VISIBLE
-                    rvProduk.layoutManager = LinearLayoutManager(itemView.context)
-                    rvProduk.adapter = PesananItemAdapter(order.items.drop(1)) // sisanya
-                } else {
-                    rvProduk.visibility = View.GONE
+                btnLihat.setOnClickListener {
+                    val isVisible = rvProdukLain.visibility == View.VISIBLE
+                    rvProdukLain.visibility = if (isVisible) View.GONE else View.VISIBLE
+                    txtLihat.text = if (isVisible) "Lihat semua" else "Sembunyikan"
                 }
-
-            }
-        }
-
-        fun updateView(order: Pesanan) {
-            if (expanded) {
-                // Expand → tampilkan semua item
-                rvProduk.adapter = PesananItemAdapter(order.items)
-                rvProduk.visibility = View.VISIBLE
-
-                txtLihat.text = "Sembunyikan"
-
             } else {
-                // Collapse → tampilkan hanya item pertama
-                rvProduk.adapter = PesananItemAdapter(order.items.take(1))
-                rvProduk.visibility = View.VISIBLE
-
-                txtLihat.text = "Lihat Semua"
-
+                // Hanya ada 1 item, sembunyikan elemen yang tidak perlu
+                btnLihat.visibility = View.GONE
+                txtItemTambahan.visibility = View.GONE
+                rvProdukLain.visibility = View.GONE
             }
-        }
-    }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_pesanan_main, parent, false)
-            return OrderViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-            holder.bind(orderList[position])
-
-
-            holder.itemView.setOnClickListener {
-                val context = holder.itemView.context
+            // --- 4. Atur OnClickListener untuk seluruh item view ---
+            itemView.setOnClickListener {
+                val context = itemView.context
                 val intent = Intent(context, RincianPesananActivity::class.java)
+                intent.putExtra("TRANSACTION_DATA", pesanan) // Kirim objek Pesanan
                 context.startActivity(intent)
             }
         }
-
-        override fun getItemCount(): Int = orderList.size
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_pesanan_main, parent, false)
+        return OrderViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
+        val pesanan = orderList[position]
+        holder.bind(pesanan) // Cukup panggil bind
+    }
+
+    override fun getItemCount(): Int = orderList.size
+
+    // Fungsi krusial untuk memperbarui data dari Fragment
+    fun updateData(newList: List<Pesanan>) {
+        orderList.clear()
+        orderList.addAll(newList)
+        notifyDataSetChanged() // Untuk performa lebih baik, bisa diganti dengan DiffUtil
+    }
+}
