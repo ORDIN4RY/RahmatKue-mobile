@@ -65,6 +65,7 @@ class DetailProdukActivity : AppCompatActivity() {
         val iconMinus: ImageView = findViewById(R.id.icon_minus)
         itemCounter = findViewById(R.id.input_count)
         val iconPlus: ImageView = findViewById(R.id.icon_plus)
+        val txtTotalHarga: TextView = findViewById(R.id.txt_total_harga)
 
 
 
@@ -161,11 +162,26 @@ class DetailProdukActivity : AppCompatActivity() {
                 langsungCheckOut(null, paket)
             }
         }
+        var hargaProduk = 0
+
+        if (tipe == "produk" && produk != null) {
+            hargaProduk = produk.harga
+        } else if (tipe == "paket" && paket != null) {
+            hargaProduk = paket.harga
+        }
+
+        fun updateTotal() {
+            val jumlah = itemCounter.text.toString().toInt()
+            val total = hargaProduk * jumlah
+            txtTotalHarga.text = formatRupiah.format(total)
+        }
+
+        updateTotal()
 
         iconPlus.setOnClickListener {
             val currentCount = itemCounter.text.toString().toInt()
             itemCounter.setText((currentCount + 1).toString())
-
+            updateTotal()
         }
 
         iconMinus.setOnClickListener {
@@ -185,6 +201,7 @@ class DetailProdukActivity : AppCompatActivity() {
 
             itemCounter.setText((currentCount - 1).toString())
         }
+
 
     }
 
