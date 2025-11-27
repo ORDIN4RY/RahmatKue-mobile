@@ -217,7 +217,7 @@ class CheckoutActivity(
         tvSubtotalPesanan.text = formatter.format(subtotalPesanan)
         tvTotalDiskon.text = "- ${formatter.format(totalDiskon)}"
         // Tampilkan Teks Diskon hanya jika ada diskon
-        tvTotalDiskon.visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
+//        tvTotalDiskon.visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
         findViewById<TextView>(R.id.text_diskon).visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
 
         tvSubtotalPengiriman.text = formatter.format(subtotalPengiriman)
@@ -244,11 +244,11 @@ class CheckoutActivity(
             // PERUBAHAN: Siapkan data transaksi dengan dp_minimal
             val transaksiData = TransaksiInsert(
                 idUser = currentUser.id,
-                idAlamat = alamat!!.id!!, // Selalu diisi, gunakan !! karena sudah divalidasi
+                idAlamat = alamat!!.id!!,
                 totalHarga = totalPembayaran,
-                dpMinimal = dpMinimal, // Isi jika DP, null jika Lunas
+                dpMinimal = dpMinimal,
                 status = statusAwal,
-                idVoucher = null, // Tidak digunakan dalam hal ini
+                idVoucher = null,
             )
 
             try {

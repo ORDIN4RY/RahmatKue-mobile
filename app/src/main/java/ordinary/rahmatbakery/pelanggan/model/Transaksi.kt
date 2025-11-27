@@ -9,15 +9,21 @@ data class TransaksiInsert(
     @SerialName("id_user")
     val idUser: String,
     @SerialName("id_alamat")
-    val idAlamat: String, // Tidak lagi nullable
+    val idAlamat: String,
     @SerialName("total_harga")
     val totalHarga: Int,
     @SerialName("dp_minimal")
-    val dpMinimal: Int?= 0, // Nullable, hanya diisi jika pembayaran DP
+    val dpMinimal: Int?= 0,
     @SerialName("status")
     val status: String,
     @SerialName("id_voucher")
     val idVoucher: String?=null,
+    @SerialName("waktu_selesai")
+    val waktuSelesai: String?=null,
+    @SerialName("metode_pengambilan")
+    val metodePengambilan: String?="diambil",
+    @SerialName("catatan")
+    val catatan: String?=null,
 )
 
 // Model untuk INSERT ke tabel 'detail_transaksi_produk'
