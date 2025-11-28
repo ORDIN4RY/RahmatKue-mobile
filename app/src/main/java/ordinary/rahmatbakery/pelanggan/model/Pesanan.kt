@@ -5,18 +5,15 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// --- PERUBAHAN UTAMA DI SINI ---
-// Tipe data ID diubah dari Int menjadi String untuk menampung UUID.
-// Tipe data harga/subtotal diubah dari Double menjadi Int agar cocok dengan database.
 
 @Serializable
 @Parcelize
 data class Pesanan(
     @SerialName("id_transaksi")
-    val idTransaksi: String, // Dulu Int, sekarang String (untuk UUID)
+    val idTransaksi: String,
 
     @SerialName("total_harga")
-    val totalHarga: Int, // Dulu Double, sekarang Int
+    val totalHarga: Int,
 
     @SerialName("status")
     val status: String,
@@ -37,7 +34,7 @@ data class PesananItems(
     @SerialName("jumlah")
     val jumlah: Int,
     @SerialName("subtotal")
-    val subtotal: Int, // Dulu Double, sekarang Int
+    val subtotal: Int,
     @SerialName("produk")
     val produk: Produk2
 ) : Parcelable
@@ -48,7 +45,7 @@ data class PesananPaketItems(
     @SerialName("jumlah")
     val jumlah: Int,
     @SerialName("subtotal")
-    val subtotal: Int, // Dulu Double, sekarang Int
+    val subtotal: Int,
     @SerialName("paket")
     val paket: ProdukPaket
 ) : Parcelable
@@ -57,31 +54,34 @@ data class PesananPaketItems(
 @Parcelize
 data class Produk2(
     @SerialName("id_produk")
-    val idProduk: String, // Dulu Int, sekarang String (untuk UUID)
+    val idProduk: String,
     @SerialName("nama_produk")
     val namaProduk: String,
     @SerialName("harga")
-    val harga: Int, // Dulu Double, sekarang Int
+    val harga: Int,
     @SerialName("foto_produk")
-    val fotoProduk: String? = null
+    val fotoProduk: String
 ) : Parcelable
 
 @Serializable
 @Parcelize
 data class ProdukPaket(
     @SerialName("id_paket")
-    val idPaket: String, // Dulu Int, sekarang String (untuk UUID)
+    val idPaket: String,
     @SerialName("nama_paket")
     val namaPaket: String,
     @SerialName("harga_paket")
-    val harga: Int, // Dulu Double, sekarang Int
+    val harga: Int,
     @SerialName("foto_paket")
     val fotoPaket: String? = null
 ) : Parcelable
 
-// Wrapper class ini tidak perlu diubah, tapi tipe datanya harus cocok
+@Serializable
+@Parcelize
 data class TampilanItemPesanan(
     val nama: String,
     val jumlah: Int,
-    val subtotal: Int // Dulu Double, sekarang Int
-)
+    val subtotal: Int,
+    val foto : String?,
+    val hargaSatuan : Int,
+): Parcelable
