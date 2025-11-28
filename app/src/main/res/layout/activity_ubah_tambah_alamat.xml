@@ -23,6 +23,7 @@
             android:src="@drawable/back" />
 
         <TextView
+            android:id="@+id/judul_halaman"
             style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,7 +84,7 @@
                 android:id="@+id/judul_patokan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/input_no_hp"
+                android:layout_below="@id/input_alamat"
                 android:layout_marginTop="10dp"
                 android:text="Detail lainnya (Cth: Blok / Unit No., Patokan)"
                 android:textColor="@color/primary" />
@@ -100,7 +101,7 @@
                 android:id="@+id/judul_alamat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/input_patokan"
+                android:layout_below="@id/input_no_hp"
                 android:layout_marginTop="10dp"
                 android:text="Alamat Lengkap"
                 android:textColor="@color/primary" />
@@ -201,7 +202,7 @@
                 android:layout_toEndOf="@+id/judul_alamat_utama" />
 
             <TextView
-                android:layout_below="@id/input_alamat"
+                android:layout_below="@id/input_patokan"
                 android:id="@+id/label_peta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -61,6 +61,7 @@
                 android:textSize="14sp" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_alamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -69,16 +70,18 @@
                 android:padding="10dp"
                 app:cardCornerRadius="10dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:id="@+id/data_pelanggan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        android:layout_weight="2">
 
                         <TextView
                             android:id="@+id/nama_pelanggan"
@@ -91,14 +94,15 @@
                             android:id="@+id/no_hp_pelanggan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="25dp"
-                            android:layout_toEndOf="@id/nama_pelanggan"
                             android:text="08571525454"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:layout_below="@id/nama_pelanggan"
+                            android:layout_marginTop="5dp"
+                            />
 
                         <TextView
                             android:id="@+id/alamat_pelanggan"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/no_hp_pelanggan"
                             android:layout_marginTop="5dp"
@@ -109,8 +113,9 @@
 
                     <RelativeLayout
                         android:id="@+id/alamat_kosong"
-                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
                         android:visibility="visible">
 
                         <TextView
@@ -123,24 +128,14 @@
                     <TextView
                         android:id="@+id/pilih"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
+                        android:layout_height="match_parent"
                         android:layout_marginEnd="5dp"
-                        android:text="Pilih >" />
-                </RelativeLayout>
+                        android:text="Pilih >"
+                        android:layout_weight="0"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="BELUM ADA ALAMAT" />
-
-                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
 
@@ -315,14 +310,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/judul_pembayaran"
-                        android:text="DP (Minimal 50%)" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/checkbox_dp"
-                        android:text="*gratis ongkir maks 10km,  > 10km dikenakan biaya"
-                        android:textSize="7sp" />
+                        android:text="DP (50% dari total harga)" />
 
                     <CheckBox
                         android:id="@+id/checkbox_lunas"
@@ -355,7 +343,7 @@
 
                     <EditText
                         android:id="@+id/etDate"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/judul_tanggal_waktu"
                         android:layout_marginTop="5dp"
@@ -363,20 +351,6 @@
                         android:clickable="true"
                         android:focusable="false"
                         android:hint="Pilih tanggal"
-                        android:textAlignment="center" />
-
-                    <EditText
-                        android:id="@+id/etTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/judul_tanggal_waktu"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_toRightOf="@id/etDate"
-                        android:background="@drawable/btn_outline"
-                        android:clickable="true"
-                        android:focusable="false"
-                        android:hint="Pilih waktu"
                         android:textAlignment="center" />
 
                 </RelativeLayout>
@@ -457,6 +431,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/baris_diskon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 

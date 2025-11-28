@@ -143,6 +143,7 @@ class UbahTambahAlamatActivity(
     }
 
     private fun prepareAdd() {
+        findViewById<TextView>(R.id.judul_alamat).setText("Tambah Alamat Baru")
         initListenerAdd()
         btnHapus.visibility = Button.GONE
     }
@@ -252,6 +253,7 @@ class UbahTambahAlamatActivity(
         cbAlamatUtama.isChecked = alamat?.isUtama ?: false
         btnHapus.visibility = Button.VISIBLE
 
+        findViewById<TextView>(R.id.judul_alamat).setText("Perbarui Alamat")
         initListenerEdit()
     }
 

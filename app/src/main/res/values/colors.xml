@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="maroon">#800000</color>
     <color name="cream">#FBFCCC</color>
-    <color name="card_light_bg">#FFFFFF</color>
+    <color name="card_light_bg">@color/white</color>
     <color name="background">#FFF6F3</color>
     <color name="primary">#8E5E48</color>
 </resources>

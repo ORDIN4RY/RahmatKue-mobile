@@ -40,6 +40,10 @@ class AlamatAdapter (
             }
 
             holder.ubahAlamat.setOnClickListener {
+                clickListener.onEditClicked(item)
+            }
+
+            holder.itemView.setOnClickListener {
                 clickListener.onAlamatClicked(item)
             }
         }
@@ -50,4 +54,5 @@ class AlamatAdapter (
 
 interface AlamatClickListener {
     fun onAlamatClicked(alamat: Alamat)
+    fun onEditClicked(alamat: Alamat)
 }

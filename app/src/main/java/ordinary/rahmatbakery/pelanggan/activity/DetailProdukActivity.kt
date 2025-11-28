@@ -2,6 +2,8 @@ package ordinary.rahmatbakery.pelanggan.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -41,6 +43,8 @@ class DetailProdukActivity : AppCompatActivity() {
 
 
     private lateinit var itemCounter: EditText
+    private lateinit var txtTotalHarga: TextView
+    private var hargaProduk = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,9 +67,9 @@ class DetailProdukActivity : AppCompatActivity() {
         val btnAddKeranjang: TextView = findViewById(R.id.btn_add_keranjang)
         val btnCheckOut: TextView = findViewById(R.id.btn_check_out)
         val iconMinus: ImageView = findViewById(R.id.icon_minus)
-        itemCounter = findViewById(R.id.input_count)
         val iconPlus: ImageView = findViewById(R.id.icon_plus)
-        val txtTotalHarga: TextView = findViewById(R.id.txt_total_harga)
+        itemCounter = findViewById(R.id.input_count)
+        txtTotalHarga = findViewById(R.id.txt_total_harga)
 
 
 
@@ -89,6 +93,7 @@ class DetailProdukActivity : AppCompatActivity() {
             }
             txtHarga.text = formatRupiah.format(produk.harga)
             rvDetailPaket.visibility = RecyclerView.GONE
+            hargaProduk = produk.harga
 
         } else if (tipe == "paket" && paket != null) {
             txtNama.text = paket.nama
@@ -102,6 +107,7 @@ class DetailProdukActivity : AppCompatActivity() {
 
             rvDetailPaket.layoutManager = LinearLayoutManager(this)
             rvDetailPaket.adapter = DetailProdukAdapter(paket.detail)
+            hargaProduk = paket.harga
         }
 
         if (from == "keranjang") {
@@ -162,19 +168,6 @@ class DetailProdukActivity : AppCompatActivity() {
                 langsungCheckOut(null, paket)
             }
         }
-        var hargaProduk = 0
-
-        if (tipe == "produk" && produk != null) {
-            hargaProduk = produk.harga
-        } else if (tipe == "paket" && paket != null) {
-            hargaProduk = paket.harga
-        }
-
-        fun updateTotal() {
-            val jumlah = itemCounter.text.toString().toInt()
-            val total = hargaProduk * jumlah
-            txtTotalHarga.text = formatRupiah.format(total)
-        }
 
         updateTotal()
 
@@ -200,9 +193,43 @@ class DetailProdukActivity : AppCompatActivity() {
             }
 
             itemCounter.setText((currentCount - 1).toString())
+            updateTotal()
         }
 
+        itemCounter.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Tidak perlu melakukan apa-apa di sini
+            }
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Tidak perlu melakukan apa-apa di sini
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Setelah teks berubah, panggil updateTotal
+                if(itemCounter.text.toString() == ""){
+                    itemCounter.setText("1")
+                }
+                updateTotal()
+            }
+        })
+
+    }
+
+    private fun updateTotal() {
+        // Gunakan try-catch untuk mencegah crash jika input tidak valid atau kosong
+        try {
+            val jumlahString = itemCounter.text.toString()
+            // Jika string kosong, anggap jumlahnya 0
+            val jumlah = if (jumlahString.isBlank()) 0 else jumlahString.toInt()
+
+            val total = hargaProduk * jumlah
+            txtTotalHarga.text = formatRupiah.format(total)
+        } catch (e: NumberFormatException) {
+            // Jika terjadi error konversi (misal: pengguna mengetik non-angka),
+            // tampilkan total 0 untuk mencegah crash.
+            txtTotalHarga.text = formatRupiah.format(0)
+        }
     }
 
     private fun tambahKeranjang(produk: Produk? = null, paket: Paket? = null) {
@@ -259,6 +286,8 @@ class DetailProdukActivity : AppCompatActivity() {
         intent.putExtra("KERANJANG_JSON", selectedItemsJson)
 
         startActivity(intent)
+
+        finish()
     }
 
 

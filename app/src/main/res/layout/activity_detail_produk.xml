@@ -82,15 +82,14 @@
         android:id="@+id/counter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btn_container"
+        android:layout_above="@id/txt_total_harga"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp">
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/icon_minus"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginStart="100dp"
             android:background="@drawable/circle_outline"
             android:src="@drawable/icon_minus" />
 
@@ -122,22 +121,20 @@
         android:id="@+id/title_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginRight="80dp"
-        android:layout_alignParentRight="true"
-        android:text="Total :" />
+        android:layout_above="@id/btn_container"
+        android:layout_marginEnd="20dp"
+        android:layout_toStartOf="@id/txt_total_harga"
+        android:text="Total :"
+        android:textSize="18sp"/>
     <TextView
         android:id="@+id/txt_total_harga"
         android:layout_width="wrap_content"
-        android:textSize="14sp"
-        android:paddingRight="4dp"
+        android:textSize="18sp"
+        android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
         android:text="Rp...."
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginRight="4dp"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/btn_container"
         />
 
     <LinearLayout

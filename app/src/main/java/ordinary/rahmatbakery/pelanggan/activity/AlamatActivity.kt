@@ -22,6 +22,7 @@ import ordinary.rahmatbakery.pelanggan.adapter.AlamatAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.AlamatClickListener
 import ordinary.rahmatbakery.pelanggan.model.Alamat
 import ordinary.rahmatbakery.util.AuthRepository
+import android.widget.TextView
 
 class AlamatActivity(
     private val repo: AuthRepository = AuthRepository()
@@ -31,6 +32,8 @@ class AlamatActivity(
     private lateinit var btnAddAlamat: Button
     private lateinit var btnBack: ImageView
     private val listAlamat = mutableListOf<Alamat>()
+    private var isSelectionMode = false // TAMBAHKAN FLAG UNTUK MENANDAI MODE
+    private lateinit var tvTitle : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,11 +46,18 @@ class AlamatActivity(
             insets
         }
 
+        isSelectionMode = intent.getBooleanExtra("SELECTION_MODE", false)
+
+
         btnAddAlamat = findViewById(R.id.btn_add_alamat)
         btnBack = findViewById(R.id.back)
+        tvTitle = findViewById(R.id.title_alamat)
 
         btnBack.setOnClickListener {
             finish()
+        }
+        if (isSelectionMode) {
+            tvTitle.text = "Pilih Alamat Pengiriman"
         }
 
         btnAddAlamat.setOnClickListener {
@@ -57,6 +67,14 @@ class AlamatActivity(
 
         setupRecyclerView()
         loadAlamat()
+    }
+
+    private val alamatResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            loadAlamat()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -98,18 +116,25 @@ class AlamatActivity(
         }
     }
 
-    private val alamatResultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        // Cek apakah hasilnya OK (yang akan kita atur dari UbahTambahAlamatActivity)
-        if (result.resultCode == RESULT_OK) {
-            loadAlamat() // Panggil kembali fungsi untuk me-refresh data dari Supabase
+
+    override fun onAlamatClicked(alamat: Alamat) {
+        if (isSelectionMode) {
+            // MODE SELEKSI: Kirim alamat yang dipilih kembali dan tutup.
+            val resultIntent = Intent()
+            resultIntent.putExtra("SELECTED_ALAMAT", alamat)
+            setResult(RESULT_OK, resultIntent)
+            finish() // Tutup activity ini
+        } else {
+            // MODE MANAJEMEN (DEFAULT): Buka activity untuk mengedit alamat.
+            val intent = Intent(this, UbahTambahAlamatActivity::class.java)
+            intent.putExtra("EXTRA_ALAMAT", alamat)
+            alamatResultLauncher.launch(intent) // Gunakan launcher untuk memulai activity
         }
     }
-    override fun onAlamatClicked(alamat: Alamat) {
+
+    override fun onEditClicked(alamat: Alamat){
         val intent = Intent(this, UbahTambahAlamatActivity::class.java)
         intent.putExtra("EXTRA_ALAMAT", alamat)
         alamatResultLauncher.launch(intent) // Gunakan launcher untuk memulai activity
     }
-
 }

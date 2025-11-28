@@ -19,9 +19,9 @@ data class TransaksiInsert(
     @SerialName("id_voucher")
     val idVoucher: String?=null,
     @SerialName("waktu_selesai")
-    val waktuSelesai: String?=null,
+    val waktuSelesai: String,
     @SerialName("metode_pengambilan")
-    val metodePengambilan: String?="diambil",
+    val metodePengiriman: String?="diambil",
     @SerialName("catatan")
     val catatan: String?=null,
 )
