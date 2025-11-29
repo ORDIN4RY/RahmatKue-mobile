@@ -71,7 +71,7 @@ data class ProdukPaket(
     @SerialName("nama_paket")
     val namaPaket: String,
     @SerialName("harga_paket")
-    val harga: Int,
+    val hargaPaket: Int,
     @SerialName("foto_paket")
     val fotoPaket: String? = null
 ) : Parcelable

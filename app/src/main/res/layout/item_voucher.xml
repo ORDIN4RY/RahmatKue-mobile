@@ -20,6 +20,8 @@
         android:layout_height="95dp"
         android:src="@drawable/logo"
         android:scaleType="centerCrop"
+        android:background="@drawable/rounded_image"
+        android:clipToOutline="true"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded"
         />
 

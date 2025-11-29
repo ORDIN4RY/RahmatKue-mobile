@@ -232,13 +232,15 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_hapus"
             android:layout_width="140dp"
             android:layout_height="50dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/btn_full"
-            android:text="Hapus Alamat" />
+            android:background="@drawable/btn_outline"
+            android:text="Hapus Alamat"
+            android:backgroundTint="@android:color/transparent"
+            />
 
         <Button
             android:id="@+id/btn_simpan"

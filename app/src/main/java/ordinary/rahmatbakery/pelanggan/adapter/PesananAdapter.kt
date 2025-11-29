@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load // Pastikan import ini ada
+import io.ktor.websocket.Frame
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.RincianPesananActivity
 import ordinary.rahmatbakery.pelanggan.model.Pesanan
@@ -20,14 +21,16 @@ import java.util.Locale
 class PesananAdapter(private val orderList: MutableList<Pesanan>) :
     RecyclerView.Adapter<PesananAdapter.OrderViewHolder>() {
 
+
     inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Deklarasi View
         private val txtTanggal: TextView = itemView.findViewById(R.id.txt_tgl_pesan)
         private val txtStatus: TextView = itemView.findViewById(R.id.txt_status_pesanan)
         private val txtTotal: TextView = itemView.findViewById(R.id.txt_total_harga_semua)
-        private val layoutProdukPertama: View = itemView.findViewById(R.id.rv_item_pesanan)
+        private val layoutProdukPertama: View = itemView.findViewById(R.id.item_pesanan)
         private val txtNamaProduk: TextView = itemView.findViewById(R.id.txt_nama_produk_pesanan)
-        private val txtItemTambahan: TextView = itemView.findViewById(R.id.txt_item_tambahan)
+         private val txtJumlah: TextView = itemView.findViewById(R.id.txt_qty_pesanan)
+        private val txtTotalItem : TextView =itemView.findViewById(R.id.txt_harga_pesanan)
         private val rvProdukLain: RecyclerView = itemView.findViewById(R.id.rv_produk_lain)
         private val btnLihat: View = itemView.findViewById(R.id.btnLihatSemua)
         private val txtLihat: TextView = itemView.findViewById(R.id.txtLihatSemua)
@@ -68,9 +71,9 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
                     jumlah = it.jumlah,
                     subtotal = it.subtotal,
                     foto= it.paket.fotoPaket,
-                    hargaSatuan = it.paket.harga
+                    hargaSatuan = it.paket.hargaPaket
                 )
-            }).sortedBy { it.nama }
+            })
             // --- 3. Atur tampilan berdasarkan jumlah item ---
             if (semuaItem.isEmpty()) {
                 layoutProdukPertama.visibility = View.GONE
@@ -78,9 +81,12 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
                 return
             }
 
-            val itemPertama = semuaItem.first()
+            val itemPertama = semuaItem[0]
+            val totalHarga = itemPertama.jumlah * itemPertama.hargaSatuan
             layoutProdukPertama.visibility = View.VISIBLE
             txtNamaProduk.text = itemPertama.nama
+            txtJumlah.text = "${itemPertama.jumlah}x"
+            txtTotalItem.text = formatRupiah.format(totalHarga)
 
             // Muat gambar sampul dari item pertama
             if (!itemPertama.foto.isNullOrEmpty()) {
@@ -96,8 +102,7 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
             // Logika untuk item lainnya
             if (semuaItem.size > 1) {
                 btnLihat.visibility = View.VISIBLE
-                txtItemTambahan.visibility = View.VISIBLE // Tampilkan teks "+ X item"
-                txtItemTambahan.text = "+ ${semuaItem.size - 1} item lainnya"
+
 
                 val itemLainAdapter = PesananItemAdapter(semuaItem)
                 rvProdukLain.layoutManager = LinearLayoutManager(itemView.context)
@@ -112,7 +117,6 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
                 }
             } else {
                 btnLihat.visibility = View.GONE
-                txtItemTambahan.visibility = View.GONE
                 rvProdukLain.visibility = View.GONE
             }
 
