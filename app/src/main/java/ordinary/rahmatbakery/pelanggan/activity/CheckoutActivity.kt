@@ -295,7 +295,7 @@ class CheckoutActivity(
         tvSubtotalPesanan.text = formatter.format(subtotalPesanan)
         tvTotalDiskon.text = "- ${formatter.format(totalDiskon)}"
         // Tampilkan Teks Diskon hanya jika ada diskon
-//        tvTotalDiskon.visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
+        tvTotalDiskon.visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
         findViewById<RelativeLayout>(R.id.baris_diskon).visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
 
         tvSubtotalPengiriman.text = formatter.format(subtotalPengiriman)

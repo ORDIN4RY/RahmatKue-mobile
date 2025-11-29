@@ -7,19 +7,32 @@
     tools:context=".pelanggan.fragment.MenuFragment"
     android:orientation="vertical">
 
-    <!-- Search Bar -->
-    <EditText
-        android:id="@+id/SearchBar"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="12dp"
-        android:paddingStart="20dp"
-        android:hint="Cari produk..."
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawablePadding="6dp"
-        android:background ="@drawable/input_rounded"
-        android:layout_marginHorizontal="10dp"
-        android:textColor="@color/primary"/>
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Cari produk atau paket..."
+        app:startIconDrawable="@android:drawable/ic_menu_search"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <HorizontalScrollView
         android:layout_width="match_parent"

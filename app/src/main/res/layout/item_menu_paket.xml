@@ -50,6 +50,17 @@
                 android:textColor="@color/primary" />
 
             <TextView
+                android:id="@+id/discounted_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/productPrice"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/productImg"
+                android:text="Rp. 70.000"
+                android:textColor="@color/primary"
+                />
+
+            <TextView
                 android:id="@+id/btn_pesan"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"

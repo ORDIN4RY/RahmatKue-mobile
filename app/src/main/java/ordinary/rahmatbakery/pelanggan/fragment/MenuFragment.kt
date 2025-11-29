@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,13 +33,17 @@ class MenuFragment : Fragment() {
     private lateinit var rvProduct: RecyclerView
     private lateinit var adapterProduct: MenuProdukAdapter
     private val listMenu = mutableListOf<Produk>()
-
     private lateinit var adapterPaket: MenuPaketAdapter
     private val listPaket = mutableListOf<Paket>()
 
     private lateinit var rvKategori: RecyclerView
     private lateinit var adapterKategori: KategoriAdapter
     private val listKategori = mutableListOf<Kategori>()
+
+    private val originalListMenu = mutableListOf<Produk>()
+    private val originalListPaket = mutableListOf<Paket>()
+
+    private lateinit var etSearch: EditText
 
     // Filter buttons
     private lateinit var btnFilterProduk: TextView
@@ -66,6 +73,9 @@ class MenuFragment : Fragment() {
         adapterProduct = MenuProdukAdapter(listMenu)
         adapterPaket = MenuPaketAdapter(listPaket)
 
+        // search
+        etSearch = rootView.findViewById(R.id.etSearch)
+
         rvProduct.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
@@ -80,6 +90,8 @@ class MenuFragment : Fragment() {
 
         // Setup filter buttons
         setupFilterButtons()
+        setupSearchListener()
+
 
         // Load data awal
         loadKategori()
@@ -88,6 +100,47 @@ class MenuFragment : Fragment() {
         return rootView
     }
 
+    private fun setupSearchListener() {
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                filterData(s.toString())
+            }
+        })
+    }
+
+    private fun filterData(query: String) {
+        // Filter list yang sedang aktif
+        when (currentFilter) {
+            "produk" -> {
+                val filteredList = if (query.isBlank()) {
+                    originalListMenu // Jika query kosong, tampilkan semua
+                } else {
+                    // Filter dari list asli berdasarkan nama produk
+                    originalListMenu.filter { produk ->
+                        produk.nama.contains(query, ignoreCase = true)
+                    }
+                }
+                listMenu.clear()
+                listMenu.addAll(filteredList)
+                adapterProduct.notifyDataSetChanged()
+            }
+            "paket" -> {
+                val filteredList = if (query.isBlank()) {
+                    originalListPaket
+                } else {
+                    originalListPaket.filter { paket ->
+                        paket.nama.contains(query, ignoreCase = true)
+                    }
+                }
+                listPaket.clear()
+                listPaket.addAll(filteredList)
+                adapterPaket.notifyDataSetChanged()
+            }
+        }
+    }
 
     private fun setupFilterButtons() {
         btnFilterProduk.setOnClickListener {
@@ -105,9 +158,8 @@ class MenuFragment : Fragment() {
 
     private fun applyFilter(filter: String) {
         currentFilter = filter
-
-        // Update button states (visual feedback)
         updateButtonStates()
+        etSearch.text.clear()
 
         when (filter) {
             "produk" -> {
@@ -137,6 +189,8 @@ class MenuFragment : Fragment() {
         } else {
             currentKateg = ""
         }
+
+        etSearch.text.clear()
         loadProduct(currentKateg)
         rvProduct.adapter = adapterProduct
 
@@ -181,32 +235,19 @@ class MenuFragment : Fragment() {
     private fun loadProduct(kategori: String) {
         lifecycleScope.launch {
             try {
-                val produk = SupabaseManager.client.from("produk")
-                    .select(
-                        Columns.raw(
-                            """
-                        id:id_produk,
-                        nama:nama_produk,
-                        varian,
-                        kategori:id_kategori(
-                            id:id_kategori,
-                            nama:nama_kategori,
-                            minimal_pembelian
-                        ),
-                        deskripsi,
-                        gambar:foto_produk,
-                        harga
-                        """.trimIndent()
-                        )
-                    ) {
-                        if (kategori.isNotEmpty()) {
-                            filter { eq("id_kategori", kategori) }
-                        }
-                    }
+                val produk = SupabaseManager.client.postgrest
+                    .rpc("get_produk_with_promo")
                     .decodeList<Produk>()
 
+                val filtered = if (kategori.isNotEmpty()) {
+                    produk.filter { it.kategori.id == kategori }
+                } else produk
+
+                originalListMenu.clear()
+                originalListMenu.addAll(filtered)
+
                 listMenu.clear()
-                listMenu.addAll(produk)
+                listMenu.addAll(originalListMenu)
                 rvKategori.visibility = View.VISIBLE
                 adapterProduct.notifyDataSetChanged()
 
@@ -220,48 +261,15 @@ class MenuFragment : Fragment() {
     private fun loadPaket() {
         lifecycleScope.launch {
             try {
-                val paket = SupabaseManager.client.from("paket")
-                    .select(
-                        Columns.raw(
-                            """
-                        id:id_paket,
-                        nama:nama_paket,
-                        deskripsi,
-                        foto:foto_paket,
-                        harga:harga_paket,
-
-                        wadah:wadah(
-                            id:id_wadah,
-                            nama:nama_wadah,
-                            deskripsi,
-                            foto:foto_wadah,
-                            kapasitas,
-                            harga:harga_wadah,
-                            varian
-                        ),
-
-                        detail:detail_paket(
-                            produk:id_produk(
-                                id:id_produk,
-                                nama:nama_produk,
-                                varian,
-                                kategori:id_kategori(
-                                    id:id_kategori,
-                                    nama:nama_kategori,
-                                    minimal_pembelian
-                                ),
-                                deskripsi,
-                                gambar:foto_produk,
-                                harga
-                            )
-                        )
-                        """.trimIndent()
-                        )
-                    )
+                val paket = SupabaseManager.client.postgrest
+                    .rpc("get_paket_with_promo")
                     .decodeList<Paket>()
 
+                originalListPaket.clear()
+                originalListPaket.addAll(paket)
+
                 listPaket.clear()
-                listPaket.addAll(paket)
+                listPaket.addAll(originalListPaket)
                 rvKategori.visibility = View.GONE
                 adapterPaket.notifyDataSetChanged()
 
