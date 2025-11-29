@@ -20,7 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.postgrest.rpc
 
 import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
@@ -175,69 +177,11 @@ class KeranjangActivity : AppCompatActivity() {
                     return@launch
                 }
 
-                val data = SupabaseManager.client.from("keranjang").select(
-                    Columns.raw(
-                        """
-            id:id_keranjang,
-            jumlah,
-            id_produk,
-            id_paket,
+                val data = SupabaseManager.client.postgrest.rpc(
+                    "get_keranjang_with_promo",
+                    mapOf("p_user" to userId)
+                ).decodeList<Keranjang>()
 
-            produk:id_produk(
-                id:id_produk,
-                nama:nama_produk,
-                varian,
-                kategori:id_kategori(
-                    id:id_kategori,
-                    nama:nama_kategori,
-                    minimal_pembelian
-                ),
-                deskripsi,
-                gambar:foto_produk,
-                harga
-            ),
-
-            paket:id_paket(
-                id:id_paket,
-                nama:nama_paket,
-                deskripsi,
-                foto:foto_paket,
-                harga:harga_paket,
-
-                wadah:wadah(
-                    id:id_wadah,
-                    nama:nama_wadah,
-                    deskripsi,
-                    foto:foto_wadah,
-                    kapasitas,
-                    harga:harga_wadah,
-                    varian
-                ),
-
-                detail:detail_paket(
-                    produk:id_produk(
-                        id:id_produk,
-                        nama:nama_produk,
-                        varian,
-                        kategori:id_kategori(
-                            id:id_kategori,
-                            nama:nama_kategori,
-                            minimal_pembelian
-                        ),
-                        deskripsi,
-                        gambar:foto_produk,
-                        harga
-                    )
-                )
-            )
-            """
-                    )
-                ) {
-                    // TAMBAHKAN FILTER INI
-                    filter {
-                        eq("id_user", userId)
-                    }
-                }.decodeList<Keranjang>()
 
                 listKeranjang.clear()
                 listKeranjang.addAll(

@@ -70,7 +70,7 @@
                 android:layout_below="@id/productPrice"
                 android:layout_marginStart="12dp"
                 android:layout_toEndOf="@id/productImg"
-                android:text=""
+                android:text="Rp. 70.000"
                 android:textColor="@color/primary"
                 />
 

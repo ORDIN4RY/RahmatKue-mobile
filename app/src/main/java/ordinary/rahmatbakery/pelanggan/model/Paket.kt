@@ -13,7 +13,10 @@ data class Paket(
     val deskripsi: String,
     val foto: String = "foto.png",
     val harga: Int,
-    val detail: List<Detail> = emptyList()
+    val detail: List<Detail> = emptyList(),
+    val tipe_diskon: String? = null,
+    val diskon: Int? = 0,
+
 ) : Parcelable
 
 

@@ -1,6 +1,7 @@
 package ordinary.rahmatbakery.pelanggan.adapter
 
 import android.content.Intent
+import android.graphics.Paint
 import ordinary.rahmatbakery.pelanggan.model.Produk
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ class MenuProdukAdapter(
         val productImg: ImageView = itemView.findViewById(R.id.productImg)
         val productName: TextView = itemView.findViewById(R.id.productName)
         val productPrice: TextView = itemView.findViewById(R.id.productPrice)
+        val discountedPrice: TextView = itemView.findViewById(R.id.discounted_price)
         val btnPesan: TextView = itemView.findViewById(R.id.btn_pesan)
         val miniText: TextView = itemView.findViewById(R.id.productSize)
     }
@@ -41,6 +43,22 @@ class MenuProdukAdapter(
         val item = listProduk[position]
         holder.productName.text = item.nama
         holder.productPrice.text = formatRupiah.format(item.harga)
+        var hargaDiskon = 0
+        if (item.tipe_diskon != null && item.diskon != null){
+            if(item.tipe_diskon == "persen"){
+                hargaDiskon = item.harga - (item.harga * item.diskon/ 100)
+            }else{
+                hargaDiskon = item.harga - item.diskon
+            }
+        }
+        if(hargaDiskon > 0){
+            holder.discountedPrice.visibility = View.VISIBLE
+            holder.discountedPrice.text = formatRupiah.format(hargaDiskon)
+            holder.productPrice.paintFlags = holder.productPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        }else{
+            holder.discountedPrice.visibility = View.GONE
+            holder.productPrice.paintFlags = holder.productPrice.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        }
 
         holder.productImg.load(item.gambar) {
             crossfade(true) // animasi lembut saat gambar muncul

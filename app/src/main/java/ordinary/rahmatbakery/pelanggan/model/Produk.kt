@@ -17,5 +17,7 @@ data class Produk (
     val deskripsi: String,
     val gambar: String,
     val harga: Int,
-    val diskon: Int? = 0
+    val diskon: Int?= 0,
+    val tipe_diskon: String? = null,
+
 ): Parcelable
