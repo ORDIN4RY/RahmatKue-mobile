@@ -48,6 +48,7 @@
             android:textColor="@color/primary" />
 
         <TextView
+            android:id="@+id/btn_detail_voucher_saya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Detail >"
@@ -57,6 +58,7 @@
             android:layout_alignParentEnd="true"/>
 
         <TextView
+            android:id="@+id/tgl_berlaku"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Berlaku sampai 1 November 2025"

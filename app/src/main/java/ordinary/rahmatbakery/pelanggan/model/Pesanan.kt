@@ -20,6 +20,21 @@ data class Pesanan(
 
     @SerialName("created_at")
     val createdAt: String,
+    @SerialName("metode_pengambilan")
+    val metodePengambilan: String? = null,
+    @SerialName("waktu_selesai")
+    val tglPesananJadi: String,
+    @SerialName("catatan")
+    val catatan: String? = null,
+    @SerialName("ongkir")
+    val ongkir: Int? = null,
+    @SerialName("nomor_pesanan")
+    val nomorPesanan: String,
+    @SerialName("dp_minimal")
+    val DP: Int? = null,
+ @SerialName("potongan")
+    val potonganHarga: Int? = null,
+
 
     @SerialName("detail_transaksi_produk")
     val items: List<PesananItems> = emptyList(),
@@ -83,5 +98,6 @@ data class TampilanItemPesanan(
     val jumlah: Int,
     val subtotal: Int,
     val foto : String?,
-    val hargaSatuan : Int,
+    val hargaSatuan : Int
+
 ): Parcelable

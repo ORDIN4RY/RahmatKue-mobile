@@ -20,7 +20,7 @@
             android:name=".pelanggan.activity.TambahProdukKustomActivity"
             android:exported="false" />
         <activity
-            android:name=".RincianPesananActivity"
+            android:name=".pelanggan.activity.RincianPesananActivity"
             android:exported="false" />
         <activity
             android:name=".GantiPasswordActivity"

@@ -17,7 +17,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/img_tukar_voucher"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:scaleType="centerCrop"
@@ -25,7 +25,7 @@
             android:background="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/nama_voucher"
+            android:id="@+id/nama_tukar_voucher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lebaran 2026 - diskon 20k"
@@ -36,13 +36,20 @@
             android:ellipsize="end"
             android:paddingTop="6dp" />
         <TextView
+            android:id="@+id/deskripsi_tukar_voucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi Voucher"
+            android:textSize="12sp"/>
+        <TextView
             android:id="@+id/jumlah_poin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50 Poin"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="30dp"/>
 
         <TextView
+            android:id="@+id/btn_detail_tukar_voucher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/arrow_right"

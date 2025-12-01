@@ -6,6 +6,7 @@ import ordinary.rahmatbakery.pelanggan.model.Produk
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,7 @@ class MenuProdukAdapter(
         val discountedPrice: TextView = itemView.findViewById(R.id.discounted_price)
         val btnPesan: TextView = itemView.findViewById(R.id.btn_pesan)
         val miniText: TextView = itemView.findViewById(R.id.productSize)
+        private lateinit var etSearch: EditText
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuProdukAdapter.ViewHolder {
@@ -74,7 +76,6 @@ class MenuProdukAdapter(
             intent.putExtra("FROM", "menu") // menandakan dari menu, bukan keranjang
             context.startActivity(intent)
         }
-
         if (item.varian == "mini") {
             holder.miniText.visibility = View.VISIBLE
         } else {

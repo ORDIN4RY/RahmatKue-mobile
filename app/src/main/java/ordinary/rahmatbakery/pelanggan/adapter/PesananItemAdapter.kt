@@ -14,7 +14,7 @@ import java.util.Locale
 
 class PesananItemAdapter(private val items: List<TampilanItemPesanan>) :
     RecyclerView.Adapter<PesananItemAdapter.ItemViewHolder>() {
-        
+
     private val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID")).apply {
         maximumFractionDigits = 0
     }
@@ -30,14 +30,10 @@ class PesananItemAdapter(private val items: List<TampilanItemPesanan>) :
             // 1. Isi data teks
             name.text = item.nama
             quantity.text = "${item.jumlah}x "
-
-            // 2. TAMPILKAN HARGA SATUAN, BUKAN SUBTOTAL
-            // Ini akan memperbaiki masalah harga tidak sesuai.
             price.text = formatRupiah.format(item.subtotal)
 
             // 3. Logika memuat gambar dari URL yang benar
             if (!item.foto.isNullOrEmpty()) {
-                // Langsung gunakan item.fotoUrl karena sudah merupakan URL lengkap
                 imgProduk.load(item.foto) {
                     crossfade(true)
                     placeholder(R.drawable.ic_launcher_background) // Ganti dengan placeholder Anda

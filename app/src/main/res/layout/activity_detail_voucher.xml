@@ -43,9 +43,10 @@
     <ImageView
         android:id="@+id/gambar_voucher"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:layout_below="@id/top"
-        android:layout_marginTop="25dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:background="@drawable/profil" />
 
     <TextView
@@ -134,5 +135,12 @@
         android:layout_below="@id/deskripsi_voucher"
         android:layout_marginTop="40dp" />
 
-
+<TextView
+    android:id="@+id/status_voucher"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Status"
+    android:padding="15dp"
+    android:visibility="gone"
+    android:layout_alignParentBottom="true"/>
 </RelativeLayout>

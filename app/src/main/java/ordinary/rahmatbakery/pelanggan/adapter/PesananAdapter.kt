@@ -1,6 +1,7 @@
 package ordinary.rahmatbakery.pelanggan.adapter
 
 import android.content.Intent
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load // Pastikan import ini ada
 import io.ktor.websocket.Frame
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.RincianPesananActivity
+import ordinary.rahmatbakery.pelanggan.activity.RincianPesananActivity
 import ordinary.rahmatbakery.pelanggan.model.Pesanan
 import ordinary.rahmatbakery.pelanggan.model.TampilanItemPesanan
 import java.text.NumberFormat
@@ -52,9 +53,6 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
             txtTanggal.text = pesanan.createdAt.substringBefore("T")
             txtStatus.text = pesanan.status
 
-            // Hitung ulang total harga yang benar dari subtotal item
-            val totalHargaYangBenar = pesanan.items.sumOf { it.subtotal } + pesanan.paketItems.sumOf { it.subtotal }
-            txtTotal.text = formatRupiah.format(totalHargaYangBenar)
 
             // --- 2. Gabungkan item, pastikan semua properti TampilanItemPesanan diisi ---
             val semuaItem = (pesanan.items.map {
@@ -74,6 +72,7 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
                     hargaSatuan = it.paket.hargaPaket
                 )
             })
+
             // --- 3. Atur tampilan berdasarkan jumlah item ---
             if (semuaItem.isEmpty()) {
                 layoutProdukPertama.visibility = View.GONE
@@ -87,6 +86,12 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
             txtNamaProduk.text = itemPertama.nama
             txtJumlah.text = "${itemPertama.jumlah}x"
             txtTotalItem.text = formatRupiah.format(totalHarga)
+
+            // Hitung ulang total harga yang benar dari subtotal item
+            val totalHargaYangBenar = pesanan.items.sumOf { it.subtotal } + pesanan.paketItems.sumOf { it.subtotal }
+
+
+            txtTotal.text = formatRupiah.format(totalHargaYangBenar )
 
             // Muat gambar sampul dari item pertama
             if (!itemPertama.foto.isNullOrEmpty()) {
@@ -103,8 +108,8 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
             if (semuaItem.size > 1) {
                 btnLihat.visibility = View.VISIBLE
 
-
-                val itemLainAdapter = PesananItemAdapter(semuaItem)
+                val itemLain = semuaItem.drop(1)
+                val itemLainAdapter = PesananItemAdapter(itemLain  )
                 rvProdukLain.layoutManager = LinearLayoutManager(itemView.context)
                 rvProdukLain.adapter = itemLainAdapter
                 rvProdukLain.visibility = View.GONE
@@ -124,7 +129,7 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
             itemView.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(context, RincianPesananActivity::class.java)
-                intent.putExtra("TRANSACTION_DATA", pesanan)
+                intent.putExtra(RincianPesananActivity.EXTRA_TRANSAKSI, pesanan)
                 context.startActivity(intent)
             }
         }

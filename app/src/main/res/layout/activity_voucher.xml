@@ -61,6 +61,12 @@
 
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Cari voucher..."
+        android:background="@drawable/input_rounded"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -68,36 +74,32 @@
         android:gravity="center"
         android:padding="10dp">
 
-        <Button
+        <TextView
             android:id="@+id/btnVoucherSaya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/border_tab"
+            android:background="@drawable/btn_filter_produk"
             android:padding="10dp"
             android:text="Voucher Saya"
-            android:textColor="@color/primary" />
+            android:textColor="@drawable/btn_filter_produk" />
 
-        <Button
+        <TextView
             android:id="@+id/btnTukarVoucher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/btnVoucherSaya"
-            android:background="@drawable/border_tab"
+            android:background="@drawable/btn_filter_produk"
             android:padding="10dp"
             android:text="Tukar Voucher"
-            android:textColor="@color/primary" />
+            android:textColor="@drawable/btn_filter_produk" />
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvVoucher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp" />
-    </FrameLayout>
+
 
 </LinearLayout>

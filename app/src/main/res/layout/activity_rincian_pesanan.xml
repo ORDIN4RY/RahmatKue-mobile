@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RincianPesananActivity">
+    tools:context=".pelanggan.activity.RincianPesananActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -64,6 +64,7 @@
                         android:background="@color/primary" />
 
                     <TextView
+                        android:id="@+id/status"
                         style="@style/TextAppearance.Material3.HeadlineSmall.Emphasized"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -109,13 +110,7 @@
                         android:text="Jl. Ahmad Yani Tanggul Kulon"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/nama_penerima"
-                        android:layout_alignParentRight="true"
-                        android:padding="5dp"
-                        android:text="Lihat" />
+
 
                     <View
                         android:id="@+id/garis_pembatas_1"
@@ -163,7 +158,7 @@
                         android:id="@+id/rv_rincian_pesanan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
+                        android:padding="10dp"
                         android:layout_marginTop="15dp"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -172,6 +167,7 @@
                         android:text="Catatan"
                         android:padding="10dp"/>
                     <TextView
+                        android:id="@+id/catatan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/total_pesanan"
@@ -351,9 +347,10 @@
                         android:layout_below="@id/tgl_pesanan_jadi"
                         />
                     <TextView
+                        android:id="@+id/metode_pembayaran"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Qris"
+                        android:text="DP"
                         android:layout_below="@id/tgl_pesanan_jadi"
                         android:layout_alignParentRight="true"/>
                 </RelativeLayout>

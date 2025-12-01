@@ -12,61 +12,61 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.pelanggan.model.UserVoucher
-import ordinary.rahmatbakery.pelanggan.model.Voucher
 import ordinary.rahmatbakery.pelanggan.activity.DetailProdukActivity
 import ordinary.rahmatbakery.pelanggan.activity.DetailVoucherActivity
 import java.text.NumberFormat
 import java.util.Locale
 
-class TukarVoucherAdapter(
-    private val listTukarVoucher: List<Voucher>)
-    : RecyclerView.Adapter<TukarVoucherAdapter.ViewHolder>()  {
-
+class VoucherSayaAdapter(
+    private val listVoucherSaya: List<UserVoucher>
+) : RecyclerView.Adapter<VoucherSayaAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val voucherImg: ImageView = itemView.findViewById(R.id.img_tukar_voucher)
-        val voucherName: TextView = itemView.findViewById(R.id.nama_tukar_voucher)
-        val voucherDeksripsi: TextView = itemView.findViewById(R.id.deskripsi_tukar_voucher)
-        val poinVoucher: TextView = itemView.findViewById(R.id.jumlah_poin)
-        val btnDetailTukarVoucher: TextView = itemView.findViewById(R.id.btn_detail_tukar_voucher)
+        val voucherImg: ImageView = itemView.findViewById(R.id.voucher_image)
+        val voucherName: TextView = itemView.findViewById(R.id.nama_voucher)
+        val voucherDeksripsi: TextView = itemView.findViewById(R.id.deskripsi_voucher)
+        val tglVoucherBerlaku: TextView = itemView.findViewById(R.id.tgl_berlaku)
+        val btnDetailVoucherSaya: TextView = itemView.findViewById(R.id.btn_detail_voucher_saya)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TukarVoucherAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): VoucherSayaAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_tukar_voucher, parent, false)
+            .inflate(R.layout.item_voucher, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TukarVoucherAdapter.ViewHolder, position: Int) {
-        val item = listTukarVoucher[position]
-        holder.voucherName.text = item.nama_voucher
-        holder.voucherDeksripsi.text = item.deskripsi
-        holder.poinVoucher.text = item.poin_tukar.toString()
+    override fun onBindViewHolder(holder: VoucherSayaAdapter.ViewHolder, position: Int) {
+        val item = listVoucherSaya[position]
+        holder.voucherName.text = item.voucher.nama_voucher
+        holder.voucherDeksripsi.text = item.voucher.deskripsi
+        holder.tglVoucherBerlaku.text = item.voucher.tgl_berakhir
 
-        holder.voucherImg.load(item.foto_voucher) {
+
+
+        holder.voucherImg.load(item.voucher.foto_voucher) {
             crossfade(true) // animasi lembut saat gambar muncul
             placeholder(R.drawable.placeholder) // opsional: gambar sementara
             error(R.drawable.error_image)       // opsional: jika gagal load
         }
-
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailVoucherActivity::class.java)
-            intent.putExtra("data_tukar_tukar", item)  // kirim parcelable
+            intent.putExtra("data_voucher_saya", item)  // kirim parcelable
             context.startActivity(intent)
         }
 
         // atau kalau klik tombol detail:
-        holder.btnDetailTukarVoucher.setOnClickListener {
+        holder.btnDetailVoucherSaya.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailVoucherActivity::class.java)
-            intent.putExtra("data_tukar_voucher", item)
+            intent.putExtra("data_voucher_saya", item)
             context.startActivity(intent)
         }
-
-
     }
 
-    override fun getItemCount() = listTukarVoucher.size
+    override fun getItemCount() = listVoucherSaya.size
 }
