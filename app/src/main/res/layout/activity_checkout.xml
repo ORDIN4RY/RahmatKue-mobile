@@ -247,20 +247,27 @@
                         android:text="Voucher" />
 
                     <RelativeLayout
+                        android:id="@+id/voucher_card"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        >
 
-                        <ImageView
+                        <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/gambar_voucher"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@drawable/logo" />
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/logo"
+                            android:layout_margin="5dp"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded" />
+
 
                         <TextView
                             android:id="@+id/nama_voucher"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/gambar_voucher"
+                            android:layout_toEndOf="@id/gambar_voucher"
                             android:text="Ramadhan 2026 - Diskon 20k" />
 
                         <TextView
@@ -268,17 +275,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/nama_voucher"
-                            android:layout_toRightOf="@id/gambar_voucher"
+                            android:layout_toEndOf="@id/gambar_voucher"
                             android:text="Diskon 20k dengan minimal transaksi Rp. 200.000"
-                            android:textSize="6dp" />
+                            android:textSize="10sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="50dp"
-                            android:layout_toRightOf="@id/gambar_voucher"
+                            android:layout_toEndOf="@id/gambar_voucher"
+                            android:layout_alignParentBottom="true"
                             android:text="Berlaku sampai 20 Februari 2026"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Belum ada voucher"
+                            android:padding="10dp"/>
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -406,24 +424,6 @@
 
                         <TextView
                             android:id="@+id/subtotal_pengiriman"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Rp. 200.000" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pembayaran Awal" />
-
-                        <TextView
-                            android:id="@+id/pembayaran_awal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"

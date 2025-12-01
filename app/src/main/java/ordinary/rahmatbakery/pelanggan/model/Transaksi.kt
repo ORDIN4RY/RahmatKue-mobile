@@ -24,6 +24,8 @@ data class TransaksiInsert(
     val metodePengiriman: String?="diambil",
     @SerialName("catatan")
     val catatan: String?=null,
+    val potongan: Int?=0,
+    val ongkir: Int?=0
 )
 
 // Model untuk INSERT ke tabel 'detail_transaksi_produk'

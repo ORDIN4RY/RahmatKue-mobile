@@ -40,6 +40,30 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/productSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mini"
+                android:textSize="12sp"
+                android:textColor="@color/primary"
+                android:layout_toEndOf="@id/productName"
+                android:paddingHorizontal="3dp"
+                android:textAlignment="center"
+                android:layout_alignTop="@id/productName"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/productPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/productName"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/productImg"
+                android:text="Rp 75.000"
+                android:textColor="@color/primary" />
+
+            <TextView
                 android:id="@+id/product_varian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,30 +81,20 @@
                 />
 
             <TextView
-                android:id="@+id/productPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/productName"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@id/productImg"
-                android:text="Rp 75.000"
-                android:textColor="@color/primary" />
-
-            <TextView
-                android:id="@+id/discounted_price"
+                android:id="@+id/kapasitas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/productPrice"
                 android:layout_marginStart="12dp"
                 android:layout_toEndOf="@id/productImg"
-                android:text="Rp. 70.000"
+                android:text="kapasitas: 4 item"
                 android:textColor="@color/primary"
                 />
 
 
 
             <TextView
-                android:id="@+id/btn_pesan"
+                android:id="@+id/btn_pilih"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_alignBottom="@+id/productImg"
@@ -90,7 +104,7 @@
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="7dp"
                 android:gravity="center"
-                android:text="Pesan"
+                android:text="Pilih"
                 android:textSize="13sp" />
 
             <LinearLayout

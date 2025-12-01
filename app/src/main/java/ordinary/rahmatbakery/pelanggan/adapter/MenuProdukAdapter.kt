@@ -30,7 +30,7 @@ class MenuProdukAdapter(
         val productPrice: TextView = itemView.findViewById(R.id.productPrice)
         val discountedPrice: TextView = itemView.findViewById(R.id.discounted_price)
         val btnPesan: TextView = itemView.findViewById(R.id.btn_pesan)
-        val miniText: TextView = itemView.findViewById(R.id.productSize)
+        val miniText: TextView = itemView.findViewById(R.id.product_varian)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuProdukAdapter.ViewHolder {

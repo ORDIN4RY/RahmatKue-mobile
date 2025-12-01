@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.adapter.KategoriAdapter
+import ordinary.rahmatbakery.pelanggan.adapter.MenuCustomAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.MenuProdukAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.MenuPaketAdapter
 import ordinary.rahmatbakery.pelanggan.model.Kategori
@@ -35,6 +36,9 @@ class MenuFragment : Fragment() {
     private val listMenu = mutableListOf<Produk>()
     private lateinit var adapterPaket: MenuPaketAdapter
     private val listPaket = mutableListOf<Paket>()
+    private lateinit var adapterCustom: MenuCustomAdapter
+    private val listMenuCustom = mutableListOf<Wadah>()
+
 
     private lateinit var rvKategori: RecyclerView
     private lateinit var adapterKategori: KategoriAdapter
@@ -42,6 +46,8 @@ class MenuFragment : Fragment() {
 
     private val originalListMenu = mutableListOf<Produk>()
     private val originalListPaket = mutableListOf<Paket>()
+    private val originalListCustom = mutableListOf<Wadah>()
+
 
     private lateinit var etSearch: EditText
 
@@ -72,6 +78,7 @@ class MenuFragment : Fragment() {
         rvProduct = rootView.findViewById(R.id.rvProduct)
         adapterProduct = MenuProdukAdapter(listMenu)
         adapterPaket = MenuPaketAdapter(listPaket)
+        adapterCustom = MenuCustomAdapter(listMenuCustom)
 
         // search
         etSearch = rootView.findViewById(R.id.etSearch)
@@ -173,12 +180,8 @@ class MenuFragment : Fragment() {
             }
 
             "custom" -> {
-                // Untuk custom (kotak), akan diimplementasikan nanti
-                listMenu.clear()
-                listPaket.clear()
-                adapterProduct.notifyDataSetChanged()
-                adapterPaket.notifyDataSetChanged()
-                // TODO: Implementasi custom box nanti
+                loadCustom()
+                rvProduct.adapter = adapterCustom
             }
         }
     }
@@ -268,9 +271,9 @@ class MenuFragment : Fragment() {
                 originalListPaket.clear()
                 originalListPaket.addAll(paket)
 
+                rvKategori.visibility = View.GONE
                 listPaket.clear()
                 listPaket.addAll(originalListPaket)
-                rvKategori.visibility = View.GONE
                 adapterPaket.notifyDataSetChanged()
 
             } catch (e: Exception) {
@@ -281,43 +284,38 @@ class MenuFragment : Fragment() {
 
 
 
-//    private fun loadCustom() {
-//        lifecycleScope.launch {
-//            try {
-//                val wadah = SupabaseManager.client.from("wadah")
-//                    .select(
-//                        Columns.raw(
-//                            """
-//                        id:id_wadah,
-//                        nama:nama_wadah,
-//                        deskripsi,
-//                        foto:foto_wadah,
-//                        kapasitas,
-//                        harga:harga_wadah,
-//                        varian
-//                        """.trimIndent()
-//                        )
-//                    )
-//                    .decodeList<Wadah>()
-//
-//                // ganti adapter Product menjadi adapter Custom
-//                listMenu.clear()
-//                listPaket.clear()
-//
-//                // jika kamu punya adapter khusus custom → pasang di sini
-//                // rvProduct.adapter = adapterCustom
-//
-//                // sementara tampilkan dengan adapterProduct agar cepat
-//                // (silakan ganti jika sudah ada adapter Custom)
-//                // listMenuCustom.addAll(wadah)
-//
-//                rvKategori.visibility = View.GONE
-//
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//        }
-//    }
+    private fun loadCustom() {
+        lifecycleScope.launch {
+            try {
+                val wadah = SupabaseManager.client.from("wadah")
+                    .select(
+                        Columns.raw(
+                            """
+                        id:id_wadah,
+                        nama:nama_wadah,
+                        deskripsi,
+                        foto:foto_wadah,
+                        kapasitas,
+                        harga:harga_wadah,
+                        varian
+                        """.trimIndent()
+                        )
+                    )
+                    .decodeList<Wadah>()
+
+                originalListCustom.clear()
+                originalListCustom.addAll(wadah)
+
+                rvKategori.visibility = View.GONE
+                listMenuCustom.clear()
+                listMenuCustom.addAll(originalListCustom)
+                adapterCustom.notifyDataSetChanged()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
 
 }
