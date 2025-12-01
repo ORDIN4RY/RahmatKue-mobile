@@ -11,7 +11,7 @@ data class Wadah(
     val id: String,
     val nama: String,
     val deskripsi: String,
-    val foto: String = "foto.png",
+    val foto: String?= null,
     val kapasitas: Int,
     val harga: Int,
     val varian: String

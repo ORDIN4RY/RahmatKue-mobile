@@ -31,13 +31,15 @@ import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.adapter.PesananCheckoutAdapter
 import ordinary.rahmatbakery.pelanggan.model.*
 import ordinary.rahmatbakery.util.AuthRepository
-import ordinary.rahmatbakery.util.OrderStatus
 import java.text.NumberFormat
 import java.util.Locale
 
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
+import ordinary.rahmatbakery.util.OrderStatus
+import ordinary.rahmatbakery.util.hitungJarak
+import kotlin.math.ceil
 
 class CheckoutActivity(
     // Menggunakan AuthRepository untuk mendapatkan data user yang sedang login
@@ -67,7 +69,8 @@ class CheckoutActivity(
 
     // Variabel untuk menyimpan data dan state
     private var alamat: Alamat? = null
-//    private var voucher: Voucher? = null
+
+    //    private var voucher: Voucher? = null
     private var metodePembayaran = "Lunas"
     private var metodePengiriman = "diambil"
 
@@ -76,6 +79,7 @@ class CheckoutActivity(
     private var subtotalPengiriman = 0
     private var totalPembayaran = 0
     private var dpMinimal = 0
+    private var hargaOngkir = 0
     private var selectedFinishDate: Calendar? = null
 
     private var keranjangTerpilih: List<Keranjang> = emptyList()
@@ -175,9 +179,12 @@ class CheckoutActivity(
             if (isChecked) {
                 cbAmbil.isChecked = false
                 metodePengiriman = "diantar"
-                subtotalPengiriman = 15000 // Biaya antar default, bisa dibuat lebih dinamis
+                if (hargaOngkir <= 0) {
+                    hitungOngkir()
+                }
+                subtotalPengiriman = hargaOngkir
             } else if (!cbAmbil.isChecked) {
-                cbAntar.isChecked = true // Mencegah kedua checkbox tidak tercentang
+                cbAntar.isChecked = true
             }
             calculateTotals()
         }
@@ -200,6 +207,7 @@ class CheckoutActivity(
             } else if (!cbDp.isChecked) {
                 cbLunas.isChecked = true
             }
+            calculateTotals()
         }
 
         cbDp.setOnCheckedChangeListener { _, isChecked ->
@@ -209,6 +217,7 @@ class CheckoutActivity(
             } else if (!cbLunas.isChecked) {
                 cbDp.isChecked = true
             }
+            calculateTotals()
         }
 
         btnPesan.setOnClickListener {
@@ -283,7 +292,11 @@ class CheckoutActivity(
         totalPembayaran = subtotalPesanan - totalDiskon + subtotalPengiriman
 
         // HITUNG DP 50%
-        dpMinimal = totalPembayaran / 2
+        if(cbLunas.isChecked){
+            dpMinimal = totalPembayaran
+        }else{
+            dpMinimal = (totalPembayaran/2)
+        }
 
         updateTotalsUI()
     }
@@ -296,31 +309,48 @@ class CheckoutActivity(
         tvTotalDiskon.text = "- ${formatter.format(totalDiskon)}"
         // Tampilkan Teks Diskon hanya jika ada diskon
         tvTotalDiskon.visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
-        findViewById<RelativeLayout>(R.id.baris_diskon).visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
+        findViewById<RelativeLayout>(R.id.baris_diskon).visibility =
+            if (totalDiskon > 0) View.VISIBLE else View.GONE
 
         tvSubtotalPengiriman.text = formatter.format(subtotalPengiriman)
         tvTotalPembayaran.text = formatter.format(totalPembayaran)
+        findViewById<TextView>(R.id.total_pembayaran_final).text = formatter.format(dpMinimal)
     }
 
     private fun submitPesanan() {
         lifecycleScope.launch {
             // PERUBAHAN VALIDASI: Alamat selalu dibutuhkan
             if (alamat == null) {
-                Toast.makeText(this@CheckoutActivity, "Alamat diperlukan untuk semua pesanan.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@CheckoutActivity,
+                    "Alamat diperlukan untuk semua pesanan.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@launch
             }
 
             if (selectedFinishDate == null) {
-                Toast.makeText(this@CheckoutActivity, "Silakan pilih tanggal selesai pesanan.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@CheckoutActivity,
+                    "Silakan pilih tanggal selesai pesanan.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@launch
             }
 
 
-            val tanggalSelesaiISO = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).format(selectedFinishDate!!.time)
+            val tanggalSelesaiISO =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).format(
+                    selectedFinishDate!!.time
+                )
 
             val currentUser = repo.getCurrentProfile()
             if (currentUser == null) {
-                Toast.makeText(this@CheckoutActivity, "Sesi tidak valid, silakan login ulang", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@CheckoutActivity,
+                    "Sesi tidak valid, silakan login ulang",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@launch
             }
 
@@ -337,7 +367,9 @@ class CheckoutActivity(
                 idVoucher = null,
                 metodePengiriman = metodePengiriman,
                 waktuSelesai = tanggalSelesaiISO,
-                catatan = null
+                catatan = null,
+                potongan = totalDiskon,
+                ongkir = hargaOngkir
             )
 
             try {
@@ -353,7 +385,12 @@ class CheckoutActivity(
                     val hargaAsli = item.produk!!.harga
                     val diskon = item.produk.diskon ?: 0
                     val subtotal = (hargaAsli - (hargaAsli * diskon / 100)) * item.jumlah
-                    DetailTransaksiProdukInsert(idTransaksiBaru, item.produk.id, item.jumlah, subtotal)
+                    DetailTransaksiProdukInsert(
+                        idTransaksiBaru,
+                        item.produk.id,
+                        item.jumlah,
+                        subtotal
+                    )
                 }
                 if (detailProdukList.isNotEmpty()) {
                     SupabaseManager.client.from("detail_transaksi_produk").insert(detailProdukList)
@@ -362,7 +399,12 @@ class CheckoutActivity(
                 // Siapkan dan insert detail paket
                 val detailPaketList = keranjangTerpilih.filter { it.paket != null }.map { item ->
                     val subtotal = item.paket!!.harga * item.jumlah
-                    DetailTransaksiPaketInsert(idTransaksiBaru, item.paket.id!!, item.jumlah, subtotal)
+                    DetailTransaksiPaketInsert(
+                        idTransaksiBaru,
+                        item.paket.id!!,
+                        item.jumlah,
+                        subtotal
+                    )
                 }
                 if (detailPaketList.isNotEmpty()) {
                     SupabaseManager.client.from("detail_transaksi_paket").insert(detailPaketList)
@@ -376,12 +418,17 @@ class CheckoutActivity(
                 }
 
                 setResult(RESULT_OK)
-                Toast.makeText(this@CheckoutActivity, "Pesanan berhasil dibuat!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@CheckoutActivity, "Pesanan berhasil dibuat!", Toast.LENGTH_LONG)
+                    .show()
                 finish()
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(this@CheckoutActivity, "Gagal membuat pesanan: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@CheckoutActivity,
+                    "Gagal membuat pesanan: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
                 tvAlamatPelanggan.text = e.message
             }
         }
@@ -415,6 +462,9 @@ class CheckoutActivity(
         tvNamaPelanggan.text = alamat?.nama
         tvNoHpPelanggan.text = alamat?.noHp
         tvAlamatPelanggan.text = alamat?.alamat
+
+
+        hitungOngkir()
     }
 
     private fun alamatNonaktif() {
@@ -426,5 +476,51 @@ class CheckoutActivity(
         rvPesanan.layoutManager = LinearLayoutManager(this)
         val pesananAdapter = PesananCheckoutAdapter(keranjangTerpilih)
         rvPesanan.adapter = pesananAdapter
+    }
+
+    private fun hitungOngkir() {
+        if (alamat == null || alamat?.latitude == null || alamat?.longitude == null) {
+            // Jika tidak ada alamat atau koordinat, pastikan ongkir 0 dan update UI
+            hargaOngkir = 0
+            if (cbAntar.isChecked) {
+                subtotalPengiriman = 0
+                calculateTotals() // Update UI untuk menampilkan ongkir Rp0
+            }
+            return
+        }
+
+        hitungJarak(
+            alamat!!.latitude!!,
+            alamat!!.longitude!!,
+        ) { route, error ->
+
+            runOnUiThread {
+                if (error != null) {
+                    println("Error menghitung jarak: $error")
+                    Toast.makeText(this, "Gagal menghitung ongkir.", Toast.LENGTH_SHORT).show()
+                    hargaOngkir = 0
+                } else if (route != null) {
+                    // ongkir dihitung setelah 10km, dan tiap +1 km nambah seribu
+                    var ongkirSementara = 0
+                    val jarak = route.distanceKm
+                    if (jarak >= 10) {
+                        val lebihKm = ceil(jarak - 10)
+                        // Contoh: Jarak 12.3km -> lebihKm = 3.0 -> ongkir = 10000 + 3000 = 13000
+                        ongkirSementara = (lebihKm * 1000).toInt()
+                    }
+
+                    println("Jarak: $jarak km, Ongkir dihitung: $ongkirSementara")
+                    hargaOngkir = ongkirSementara
+                }
+
+                if (metodePengiriman == "diantar") {
+                    subtotalPengiriman = hargaOngkir
+                    // Panggil kembali calculateTotals() untuk menghitung ulang semuanya
+                    // dan memperbarui UI dengan nilai ongkir yang baru.
+                    calculateTotals()
+                }
+            }
+
+        }
     }
 }

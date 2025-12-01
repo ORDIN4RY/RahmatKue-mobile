@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
@@ -19,7 +18,7 @@ import android.widget.ProgressBar
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
-import ordinary.rahmatbakery.pelanggan.adapter.PesananTerakhirAdapter
+import ordinary.rahmatbakery.pelanggan.adapter.LastOrderAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.CarouselAdapter
 import ordinary.rahmatbakery.pelanggan.model.Carousel
 import ordinary.rahmatbakery.api.SupabaseManager
@@ -27,10 +26,9 @@ import ordinary.rahmatbakery.pelanggan.model.PesananTerakhir
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.rpc
 import io.github.jan.supabase.realtime.RealtimeChannel
-import io.github.jan.supabase.realtime.PostgresAction
-import io.github.jan.supabase.realtime.channel
-import io.github.jan.supabase.realtime.realtime
+import ordinary.rahmatbakery.pelanggan.model.Keranjang
 
 class BerandaFragment : Fragment() {
 
@@ -40,6 +38,8 @@ class BerandaFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private val handler = Handler(Looper.getMainLooper())
     private var realtimeChannel: RealtimeChannel? = null
+    private val listLastOrder = mutableListOf<Keranjang>()
+    private lateinit var lastOrderAdapter: LastOrderAdapter
 
     private val autoScrollRunnable = object : Runnable {
         override fun run() {
@@ -53,8 +53,6 @@ class BerandaFragment : Fragment() {
     }
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var pesananAdapter: PesananTerakhirAdapter
-    private val listPesanan = mutableListOf<PesananTerakhir>()
 
     private val parentActivity: DashboardActivity?
         get() = activity as? DashboardActivity
@@ -80,12 +78,11 @@ class BerandaFragment : Fragment() {
         pointText.text = "${point ?: 0} Points"
 
         recyclerView = rootView.findViewById(R.id.rvPesananTerakhir)
-        pesananAdapter = PesananTerakhirAdapter(listPesanan)
-        recyclerView.adapter = pesananAdapter
+        lastOrderAdapter = LastOrderAdapter(listLastOrder)
+        recyclerView.adapter = lastOrderAdapter
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        dummyData()
 
         viewPager = rootView.findViewById(R.id.carousel_view_pager)
         indicatorContainer = rootView.findViewById(R.id.carousel_indicator_container)
@@ -99,15 +96,31 @@ class BerandaFragment : Fragment() {
 
 //        fetchAndSubscribeCarouselData()
 
+        loadLastOrder()
+
         return rootView
     }
 
-    private fun dummyData() {
-        listPesanan.add(PesananTerakhir("1", "Roti Coklat", "https://contoh.com/roti_coklat.jpg"))
-        listPesanan.add(PesananTerakhir("2", "Kue Keju", "https://contoh.com/kue_keju.jpg"))
-        listPesanan.add(PesananTerakhir("3", "Roti Tawar", "https://contoh.com/roti_tawar.jpg"))
-        listPesanan.add(PesananTerakhir("4", "Nastar", "https://contoh.com/nastar.jpg"))
-        pesananAdapter.notifyDataSetChanged()
+    private fun loadLastOrder(){
+
+        lifecycleScope.launch {
+            try {
+                val lastOrder = SupabaseManager.client.postgrest.rpc(
+                    "get_last_order_items",
+                    mapOf("uid" to parentActivity?.profile?.id)
+                ).decodeList<Keranjang>()
+
+                println(lastOrder)
+
+                listLastOrder.clear()
+                listLastOrder.addAll(lastOrder)
+                lastOrderAdapter.notifyDataSetChanged()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

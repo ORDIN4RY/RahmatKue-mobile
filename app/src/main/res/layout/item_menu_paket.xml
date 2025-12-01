@@ -68,7 +68,7 @@
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/btn_filter_produk"
                 android:textColor="@drawable/btn_filter_produk"
-                android:paddingHorizontal="40dp"
+                android:paddingHorizontal="20dp"
                 android:paddingVertical="7dp"
                 android:gravity="center"
                 android:text="Pesan"
