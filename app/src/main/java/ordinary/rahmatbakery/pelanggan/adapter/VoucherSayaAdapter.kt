@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -27,7 +28,8 @@ class VoucherSayaAdapter(
         val voucherName: TextView = itemView.findViewById(R.id.nama_voucher)
         val voucherDeksripsi: TextView = itemView.findViewById(R.id.deskripsi_voucher)
         val tglVoucherBerlaku: TextView = itemView.findViewById(R.id.tgl_berlaku)
-        val btnDetailVoucherSaya: TextView = itemView.findViewById(R.id.btn_detail_voucher_saya)
+        val voucherCard: RelativeLayout = itemView.findViewById(R.id.voucher_card)
+
     }
 
     override fun onCreateViewHolder(
@@ -60,7 +62,7 @@ class VoucherSayaAdapter(
         }
 
         // atau kalau klik tombol detail:
-        holder.btnDetailVoucherSaya.setOnClickListener {
+        holder.voucherCard.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailVoucherActivity::class.java)
             intent.putExtra("data_voucher_saya", item)

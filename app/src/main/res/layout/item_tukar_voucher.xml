@@ -46,14 +46,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50 Poin"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/btn_detail_tukar_voucher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/arrow_right"
-            android:layout_gravity="right"
-            android:layout_marginBottom="10dp"/>
+            android:layout_gravity="right"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

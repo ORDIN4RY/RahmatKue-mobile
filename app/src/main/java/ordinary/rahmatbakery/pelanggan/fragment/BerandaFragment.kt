@@ -1,5 +1,6 @@
 package ordinary.rahmatbakery.pelanggan.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,15 +21,23 @@ import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
 import ordinary.rahmatbakery.pelanggan.adapter.LastOrderAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.CarouselAdapter
-import ordinary.rahmatbakery.pelanggan.model.Carousel
 import ordinary.rahmatbakery.api.SupabaseManager
-import ordinary.rahmatbakery.pelanggan.model.PesananTerakhir
 import android.widget.ImageView
+import coil.load
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.postgrest.query.Order
 import io.github.jan.supabase.postgrest.rpc
 import io.github.jan.supabase.realtime.RealtimeChannel
+import ordinary.rahmatbakery.pelanggan.activity.DetailProdukActivity
+import ordinary.rahmatbakery.pelanggan.activity.DetailPromoActivity
+import ordinary.rahmatbakery.pelanggan.adapter.MenuTerbaruAdapter
+import ordinary.rahmatbakery.pelanggan.adapter.PromoAdapter
 import ordinary.rahmatbakery.pelanggan.model.Keranjang
+import ordinary.rahmatbakery.pelanggan.model.Produk
+import ordinary.rahmatbakery.pelanggan.model.Promo
 
 class BerandaFragment : Fragment() {
 
@@ -51,9 +60,15 @@ class BerandaFragment : Fragment() {
             handler.postDelayed(this, 3000)
         }
     }
-
+    private lateinit var cardMenuTerbaru: CardView
+    private lateinit var cardPromoTerbaru: CardView
     private lateinit var recyclerView: RecyclerView
-
+    private lateinit var rvPromoTerbaru: ImageView
+    private lateinit var promoAdapter: PromoAdapter
+    private val listPromo = mutableListOf<Promo>()
+    private lateinit var rvMenuTerbaru: ImageView
+    private lateinit var menuTerbaruAdapter: MenuTerbaruAdapter
+    private val listProduk = mutableListOf<Produk>()
     private val parentActivity: DashboardActivity?
         get() = activity as? DashboardActivity
 
@@ -67,8 +82,13 @@ class BerandaFragment : Fragment() {
     ): View? {
 
         val rootView = inflater.inflate(R.layout.fragment_beranda, container, false)
+        rvPromoTerbaru = rootView.findViewById(R.id.iv_promo_terbaru)
+        cardPromoTerbaru = rootView.findViewById(R.id.card_promo_terbaru)
 
-        val nameText = rootView.findViewById<TextView>(R.id.nickname)
+        rvMenuTerbaru = rootView.findViewById(R.id.iv_menu_terbaru)
+        cardMenuTerbaru = rootView.findViewById(R.id.card_menu_terbaru)
+
+         val nameText = rootView.findViewById<TextView>(R.id.nickname)
         val pointText = rootView.findViewById<TextView>(R.id.user_point)
 
         val username = parentActivity?.profile?.username
@@ -95,12 +115,95 @@ class BerandaFragment : Fragment() {
         viewPager.visibility = View.GONE
 
 //        fetchAndSubscribeCarouselData()
-
+        loadSinglePromoTerbaru()
         loadLastOrder()
-
+        refetchCarouselData()
+        loadSingleProdukTerbaru()
+        fetchAndSubscribeCarouselData()
         return rootView
     }
 
+    private fun loadSingleProdukTerbaru() {
+        lifecycleScope.launch {
+            try {
+                // Ambil satu produk terbaru dari tabel 'produk'
+                val produkTerbaru = SupabaseManager.client.postgrest["produk"]
+                    .select (Columns.list(
+                        "id_produk",
+                        "nama_produk",
+                        "foto_produk",
+                        "varian",
+                        "deskripsi",
+                        "harga",
+                        "diskon",
+                        "created_at",
+                         )){
+                        order("created_at", Order.DESCENDING)
+                        limit(1)
+                        single()
+                    }.decodeAs<Produk>()// Ambil item pertama, atau null jika kosong
+
+                // Jika produk berhasil didapatkan
+                if (produkTerbaru != null) {
+                    Log.d("PRODUK_TERBARU", "Berhasil memuat produk: ${produkTerbaru.nama}")
+
+                    // Tampilkan CardView dan muat gambarnya
+                    cardMenuTerbaru.visibility = View.VISIBLE
+                    rvMenuTerbaru.load(produkTerbaru.gambar) { // 'gambar' sesuai nama properti di model Produk
+                        crossfade(true)
+                        placeholder(R.drawable.placeholder)
+                        error(R.drawable.error_image)
+                    }
+
+                    // Atur aksi klik untuk membuka halaman detail
+                    cardMenuTerbaru.setOnClickListener {
+                        // Anda perlu membuat DetailProdukActivity
+                        val intent = Intent(context, DetailProdukActivity::class.java)
+                        // Kirim objek produk ke activity detail
+                        intent.putExtra("data_produk", produkTerbaru)
+                        startActivity(intent)
+                    }
+                } else {
+                    // Jika tidak ada produk yang ditemukan
+                    Log.w("PRODUK_TERBARU", "Tidak ada produk yang bisa ditampilkan.")
+                    cardMenuTerbaru.visibility = View.GONE // Sembunyikan card
+                }
+
+            } catch (e: Exception) {
+                // Jika terjadi error saat mengambil data
+                Log.e("PRODUK_TERBARU", "Gagal memuat produk tunggal: ${e.message}", e)
+                cardMenuTerbaru.visibility = View.GONE // Sembunyikan card
+            }
+        }
+    }
+    private fun loadSinglePromoTerbaru() {
+        lifecycleScope.launch {
+            try {
+                val promo = SupabaseManager.client.postgrest["promo"]
+                    .select {
+                        order("created_at", Order.DESCENDING) // Urutkan berdasarkan tanggal dibuat
+                        limit(1) // Ambil hanya 1 data
+                        single() // Ambil sebagai satu objek, bukan list
+                    }.decodeAs<Promo>() // Gunakan decodeAs, bukan decodeList
+
+                rvPromoTerbaru.load(promo.fotoSquare) {
+                    crossfade(true)
+                    error(R.drawable.error_image)
+                }
+
+                // Tambahkan OnClickListener untuk membuka detail
+                cardPromoTerbaru.setOnClickListener {
+                    val intent = Intent(requireContext(), DetailPromoActivity::class.java)
+                    intent.putExtra("data_promo_terbaru", promo)
+                    startActivity(intent)
+                }
+
+            } catch (e: Exception) {
+                Log.e("BerandaFragment", "Gagal memuat promo tunggal: ${e.message}")
+                cardPromoTerbaru.visibility = View.GONE // Sembunyikan jika gagal
+            }
+        }
+    }
     private fun loadLastOrder(){
 
         lifecycleScope.launch {
@@ -133,59 +236,49 @@ class BerandaFragment : Fragment() {
         })
     }
 
-//    private fun fetchAndSubscribeCarouselData() {
-//        lifecycleScope.launch {
-//            try {
-//                val initial = SupabaseManager.client.postgrest["carousel_items"]
-//                    .select()
-//                    .decodeList<Carousel>()
-//
-//                val items = initial.map {
-//                    Carousel(
-//                        id = it.id,
-//                        image_url = it.image_url
-//                    )
-//                }
-//
-//                setupCarousel(items)
-//
-//            } catch (e: Exception) {
-//                Log.e("Supabase", "Fetch initial failed: ${e.message}")
-//            } finally {
-//                progressBar.visibility = View.GONE
-//            }
-//        }
-//
-//        // === REALTIME ===
-//        lifecycleScope.launch {
-//            realtimeChannel =
-//                SupabaseManager.client.realtime.channel("carousel_updates")
-//
-//            realtimeChannel?.postgresChanges(
-//                event = PostgresAction.  ,
-//                schema = "public",
-//                table = "carousel_items"
-//            ) { payload ->
-//                when (payload) {
-//                    is PostgresAction.Insert,
-//                    is PostgresAction.Update,
-//                    is PostgresAction.Delete -> refetchCarouselData()
-//                }
-//            }
-//
-//            realtimeChannel?.subscribe()
-//        }
-//    }
+    private fun fetchAndSubscribeCarouselData() {
+        // The user ID is fetched but not used, you might want to check if this is intended.
+        val userId = parentActivity?.profile?.id ?: return
+
+        progressBar.visibility = View.VISIBLE
+        viewPager.visibility = View.GONE
+
+        lifecycleScope.launch {
+            try {
+                // Fetch data from the "promo" table
+                val promos = SupabaseManager.client.postgrest["promo"]
+                    .select()
+                    .decodeList<Promo>()
+
+                // Map the fetched 'Promo' objects to 'Carousel' objects
+                val items = promos.mapNotNull { promo ->
+                    promo.fotoBanner?.let { bannerUrl ->
+                        // Assuming Carousel model is: data class Carousel(val id: String, val image_url: String)
+                        Promo(promo.id, promo.fotoBanner)
+                    }
+                }
+
+                // Now call setupCarousel with the list of Carousel items
+                setupCarousel(items)
+
+            } catch (e: Exception) {
+                Log.e("Supabase", "Fetch carousel failed: ${e.message}")
+                progressBar.visibility = View.GONE
+            }
+        }
+    }
+
+
 
     private fun refetchCarouselData() {
         lifecycleScope.launch {
             try {
-                val data = SupabaseManager.client.postgrest["carousel_items"]
+                val data = SupabaseManager.client.postgrest["promo"]
                     .select()
-                    .decodeList<Carousel>()
+                    .decodeList<Promo>()
 
                 val items = data.map {
-                    Carousel(it.id, it.image_url)
+                    Promo(it.id, it.fotoBanner)
                 }
 
                 setupCarousel(items)
@@ -195,7 +288,7 @@ class BerandaFragment : Fragment() {
         }
     }
 
-    private fun setupCarousel(items: List<Carousel>) {
+    private fun setupCarousel(items: List<Promo>) {
         carouselAdapter.updateData(items)
 
         progressBar.visibility = View.GONE

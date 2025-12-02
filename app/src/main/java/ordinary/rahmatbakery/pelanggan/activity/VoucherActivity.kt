@@ -8,15 +8,19 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.model.Profile
 import ordinary.rahmatbakery.pelanggan.model.UserVoucher
 import ordinary.rahmatbakery.pelanggan.model.Voucher
 import ordinary.rahmatbakery.pelanggan.adapter.MenuPaketAdapter
@@ -30,6 +34,7 @@ class VoucherActivity : AppCompatActivity() {
 
     private lateinit var btnFilterVoucherSaya: TextView
     private lateinit var btnFilterTukarVoucher: TextView
+    private lateinit var userPoint: TextView
     private lateinit var voucherSayaAdapter: VoucherSayaAdapter
     private lateinit var tukarVoucherAdapter: TukarVoucherAdapter
     private lateinit var rvVoucher: RecyclerView
@@ -45,7 +50,11 @@ class VoucherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_voucher)
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.voucher)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         rvVoucher = findViewById(R.id.rvVoucher)
 
@@ -56,9 +65,11 @@ class VoucherActivity : AppCompatActivity() {
 
         btnFilterVoucherSaya = findViewById(R.id.btnVoucherSaya)
         btnFilterTukarVoucher = findViewById(R.id.btnTukarVoucher)
+        userPoint = findViewById(R.id.user_point)
 
         setupFilterButtons()
         setupSearchListener()
+        loadUserPoint()
 
         applyFilter("voucherSaya")
     }
@@ -165,7 +176,6 @@ class VoucherActivity : AppCompatActivity() {
         }
     }
 
-
     private fun loadVoucher() {
         lifecycleScope.launch {
             try {
@@ -186,6 +196,29 @@ class VoucherActivity : AppCompatActivity() {
             }
         }
     }
+    private fun loadUserPoint() {
+        val userId = SupabaseManager.client.auth.currentUserOrNull()?.id
+        if (userId != null) {
+        lifecycleScope.launch {
+            try {
+                val result = SupabaseManager.client.postgrest
+                    .from("profiles")
+                    .select {
+                        filter {
+                            eq("id", userId)   // ✔ sama persis format seperti loadPesanan
+                        }
+                    }
+                    .decodeSingle<Profile>()
 
+                val point = result.point
+                userPoint.text = "${point} Points"
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                userPoint.text = "error"
+            }
+        }
+    }
+    }
 
 }

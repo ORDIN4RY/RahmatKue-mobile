@@ -7,4 +7,9 @@
     <color name="card_light_bg">@color/white</color>
     <color name="background">#FFF6F3</color>
     <color name="primary">#8E5E48</color>
+
+    <color name="status_aktif">#14A44D</color>
+    <color name="status_belum_aktif">#0F62FE</color>
+    <color name="status_expired">#E70F0F</color>
+    <color name="status_digunakan">#800000</color>
 </resources>

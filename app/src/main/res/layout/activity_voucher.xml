@@ -63,9 +63,13 @@
     </RelativeLayout>
     <EditText
         android:id="@+id/etSearch"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:hint="Cari voucher..."
+        android:textSize="10sp"
+        android:layout_gravity="right"
+        android:padding="8dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/input_rounded"/>
 
     <RelativeLayout

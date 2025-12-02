@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/promo_terbaru"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".pelanggan.activity.DetailPromoActivity">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Gambar Utama Promo (Banner ) -->
+            <!-- FrameLayout digunakan untuk menjaga rasio gambar 16:9 -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_detail_promo_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+            </FrameLayout>
+
+            <!-- Konten Teks di bawah gambar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Nama Promo -->
+                <TextView
+                    android:id="@+id/detail_promo_name"
+                    style="@style/TextAppearance.Material3.HeadlineMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary"
+                    android:textStyle="bold"
+                    tools:text="Promo Spesial Akhir Tahun" />
+
+                <!-- Detail Diskon -->
+
+                <!-- Garis Pemisah -->
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="?android:attr/listDivider" />
+
+                <!-- Judul Deskripsi -->
+                <TextView
+                    android:id="@+id/tv_description_label"
+                    style="@style/TextAppearance.Material3.TitleLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Deskripsi Promo"
+                    android:textColor="@color/primary" />
+
+                <!-- Isi Deskripsi Promo -->
+                <TextView
+                    android:id="@+id/detail_promo_description"
+                    style="@style/TextAppearance.Material3.BodyLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="4dp"
+                    tools:text="Nikmati potongan harga spesial untuk semua jenis kue tart dalam rangka merayakan akhir tahun yang manis. Promo ini berlaku tanpa minimum pembelian dan dapat digunakan untuk satu kali transaksi per pengguna." />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_detail_promo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

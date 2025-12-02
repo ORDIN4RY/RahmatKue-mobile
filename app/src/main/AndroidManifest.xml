@@ -17,6 +17,9 @@
         android:theme="@style/Theme.RahmatBakery"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".pelanggan.activity.DetailPromoActivity"
+            android:exported="false" />
+        <activity
             android:name=".pelanggan.activity.TambahProdukKustomActivity"
             android:exported="false" />
         <activity

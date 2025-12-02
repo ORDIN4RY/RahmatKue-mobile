@@ -10,10 +10,19 @@ import kotlinx.serialization.Serializable
 data class Promo(
     @SerialName("id_promo")
     val id: String,
-    val nama: String,
-    val deskripsi: String?,
+
+    @SerialName("foto_banner")
+    val fotoBanner: String?=null,
+    @SerialName("foto_square")
+    val fotoSquare: String?=null,
+    @SerialName("nama")
+    val nama: String?=null,
+    @SerialName("deskripsi")
+    val deskripsi: String??=null,
     @SerialName("tipe_diskon")
-    val tipeDiskon: String, // misal: "persen" atau "potongan_harga"
+    val tipeDiskon: String?=null, // misal: "persen" atau "potongan_harga"
     @SerialName("nilai_diskon")
-    val nilaiDiskon: Int
+    val nilaiDiskon: Int?=0
+
+
 ) : Parcelable
