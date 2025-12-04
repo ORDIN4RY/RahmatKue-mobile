@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    tools:context=".admin.activity.BerandaAdminFragment">
+    tools:context=".admin.fragment.BerandaAdminFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                         android:id="@+id/tv_total_pesanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20"
+                        android:text="..."
                         android:textColor="@android:color/white"
                         android:textSize="28sp"
                         android:textStyle="bold" />
@@ -59,7 +59,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sejak Agustus 2025"
+                        android:text=""
                         android:textColor="#ADFF2F"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -100,7 +100,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sejak Agustus 2025"
+                        android:text=""
                         android:textColor="#ADFF2F"
                         android:layout_marginTop="10dp"
                         android:textSize="10sp" />
@@ -139,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="Oktober ^"
+                        android:text="Bulan : "
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
                 </RelativeLayout>
@@ -304,85 +304,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Product Item 1 -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp">
 
-                        <ImageView
-                            android:id="@+id/product_image_1"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/placeholder"
-                            android:contentDescription="Product Image"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginTop="20dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/product_image_1"
-                            android:text="Kue AMD"
-                            android:textSize="16sp"
-                            android:layout_marginTop="20dp"
-                            android:textColor="@android:color/black"
-                            android:layout_centerVertical="true" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                           android:layout_alignParentRight="true"
-                            android:text="Terjual (pcs)"
-                            android:textSize="14sp"
-                            android:textColor="@android:color/black"
-                           />
-
-                        <TextView
-                            android:id="@+id/product_sales_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:text="40"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="20dp"
-                            android:textColor="@android:color/black"
-                        />
-                    </RelativeLayout>
-
-                    <!-- Product Item 2 -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/product_image_2"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/placeholder"
-                            android:contentDescription="Product Image"
-                            android:layout_marginEnd="8dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/product_image_2"
-                            android:text="Kue AMD"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/black"
-                            android:layout_centerVertical="true" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="30"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/black"
-                            android:layout_centerVertical="true" />
-                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

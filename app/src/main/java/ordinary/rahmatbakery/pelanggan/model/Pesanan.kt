@@ -27,7 +27,7 @@ data class Pesanan(
     @SerialName("catatan")
     val catatan: String? = null,
     @SerialName("ongkir")
-    val ongkir: Int? = null,
+    val ongkir: Int? = 0,
     @SerialName("nomor_pesanan")
     val nomorPesanan: String,
     @SerialName("dp_minimal")
@@ -52,7 +52,8 @@ data class PesananItems(
     @SerialName("subtotal")
     val subtotal: Int,
     @SerialName("produk")
-    val produk: Produk2
+    val produk: Produk2,
+    val varian : String
 ) : Parcelable
 
 @Parcelize
@@ -76,7 +77,8 @@ data class Produk2(
     @SerialName("harga")
     val harga: Int,
     @SerialName("foto_produk")
-    val fotoProduk: String
+    val fotoProduk: String,
+    val varian : String
 ) : Parcelable
 
 @Serializable

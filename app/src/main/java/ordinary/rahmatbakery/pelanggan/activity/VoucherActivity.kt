@@ -161,7 +161,6 @@ class VoucherActivity : AppCompatActivity() {
                     voucher:id_voucher (
                         id_voucher,
                         nama_voucher,
-                        kode_voucher,
                         tgl_mulai,
                         tgl_berakhir,
                         deskripsi,
