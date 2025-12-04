@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -25,6 +26,8 @@ import ordinary.rahmatbakery.pelanggan.model.KategoriVoucher
 import ordinary.rahmatbakery.pelanggan.model.UserVoucher
 import ordinary.rahmatbakery.pelanggan.model.Voucher
 import ordinary.rahmatbakery.model.Profile
+import ordinary.rahmatbakery.pelanggan.adapter.SyaratAdapter
+import ordinary.rahmatbakery.util.setListViewHeightBasedOnChildren
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,7 +36,7 @@ class DetailVoucherActivity : AppCompatActivity() {
     private var profile: Profile? = null
     private var poinUser: Int = 0
     private var originalVoucherList: MutableList<Voucher> = mutableListOf()
-    private lateinit var syaratKetentuan: TextView
+    private lateinit var syaratKetentuan: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +57,8 @@ class DetailVoucherActivity : AppCompatActivity() {
         if (userVoucher != null) {
             setupVoucherSaya(userVoucher)
         } else if (tukarVoucher != null) {
-            originalVoucherList = mutableListOf(tukarVoucher) // simpan list voucher yang bisa ditukar
+            originalVoucherList =
+                mutableListOf(tukarVoucher) // simpan list voucher yang bisa ditukar
             setupTukarVoucher(tukarVoucher)
         } else {
             finish()
@@ -70,7 +74,8 @@ class DetailVoucherActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.nama_voucher).text = voucher.nama_voucher
         findViewById<TextView>(R.id.deskripsi_voucher).text = voucher.deskripsi
-        findViewById<TextView>(R.id.masa_berlaku).text = formatMasaBerlaku(voucher.tgl_mulai, voucher.tgl_berakhir)
+        findViewById<TextView>(R.id.masa_berlaku).text =
+            formatMasaBerlaku(voucher.tgl_mulai, voucher.tgl_berakhir)
         findViewById<TextView>(R.id.jumlah_poin).visibility = View.GONE
         findViewById<TextView>(R.id.poin).visibility = View.GONE
         findViewById<ImageView>(R.id.gambar_voucher).load(voucher.foto_voucher)
@@ -95,19 +100,39 @@ class DetailVoucherActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.nama_voucher).text = data.nama_voucher
         findViewById<TextView>(R.id.deskripsi_voucher).text = data.deskripsi
         findViewById<TextView>(R.id.jumlah_poin).text = data.poin_tukar.toString()
-        findViewById<TextView>(R.id.masa_berlaku).text = formatMasaBerlaku(data.tgl_mulai, data.tgl_berakhir)
+        findViewById<TextView>(R.id.masa_berlaku).text =
+            formatMasaBerlaku(data.tgl_mulai, data.tgl_berakhir)
         findViewById<TextView>(R.id.btn_tukar_voucher).visibility = View.VISIBLE
         findViewById<ImageView>(R.id.gambar_voucher).load(data.foto_voucher)
-
-        loadKategoriVoucher(data.id_voucher) { kategoriNames ->
-            val kategoriText = if (kategoriNames.isEmpty()) "Semua" else kategoriNames.joinToString(", ")
-            syaratKetentuan.text = """
-                1. Minimal pembelian: Rp. ${data.minimal_pembelian}
-                2. Potongan: ${data.persentase_potongan}% (maks: Rp. ${data.maksimal_potongan})
-                3. Berlaku hanya untuk kategori $kategoriText
-                4. Tidak dapat digabung dengan promo lain
-            """.trimIndent()
+        var kategori = ""
+//            if (kategoriNames.isEmpty()) "Semua" else kategoriNames.joinToString(", ")
+        if (!data.kategoriList.isEmpty()) {
+            kategori = data.kategoriList.joinToString(", ")
         }
+
+//        syaratKetentuan.text = """
+//                1. Minimal pembelian: Rp. ${data.minimal_pembelian}
+//                2. Potongan: ${data.persentase_potongan}% (maks: Rp. ${data.maksimal_potongan})
+//                3. Berlaku hanya untuk kategori $kategoriText
+//                4. Tidak dapat digabung dengan promo lain
+//            """.trimIndent()
+
+        val listSK = listOf(
+            "Masa Berlaku" to "Voucher berlaku selama ${data.tgl_mulai} sampai ${data.tgl_berakhir}.",
+            "Produk Berlaku" to if(kategori.isEmpty()) "Berlaku untuk semua kategori" else "Berlaku untuk kategori $kategori",
+            "Minimal Pembelian" to "Voucher dapat digunakan jika total belanja minimal Rp ${data.minimal_pembelian}.",
+            "Potongan Harga" to "Voucher memberikan diskon ${data.persentase_potongan}%. ${if(data.maksimal_potongan!! > 0) "Potongan maksimal Rp. ${data.maksimal_potongan}." else ""}",
+            "Poin Penukaran" to "Diperlukan ${data.poin_tukar} poin untuk menukar voucher ini.",
+            "Penggunaan Voucher" to "Tidak dapat digabung dengan voucher lain.",
+            "Penukaran" to "Tidak dapat ditukar dengan uang tunai.",
+            "Ketentuan Tambahan" to "Rahmat Bakery berhak membatalkan voucher jika terjadi penyalahgunaan atau kecurangan.",
+
+        )
+
+        val listView: ListView = findViewById(R.id.syarat_ketentuan)
+        listView.adapter = SyaratAdapter(this, listSK)
+        setListViewHeightBasedOnChildren(listView)
+
 
         val btnTukarVoucher = findViewById<TextView>(R.id.btn_tukar_voucher)
 
@@ -117,28 +142,28 @@ class DetailVoucherActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadKategoriVoucher(voucherId: String, callback: (List<String>) -> Unit) {
-        lifecycleScope.launch {
-            try {
-                // PERBAIKAN 1: Menggunakan Columns.raw() untuk mengatasi error type mismatch
-                val kategoriIds = SupabaseManager.client.postgrest
-                    .from("voucher_kategori")
-                    .select(Columns.raw("id_kategori")) { // <-- PERBAIKAN DI SINI
-                        filter { eq("id_voucher", voucherId) }
-                    }
-                    .decodeList<KategoriVoucher>()
-
-                // Asumsi: KategoriVoucher memiliki properti 'kategori' yang memiliki 'nama'
-                // Jika ini menyebabkan error, struktur model data Anda mungkin perlu disesuaikan
-                // atau cara query-nya harus diubah (misal dengan join seperti saran sebelumnya).
-                val kategoriNames = kategoriIds.map { it.kategori.nama }
-                callback(kategoriNames)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                callback(emptyList())
-            }
-        }
-    }
+//    private fun loadKategoriVoucher(voucherId: String, callback: (List<String>) -> Unit) {
+//        lifecycleScope.launch {
+//            try {
+//                // PERBAIKAN 1: Menggunakan Columns.raw() untuk mengatasi error type mismatch
+//                val kategoriIds = SupabaseManager.client.postgrest
+//                    .from("voucher_kategori")
+//                    .select(Columns.raw("id_kategori")) { // <-- PERBAIKAN DI SINI
+//                        filter { eq("id_voucher", voucherId) }
+//                    }
+//                    .decodeList<KategoriVoucher>()
+//
+//                // Asumsi: KategoriVoucher memiliki properti 'kategori' yang memiliki 'nama'
+//                // Jika ini menyebabkan error, struktur model data Anda mungkin perlu disesuaikan
+//                // atau cara query-nya harus diubah (misal dengan join seperti saran sebelumnya).
+//                val kategoriNames = kategoriIds.map { it.kategori.nama }
+//                callback(kategoriNames)
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                callback(emptyList())
+//            }
+//        }
+//    }
 
     private fun loadUserPoint() {
         val userId = SupabaseManager.client.auth.currentUserOrNull()?.id ?: return
@@ -162,7 +187,8 @@ class DetailVoucherActivity : AppCompatActivity() {
     private fun redeemVoucher(voucherId: String) {
         val userId = SupabaseManager.client.auth.currentUserOrNull()?.id
         if (userId == null) {
-            Toast.makeText(this, "Anda harus login untuk menukar voucher.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Anda harus login untuk menukar voucher.", Toast.LENGTH_LONG)
+                .show()
             return
         }
 
@@ -206,7 +232,8 @@ class DetailVoucherActivity : AppCompatActivity() {
     }
 
     private fun removeVoucherFromTukarList(voucherId: String) {
-        originalVoucherList = originalVoucherList.filter { it.id_voucher != voucherId }.toMutableList()
+        originalVoucherList =
+            originalVoucherList.filter { it.id_voucher != voucherId }.toMutableList()
         refreshVoucherList()
     }
 
@@ -234,6 +261,12 @@ class DetailVoucherActivity : AppCompatActivity() {
     private fun formatMasaBerlaku(tglMulai: String, tglBerakhir: String): String {
         val inFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val outFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-        return "${outFormat.format(inFormat.parse(tglMulai))} - ${outFormat.format(inFormat.parse(tglBerakhir))}"
+        return "${outFormat.format(inFormat.parse(tglMulai))} - ${
+            outFormat.format(
+                inFormat.parse(
+                    tglBerakhir
+                )
+            )
+        }"
     }
 }

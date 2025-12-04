@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/checkout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     tools:context=".pelanggan.activity.CheckoutActivity">
 
-
+    <!-- Header -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="15dp"
-        app:cardBackgroundColor="@color/background">
+        android:elevation="8dp"
+        app:cardBackgroundColor="@color/background"
+        app:cardElevation="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="16dp">
 
             <ImageView
                 android:id="@+id/back"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="Back"
                 android:src="@drawable/back"
                 app:tint="@color/primary" />
 
@@ -34,11 +35,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="12dp"
                 android:layout_toEndOf="@id/back"
                 android:text="Checkout"
                 android:textColor="@color/primary"
-                android:textSize="18sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -46,82 +48,92 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="80dp">
 
+            <!-- Data Pelanggan Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="Data Pelanggan"
-                android:textSize="14sp" />
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_alamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/background"
-                android:elevation="10dp"
-                android:padding="10dp"
-                app:cardCornerRadius="10dp">
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <RelativeLayout
                         android:id="@+id/data_pelanggan"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:layout_weight="2">
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/nama_pelanggan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ahmad Febri"
-                            android:textSize="14sp" />
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/no_hp_pelanggan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="08571525454"
-                            android:textSize="14sp"
                             android:layout_below="@id/nama_pelanggan"
-                            android:layout_marginTop="5dp"
-                            />
+                            android:layout_marginTop="4dp"
+                            android:text="08571525454"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/alamat_pelanggan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/no_hp_pelanggan"
-                            android:layout_marginTop="5dp"
-                            android:text="Jl. Sultan Agung No. 90, Selatan Balai Desa "
+                            android:layout_marginTop="4dp"
+                            android:text="Jl. Sultan Agung No. 90, Selatan Balai Desa"
+                            android:textColor="@android:color/darker_gray"
                             android:textSize="14sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/alamat_kosong"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:visibility="visible">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="BELUM ADA ALAMAT" />
+                            android:text="Belum ada alamat"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="14sp" />
 
                     </RelativeLayout>
 
@@ -129,331 +141,512 @@
                         android:id="@+id/pilih"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:text="Pilih >"
-                        android:layout_weight="0"
+                        android:layout_marginStart="8dp"
                         android:gravity="center_vertical"
-                        />
+                        android:text="Pilih >"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Pesanan Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Pesanan"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="10dp">
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
                     <TextView
                         android:id="@+id/judul_pesanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Pesanan" />
+                        android:text="Daftar Item"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
-                    <ScrollView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPesanan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/judul_pesanan">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvPesanan"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_marginBottom="10dp" />
-                    </ScrollView>
-                </RelativeLayout>
+                        android:layout_marginTop="8dp"
+                        android:nestedScrollingEnabled="false" />
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Metode Pengambilan Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Metode Pengambilan"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="8dp"
-                android:elevation="5dp"
-                app:cardCornerRadius="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-
-                    <TextView
-                        android:id="@+id/judul_opsi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pilih Opsi" />
-
-                    <CheckBox
-                        android:id="@+id/cb_antar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/judul_opsi"
-                        android:text="Di Antar" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/cb_antar"
-                        android:layout_marginTop="1dp"
-                        android:text="*gratis ongkir maks 10km,  > 10km dikenakan biaya"
-                        android:textSize="10sp" />
-
-                    <CheckBox
-                        android:id="@+id/cb_ambil"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/judul_opsi"
-                        android:layout_marginStart="50dp"
-                        android:layout_toRightOf="@id/cb_antar"
-                        android:text="Di Ambil" />
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/container_voucher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/background"
-                android:elevation="10dp"
-                android:padding="15dp"
-                app:cardCornerRadius="16dp">
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/judul_opsi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Pilih Opsi"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/cb_antar"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Diantar"
+                                android:textSize="14sp" />
+
+                            <CheckBox
+                                android:id="@+id/cb_ambil"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Diambil"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:text="Gratis ongkir maks 10km"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="11sp"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Voucher Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Voucher"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/voucher_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/voucher_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
                         android:id="@+id/judul_voucher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Voucher" />
+                        android:layout_marginBottom="8dp"
+                        android:text="Pilih Voucher"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <RelativeLayout
-                        android:id="@+id/voucher_card"
+                        android:id="@+id/voucher_on"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        >
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="8dp"
+                        android:visibility="gone">
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/gambar_voucher"
-                            android:layout_width="75dp"
-                            android:layout_height="75dp"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/logo"
-                            android:layout_margin="5dp"
                             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded" />
-
 
                         <TextView
                             android:id="@+id/nama_voucher"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:layout_toEndOf="@id/gambar_voucher"
-                            android:text="Ramadhan 2026 - Diskon 20k" />
+                            android:text="Ramadhan 2026 - Diskon 20k"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/deskripsi_voucher"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/nama_voucher"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="4dp"
                             android:layout_toEndOf="@id/gambar_voucher"
                             android:text="Diskon 20k dengan minimal transaksi Rp. 200.000"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="50dp"
-                            android:layout_toEndOf="@id/gambar_voucher"
-                            android:layout_alignParentBottom="true"
-                            android:text="Berlaku sampai 20 Februari 2026"
+                            android:textColor="@android:color/darker_gray"
                             android:textSize="12sp" />
+
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/voucher_off"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="12dp"
+                        android:visibility="visible">
+
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Belum ada voucher"
-                            android:padding="10dp"/>
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Tap untuk memilih voucher"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="14sp" />
                     </RelativeLayout>
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Tanggal Selesai Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Waktu Penyelesaian"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="8dp"
-                android:elevation="5dp"
-                app:cardCornerRadius="10dp">
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/judul_pembayaran"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Metode Pembayaran" />
-
-                    <CheckBox
-                        android:id="@+id/checkbox_dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/judul_pembayaran"
-                        android:text="DP (50% dari total harga)" />
-
-                    <CheckBox
-                        android:id="@+id/checkbox_lunas"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/judul_pembayaran"
-                        android:layout_toRightOf="@id/checkbox_dp"
-                        android:text="Lunas" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="8dp"
-                android:elevation="5dp"
-                app:cardCornerRadius="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
                         android:id="@+id/judul_tanggal_waktu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tanggal selesai" />
+                        android:layout_marginBottom="8dp"
+                        android:text="Tanggal Selesai"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/etDate"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/judul_tanggal_waktu"
-                        android:layout_marginTop="5dp"
+                        android:layout_height="48dp"
                         android:background="@drawable/btn_outline"
                         android:clickable="true"
+                        android:drawableEnd="@android:drawable/ic_menu_my_calendar"
                         android:focusable="false"
-                        android:hint="Pilih tanggal"
-                        android:textAlignment="center" />
+                        android:hint="Pilih tanggal selesai"
+                        android:paddingHorizontal="16dp"
+                        android:textAlignment="textStart" />
 
-                </RelativeLayout>
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <!-- Catatan Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Catatan (Opsional)"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="8dp"
-                android:elevation="5dp"
-                app:cardCornerRadius="10dp">
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Tambahkan Catatan"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_catatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="@drawable/btn_outline"
+                        android:gravity="top|start"
+                        android:hint="Contoh: Tolong dipacking rapi, ini untuk kado"
+                        android:inputType="textMultiLine"
+                        android:maxLength="200"
+                        android:padding="12dp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="4dp"
+                        android:text="Maksimal 200 karakter"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Metode Pembayaran Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Metode Pembayaran"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/judul_pembayaran"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Pilih Metode"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_dp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="DP (50%)"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_lunas"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Lunas"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Rincian Pembayaran Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Rincian Pembayaran"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
                         android:id="@+id/judul_rincian_pembayaran"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rincian Pembayaran" />
+                        android:layout_marginBottom="12dp"
+                        android:text="Detail Biaya"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginBottom="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Subtotatal Pesanan" />
+                            android:text="Subtotal Pesanan"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/subtotal_pesanan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="Rp. 200.000" />
+                            android:text="Rp 200.000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Subtotal Pengiriman" />
+                            android:text="Subtotal Pengiriman"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/subtotal_pengiriman"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="Rp. 200.000" />
+                            android:text="Rp 0"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/baris_diskon"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/text_diskon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Potongan Harga " />
+                            android:text="Potongan Harga"
+                            android:textColor="#4CAF50"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/potongan_harga"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="Rp. 200.000" />
+                            android:text="- Rp 20.000"
+                            android:textColor="#4CAF50"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
 
                     <View
                         android:id="@+id/garis_pembayaran"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginVertical="12dp"
                         android:background="@color/primary" />
 
                     <RelativeLayout
@@ -463,57 +656,84 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Pembayaran" />
+                            android:text="Total Pembayaran"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/total_pembayaran"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="Rp. 200.000" />
+                            android:text="Rp 200.000"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
-
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+        </LinearLayout>
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:background="@color/background" />
+    </ScrollView>
+
+    <!-- Bottom Checkout Bar -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:cardBackgroundColor="@color/background"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/total_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_toStartOf="@id/btn_pesan"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/total_pesan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_toLeftOf="@id/btn_pesan"
-                    android:text="Total Pembayaran :" />
+                    android:text="Total Pembayaran"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/total_pembayaran_final"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/total_pesan"
-                    android:layout_marginRight="5dp"
-                    android:layout_toLeftOf="@id/btn_pesan"
-                    android:text="Rp. 200.000" />
+                    android:text="Rp 200.000"
+                    android:textColor="@color/primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_pesan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/btn_outline"
-                    android:text="Buat Pesanan" />
-            </RelativeLayout>
-        </LinearLayout>
+            <Button
+                android:id="@+id/btn_pesan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_outline"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:text="Buat Pesanan"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
+    </androidx.cardview.widget.CardView>
 
-    </ScrollView>
-</LinearLayout>
+</RelativeLayout>

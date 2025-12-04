@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:elevation="2dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10sp"
+    android:background="@color/card_light_bg"
+    android:id="@+id/voucher_card"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/voucher_image"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:src="@drawable/logo"
+            android:scaleType="centerCrop"
+            android:clipToOutline="true"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded"
+            />
+
+        <TextView
+            android:id="@+id/nama_voucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@id/voucher_image"
+            android:text="Ramadhan 2026 - Diskon 20K"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            />
+<!--            android:textColor="@color/primary"-->
+
+
+        <TextView
+            android:id="@+id/deskripsi_voucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Potongan harga sebesar Rp. 10.000 Untuk kategori kue donut"
+            android:textSize="9sp"
+            android:layout_marginStart="5dp"
+            android:layout_below="@id/nama_voucher"
+            android:layout_toEndOf="@id/voucher_image"
+            />
+<!--            android:textColor="@color/primary" -->
+
+
+        <TextView
+            android:id="@+id/alasan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ganti metode pengambilan"
+            android:textSize="10sp"
+            android:layout_toEndOf="@id/voucher_image"
+            android:layout_alignBottom="@id/voucher_image"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -130,9 +130,10 @@ class BerandaFragment : Fragment() {
                 // Ambil satu produk terbaru dari tabel 'produk'
                 val produkTerbaru = SupabaseManager.client.postgrest["produk"]
                     .select (Columns.list(
-                        "id_produk",
-                        "nama_produk",
-                        "foto_produk",
+                        "id: id_produk",
+                        "nama : nama_produk",
+                        "gambar : foto_produk",
+                        "kategori:id_kategori(id : id_kategori, nama:nama_kategori,minimal_pembelian)",
                         "varian",
                         "deskripsi",
                         "harga",

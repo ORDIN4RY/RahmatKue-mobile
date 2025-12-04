@@ -68,7 +68,7 @@ class DashboardActivity(
                     }
             }
             if (savedInstanceState == null) {
-                replaceFragment(BerandaAdminFragment())
+//                replaceFragment(BerandaAdminFragment())
                 judul.setText("Beranda Admin")
             }
         }
@@ -76,7 +76,7 @@ class DashboardActivity(
         navbar.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    replaceFragment(BerandaAdminFragment())
+//                    replaceFragment(BerandaAdminFragment())
                     judul.setText("Beranda")
                     true
                 }

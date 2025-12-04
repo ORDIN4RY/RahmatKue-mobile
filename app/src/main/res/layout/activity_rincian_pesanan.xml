@@ -79,14 +79,15 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/headline"
                         android:padding="10dp"
-                        android:text="Alamat" />
+                        android:textStyle="bold"
+                        android:text="Alamat :" />
 
                     <ImageView
                         android:id="@+id/ic_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_below="@id/headline"
-                        android:layout_marginLeft="17dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="35dp"
                         android:background="@drawable/ic_location" />
 
@@ -135,7 +136,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/garis_pembatas_1"
                         android:padding="10dp"
-                        android:text="Metode Pengantaran " />
+                        android:textStyle="bold"
+                        android:text="Metode Pengantaran :" />
 
                     <TextView
                         android:id="@+id/metode_pengantaran"
@@ -163,7 +165,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pesanan"/>
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:text="Pesanan :"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_rincian_pesanan"
                         android:layout_width="match_parent"
@@ -174,7 +178,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/total_harga_produk"
-                        android:text="Catatan"
+                        android:text="Catatan :"
+                        android:textStyle="bold"
                         android:padding="10dp"/>
                     <TextView
                         android:id="@+id/catatan"
@@ -231,6 +236,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
+                        android:textStyle="bold"
                         android:text="Rincian: " />
 
                     <TextView

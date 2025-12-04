@@ -1,5 +1,6 @@
 package ordinary.rahmatbakery.pelanggan.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -37,8 +38,10 @@ import java.util.Locale
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
+import coil.load
 import ordinary.rahmatbakery.util.OrderStatus
 import ordinary.rahmatbakery.util.hitungJarak
+import java.util.ArrayList
 import kotlin.math.ceil
 
 class CheckoutActivity(
@@ -65,12 +68,17 @@ class CheckoutActivity(
     private lateinit var tvAlamatPelanggan: TextView
     private lateinit var etDate: EditText
     private lateinit var cardAlamat: CardView
+    private lateinit var voucherCard: CardView
+    private lateinit var gambarVoucher: ImageView
+    private lateinit var namaVoucher: TextView
+    private lateinit var deskripsiVoucher: TextView
+    private lateinit var etCatatan: EditText
 
 
     // Variabel untuk menyimpan data dan state
     private var alamat: Alamat? = null
+    private var voucher: Voucher? = null
 
-    //    private var voucher: Voucher? = null
     private var metodePembayaran = "Lunas"
     private var metodePengiriman = "diambil"
 
@@ -80,6 +88,9 @@ class CheckoutActivity(
     private var totalPembayaran = 0
     private var dpMinimal = 0
     private var hargaOngkir = 0
+    private var totalPotongan = 0
+    private var kategoriPesananList: ArrayList<String?> = arrayListOf()
+
     private var selectedFinishDate: Calendar? = null
 
     private var keranjangTerpilih: List<Keranjang> = emptyList()
@@ -121,6 +132,18 @@ class CheckoutActivity(
         }
     }
 
+    private val pickVoucherLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.let { data ->
+                voucher = data.getParcelableExtra("VOUCHER")
+                calculateTotals()
+                updateTotalsUI()
+            }
+        }
+    }
+
     private fun initializeViews() {
         rvPesanan = findViewById(R.id.rvPesanan)
         btnBack = findViewById(R.id.back)
@@ -135,7 +158,11 @@ class CheckoutActivity(
         tvTotalPembayaran = findViewById(R.id.total_pembayaran)
         etDate = findViewById(R.id.etDate)
         cardAlamat = findViewById(R.id.card_alamat)
-
+        voucherCard = findViewById(R.id.voucher_card)
+        gambarVoucher = findViewById(R.id.gambar_voucher)
+        namaVoucher = findViewById(R.id.nama_voucher)
+        deskripsiVoucher = findViewById(R.id.deskripsi_voucher)
+        etCatatan = findViewById(R.id.et_catatan)
 
         // View untuk alamat
         layoutAlamat = findViewById(R.id.data_pelanggan)
@@ -159,6 +186,11 @@ class CheckoutActivity(
         try {
             // Decode string JSON menjadi List<Keranjang>
             keranjangTerpilih = Json.decodeFromString(selectedItemsJson)
+            keranjangTerpilih.forEach { item ->
+                if (item.produk != null) {
+                    kategoriPesananList += item.produk.kategori.nama
+                }
+            }
         } catch (e: Exception) {
             Toast.makeText(this, "Error memproses data keranjang", Toast.LENGTH_SHORT).show()
             finish()
@@ -187,6 +219,7 @@ class CheckoutActivity(
                 cbAntar.isChecked = true
             }
             calculateTotals()
+            updateTotalsUI()
         }
 
         cbAmbil.setOnCheckedChangeListener { _, isChecked ->
@@ -194,10 +227,12 @@ class CheckoutActivity(
                 cbAntar.isChecked = false
                 metodePengiriman = "diambil"
                 subtotalPengiriman = 0
+                voucher == null
             } else if (!cbAntar.isChecked) {
                 cbAmbil.isChecked = true
             }
             calculateTotals()
+            updateTotalsUI()
         }
 
         cbLunas.setOnCheckedChangeListener { _, isChecked ->
@@ -221,7 +256,7 @@ class CheckoutActivity(
         }
 
         btnPesan.setOnClickListener {
-            val intent = Intent(this@CheckoutActivity, PembayaranQrisActivity::class.java )
+            val intent = Intent(this@CheckoutActivity, PembayaranQrisActivity::class.java)
             startActivity(intent)
             submitPesanan()
         }
@@ -235,6 +270,10 @@ class CheckoutActivity(
             // Kirim extra untuk menandakan kita masuk ke mode seleksi
             intent.putExtra("SELECTION_MODE", true)
             selectAlamatLauncher.launch(intent)
+        }
+
+        voucherCard.setOnClickListener {
+            openVoucherSelection()
         }
     }
 
@@ -291,13 +330,31 @@ class CheckoutActivity(
             }
         }
 
+        if (voucher != null) {
+            if (voucher!!.jenis_voucher == "diskon") {
+                val potongan = subtotalPesanan * voucher!!.maksimal_potongan!! / 100
+                if (voucher!!.maksimal_potongan!! > subtotalPesanan || voucher!!.maksimal_potongan == 0) {
+                    totalDiskon += potongan
+                } else {
+                    totalDiskon += voucher!!.maksimal_potongan!!
+                }
+            } else if (voucher!!.jenis_voucher == "ongkir") {
+                val potonganOngkir = hargaOngkir * voucher!!.maksimal_potongan!! / 100
+                if (voucher!!.maksimal_potongan!! > hargaOngkir|| voucher!!.maksimal_potongan == 0) {
+                    subtotalPengiriman -= potonganOngkir
+                } else {
+                    subtotalPengiriman -= voucher!!.maksimal_potongan!!
+                }
+            }
+        }
+
         totalPembayaran = subtotalPesanan - totalDiskon + subtotalPengiriman
 
         // HITUNG DP 50%
-        if(cbLunas.isChecked){
+        if (cbLunas.isChecked) {
             dpMinimal = totalPembayaran
-        }else{
-            dpMinimal = (totalPembayaran/2)
+        } else {
+            dpMinimal = (totalPembayaran / 2)
         }
 
         updateTotalsUI()
@@ -313,10 +370,29 @@ class CheckoutActivity(
         tvTotalDiskon.visibility = if (totalDiskon > 0) View.VISIBLE else View.GONE
         findViewById<RelativeLayout>(R.id.baris_diskon).visibility =
             if (totalDiskon > 0) View.VISIBLE else View.GONE
+        val textOngkir = if (metodePengiriman == "diantar") hargaOngkir else subtotalPengiriman
 
-        tvSubtotalPengiriman.text = formatter.format(subtotalPengiriman)
+        tvSubtotalPengiriman.text = formatter.format(textOngkir)
         tvTotalPembayaran.text = formatter.format(totalPembayaran)
         findViewById<TextView>(R.id.total_pembayaran_final).text = formatter.format(dpMinimal)
+
+
+        if (voucher != null) {
+            gambarVoucher.load(voucher!!.foto_voucher){
+                crossfade(true)
+                placeholder(R.drawable.placeholder)
+                error(R.drawable.error_image)
+            }
+            namaVoucher.text = voucher!!.nama_voucher
+            deskripsiVoucher.text = voucher!!.deskripsi
+
+            findViewById<RelativeLayout>(R.id.voucher_on).visibility = View.VISIBLE
+            findViewById<RelativeLayout>(R.id.voucher_off).visibility = View.GONE
+        }else{
+            findViewById<RelativeLayout>(R.id.voucher_on).visibility = View.GONE
+            findViewById<RelativeLayout>(R.id.voucher_off).visibility = View.VISIBLE
+        }
+
     }
 
     private fun submitPesanan() {
@@ -366,12 +442,12 @@ class CheckoutActivity(
                 totalHarga = totalPembayaran,
                 dpMinimal = dpMinimal,
                 status = statusAwal,
-                idVoucher = null,
+                idVoucher = voucher?.id_voucher,
                 metodePengiriman = metodePengiriman,
                 waktuSelesai = tanggalSelesaiISO,
-                catatan = null,
+                catatan = etCatatan.text.toString().trim(),
                 potongan = totalDiskon,
-                ongkir = hargaOngkir
+                ongkir = subtotalPengiriman
             )
 
             try {
@@ -524,5 +600,14 @@ class CheckoutActivity(
             }
 
         }
+    }
+
+    private fun openVoucherSelection() {
+        val intent = Intent(this, PilihVoucher::class.java)
+        intent.putExtra("metode_pengambilan", metodePengiriman)
+        intent.putExtra("subtotal_pesanan", subtotalPesanan.toLong())
+        intent.putStringArrayListExtra("kategori_pesanan", kategoriPesananList)
+
+        pickVoucherLauncher.launch(intent)
     }
 }
