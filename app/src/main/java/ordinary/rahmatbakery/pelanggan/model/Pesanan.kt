@@ -34,7 +34,8 @@ data class Pesanan(
     val DP: Int? = null,
  @SerialName("potongan")
     val potonganHarga: Int? = null,
-
+    @SerialName("alamat")
+    val alamat: Alamat?=null,
 
     @SerialName("detail_transaksi_produk")
     val items: List<PesananItems> = emptyList(),

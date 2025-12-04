@@ -43,7 +43,7 @@
                 <!-- Logo Profil (Dihapus dari sini, dipindahkan ke luar CardView) -->
 
                 <TextView
-                    android:id="@+id/username"
+                    android:id="@+id/username_pengaturan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ahmad Hananto"

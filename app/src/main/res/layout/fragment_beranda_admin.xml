@@ -14,7 +14,7 @@
         android:padding="16dp">
 
         <!-- Header -->
-        
+
 
         <!-- Summary Cards -->
         <LinearLayout
@@ -48,6 +48,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_total_pesanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="20"
@@ -88,6 +89,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_total_pemasukan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp. 1.000.000"
@@ -166,6 +168,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_selesai"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Selesai : 15"
@@ -174,6 +177,7 @@
                             android:layout_marginBottom="4dp" />
 
                         <TextView
+                            android:id="@+id/tv_proses"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Proses : 3"
@@ -182,6 +186,7 @@
                             android:layout_marginBottom="4dp" />
 
                         <TextView
+                            android:id="@+id/tv_batal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Dibatalkan : 2"
@@ -210,6 +215,7 @@
             app:cardElevation="4dp">
 
             <LinearLayout
+                android:id="@+id/layout_pesanan_terbaru"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -293,6 +299,7 @@
 
                 <!-- Product List (Placeholder, ideally a RecyclerView) -->
                 <LinearLayout
+                    android:id="@+id/layout_produk_terlaris"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">

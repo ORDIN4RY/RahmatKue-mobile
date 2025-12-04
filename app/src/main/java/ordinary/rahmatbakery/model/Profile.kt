@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 @Parcelize
 @kotlinx.serialization.Serializable
-data class Profile(
+data class  Profile(
     val id: String,
     val username: String? = "pengguna",
     val level: String? = "pelanggan",

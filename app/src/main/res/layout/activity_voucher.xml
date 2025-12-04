@@ -58,7 +58,13 @@
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </RelativeLayout>
-
+            <!-- Tambahkan ProgressBar di layout activity_voucher.xml -->
+            <ProgressBar
+                android:id="@+id/loadingProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
     <EditText

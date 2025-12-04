@@ -19,10 +19,14 @@ import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.activity.AlamatActivity
 import ordinary.rahmatbakery.pelanggan.activity.BantuanActivity
+import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
 import ordinary.rahmatbakery.pelanggan.activity.EditProfileActivity
 import ordinary.rahmatbakery.pelanggan.activity.VoucherActivity
 
 class PengaturanFragment : Fragment() {
+
+    private val parentActivity: DashboardActivity?
+        get() = activity as? DashboardActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -40,8 +44,11 @@ class PengaturanFragment : Fragment() {
         val btnBantuan = rootView.findViewById<LinearLayout>(R.id.btn_bantuan)
         val btnGantiPass = rootView.findViewById<LinearLayout>(R.id.btn_ganti_password)
         val btnProfil = rootView.findViewById<CardView>(R.id.profile_card)
+        val username = rootView.findViewById<TextView>(R.id.username_pengaturan)
 
+        val usernamex = parentActivity?.profile?.username
 
+        username.text = "${usernamex}"
         // Set aksi klik
         btnAlamat.setOnClickListener {
             val intent = Intent(requireContext(), AlamatActivity::class.java)

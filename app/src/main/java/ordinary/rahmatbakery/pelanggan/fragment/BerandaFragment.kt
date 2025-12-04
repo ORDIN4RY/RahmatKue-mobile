@@ -69,6 +69,7 @@ class BerandaFragment : Fragment() {
     private lateinit var rvMenuTerbaru: ImageView
     private lateinit var menuTerbaruAdapter: MenuTerbaruAdapter
     private val listProduk = mutableListOf<Produk>()
+
     private val parentActivity: DashboardActivity?
         get() = activity as? DashboardActivity
 

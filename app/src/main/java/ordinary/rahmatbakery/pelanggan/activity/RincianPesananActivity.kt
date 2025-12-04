@@ -1,13 +1,16 @@
 package ordinary.rahmatbakery.pelanggan.activity
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.pelanggan.model.Pesanan
+import ordinary.rahmatbakery.pelanggan.model.Alamat
 import ordinary.rahmatbakery.pelanggan.model.TampilanItemPesanan
 import ordinary.rahmatbakery.pelanggan.adapter.RincianPesananAdapter
 import android.widget.TextView
@@ -32,12 +35,14 @@ class RincianPesananActivity : AppCompatActivity() {
 
     // Rincian harga
     private lateinit var txtTotalPesanan: TextView
+    private lateinit var txtHargaTotalProduk: TextView
     private lateinit var txtSubTotalPesanan: TextView
     private lateinit var txtSubtotalPengiriman: TextView
     private lateinit var txtPembayaranAwal: TextView
+    private lateinit var txtTitlePembayaranAwal: TextView
+    private lateinit var txtKekuranganBayar: TextView
     private lateinit var txtPotonganHarga: TextView
 
-    // Info transaksi
     private lateinit var txtNomorPesanan: TextView
     private lateinit var txtTglPemesanan: TextView
     private lateinit var txtTglPesananJadi: TextView
@@ -45,6 +50,11 @@ class RincianPesananActivity : AppCompatActivity() {
     private lateinit var txtMetodePengambilan: TextView
     private lateinit var txtStatus: TextView
     private lateinit var txtCatatan: TextView
+    private lateinit var txtNamaPenerima: TextView
+    private lateinit var txtNoHpPenerima: TextView
+    private lateinit var txtAlamatPenerima: TextView
+
+    private lateinit var btnBayarSekarang: TextView
 
     val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID")).apply {
         maximumFractionDigits = 0
@@ -89,10 +99,13 @@ class RincianPesananActivity : AppCompatActivity() {
         rvPesanan = findViewById(R.id.rv_rincian_pesanan)
 
         txtTotalPesanan = findViewById(R.id.total_pesanan)
+        txtHargaTotalProduk = findViewById(R.id.total_harga_produk)
         txtSubTotalPesanan = findViewById(R.id.subtotal_pesanan)
         txtSubtotalPengiriman = findViewById(R.id.subtotal_pengiriman)
         txtPembayaranAwal = findViewById(R.id.pembayaran_awal)
         txtPotonganHarga = findViewById(R.id.potongan_harga)
+        txtKekuranganBayar = findViewById(R.id.kekurangan_bayar)
+        txtTitlePembayaranAwal = findViewById(R.id.title_pembayaran_awal)
 
         txtNomorPesanan = findViewById(R.id.nomor_pesanan)
         txtTglPemesanan = findViewById(R.id.tgl_pemesanan)
@@ -101,6 +114,12 @@ class RincianPesananActivity : AppCompatActivity() {
         txtMetodePengambilan = findViewById(R.id.metode_pengantaran)
         txtStatus = findViewById(R.id.status)
         txtCatatan = findViewById(R.id.catatan)
+        btnBayarSekarang = findViewById(R.id.btn_bayar_sekarang)
+
+        txtNamaPenerima = findViewById(R.id.nama_penerima)
+        txtNoHpPenerima = findViewById(R.id.no_hp_penerima)
+        txtAlamatPenerima = findViewById(R.id.alamat_penerima)
+
     }
 
     /** =============================
@@ -111,7 +130,11 @@ class RincianPesananActivity : AppCompatActivity() {
         txtNomorPesanan.text = pesanan.nomorPesanan
         txtStatus.text = pesanan.status
         txtMetodePengambilan.text = pesanan.metodePengambilan ?: "-"
+        txtCatatan.text = pesanan.catatan
 
+            txtNamaPenerima.text = pesanan.alamat?.nama
+            txtNoHpPenerima.text = pesanan.alamat?.noHp
+            txtAlamatPenerima.text = pesanan.alamat?.alamat
 
         txtTglPemesanan.text = pesanan.createdAt.substringBefore("T")
         txtTglPesananJadi.text = pesanan.tglPesananJadi.substringBefore("T")
@@ -119,13 +142,46 @@ class RincianPesananActivity : AppCompatActivity() {
         txtCatatan.text = if (pesanan.catatan.isNullOrBlank()) "-" else pesanan.catatan
 
         // Rincian harga
-        txtSubTotalPesanan.text = formatRupiah.format(pesanan.totalHarga)
-        txtSubtotalPengiriman.text = formatRupiah.format(pesanan.ongkir?: 0)
-        txtPembayaranAwal.text = formatRupiah.format(pesanan.DP?: 0)
-        txtPotonganHarga.text = formatRupiah.format(pesanan.potonganHarga?: 0)
+        val kekuranganBayar = pesanan.totalHarga - (pesanan.DP ?: 0)
 
+        txtSubtotalPengiriman.text = formatRupiah.format(pesanan.ongkir ?: 0)
+        if (pesanan.DP == pesanan.totalHarga){
+            txtPembayaranAwal.text =("Rp. -")
+        }else {
+            txtPembayaranAwal.visibility= View.VISIBLE
+            txtPembayaranAwal.text = formatRupiah.format(pesanan.DP ?: 0)
+            txtTitlePembayaranAwal.visibility= View.VISIBLE
+            txtKekuranganBayar.visibility= View.VISIBLE
+            txtKekuranganBayar.text ="Kekurangan : ${formatRupiah.format(kekuranganBayar)}"
+        }
+        if(pesanan.potonganHarga==0){
+            txtPotonganHarga.text = ("Rp. -")
+        }else {
+            txtPotonganHarga.text = formatRupiah.format(pesanan.potonganHarga)
+        }
         // Total akhir
-        txtTotalPesanan.text = formatRupiah.format(pesanan.totalHarga)
+        val totalHarga = formatRupiah.format(pesanan.totalHarga)
+        txtTotalPesanan.text = "Total Pesanan : ${totalHarga}"
+        val totalHargaPaket = pesanan.paketItems.sumOf { it.subtotal }
+        val totalHargaItem = pesanan.items.sumOf { it.subtotal }
+        val totalHargaProduk = totalHargaPaket + totalHargaItem
+
+        txtSubTotalPesanan.text = formatRupiah.format(totalHargaProduk)
+        if (pesanan.totalHarga == pesanan.DP){
+            txtMetodePembayaran.text ="Lunas"
+        }else{
+            txtMetodePembayaran.text ="DP"
+        }
+        txtHargaTotalProduk.text = formatRupiah.format(totalHargaProduk)
+
+        if (pesanan.status == "Menunggu Pembayaran") {
+            btnBayarSekarang.visibility = View.VISIBLE
+            btnBayarSekarang.setOnClickListener {
+                val intent = Intent(this@RincianPesananActivity, PembayaranQrisActivity::class.java)
+                intent.putExtra(RincianPesananActivity.EXTRA_TRANSAKSI, pesanan)
+                startActivity(intent)
+            }
+        }
     }
 
     /** =============================
@@ -163,6 +219,8 @@ class RincianPesananActivity : AppCompatActivity() {
 
     private suspend fun loadDetailPesanan(idTransaksi: String): Pesanan? {
         return try {
+            val userId = SupabaseManager.client.auth.currentUserOrNull()?.id
+
             SupabaseManager.client.postgrest.from("transaksi")
                 .select(
                     Columns.raw(
@@ -178,7 +236,16 @@ class RincianPesananActivity : AppCompatActivity() {
                     nomor_pesanan,
                     dp_minimal,
                     potongan,
-
+                    
+                   alamat(  
+                id_alamat, 
+                nama_lengkap,
+                no_hp_penerima,
+                alamat_rumah,
+                id_user,         
+                alamat_utama
+                ),
+                    
                     detail_transaksi_produk(
                         jumlah,
                         subtotal,
@@ -208,6 +275,7 @@ class RincianPesananActivity : AppCompatActivity() {
                 .decodeSingle<Pesanan>()
         } catch (e: Exception) {
             Log.e("SUPABASE", "Error load pesanan: ${e.message}")
+            e.printStackTrace()
             null
         }
     }

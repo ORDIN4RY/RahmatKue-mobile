@@ -28,9 +28,9 @@
         <activity
             android:name=".GantiPasswordActivity"
             android:exported="false" />
-        <activity
-            android:name=".admin.activity.PesananAdminActivity"
-            android:exported="false" /> <!-- pelanggan -->
+<!--        <activity-->
+<!--            android:name=".admin.activity.PesananAdminActivity"-->
+<!--            android:exported="false" /> &lt;!&ndash; pelanggan &ndash;&gt;-->
         <activity
             android:name=".pelanggan.activity.DetailProdukActivity"
             android:exported="false" />
@@ -46,6 +46,9 @@
             android:exported="false" />
         <activity
             android:name=".pelanggan.activity.VoucherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pelanggan.activity.PembayaranQrisActivity"
             android:exported="false" />
         <activity
             android:name=".pelanggan.activity.PilihLokasiActivity"

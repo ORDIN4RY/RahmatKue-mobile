@@ -221,6 +221,8 @@ class CheckoutActivity(
         }
 
         btnPesan.setOnClickListener {
+            val intent = Intent(this@CheckoutActivity, PembayaranQrisActivity::class.java )
+            startActivity(intent)
             submitPesanan()
         }
 

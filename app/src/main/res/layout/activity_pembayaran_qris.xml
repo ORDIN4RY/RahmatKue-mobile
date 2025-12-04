@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.activity.pembayaran_qrisActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".pelanggan.activity.PembayaranQrisActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,9 +17,9 @@
             android:id="@+id/gambardone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/checkmark"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/checkmark" />
 
         <TextView
             android:id="@+id/judul1"
@@ -28,9 +28,8 @@
             android:layout_below="@id/gambardone"
             android:layout_marginTop="15dp"
             android:text="Terima Kasih"
-            android:textAlignment="center"
-            />
-        
+            android:textAlignment="center" />
+
         <TextView
             android:id="@+id/judul2"
             android:layout_width="match_parent"
@@ -38,51 +37,56 @@
             android:layout_below="@id/judul1"
             android:layout_marginTop="10dp"
             android:text="Pesanan Anda Telah Diterima"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
     </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="200dp"
-            android:layout_height="140dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            android:layout_gravity="center">
+    <androidx.cardview.widget.CardView
+        android:layout_width="255dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-               >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Order number"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tvOrderNumber2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=": 1212bjwhgeye"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"><!-- Order Number -->
+            <!-- Order Number -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="15dp">
+
+                android:paddingTop="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Order Number"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvOrderNumber2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1212bjwhgeye"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Waktu -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -90,81 +94,75 @@
                     android:layout_weight="1"
                     android:text="Waktu"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/tvWaktu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=": 31 September 2025"
+                    android:text="31 September 2025"
                     android:textColor="@android:color/black"
-                   android:textSize="14sp"/>
+                    android:textSize="13sp" />
             </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Total"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tvTotal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=": Rp. 200.000"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-            <RelativeLayout
+            <!-- Total -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
                 <TextView
-                    android:id="@+id/judul3"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Scan Kode QRIS Dibawah Ini!"
-                    android:textAlignment="center"
-                    />
-                <ImageView
-                    android:id="@+id/qrcode"
+                    android:layout_weight="1"
+                    android:text="Total"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_below="@id/judul3"
-                    android:background="@drawable/checkmark"
-                    android:layout_centerInParent="true"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Jumlah yang harus dibayar : Rp. 200.000"
-                    android:layout_below="@id/qrcode"
-                    android:textAlignment="center"
-                    android:layout_marginTop="15dp"/>
+                    android:text="Rp. 200.000"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/judul3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scan Kode QRIS Dibawah Ini!"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/qrcode"
+            android:layout_width="300dp"
+            android:layout_height="350dp"
+            android:layout_below="@id/judul3"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/qris" />
+
+        <TextView
+            android:id="@+id/jumlah_yg_dibayar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/qrcode"
+            android:layout_marginTop="15dp"
+            android:text="Jumlah yang harus dibayar : Rp. 200.000"
+            android:textAlignment="center" />
 
 
-
-
-
-            </RelativeLayout>
-
-
-
-
-
-
-
+    </RelativeLayout>
 
 </LinearLayout>

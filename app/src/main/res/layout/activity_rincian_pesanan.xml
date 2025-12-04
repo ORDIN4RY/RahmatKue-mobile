@@ -74,6 +74,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/headline"
@@ -100,11 +101,20 @@
                         android:text="Ahmad Hananto"
                         android:textSize="16sp" />
 
+
+                    <TextView
+                        android:id="@+id/no_hp_penerima"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="08867565"
+                        android:layout_toRightOf="@id/ic_location"
+                        android:layout_below="@id/nama_penerima"
+                        android:layout_marginLeft="5dp"/>
                     <TextView
                         android:id="@+id/alamat_penerima"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/nama_penerima"
+                        android:layout_below="@id/no_hp_penerima"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/ic_location"
                         android:text="Jl. Ahmad Yani Tanggul Kulon"
@@ -163,14 +173,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/total_pesanan"
+                        android:layout_below="@id/total_harga_produk"
                         android:text="Catatan"
                         android:padding="10dp"/>
                     <TextView
                         android:id="@+id/catatan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/total_pesanan"
+                        android:layout_below="@id/total_harga_produk"
                         android:text="-"
                         android:layout_marginTop="30dp"
                         android:paddingLeft="10dp"
@@ -189,11 +199,11 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/garis_pembatas_2"
                         android:layout_marginTop="10dp"
-                        android:layout_toLeftOf="@id/total_pesanan"
-                        android:text="Total Pesanan: " />
+                        android:layout_toLeftOf="@id/total_harga_produk"
+                        android:text="Total : " />
 
                     <TextView
-                        android:id="@+id/total_pesanan"
+                        android:id="@+id/total_harga_produk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/garis_pembatas_2"
@@ -234,6 +244,7 @@
                         android:id="@+id/subtotal_pesanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:layout_below="@id/rincian_biaya"
                         android:layout_alignParentRight="true"
                         android:text="Rp. 2510000" />
@@ -249,6 +260,7 @@
                         android:id="@+id/subtotal_pengiriman"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:layout_below="@id/subtotal_pesanan"
                         android:layout_alignParentRight="true"
                         android:text="Rp. 2000" />
@@ -258,32 +270,70 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/subtotal_pengiriman"
                         android:paddingLeft="10dp"
-                        android:text="Pembayaran Awal" />
+                        android:text="Potongan Harga" />
 
                     <TextView
                         android:id="@+id/pembayaran_awal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/subtotal_pengiriman"
+                        android:padding="5dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/total_pesanan"
                         android:layout_alignParentRight="true"
                         android:text="Rp. -" />
 
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/pembayaran_awal"
+                        android:background="@color/primary"
+                        android:layout_marginTop="5dp"/>
                     <TextView
+                        android:id="@+id/kekurangan_bayar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:visibility="gone"
                         android:layout_below="@id/pembayaran_awal"
-                        android:layout_marginTop="0dp"
-                        android:paddingLeft="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="Potongan Harga" />
+                        android:layout_alignParentRight="true"
+                        android:text="Rp. -" />
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/potongan_harga"
+                        android:background="@color/primary"
+                        android:layout_marginTop="5dp"/>
+                    <TextView
+                        android:id="@+id/total_pesanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Pesanan"
+                        android:layout_below="@id/potongan_harga"
+                        android:layout_marginTop="10dp"
+                        android:padding="5dp"
+                        android:layout_alignParentRight="true"/>
 
                     <TextView
                         android:id="@+id/potongan_harga"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/pembayaran_awal"
+                        android:padding="5dp"
+                        android:layout_below="@id/subtotal_pengiriman"
                         android:layout_alignParentRight="true"
                         android:text="Rp. -" />
+
+                    <TextView
+                        android:id="@+id/title_pembayaran_awal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/total_pesanan"
+                        android:layout_marginTop="0dp"
+                        android:paddingTop="10dp"
+                        android:visibility="gone"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Pembayaran Awal" />
+
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -355,11 +405,24 @@
                         android:layout_alignParentRight="true"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
-            <Button
+
+            <TextView
+                android:id="@+id/btn_bayar_sekarang"
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="wrap_content"
+                android:text="Bayar Sekarang"
+               android:visibility="gone"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_full"/>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Batalkan Pesanan"
+                android:textAlignment="center"
                 android:background="@drawable/btn_outline"/>
         </LinearLayout>
 

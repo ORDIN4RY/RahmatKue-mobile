@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load // Pastikan import ini ada
 import io.ktor.websocket.Frame
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.pelanggan.activity.PembayaranQrisActivity
 import ordinary.rahmatbakery.pelanggan.activity.RincianPesananActivity
 import ordinary.rahmatbakery.pelanggan.model.Pesanan
 import ordinary.rahmatbakery.pelanggan.model.TampilanItemPesanan
@@ -73,6 +74,7 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
                 )
             })
 
+
             // --- 3. Atur tampilan berdasarkan jumlah item ---
             if (semuaItem.isEmpty()) {
                 layoutProdukPertama.visibility = View.GONE
@@ -132,6 +134,8 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
                 intent.putExtra(RincianPesananActivity.EXTRA_TRANSAKSI, pesanan)
                 context.startActivity(intent)
             }
+
+
         }
     }
 

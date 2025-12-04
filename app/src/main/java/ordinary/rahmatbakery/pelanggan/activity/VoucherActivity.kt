@@ -3,10 +3,8 @@ package ordinary.rahmatbakery.pelanggan.activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -21,14 +19,10 @@ import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.model.Profile
-import ordinary.rahmatbakery.pelanggan.model.UserVoucher
-import ordinary.rahmatbakery.pelanggan.model.Voucher
-import ordinary.rahmatbakery.pelanggan.adapter.MenuPaketAdapter
-import ordinary.rahmatbakery.pelanggan.adapter.MenuProdukAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.TukarVoucherAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.VoucherSayaAdapter
-import ordinary.rahmatbakery.pelanggan.model.Paket
-import ordinary.rahmatbakery.pelanggan.model.Produk
+import ordinary.rahmatbakery.pelanggan.model.UserVoucher
+import ordinary.rahmatbakery.pelanggan.model.Voucher
 
 class VoucherActivity : AppCompatActivity() {
 
@@ -41,9 +35,11 @@ class VoucherActivity : AppCompatActivity() {
     private var currentFilter = "voucherSaya"
     private lateinit var etSearch: EditText
 
+    // Data asli dari server
     private val VoucherSaya = mutableListOf<UserVoucher>()
     private val TukarVoucher = mutableListOf<Voucher>()
 
+    // Data yang ditampilkan (setelah filter)
     private val listVoucherSaya = mutableListOf<UserVoucher>()
     private val listTukarVoucher = mutableListOf<Voucher>()
 
@@ -57,7 +53,6 @@ class VoucherActivity : AppCompatActivity() {
         }
 
         rvVoucher = findViewById(R.id.rvVoucher)
-
         etSearch = findViewById(R.id.etSearch)
 
         voucherSayaAdapter = VoucherSayaAdapter(listVoucherSaya)
@@ -74,6 +69,17 @@ class VoucherActivity : AppCompatActivity() {
         applyFilter("voucherSaya")
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Refresh data saat kembali ke activity
+        loadUserPoint()
+        if (currentFilter == "voucherSaya") {
+            loadVoucherSaya()
+        } else {
+            loadVoucher()
+        }
+    }
+
     private fun setupSearchListener() {
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -86,7 +92,6 @@ class VoucherActivity : AppCompatActivity() {
 
     private fun filterData(query: String) {
         when (currentFilter) {
-
             "voucherSaya" -> {
                 val filtered = if (query.isBlank()) VoucherSaya
                 else VoucherSaya.filter {
@@ -118,16 +123,17 @@ class VoucherActivity : AppCompatActivity() {
 
     private fun applyFilter(filter: String) {
         currentFilter = filter
+        etSearch.text.clear() // Clear search when switching filter
         updateButtonStates()
 
         when (filter) {
             "voucherSaya" -> {
-                rvVoucher.layoutManager= LinearLayoutManager(this)
+                rvVoucher.layoutManager = LinearLayoutManager(this)
                 rvVoucher.adapter = voucherSayaAdapter
                 loadVoucherSaya()
             }
             "tukarVoucher" -> {
-                rvVoucher.layoutManager= GridLayoutManager(this,2)
+                rvVoucher.layoutManager = GridLayoutManager(this, 2)
                 rvVoucher.adapter = tukarVoucherAdapter
                 loadVoucher()
             }
@@ -142,6 +148,9 @@ class VoucherActivity : AppCompatActivity() {
     private fun loadVoucherSaya() {
         lifecycleScope.launch {
             try {
+                val userId = SupabaseManager.client.auth.currentUserOrNull()?.id
+                if (userId == null) return@launch
+
                 val result = SupabaseManager.client.postgrest["user_voucher"]
                     .select(Columns.raw("""
                     *,
@@ -159,7 +168,11 @@ class VoucherActivity : AppCompatActivity() {
                         poin_tukar,
                         foto
                     )
-                """.trimIndent()))
+                """.trimIndent())) {
+                        filter {
+                            eq("id_user", userId)
+                        }
+                    }
                     .decodeList<UserVoucher>()
 
                 VoucherSaya.clear()
@@ -179,15 +192,44 @@ class VoucherActivity : AppCompatActivity() {
     private fun loadVoucher() {
         lifecycleScope.launch {
             try {
-                val result = SupabaseManager.client.postgrest["voucher"]
-                    .select(Columns.raw("*"))
+                val userId = SupabaseManager.client.auth.currentUserOrNull()?.id
+                if (userId == null) return@launch
+
+                // Ambil semua voucher aktif
+                val allVouchers = SupabaseManager.client.postgrest["voucher"]
+                    .select(Columns.raw("*")) {
+                        filter {
+                            eq("is_active", true)
+                        }
+                    }
                     .decodeList<Voucher>()
 
+                // Ambil voucher yang sudah dimiliki user
+                val userVouchers = SupabaseManager.client.postgrest["user_voucher"]
+                    .select(Columns.raw("id_voucher")) {
+                        filter {
+                            eq("id_user", userId)
+                        }
+                    }
+                    .decodeList<Map<String, String>>()
+
+                val ownedVoucherIds = userVouchers.mapNotNull { it["id_voucher"] }
+
+                // Filter voucher yang belum dimiliki
+                val availableVouchers = if (ownedVoucherIds.isEmpty()) {
+                    allVouchers
+                } else {
+                    allVouchers.filter { voucher ->
+                        // Cek apakah voucher.id_voucher ada di ownedVoucherIds
+                        !ownedVoucherIds.contains(voucher.id_voucher.toString())
+                    }
+                }
+
                 TukarVoucher.clear()
-                TukarVoucher.addAll(result)
+                TukarVoucher.addAll(availableVouchers)
 
                 listTukarVoucher.clear()
-                listTukarVoucher.addAll(result)
+                listTukarVoucher.addAll(availableVouchers)
 
                 tukarVoucherAdapter.notifyDataSetChanged()
 
@@ -196,29 +238,36 @@ class VoucherActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun loadUserPoint() {
         val userId = SupabaseManager.client.auth.currentUserOrNull()?.id
         if (userId != null) {
-        lifecycleScope.launch {
-            try {
-                val result = SupabaseManager.client.postgrest
-                    .from("profiles")
-                    .select {
-                        filter {
-                            eq("id", userId)   // ✔ sama persis format seperti loadPesanan
+            lifecycleScope.launch {
+                try {
+                    val result = SupabaseManager.client.postgrest
+                        .from("profiles")
+                        .select {
+                            filter {
+                                eq("id", userId)
+                            }
                         }
-                    }
-                    .decodeSingle<Profile>()
+                        .decodeSingle<Profile>()
 
-                val point = result.point
-                userPoint.text = "${point} Points"
+                    val point = result.point
+                    userPoint.text = "${point} Points"
 
-            } catch (e: Exception) {
-                e.printStackTrace()
-                userPoint.text = "error"
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    userPoint.text = "error"
+                }
             }
         }
     }
-    }
 
+    // Fungsi untuk refresh data setelah menukar voucher
+    fun refreshAfterExchange() {
+        loadUserPoint()
+        loadVoucherSaya()
+        loadVoucher()
+    }
 }

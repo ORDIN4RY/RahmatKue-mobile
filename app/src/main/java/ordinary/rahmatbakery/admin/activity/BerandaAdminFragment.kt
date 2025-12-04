@@ -1,85 +1,180 @@
 package ordinary.rahmatbakery.admin.activity
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import io.github.jan.supabase.postgrest.postgrest
+import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
+import ordinary.rahmatbakery.databinding.FragmentBerandaAdminBinding
+import ordinary.rahmatbakery.api.SupabaseManager
+import io.github.jan.supabase.postgrest.query.Count
+import io.github.jan.supabase.postgrest.query.Order
 import ordinary.rahmatbakery.R
-import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
+import ordinary.rahmatbakery.admin.activity.model.ProdukTerlaris
+import ordinary.rahmatbakery.admin.activity.model.Transaksi
+import ordinary.rahmatbakery.admin.activity.model.TransaksiLatest
+import java.text.NumberFormat
+import java.util.Locale
 
-/**
- * A simple [Fragment] subclass for the Dashboard screen.
- * This fragment implements the UI based on the provided image, including a placeholder
- * for the Pie Chart using the MPAndroidChart library.
- */
 class BerandaAdminFragment : Fragment() {
+
+    private lateinit var tvTotalPesanan: TextView
+    private lateinit var tvTotalPemasukan: TextView
+
+    private lateinit var tvSelesai: TextView
+    private lateinit var tvProses: TextView
+    private lateinit var tvBatal: TextView
+
+    private lateinit var layoutPesananTerbaru: LinearLayout
+    private lateinit var layoutProdukTerlaris: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_beranda_admin, container, false)
     }
-
+    private val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID")).apply {
+        maximumFractionDigits = 0
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupPieChart(view)
+
+        // ---------------------
+        // FIND VIEW BY ID
+        // ---------------------
+        tvTotalPesanan = view.findViewById(R.id.tv_total_pesanan)
+        tvTotalPemasukan = view.findViewById(R.id.tv_total_pemasukan)
+
+        tvSelesai = view.findViewById(R.id.tv_selesai)
+        tvProses = view.findViewById(R.id.tv_proses)
+        tvBatal = view.findViewById(R.id.tv_batal)
+
+        layoutPesananTerbaru = view.findViewById(R.id.layout_pesanan_terbaru)
+        layoutProdukTerlaris = view.findViewById(R.id.layout_produk_terlaris)
+
+        // ---------------------
+        // LOAD DATA
+        // ---------------------
+        loadDashboardData()
     }
 
-    /**
-     * Sets up the Pie Chart using dummy data.
-     * NOTE: This requires the MPAndroidChart dependency.
-     */
-    private fun setupPieChart(view: View) {
-        // Create a new PieChart instance
-        val pieChart = PieChart(requireContext())
-        pieChart.description.isEnabled = false
-        pieChart.legend.isEnabled = false
-        pieChart.isDrawHoleEnabled = false // Make it a solid pie chart
-
-        // Dummy Data based on the image: Selesai: 15, Proses: 3, Dibatalkan: 2
-        val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(15f, "Selesai"))
-        entries.add(PieEntry(3f, "Proses"))
-        entries.add(PieEntry(2f, "Dibatalkan"))
-
-        val dataSet = PieDataSet(entries, "Order Status")
-
-        // Colors based on the image (light blue, orange, and a third color for the remaining slice)
-        val colors = listOf(
-            Color.rgb(173, 216, 230), // Light Blue (similar to image)
-            Color.rgb(255, 165, 0),   // Orange (similar to image)
-            Color.rgb(139, 69, 19)    // Brown (for the third slice)
-        )
-        dataSet.colors = colors
-        dataSet.setDrawValues(false) // Do not draw values on the slices
-
-        val data = PieData(dataSet)
-        pieChart.data = data
-        pieChart.invalidate() // Refresh chart
-
-        // Add the PieChart to the chart_container FrameLayout
-        val chartContainer = view.findViewById<FrameLayout>(R.id.chart_container)
-        chartContainer.removeAllViews() // Clear placeholder background
-        chartContainer.addView(pieChart, FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        ))
+    private fun loadDashboardData() {
+        lifecycleScope.launch {
+            try {
+                loadTotalPesanan()
+                loadTotalPemasukan()
+//                loadStatistikPesanan()
+//                loadPesananTerbaru()
+                loadProdukTerlaris()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(requireContext(), "Gagal memuat data", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment.
-         */
-        @JvmStatic
-        fun newInstance() = BerandaAdminFragment()
+    // -----------------------------------------------------
+    // 1. TOTAL PESANAN
+    // -----------------------------------------------------
+    private suspend fun loadTotalPesanan() {
+        val list = SupabaseManager.client.postgrest
+            .from("transaksi")
+            .select {
+                filter { eq("status", "Selesai") }
+            }
+            .decodeList<Transaksi>()
+
+        tvTotalPesanan.text = list.size.toString()
+    }
+
+    // -----------------------------------------------------
+    // 2. TOTAL PEMASUKAN
+    // -----------------------------------------------------
+    private suspend fun loadTotalPemasukan() {
+        val list = SupabaseManager.client.postgrest
+            .from("transaksi")
+            .select{
+                filter { eq("status", "Selesai") }
+            }
+            .decodeList<Transaksi>()
+
+        val total = list.sumOf { it.total_harga }
+        tvTotalPemasukan.text = formatRupiah.format(total)
+    }
+
+//     -----------------------------------------------------
+//     3. STATISTIK PESANAN
+//    // -----------------------------------------------------
+    private suspend fun loadStatistikPesanan() {
+        val selesai = countStatus("Selesai")
+        val proses = countStatus("Diproses")
+        val batal = countStatus("Dibatalkan")
+
+        tvSelesai.text = selesai.toString()
+        tvProses.text = proses.toString()
+        tvBatal.text = batal.toString()
+    }
+
+    private suspend fun countStatus(status: String): Int {
+        val r = SupabaseManager.client.postgrest
+            .from("transaksi")
+            .select(){
+                filter {
+                    eq("status", status)
+                }
+            }
+
+
+        return r.count ?: 0
+    }
+
+    // -----------------------------------------------------
+    // 4. PESANAN TERBARU
+    // -----------------------------------------------------
+    private suspend fun loadPesananTerbaru() {
+        layoutPesananTerbaru.removeAllViews()
+
+        val data = SupabaseManager.client.postgrest
+            .from("transaksi")
+            .select("id_transaksi, created_at, total_harga")
+            .order("created_at", Order.DESCENDING)
+            .limit(10)
+            .decodeList<TransaksiLatest>()
+
+        data.forEach { item ->
+            val tv = TextView(requireContext())
+            tv.text = "#${item.id_transaksi.take(6)} — Rp ${item.total_harga}"
+            tv.textSize = 14f
+            tv.setPadding(10, 10, 10, 10)
+            layoutPesananTerbaru.addView(tv)
+        }
+    }
+
+    // -----------------------------------------------------
+    // 5. PRODUK TERLARIS
+    // -----------------------------------------------------
+    private suspend fun loadProdukTerlaris() {
+        layoutProdukTerlaris.removeAllViews()
+
+        val data = SupabaseManager.client.postgrest
+            .rpc("get_produk_terlaris") // atau query manual
+            .decodeList<ProdukTerlaris>()
+
+        data.forEach { item ->
+            val tv = TextView(requireContext())
+            tv.text = "${item.nama_produk} — ${item.total_terjual} terjual"
+            tv.textSize = 14f
+            tv.setPadding(10, 10, 10, 10)
+            layoutProdukTerlaris.addView(tv)
+        }
     }
 }
+

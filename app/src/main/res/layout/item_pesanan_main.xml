@@ -18,6 +18,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
+<!--            <TextView-->
+<!--                android:id="@+id/btn_bayar_sekarang"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:padding="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Bayar Sekarang"-->
+<!--                android:textSize="12sp"-->
+<!--                android:visibility="gone"-->
+<!--                android:background="@drawable/btn_square"/>-->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,11 +59,10 @@
             android:layout_marginTop="4dp"
             android:visibility="gone" />
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black"
+            android:background="@color/primary"
             android:layout_marginTop="5dp"/>
         <LinearLayout
             android:id="@+id/btnLihatSemua"
