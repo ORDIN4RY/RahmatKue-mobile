@@ -13,8 +13,6 @@ data class Voucher(
     val id_voucher: String,
     @SerialName ("nama_voucher")
     val nama_voucher: String,
-    @SerialName ("kode_voucher")
-    val kode_voucher: String? = null,
     @SerialName("tgl_mulai")
     val tgl_mulai: String,
     @SerialName ("tgl_berakhir")
@@ -33,7 +31,9 @@ data class Voucher(
     val persentase_potongan:Int?=0,
     @SerialName("maksimal_potongan")
     val maksimal_potongan:Int?=0,
-
-
-
+    @SerialName("kategori")
+    val kategoriList: List<String> = emptyList(),
+    @SerialName("is_active")
+    val isActive : Boolean = true,
+    @Transient var alasanTidakBisa: String = "" // Untuk menyimpan alasan voucher tidak bisa dipakai
 ): Parcelable
