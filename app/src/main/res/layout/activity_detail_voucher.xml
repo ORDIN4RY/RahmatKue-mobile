@@ -166,12 +166,13 @@
 
     <TextView
         android:id="@+id/btn_tukar_voucher"
-        android:layout_width="match_parent"
+        android:layout_width="380dp"
+        android:layout_margin="15dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/btn_filter_produk"
-        android:padding="10dp"
+        android:padding="15dp"
         android:textColor="@color/cardview_light_background"
         android:text="Tukarkan Voucher"
         android:textAlignment="center" />
