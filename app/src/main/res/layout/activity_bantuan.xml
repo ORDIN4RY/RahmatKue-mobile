@@ -53,10 +53,12 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/btnHubungiAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/button2"
             android:drawableLeft="@drawable/whatsapp_svgrepo_com"
             android:drawablePadding="8dp"

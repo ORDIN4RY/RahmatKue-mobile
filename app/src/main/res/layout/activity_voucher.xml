@@ -69,13 +69,13 @@
     </RelativeLayout>
     <EditText
         android:id="@+id/etSearch"
-        android:layout_width="150dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:hint="Cari voucher..."
         android:textSize="10sp"
-        android:layout_gravity="right"
-        android:padding="8dp"
-        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/input_rounded"/>
 
     <RelativeLayout
@@ -86,30 +86,32 @@
 
         <TextView
             android:id="@+id/btnVoucherSaya"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/btn_filter_produk"
             android:padding="10dp"
             android:text="Voucher Saya"
+            android:gravity="center"
             android:textColor="@drawable/btn_filter_produk" />
 
         <TextView
             android:id="@+id/btnTukarVoucher"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/btnVoucherSaya"
             android:background="@drawable/btn_filter_produk"
             android:padding="10dp"
             android:text="Tukar Voucher"
+            android:gravity="center"
             android:textColor="@drawable/btn_filter_produk" />
     </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvVoucher"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVoucher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp" />
 
 
 </LinearLayout>

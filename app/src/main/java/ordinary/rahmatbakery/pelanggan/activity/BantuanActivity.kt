@@ -1,16 +1,17 @@
 package ordinary.rahmatbakery.pelanggan.activity
 
-import ordinary.rahmatbakery.pelanggan.adapter.HelpAdapter
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ordinary.rahmatbakery.pelanggan.model.HelpItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.pelanggan.adapter.HelpAdapter
+import ordinary.rahmatbakery.pelanggan.model.HelpItem
 
 class BantuanActivity : AppCompatActivity() {
 
@@ -18,10 +19,16 @@ class BantuanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bantuan)
 
+        val btnHubungiAdmin = findViewById<Button>(R.id.btnHubungiAdmin)
+        btnHubungiAdmin.setOnClickListener {
+            val url = "https://wa.me/+6283198720209?text=Halo,+Saya+membutuhkan+bantuan"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Baca JSON dari res/raw/help_data.json
         val inputStream = resources.openRawResource(R.raw.help_center)
         val jsonString = inputStream.bufferedReader().use { it.readText() }
 

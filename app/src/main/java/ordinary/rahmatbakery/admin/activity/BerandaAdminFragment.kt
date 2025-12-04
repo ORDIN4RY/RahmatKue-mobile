@@ -1,29 +1,29 @@
-//package ordinary.rahmatbakery.admin.activity
-//
-//import android.os.Bundle
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import android.widget.LinearLayout
-//import android.widget.TextView
-//import android.widget.Toast
-//import androidx.fragment.app.Fragment
-//import androidx.lifecycle.lifecycleScope
-//import io.github.jan.supabase.postgrest.postgrest
-//import kotlinx.coroutines.launch
-//import kotlinx.serialization.Serializable
-//import ordinary.rahmatbakery.databinding.FragmentBerandaAdminBinding
-//import ordinary.rahmatbakery.api.SupabaseManager
-//import io.github.jan.supabase.postgrest.query.Count
-//import io.github.jan.supabase.postgrest.query.Order
-//import ordinary.rahmatbakery.R
-//import ordinary.rahmatbakery.admin.activity.model.ProdukTerlaris
-//import ordinary.rahmatbakery.admin.activity.model.Transaksi
-//import ordinary.rahmatbakery.admin.activity.model.TransaksiLatest
-//import java.text.NumberFormat
-//import java.util.Locale
-//
-//class BerandaAdminFragment : Fragment() {
+package ordinary.rahmatbakery.admin.activity
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import io.github.jan.supabase.postgrest.postgrest
+import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
+import ordinary.rahmatbakery.databinding.FragmentBerandaAdminBinding
+import ordinary.rahmatbakery.api.SupabaseManager
+import io.github.jan.supabase.postgrest.query.Count
+import io.github.jan.supabase.postgrest.query.Order
+import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.admin.activity.model.ProdukTerlaris
+import ordinary.rahmatbakery.admin.activity.model.Transaksi
+import ordinary.rahmatbakery.admin.activity.model.TransaksiLatest
+import java.text.NumberFormat
+import java.util.Locale
+
+class BerandaAdminFragment : Fragment() {
 //
 //    private lateinit var tvTotalPesanan: TextView
 //    private lateinit var tvTotalPemasukan: TextView
@@ -34,18 +34,18 @@
 //
 //    private lateinit var layoutPesananTerbaru: LinearLayout
 //    private lateinit var layoutProdukTerlaris: LinearLayout
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        return inflater.inflate(R.layout.fragment_beranda_admin, container, false)
-//    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_beranda_admin, container, false)
+    }
 //    private val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID")).apply {
 //        maximumFractionDigits = 0
-//    }
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 //
 //        // ---------------------
 //        // FIND VIEW BY ID
@@ -64,7 +64,8 @@
 //        // LOAD DATA
 //        // ---------------------
 //        loadDashboardData()
-//    }
+    }}
+
 //
 //    private fun loadDashboardData() {
 //        lifecycleScope.launch {
@@ -80,10 +81,10 @@
 //            }
 //        }
 //    }
-//
-//    // -----------------------------------------------------
-//    // 1. TOTAL PESANAN
-//    // -----------------------------------------------------
+
+    // -----------------------------------------------------
+    // 1. TOTAL PESANAN
+    // -----------------------------------------------------
 //    private suspend fun loadTotalPesanan() {
 //        val list = SupabaseManager.client.postgrest
 //            .from("transaksi")
@@ -136,9 +137,9 @@
 //        return r.count ?: 0
 //    }
 //
-//    // -----------------------------------------------------
-//    // 4. PESANAN TERBARU
-//    // -----------------------------------------------------
+    // -----------------------------------------------------
+    // 4. PESANAN TERBARU
+    // -----------------------------------------------------
 //    private suspend fun loadPesananTerbaru() {
 //        layoutPesananTerbaru.removeAllViews()
 //
@@ -175,6 +176,6 @@
 //            tv.setPadding(10, 10, 10, 10)
 //            layoutProdukTerlaris.addView(tv)
 //        }
-//    }
+// }
 //}
-//
+

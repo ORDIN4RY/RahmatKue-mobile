@@ -79,9 +79,9 @@
     <RelativeLayout
                 android:id="@+id/bottom"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="65dp"
                 android:layout_alignParentBottom="true"
-        android:background="@color/card_light_bg"               >
+                android:background="@color/card_light_bg"               >
 
         <CheckBox
                 android:id="@+id/cb_pilih_semua"
