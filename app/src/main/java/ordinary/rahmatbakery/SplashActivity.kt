@@ -11,7 +11,7 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.status.SessionStatus
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
 import ordinary.rahmatbakery.model.Profile
 import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity as db_pelanggan
 import ordinary.rahmatbakery.admin.activity.DashboardActivity as db_admin

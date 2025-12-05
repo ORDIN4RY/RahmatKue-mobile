@@ -176,7 +176,6 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/btn_filter_produk"
         android:padding="15dp"
-        android:textColor="@color/cardview_light_background"
         android:text="Tukarkan Voucher"
         android:textAlignment="center"
         android:textColor="@color/cardview_light_background" />

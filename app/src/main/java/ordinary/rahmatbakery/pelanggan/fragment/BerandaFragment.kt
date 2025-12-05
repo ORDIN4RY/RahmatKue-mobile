@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
 import ordinary.rahmatbakery.pelanggan.adapter.LastOrderAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.CarouselAdapter
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
 import android.widget.ImageView
 import coil.load
 import androidx.cardview.widget.CardView

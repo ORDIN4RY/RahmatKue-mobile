@@ -17,7 +17,7 @@ import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
 import ordinary.rahmatbakery.model.Profile
 import ordinary.rahmatbakery.pelanggan.adapter.TukarVoucherAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.VoucherSayaAdapter

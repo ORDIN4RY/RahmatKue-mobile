@@ -13,7 +13,7 @@ import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import ordinary.rahmatbakery.databinding.FragmentBerandaAdminBinding
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
 import io.github.jan.supabase.postgrest.query.Count
 import io.github.jan.supabase.postgrest.query.Order
 import ordinary.rahmatbakery.R

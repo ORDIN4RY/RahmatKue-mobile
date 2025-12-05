@@ -18,7 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.model.Alamat
 import ordinary.rahmatbakery.util.AuthRepository
 import org.maplibre.android.MapLibre

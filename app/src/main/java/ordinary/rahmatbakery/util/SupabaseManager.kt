@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.api
+package ordinary.rahmatbakery.util
 
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
@@ -7,7 +7,6 @@ import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.realtime.Realtime
 import io.github.jan.supabase.serializer.KotlinXSerializer
 import kotlinx.serialization.json.Json
-
 
 object SupabaseManager {
 
@@ -18,18 +17,18 @@ object SupabaseManager {
         supabaseUrl = SUPABASE_URL,
         supabaseKey = SUPABASE_KEY
     ) {
-        install(Auth){
+        install(Auth.Companion) {
             alwaysAutoRefresh = true
             autoSaveToStorage = true
 
         }
-        install(Postgrest)
+        install(Postgrest.Companion)
         defaultSerializer = KotlinXSerializer(Json {
             ignoreUnknownKeys = true
             isLenient = true
             explicitNulls = false
         })
-        install(Realtime)
+        install(Realtime.Companion)
         //install other modules
     }
 }

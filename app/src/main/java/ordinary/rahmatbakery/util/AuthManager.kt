@@ -3,7 +3,7 @@ package ordinary.rahmatbakery.util
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.postgrest
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
 import ordinary.rahmatbakery.model.Profile
 
 class AuthRepository {

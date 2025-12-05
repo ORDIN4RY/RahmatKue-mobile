@@ -17,7 +17,7 @@ import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.adapter.AlamatAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.AlamatClickListener
 import ordinary.rahmatbakery.pelanggan.model.Alamat

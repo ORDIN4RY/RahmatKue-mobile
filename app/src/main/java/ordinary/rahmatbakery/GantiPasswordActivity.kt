@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
 
 class GantiPasswordActivity : AppCompatActivity() {
     private val supabaseClient = SupabaseManager.client
