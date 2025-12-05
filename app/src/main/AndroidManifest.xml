@@ -17,7 +17,10 @@
         android:theme="@style/Theme.RahmatBakery"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".pelanggan.activity.PilihVoucher"
+            android:name=".admin.activity.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.activity.OrderListActivity"
             android:exported="false" />
         <activity
             android:name=".pelanggan.activity.DetailPromoActivity"

@@ -6,15 +6,11 @@
         android:title="Beranda"
         />
     <item
-        android:id="@+id/analytic"
+        android:id="@+id/kelolapesanan"
         android:icon="@drawable/box"
-        android:title="Statistik" />
-    <item
-        android:id="@+id/order"
-        android:icon="@drawable/pesanan"
-        android:title="Pesanan" />
+        android:title="Kelola Pesanan" />
     <item
         android:id="@+id/logout"
         android:icon="@drawable/logout"
-        android:title="Pengaturan" />
+        android:title="Logout" />
 </menu>

@@ -1,5 +1,6 @@
 package ordinary.rahmatbakery.admin.activity
 
+import ordinary.rahmatbakery.admin.fragment.BerandaAdminFragment
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
@@ -16,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.admin.fragment.OrderListFragment
 import ordinary.rahmatbakery.model.Profile
 import ordinary.rahmatbakery.pelanggan.activity.KeranjangActivity
 import ordinary.rahmatbakery.pelanggan.activity.NotifActivity
@@ -78,19 +80,15 @@ class DashboardActivity(
                     judul.setText("Beranda")
                     true
                 }
-                R.id.analytic -> {
-                    replaceFragment(MenuFragment())
-                    judul.setText("Menu Produk")
-                    true
-                }
-                R.id.order -> {
-                    replaceFragment(PesananFragment())
-                    judul.setText("Daftar Pesanan")
+                R.id.kelolapesanan-> {
+                    replaceFragment(OrderListFragment())
+                    judul.setText("Kelola Pesanan")
                     true
                 }
                 R.id.logout -> {
-                    replaceFragment(PengaturanFragment())
-                    judul.setText("Pengaturan")
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
                     true
                 }
                 else -> false
