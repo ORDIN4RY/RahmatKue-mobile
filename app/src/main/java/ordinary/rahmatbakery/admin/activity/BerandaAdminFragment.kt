@@ -17,23 +17,23 @@ import ordinary.rahmatbakery.util.SupabaseManager
 import io.github.jan.supabase.postgrest.query.Count
 import io.github.jan.supabase.postgrest.query.Order
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.admin.activity.model.ProdukTerlaris
-import ordinary.rahmatbakery.admin.activity.model.Transaksi
-import ordinary.rahmatbakery.admin.activity.model.TransaksiLatest
+//import ordinary.rahmatbakery.admin.activity.model.ProdukTerlaris
+//import ordinary.rahmatbakery.admin.activity.model.Transaksi
+//import ordinary.rahmatbakery.admin.activity.model.TransaksiLatest
 import java.text.NumberFormat
 import java.util.Locale
 
 class BerandaAdminFragment : Fragment() {
 //
-//    private lateinit var tvTotalPesanan: TextView
-//    private lateinit var tvTotalPemasukan: TextView
-//
-//    private lateinit var tvSelesai: TextView
-//    private lateinit var tvProses: TextView
-//    private lateinit var tvBatal: TextView
-//
-//    private lateinit var layoutPesananTerbaru: LinearLayout
-//    private lateinit var layoutProdukTerlaris: LinearLayout
+    private lateinit var tvTotalPesanan: TextView
+    private lateinit var tvTotalPemasukan: TextView
+
+    private lateinit var tvSelesai: TextView
+    private lateinit var tvProses: TextView
+    private lateinit var tvBatal: TextView
+
+    private lateinit var layoutPesananTerbaru: LinearLayout
+    private lateinit var layoutProdukTerlaris: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

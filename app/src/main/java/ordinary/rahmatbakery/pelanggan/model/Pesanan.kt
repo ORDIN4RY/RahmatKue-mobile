@@ -53,7 +53,7 @@ data class PesananItems(
     val subtotal: Int,
     @SerialName("produk")
     val produk: Produk2,
-    val varian : String
+//    val varian : String
 ) : Parcelable
 
 @Parcelize
@@ -78,7 +78,7 @@ data class Produk2(
     val harga: Int,
     @SerialName("foto_produk")
     val fotoProduk: String,
-    val varian : String
+    val varian : String?="normal"
 ) : Parcelable
 
 @Serializable

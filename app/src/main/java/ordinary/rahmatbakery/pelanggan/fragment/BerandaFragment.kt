@@ -23,6 +23,7 @@ import ordinary.rahmatbakery.pelanggan.adapter.LastOrderAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.CarouselAdapter
 import ordinary.rahmatbakery.util.SupabaseManager
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import coil.load
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -217,6 +218,15 @@ class BerandaFragment : Fragment() {
 
                 println(lastOrder)
 
+
+//                if (lastOrder.isEmpty()){
+//                    requireView().findViewById<TextView>(R.id.orderAlt).visibility= View.VISIBLE
+//                    requireView().findViewById<RelativeLayout>(R.id.lastOrder).visibility = View.GONE
+//                }else{
+//                requireView().findViewById<TextView>(R.id.orderAlt).visibility= View.GONE
+//                    requireView().findViewById<RelativeLayout>(R.id.lastOrder).visibility = View.VISIBLE
+//
+//                }
                 listLastOrder.clear()
                 listLastOrder.addAll(lastOrder)
                 lastOrderAdapter.notifyDataSetChanged()

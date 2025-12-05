@@ -67,8 +67,12 @@
         <activity
             android:name=".pelanggan.activity.NotifActivity"
             android:exported="false" />
+
         <activity
             android:name=".pelanggan.activity.KeranjangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pelanggan.activity.PilihVoucher"
             android:exported="false" />
         <activity
             android:name=".pelanggan.activity.DashboardActivity"

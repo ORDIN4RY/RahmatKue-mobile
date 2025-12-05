@@ -54,7 +54,7 @@ class MenuFragment : Fragment() {
     // Filter buttons
     private lateinit var btnFilterProduk: TextView
     private lateinit var btnFilterPaket: TextView
-    private lateinit var btnFilterCustom: TextView
+//    private lateinit var btnFilterCustom: TextView
 
     private var currentFilter = "produk" // default filter
     private var currentKateg = "" // default kategori filter
@@ -72,7 +72,7 @@ class MenuFragment : Fragment() {
         // Inisialisasi Filter Buttons
         btnFilterProduk = rootView.findViewById(R.id.btn_satuan)
         btnFilterPaket = rootView.findViewById(R.id.btn_paket)
-        btnFilterCustom = rootView.findViewById(R.id.btn_custom)
+//        btnFilterCustom = rootView.findViewById(R.id.btn_custom)
 
         // Inisialisasi RecyclerView Produk
         rvProduct = rootView.findViewById(R.id.rvProduct)
@@ -158,9 +158,9 @@ class MenuFragment : Fragment() {
             applyFilter("paket")
         }
 
-        btnFilterCustom.setOnClickListener {
-            applyFilter("custom")
-        }
+//        btnFilterCustom.setOnClickListener {
+//            applyFilter("custom")
+//        }
     }
 
     private fun applyFilter(filter: String) {
@@ -204,13 +204,13 @@ class MenuFragment : Fragment() {
         // Reset semua button ke state default
         btnFilterProduk.isSelected = false
         btnFilterPaket.isSelected = false
-        btnFilterCustom.isSelected = false
+//        btnFilterCustom.isSelected = false
 
         // Set button yang aktif
         when (currentFilter) {
             "produk" -> btnFilterProduk.isSelected = true
             "paket" -> btnFilterPaket.isSelected = true
-            "custom" -> btnFilterCustom.isSelected = true
+//            "custom" -> btnFilterCustom.isSelected = true
         }
     }
 

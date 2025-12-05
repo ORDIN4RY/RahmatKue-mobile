@@ -18,7 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.admin.activity.DashboardRepository
+//import ordinary.rahmatbakery.admin.activity.DashboardRepository
 import ordinary.rahmatbakery.model.DashboardStats
 import ordinary.rahmatbakery.model.PesananTerakhir
 import ordinary.rahmatbakery.model.ProdukTerlaris
@@ -27,7 +27,7 @@ import java.util.Locale
 
 class BerandaAdminFragment : Fragment() {
 
-    private val repository = DashboardRepository()
+//    private val repository = DashboardRepository()
 
     // Views
     private lateinit var tvTotalPesanan: TextView
@@ -70,16 +70,16 @@ class BerandaAdminFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 // Load statistik dashboard
-                val stats = repository.getDashboardStats()
-                if (isAdded) updateDashboardStats(stats)
+//                val stats = repository.getDashboardStats()
+//                if (isAdded) updateDashboardStats(stats)
 
                 // Load pesanan terakhir
-                val pesanan = repository.getPesananTerakhir()
-                if (isAdded) updatePesananTerakhir(pesanan)
+//                val pesanan = repository.getPesananTerakhir()
+//                if (isAdded) updatePesananTerakhir(pesanan)
 
                 // Load produk terlaris
-                val produk = repository.getProdukTerlaris()
-                if (isAdded) updateProdukTerlaris(produk)
+//                val produk = repository.getProdukTerlaris()
+//                if (isAdded) updateProdukTerlaris(produk)
 
             } catch (e: Exception) {
                 e.printStackTrace()

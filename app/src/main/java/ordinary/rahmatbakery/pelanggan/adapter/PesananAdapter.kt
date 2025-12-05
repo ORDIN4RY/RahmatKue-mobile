@@ -99,11 +99,11 @@ class PesananAdapter(private val orderList: MutableList<Pesanan>) :
             if (!itemPertama.foto.isNullOrEmpty()) {
                 imageView.load(itemPertama.foto) {
                     crossfade(true)
-                    placeholder(R.drawable.ic_launcher_background)
-                    error(R.drawable.ic_launcher_foreground)
+                    placeholder(R.drawable.placeholder)
+                    error(R.drawable.error_image)
                 }
             } else {
-                imageView.setImageResource(R.drawable.ic_launcher_background)
+                imageView.setImageResource(R.drawable.placeholder)
             }
 
             // Logika untuk item lainnya

@@ -78,7 +78,8 @@ class PesananFragment : Fragment() {
                                 id_produk,
                                 nama_produk,
                                 harga,
-                                foto_produk
+                                foto_produk,
+                                varian
                             )
                         ),
                         

@@ -90,4 +90,5 @@ class OrderProductAdapter(
         val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
         return format.format(amount).replace("Rp", "Rp ")
     }
+
 }

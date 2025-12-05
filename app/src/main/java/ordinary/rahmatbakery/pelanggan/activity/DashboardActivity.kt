@@ -41,7 +41,7 @@ class DashboardActivity(
         }
 
         var navbar = findViewById<BottomNavigationView>(R.id.bottomNav)
-        var btnNotif = findViewById<ImageView>(R.id.icon_notif)
+////        var btnNotif = findViewById<ImageView>(R.id.icon_notif)
         var btnCart = findViewById<ImageView>(R.id.icon_cart)
         var judul = findViewById<TextView>(R.id.judul_halaman)
 
@@ -97,10 +97,10 @@ class DashboardActivity(
         }
 
 
-        btnNotif.setOnClickListener {
-            val intent = Intent(this, NotifActivity::class.java)
-            startActivity(intent)
-        }
+//        btnNotif.setOnClickListener {
+//            val intent = Intent(this, NotifActivity::class.java)
+//            startActivity(intent)
+//        }
         btnCart.setOnClickListener {
             val intent = Intent(this, KeranjangActivity::class.java)
             startActivity(intent)

@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -92,6 +93,10 @@ class RincianPesananActivity : AppCompatActivity() {
             detail?.let { fullData ->
                 displayPesananData(fullData)    // ← nomor pesanan ditampilkan disini
             }
+        }
+
+        findViewById<ImageView>(R.id.back).setOnClickListener{
+            this.finish()
         }
     }
 

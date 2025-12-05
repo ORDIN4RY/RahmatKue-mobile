@@ -13,7 +13,7 @@ fun setListViewHeightBasedOnChildren(listView: ListView) {
             View.MeasureSpec.makeMeasureSpec(listView.width, View.MeasureSpec.UNSPECIFIED),
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         )
-        totalHeight += listItem.measuredHeight
+        totalHeight += listItem.measuredHeight+20
     }
 
     val params = listView.layoutParams

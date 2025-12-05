@@ -43,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="center"
         android:padding="10dp">
 
         <TextView
@@ -69,17 +70,17 @@
             android:textAlignment="center"
             />
 
-        <TextView
-            android:id="@+id/btn_custom"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Kustom"
-            android:textColor="@drawable/btn_filter_produk"
-            android:background="@drawable/btn_filter_produk"
-            android:textSize="16sp"
-            android:layout_marginHorizontal="10dp"
-            android:textAlignment="center"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/btn_custom"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Kustom"-->
+<!--            android:textColor="@drawable/btn_filter_produk"-->
+<!--            android:background="@drawable/btn_filter_produk"-->
+<!--            android:textSize="16sp"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            android:textAlignment="center"-->
+<!--            />-->
 
     </LinearLayout>
     </HorizontalScrollView>

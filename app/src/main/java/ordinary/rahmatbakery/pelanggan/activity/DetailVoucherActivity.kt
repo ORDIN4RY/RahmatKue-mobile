@@ -91,6 +91,7 @@ class DetailVoucherActivity : AppCompatActivity() {
             tvStatus.text = "Sudah Digunakan"
             tvStatus.setTextColor(getColor(R.color.maroon))
         }
+
     }
 
     private fun setupTukarVoucher(data: Voucher) {
@@ -105,7 +106,6 @@ class DetailVoucherActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.btn_tukar_voucher).visibility = View.VISIBLE
         findViewById<ImageView>(R.id.gambar_voucher).load(data.foto_voucher)
         var kategori = ""
-//            if (kategoriNames.isEmpty()) "Semua" else kategoriNames.joinToString(", ")
         if (!data.kategoriList.isEmpty()) {
             kategori = data.kategoriList.joinToString(", ")
         }
@@ -120,7 +120,7 @@ class DetailVoucherActivity : AppCompatActivity() {
         val listSK = listOf(
             "Masa Berlaku" to "Voucher berlaku selama ${data.tgl_mulai} sampai ${data.tgl_berakhir}.",
             "Produk Berlaku" to if(kategori.isEmpty()) "Berlaku untuk semua kategori" else "Berlaku untuk kategori $kategori",
-            "Minimal Pembelian" to "Voucher dapat digunakan jika total belanja minimal Rp ${data.minimal_pembelian}.",
+            "Minimal Pembelian" to "Voucher dapat digunakan jika total belanja memenuhi syarat minimal.",
             "Potongan Harga" to "Voucher memberikan diskon ${data.persentase_potongan}%. ${if(data.maksimal_potongan!! > 0) "Potongan maksimal Rp. ${data.maksimal_potongan}." else ""}",
             "Poin Penukaran" to "Diperlukan ${data.poin_tukar} poin untuk menukar voucher ini.",
             "Penggunaan Voucher" to "Tidak dapat digabung dengan voucher lain.",

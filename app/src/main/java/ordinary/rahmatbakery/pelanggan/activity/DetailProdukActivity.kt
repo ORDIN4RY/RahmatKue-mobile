@@ -93,6 +93,7 @@ class DetailProdukActivity : AppCompatActivity() {
             }
             txtHarga.text = formatRupiah.format(produk.harga)
             rvDetailPaket.visibility = RecyclerView.GONE
+//            itemCounter.setText(produk.kategori.minPembelian)
             hargaProduk = produk.harga
 
         } else if (tipe == "paket" && paket != null) {
@@ -104,7 +105,7 @@ class DetailProdukActivity : AppCompatActivity() {
                 error(R.drawable.error_image)       // opsional: jika gagal load
             }
             txtHarga.text = formatRupiah.format(paket.harga)
-
+//            itemCounter.setText("")
             rvDetailPaket.layoutManager = LinearLayoutManager(this)
             rvDetailPaket.adapter = DetailProdukAdapter(paket.detail)
             hargaProduk = paket.harga

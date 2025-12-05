@@ -14,7 +14,7 @@ data class Produk (
     val id: String,
     val gambar: String? = null,
     val nama: String,
-    val varian: String,
+    val varian: String?="normal",
     val kategori: Kategori,
     val deskripsi: String,
     val harga: Int,

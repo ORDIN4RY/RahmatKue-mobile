@@ -46,16 +46,26 @@ class OrderProductsFragment : Fragment() {
         val kekuranganBayar = order.totalHarga - order.dpMinimal
         view.findViewById<TextView>(R.id.tvKekuranganBayar).text = formatRupiah(kekuranganBayar)
 
-        if(order.dpMinimal==order.totalHarga){
+//        if (order.ongkir > 0){
+//            view.findViewById<TextView>(R.id.tvTotalHarga).text = formatRupiah(hargaSetelahOngkir)
+//
+//        }
+//        if (order.potongan > 0){
+//            view.findViewById<TextView>(R.id.tvTotalHarga).text = formatRupiah(hargaSetelahOngkirdanPotongan)
+//        }
+        view.findViewById<TextView>(R.id.tvTotalHarga).text = formatRupiah(order.totalHarga)
+        view.findViewById<TextView>(R.id.tvPotongan).text = formatRupiah(order.potongan)
+        if(order.dpMinimal==order.totalHarga) {
             view.findViewById<TextView>(R.id.tvDpMinimal).text = "Rp 0,00"
-
+        }
 
         rvProducts.adapter = OrderProductAdapter(products, packages)
     }
 
 }
-    private fun formatRupiah(amount: Int): String {
-        val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
-        return format.format(amount).replace("Rp", "Rp ")
-    }
+
+private fun formatRupiah(amount: Int): String {
+    val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
+    return format.format(amount).replace("Rp", "Rp ")
 }
+

@@ -18,9 +18,10 @@ import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.adapter.OrderDetailPagerAdapter
 import ordinary.rahmatbakery.admin.activity.OrderRepository
-import ordinary.rahmatbakery.api.SupabaseManager
+//import ordinary.rahmatbakery.api.SupabaseManager
 import ordinary.rahmatbakery.model.OrderAdmin
 import ordinary.rahmatbakery.CancelOrderDialog
+import ordinary.rahmatbakery.util.SupabaseManager
 
 class OrderDetailActivity : AppCompatActivity() {
 
@@ -189,6 +190,7 @@ class OrderDetailActivity : AppCompatActivity() {
 
         btnCancel.setOnClickListener { showCancelDialog() }
         btnProcess.setOnClickListener { processOrder() }
+        btnReady.setOnClickListener { orderReady() }
         btnComplete.setOnClickListener { completeOrder() }
         btnClose.setOnClickListener { finish() }
     }
@@ -325,4 +327,42 @@ class OrderDetailActivity : AppCompatActivity() {
             .setNegativeButton("Tidak", null)
             .show()
     }
+    private fun orderReady() {
+        AlertDialog.Builder(this)
+            .setTitle("Konfirmasi")
+            .setMessage("Produk sudah jadi dan siap?")
+            .setPositiveButton("Ya") { _, _ ->
+                lifecycleScope.launch {
+                    try {
+                        val success = orderRepository.orderReady(orderId!!)
+
+                        if (success) {
+                            Toast.makeText(
+                                this@OrderDetailActivity,
+                                "Pesanan sudah siap",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            loadOrderDetail()
+                        } else {
+                            Toast.makeText(
+                                this@OrderDetailActivity,
+                                "Gagal menyelesaikan pesanan",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                    } catch (e: Exception) {
+                        Toast.makeText(
+                            this@OrderDetailActivity,
+                            "Error: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+            .setNegativeButton("Tidak", null)
+            .show()
+    }
+
 }

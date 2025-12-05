@@ -5,7 +5,8 @@ import io.github.jan.supabase.postgrest.query.Columns
 import ordinary.rahmatbakery.model.Cancellation
 import ordinary.rahmatbakery.model.OrderAdmin
 import io.github.jan.supabase.postgrest.query.Order
-import ordinary.rahmatbakery.api.SupabaseManager
+import ordinary.rahmatbakery.util.SupabaseManager
+//import ordinary.rahmatbakery.api.SupabaseManager
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -127,6 +128,9 @@ class OrderRepository {
      */
     suspend fun completeOrder(orderId: String): Boolean {
         return updateOrderStatus(orderId, "Selesai")
+    }
+    suspend fun orderReady(orderId: String): Boolean {
+        return updateOrderStatus(orderId, "Siap Diantar/Diambil")
     }
 
     /**

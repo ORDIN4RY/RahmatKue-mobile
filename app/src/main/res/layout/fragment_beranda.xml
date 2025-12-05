@@ -102,10 +102,18 @@
                 android:layout_marginTop="10dp"
                 android:text="Pesanan Terakhir > "
                 android:textColor="@color/primary" />
-
+<!--            <TextView-->
+<!--                android:id="@+id/orderAlt"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:text="Belum ada Pesanan"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                />-->
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/lastOrder">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPesananTerakhir"
