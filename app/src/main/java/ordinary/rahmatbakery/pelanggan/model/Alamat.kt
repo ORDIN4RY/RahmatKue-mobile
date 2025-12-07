@@ -8,9 +8,9 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class Alamat (
+data class Alamat(
     @SerialName("id_alamat")
-    val id: String ?= "",
+    val id: String? = "",
 
     @SerialName("id_user")
     val idUser: String,
@@ -22,7 +22,7 @@ data class Alamat (
     val noHp: String,
 
     @SerialName("detail_lain")
-    val detail: String ?= "",
+    val detail: String? = "",
 
     @SerialName("alamat_rumah")
     val alamat: String,
@@ -30,7 +30,16 @@ data class Alamat (
     @SerialName("alamat_utama")
     val isUtama: Boolean,
 
-    val latitude: Double ?= 0.0,
+    val latitude: Double? = 0.0,
 
-    val longitude: Double ?= 0.0
+    val longitude: Double? = 0.0,
+
+    @SerialName("kecamatan")
+    val kecamatan: String? = "",
+
+    @SerialName("kabupaten")
+    val kabupaten: String? = "",
+
+    @SerialName("provinsi")
+    val provinsi: String? = ""
 ) : Parcelable

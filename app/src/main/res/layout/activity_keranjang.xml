@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/keranjang"
-    android:background="@color/background"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -51,7 +51,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header">
+        android:layout_below="@id/header"
+        android:background="@color/background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_outline"
+                android:textColor="@color/primary"
                 android:text="Checkout"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"

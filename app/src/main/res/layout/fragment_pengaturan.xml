@@ -1,300 +1,315 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    android:fillViewport="true"
     tools:context=".pelanggan.fragment.PengaturanFragment">
 
-    <!-- Container untuk Logo dan Card Profil Atas -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/profile_header_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="wrap_content">
 
-        <!-- Card Profil Atas (Diubah dari 290dp menjadi match_parent dengan margin) -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/profile_card"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:background="@color/white"
-            android:backgroundTint="@color/white"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="30dp"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="10dp"
-            android:elevation="5dp">
-
-            <RelativeLayout
-                android:padding="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"> <!-- Tambahkan margin untuk mengimbangi logo -->
-
-                <!-- Logo Profil (Dihapus dari sini, dipindahkan ke luar CardView) -->
-
-                <TextView
-                    android:id="@+id/username_pengaturan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ahmad Hananto"
-                    android:layout_marginTop="10dp"
-                    android:layout_centerHorizontal="true"
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/primary"
-                    />
-
-
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- Logo Profil (ImageView) - Ditempatkan di luar CardView untuk efek setengah keluar -->
-        <ImageView
-            android:id="@+id/img_profil"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/profil"
-            android:background="@drawable/circle_background"
-            android:clipToOutline="true"
-            android:padding="10dp"
-            android:contentDescription="Profile Logo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/profile_card"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:elevation="4dp"
-            android:translationZ="8dp"
-            android:layout_marginBottom="-30dp"
-            android:layout_marginTop="10dp"/> <!-- Margin negatif untuk efek setengah keluar (Tinggi 60dp / 2 = 30dp) -->
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Card Menu Bawah (Mempertahankan struktur asli pengguna) -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/menu_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="3dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintTop_toBottomOf="@id/profile_header_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-
-        <ScrollView
+        <!-- Profile Header Container -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_header_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Profile Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="60dp"
+                android:backgroundTint="@color/white"
+                android:elevation="6dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="24dp"
+                    android:paddingTop="48dp"
+                    android:paddingBottom="24dp">
+
+                    <TextView
+                        android:id="@+id/username_pengaturan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ahmad Hananto"
+                        android:textColor="@color/primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Member Setia Rahmat Bakery"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Profile Image (Overlapping) -->
+            <ImageView
+                android:id="@+id/img_profil"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/circle_background"
+                android:clipToOutline="true"
+                android:contentDescription="Profile"
+                android:elevation="8dp"
+                android:padding="16dp"
+                android:src="@drawable/profil"
+                android:translationZ="10dp"
+                android:layout_marginTop="60dp"
+                app:layout_constraintBottom_toTopOf="@id/profile_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Menu Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/menu_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_header_container">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical"
-                android:background="@color/card_light_bg"
-                android:paddingVertical="10dp">
+                android:padding="8dp">
 
-                <!-- Menu Item 1: Voucher -->
+                <!-- Voucher -->
                 <LinearLayout
                     android:id="@+id/btn_voucher"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:background="@drawable/menu_item_background">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
                         android:src="@drawable/ic_voucher"
-                        app:tint="@color/primary"/>
+                        app:tint="@color/primary" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Voucher"
-                        android:layout_marginStart="15dp"
-                        style="@style/TextAppearance.Material3.ActionBar.Subtitle"
-                        android:textColor="@color/primary"/>
+                        android:text="Voucher Saya"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        app:tint="@color/primary"/>
+                        app:tint="@android:color/darker_gray" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E0E0E0"
-                    android:layout_marginHorizontal="20dp"/>
+                    android:layout_marginHorizontal="16dp"
+                    android:background="#E0E0E0" />
 
-                <!-- Menu Item 2: Alamat Tersimpan -->
+                <!-- Alamat -->
                 <LinearLayout
                     android:id="@+id/btn_alamat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:background="@drawable/menu_item_background">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
                         android:src="@drawable/ic_location"
-                        app:tint="@color/primary"/>
+                        app:tint="@color/primary" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Alamat Tersimpan"
-                        android:layout_marginStart="15dp"
-                        style="@style/TextAppearance.Material3.ActionBar.Subtitle"
-                        android:textColor="@color/primary"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        app:tint="@color/primary"/>
+                        app:tint="@android:color/darker_gray" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E0E0E0"
-                    android:layout_marginHorizontal="20dp"/>
+                    android:layout_marginHorizontal="16dp"
+                    android:background="#E0E0E0" />
 
-                <!-- Menu Item 3: Bantuan -->
+                <!-- Bantuan -->
                 <LinearLayout
                     android:id="@+id/btn_bantuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:background="@drawable/menu_item_background">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
                         android:src="@drawable/ic_help"
-                        app:tint="@color/primary"/>
+                        app:tint="@color/primary" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Bantuan"
-                        android:layout_marginStart="15dp"
-                        style="@style/TextAppearance.Material3.ActionBar.Subtitle"
-                        android:textColor="@color/primary"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        app:tint="@color/primary"/>
+                        app:tint="@android:color/darker_gray" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E0E0E0"
-                    android:layout_marginHorizontal="20dp"/>
+                    android:layout_marginHorizontal="16dp"
+                    android:background="#E0E0E0" />
 
-                <!-- Menu Item 4: Logout -->
+                <!-- Ganti Password -->
                 <LinearLayout
                     android:id="@+id/btn_ganti_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:background="@drawable/menu_item_background">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
                         android:src="@drawable/ic_ganti_password"
-                        app:tint="@color/primary"/>
+                        app:tint="@color/primary" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Ganti Password"
-                        android:layout_marginStart="15dp"
-                        style="@style/TextAppearance.Material3.ActionBar.Subtitle"
-                        android:textColor="@color/primary"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        app:tint="@color/primary"/>
+                        app:tint="@android:color/darker_gray" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E0E0E0"
-                    android:layout_marginHorizontal="20dp"/>
+                    android:layout_marginHorizontal="16dp"
+                    android:background="#E0E0E0" />
+
+                <!-- Logout -->
                 <LinearLayout
                     android:id="@+id/logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:background="@drawable/menu_item_background">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
                         android:src="@drawable/ic_logout"
-                        app:tint="@color/primary"/>
+                        app:tint="#F44336" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Logout"
-                        android:layout_marginStart="15dp"
-                        style="@style/TextAppearance.Material3.ActionBar.Subtitle"
-                        android:textColor="@color/primary"/>
+                        android:textColor="#F44336"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        app:tint="@color/primary"/>
+                        app:tint="#F44336" />
                 </LinearLayout>
 
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        </ScrollView>
+        <!-- App Version -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="Version 1.0.0"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_card" />
 
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

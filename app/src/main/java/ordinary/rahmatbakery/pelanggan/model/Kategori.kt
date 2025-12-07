@@ -12,5 +12,5 @@ data class Kategori (
     val nama: String,
 
     @SerialName("minimal_pembelian")
-    val minPembelian: Int
+    val minPembelian: Int?= 0
 ) : Parcelable

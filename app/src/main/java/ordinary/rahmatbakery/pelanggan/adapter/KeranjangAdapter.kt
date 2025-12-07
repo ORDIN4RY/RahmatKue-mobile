@@ -95,7 +95,7 @@ class KeranjangAdapter(
             val current = listKeranjang[currentPos]
 
             if (current.tipe == "produk") {
-                if (current.jumlah <= item.produk!!.kategori.minPembelian) {
+                if (current.jumlah <= item.produk!!.kategori.minPembelian!!) {
                     Toast.makeText(holder.itemView.context, "Minimal pembelian kategori ${item.produk.kategori.nama} adalah ${item.produk.kategori.minPembelian} pcs", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
@@ -133,8 +133,8 @@ class KeranjangAdapter(
                         var validatedJumlah = newJumlah
                         var validationMessage: String? = null
 
-                        if (currentItem.tipe == "produk" && newJumlah < currentItem.produk!!.kategori.minPembelian) {
-                            validatedJumlah = currentItem.produk.kategori.minPembelian
+                        if (currentItem.tipe == "produk" && newJumlah < currentItem.produk!!.kategori.minPembelian!!) {
+                            validatedJumlah = currentItem.produk.kategori.minPembelian!!
                             validationMessage = "Minimal pembelian kategori ${currentItem.produk.kategori.nama} adalah ${currentItem.produk.kategori.minPembelian} pcs"
                         } else if (currentItem.tipe == "paket" && newJumlah < 1) {
                             validatedJumlah = 1

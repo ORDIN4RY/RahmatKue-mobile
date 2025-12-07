@@ -29,6 +29,8 @@ class MenuPaketAdapter(
         val productName: TextView = itemView.findViewById(R.id.productName)
         val productPrice: TextView = itemView.findViewById(R.id.productPrice)
         val discountedPrice: TextView = itemView.findViewById(R.id.discounted_price)
+        val badgeDiskon: TextView = itemView.findViewById(R.id.badge_diskon)
+        val infoHemat: TextView = itemView.findViewById(R.id.info_hemat)
         val btnPesan: TextView = itemView.findViewById(R.id.btn_pesan)
     }
 
@@ -44,21 +46,43 @@ class MenuPaketAdapter(
         holder.productPrice.text = formatRupiah.format(item.harga)
 
         var hargaDiskon = 0
-        if (item.tipe_diskon != null && item.diskon != null){
-            if(item.tipe_diskon == "persen"){
-                hargaDiskon = item.harga - (item.harga * item.diskon/ 100)
-            }else{
+        var persenDiskon = 0
+        var nominalHemat = 0
+
+        if (item.tipe_diskon != null && item.diskon != null) {
+            if (item.tipe_diskon == "persen") {
+                persenDiskon = item.diskon
+                hargaDiskon = item.harga - (item.harga * item.diskon / 100)
+                nominalHemat = item.harga - hargaDiskon
+            } else {
                 hargaDiskon = item.harga - item.diskon
+                nominalHemat = item.diskon
+                // Hitung persen untuk badge
+                persenDiskon = ((item.diskon.toFloat() / item.harga.toFloat()) * 100).toInt()
             }
         }
-        if(hargaDiskon > 0){
+
+        if (hargaDiskon > 0) {
+            // Show discount elements
             holder.discountedPrice.visibility = View.VISIBLE
             holder.discountedPrice.text = formatRupiah.format(hargaDiskon)
             holder.productPrice.paintFlags = holder.productPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        }else{
+
+            // Show discount badge
+            holder.badgeDiskon.visibility = View.VISIBLE
+            holder.badgeDiskon.text = "-${persenDiskon}%"
+
+            // Show hemat info
+            holder.infoHemat.visibility = View.VISIBLE
+            holder.infoHemat.text = "Hemat ${formatRupiah.format(nominalHemat)}"
+        } else {
+            // Hide discount elements
             holder.discountedPrice.visibility = View.GONE
             holder.productPrice.paintFlags = holder.productPrice.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            holder.badgeDiskon.visibility = View.GONE
+            holder.infoHemat.visibility = View.GONE
         }
+
         holder.productImg.load(item.foto) {
             crossfade(true)
             placeholder(R.drawable.placeholder)
@@ -70,7 +94,7 @@ class MenuPaketAdapter(
             val intent = Intent(context, DetailProdukActivity::class.java)
             intent.putExtra("TIPE", "paket")
             intent.putExtra("PAKET", item)
-            intent.putExtra("FROM", "menu") // menandakan dari menu, bukan keranjang
+            intent.putExtra("FROM", "menu")
             context.startActivity(intent)
         }
     }

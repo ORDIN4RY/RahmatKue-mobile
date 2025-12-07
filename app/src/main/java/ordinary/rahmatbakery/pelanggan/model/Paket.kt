@@ -9,7 +9,6 @@ import kotlinx.serialization.Serializable
 data class Paket(
     val id : String ?=null,
     val nama: String,
-    val wadah: Wadah,
     val deskripsi: String,
     val foto: String = "foto.png",
     val harga: Int,

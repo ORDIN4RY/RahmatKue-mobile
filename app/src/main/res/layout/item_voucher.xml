@@ -59,8 +59,7 @@
             android:text="Berlaku sampai 1 November 2025"
             android:textSize="10sp"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/deskripsi_voucher"
-            android:layout_marginTop="30dp"
+            android:layout_alignBottom="@id/voucher_image"
 
             />
 </RelativeLayout>

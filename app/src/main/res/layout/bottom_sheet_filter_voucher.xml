@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Filter Voucher"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary" />
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@color/primary" />
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#E0E0E0" />
+
+    <!-- Jenis Voucher Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Jenis Voucher"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/btnSemua"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/btn_filter_produk"
+            android:padding="12dp"
+            android:text="Semua"
+            android:textAlignment="center"
+            android:textColor="@drawable/btn_filter_produk"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/btnPotongan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/btn_filter_produk_outline"
+            android:padding="12dp"
+            android:text="Potongan"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/btnOngkir"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/btn_filter_produk_outline"
+            android:padding="12dp"
+            android:text="Ongkir"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Range Poin Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Range Poin"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary" />
+
+    <TextView
+        android:id="@+id/tvRangePoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="0 - 1000 Poin"
+        android:textSize="14sp"
+        android:textColor="#666666" />
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/rangeSliderPoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:valueFrom="0"
+        android:valueTo="1000"
+        android:stepSize="10"
+        app:thumbColor="@color/primary"
+        app:trackColorActive="@color/primary"
+        app:trackColorInactive="#E0E0E0" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#E0E0E0" />
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/btnReset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/btn_filter_produk_outline"
+            android:padding="14dp"
+            android:text="Reset"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnApply"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/btn_filter_produk"
+            android:padding="14dp"
+            android:text="Terapkan"
+            android:textAlignment="center"
+            android:textColor="@drawable/btn_filter_produk"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

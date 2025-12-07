@@ -229,6 +229,9 @@ class CheckoutActivity(
                 subtotalPengiriman = hargaOngkir
             } else if (!cbAmbil.isChecked) {
                 cbAntar.isChecked = true
+                if(voucher?.jenis_voucher == "ongkir"){
+                    voucher = null
+                }
             }
             calculateTotals()
             updateTotalsUI()
@@ -356,6 +359,9 @@ class CheckoutActivity(
                     subtotalPengiriman -= potonganOngkir
                 } else {
                     subtotalPengiriman -= voucher!!.maksimal_potongan!!
+                }
+                if(subtotalPengiriman < 0){
+                    subtotalPengiriman = 0
                 }
             }
         }

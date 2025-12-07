@@ -17,6 +17,12 @@
         android:theme="@style/Theme.RahmatBakery"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".pelanggan.activity.PilihWadahActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pelanggan.activity.CustomPaketActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.activity.OrderDetailActivity"
             android:exported="false" />
         <activity
@@ -67,7 +73,6 @@
         <activity
             android:name=".pelanggan.activity.NotifActivity"
             android:exported="false" />
-
         <activity
             android:name=".pelanggan.activity.KeranjangActivity"
             android:exported="false" />

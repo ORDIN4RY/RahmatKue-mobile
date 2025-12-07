@@ -3,7 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="maroon">#800000</color>
-    <color name="cream">#FBFCCC</color>
     <color name="card_light_bg">@color/white</color>
     <color name="background">#FFF6F3</color>
     <color name="primary">#8E5E48</color>
@@ -13,4 +12,9 @@
     <color name="status_belum_aktif">#0F62FE</color>
     <color name="status_expired">#E70F0F</color>
     <color name="status_digunakan">#800000</color>
+    <!-- Badge Colors -->
+    <color name="badge_harga_text">#1976D2</color>
+    <color name="badge_ongkir_text">#F57C00</color>
+    <color name="badge_gratis_text">#388E3C</color>
+    <color name="error_text">#C62828</color>
 </resources>

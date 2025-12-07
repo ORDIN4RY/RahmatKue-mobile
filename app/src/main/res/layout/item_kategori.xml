@@ -3,19 +3,18 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="4dp">
 
     <TextView
         android:id="@+id/textKategori"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Produk"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:padding="8dp"
-        android:textColor="@color/primary"
         android:background="@drawable/bg_filter_kategori"
-        android:paddingVertical="3dp"
-        android:paddingHorizontal="6dp"
-        />
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="Kue Basah"
+        android:textColor="@color/primary"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 </LinearLayout>

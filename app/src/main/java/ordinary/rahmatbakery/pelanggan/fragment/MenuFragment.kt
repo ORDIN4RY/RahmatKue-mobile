@@ -1,19 +1,20 @@
 package ordinary.rahmatbakery.pelanggan.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
@@ -21,13 +22,9 @@ import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.util.SupabaseManager
 import ordinary.rahmatbakery.pelanggan.adapter.KategoriAdapter
-import ordinary.rahmatbakery.pelanggan.adapter.MenuCustomAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.MenuProdukAdapter
 import ordinary.rahmatbakery.pelanggan.adapter.MenuPaketAdapter
-import ordinary.rahmatbakery.pelanggan.model.Kategori
-import ordinary.rahmatbakery.pelanggan.model.Produk
-import ordinary.rahmatbakery.pelanggan.model.Paket
-import ordinary.rahmatbakery.pelanggan.model.Wadah
+import ordinary.rahmatbakery.pelanggan.model.*
 
 class MenuFragment : Fragment() {
 
@@ -36,9 +33,6 @@ class MenuFragment : Fragment() {
     private val listMenu = mutableListOf<Produk>()
     private lateinit var adapterPaket: MenuPaketAdapter
     private val listPaket = mutableListOf<Paket>()
-    private lateinit var adapterCustom: MenuCustomAdapter
-    private val listMenuCustom = mutableListOf<Wadah>()
-
 
     private lateinit var rvKategori: RecyclerView
     private lateinit var adapterKategori: KategoriAdapter
@@ -46,16 +40,11 @@ class MenuFragment : Fragment() {
 
     private val originalListMenu = mutableListOf<Produk>()
     private val originalListPaket = mutableListOf<Paket>()
-    private val originalListCustom = mutableListOf<Wadah>()
-
 
     private lateinit var etSearch: EditText
-
     // Filter buttons
     private lateinit var btnFilterProduk: TextView
     private lateinit var btnFilterPaket: TextView
-//    private lateinit var btnFilterCustom: TextView
-
     private var currentFilter = "produk" // default filter
     private var currentKateg = "" // default kategori filter
 
@@ -72,13 +61,11 @@ class MenuFragment : Fragment() {
         // Inisialisasi Filter Buttons
         btnFilterProduk = rootView.findViewById(R.id.btn_satuan)
         btnFilterPaket = rootView.findViewById(R.id.btn_paket)
-//        btnFilterCustom = rootView.findViewById(R.id.btn_custom)
 
         // Inisialisasi RecyclerView Produk
         rvProduct = rootView.findViewById(R.id.rvProduct)
         adapterProduct = MenuProdukAdapter(listMenu)
         adapterPaket = MenuPaketAdapter(listPaket)
-        adapterCustom = MenuCustomAdapter(listMenuCustom)
 
         // search
         etSearch = rootView.findViewById(R.id.etSearch)
@@ -99,12 +86,20 @@ class MenuFragment : Fragment() {
         setupFilterButtons()
         setupSearchListener()
 
-
         // Load data awal
         loadKategori()
         applyFilter("produk")
 
         return rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh data saat kembali ke fragment
+        when (currentFilter) {
+            "produk" -> loadProduct(currentKateg)
+            "paket" -> loadPaket()
+        }
     }
 
     private fun setupSearchListener() {
@@ -119,13 +114,11 @@ class MenuFragment : Fragment() {
     }
 
     private fun filterData(query: String) {
-        // Filter list yang sedang aktif
         when (currentFilter) {
             "produk" -> {
                 val filteredList = if (query.isBlank()) {
-                    originalListMenu // Jika query kosong, tampilkan semua
+                    originalListMenu
                 } else {
-                    // Filter dari list asli berdasarkan nama produk
                     originalListMenu.filter { produk ->
                         produk.nama.contains(query, ignoreCase = true)
                     }
@@ -158,9 +151,6 @@ class MenuFragment : Fragment() {
             applyFilter("paket")
         }
 
-//        btnFilterCustom.setOnClickListener {
-//            applyFilter("custom")
-//        }
     }
 
     private fun applyFilter(filter: String) {
@@ -179,10 +169,6 @@ class MenuFragment : Fragment() {
                 rvProduct.adapter = adapterPaket
             }
 
-            "custom" -> {
-                loadCustom()
-                rvProduct.adapter = adapterCustom
-            }
         }
     }
 
@@ -201,28 +187,22 @@ class MenuFragment : Fragment() {
     }
 
     private fun updateButtonStates() {
-        // Reset semua button ke state default
         btnFilterProduk.isSelected = false
         btnFilterPaket.isSelected = false
-//        btnFilterCustom.isSelected = false
 
-        // Set button yang aktif
         when (currentFilter) {
             "produk" -> btnFilterProduk.isSelected = true
             "paket" -> btnFilterPaket.isSelected = true
-//            "custom" -> btnFilterCustom.isSelected = true
         }
     }
 
     private fun loadKategori() {
         lifecycleScope.launch {
             try {
-                // Panggil fungsi RPC yang sudah kita buat
                 val kategories = SupabaseManager.client.postgrest.rpc(
                     function = "get_kategori_with_products"
-                ).decodeList<Kategori>() // Gunakan data class Kategori yang sudah ada
+                ).decodeList<Kategori>()
 
-                // Logika selanjutnya tetap sama
                 if (kategories.isNotEmpty()) {
                     listKategori.clear()
                     listKategori.addAll(kategories)
@@ -230,7 +210,6 @@ class MenuFragment : Fragment() {
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                // Mungkin tampilkan Toast jika gagal
             }
         }
     }
@@ -260,7 +239,6 @@ class MenuFragment : Fragment() {
         }
     }
 
-
     private fun loadPaket() {
         lifecycleScope.launch {
             try {
@@ -281,41 +259,5 @@ class MenuFragment : Fragment() {
             }
         }
     }
-
-
-
-    private fun loadCustom() {
-        lifecycleScope.launch {
-            try {
-                val wadah = SupabaseManager.client.from("wadah")
-                    .select(
-                        Columns.raw(
-                            """
-                        id:id_wadah,
-                        nama:nama_wadah,
-                        deskripsi,
-                        foto:foto_wadah,
-                        kapasitas,
-                        harga:harga_wadah,
-                        varian
-                        """.trimIndent()
-                        )
-                    )
-                    .decodeList<Wadah>()
-
-                originalListCustom.clear()
-                originalListCustom.addAll(wadah)
-
-                rvKategori.visibility = View.GONE
-                listMenuCustom.clear()
-                listMenuCustom.addAll(originalListCustom)
-                adapterCustom.notifyDataSetChanged()
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
 
 }

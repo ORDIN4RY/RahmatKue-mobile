@@ -43,6 +43,7 @@ class UbahTambahAlamatActivity(
     private lateinit var inputLatitude: EditText
     private lateinit var inputLongitude: EditText
     private lateinit var inputDetail: EditText
+    private lateinit var tvWilayah: TextView
 
     private lateinit var mapView: MapView
     private lateinit var map: MapLibreMap
@@ -50,7 +51,9 @@ class UbahTambahAlamatActivity(
     private val jemberCenter = LatLng(-8.1722, 113.6870)
 
     private var alamat: Alamat? = null
-
+    private var kecamatan: String = ""
+    private var kabupaten: String = ""
+    private var provinsi: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +82,12 @@ class UbahTambahAlamatActivity(
         }
 
         findViewById<TextView>(R.id.pilih_alamat).setOnClickListener {
-            val intent = Intent(this, PilihLokasiActivity::class.java)
+            val intent = Intent(this, PilihLokasiActivity::class.java).apply {
+                val lat = inputLatitude.text.toString().toDoubleOrNull() ?: Double.NaN
+                val lon = inputLongitude.text.toString().toDoubleOrNull() ?: Double.NaN
+                putExtra("latitude", lat)
+                putExtra("longitude", lon)
+            }
             lokasiResultLauncher.launch(intent)
         }
 
@@ -121,8 +129,6 @@ class UbahTambahAlamatActivity(
                 true
             }
         }
-
-
     }
 
     private val lokasiResultLauncher = registerForActivityResult(
@@ -131,14 +137,42 @@ class UbahTambahAlamatActivity(
         if (result.resultCode == RESULT_OK) {
             val lat = result.data?.getDoubleExtra("latitude", 0.0)
             val lon = result.data?.getDoubleExtra("longitude", 0.0)
+            val address = result.data?.getStringExtra("address") ?: ""
+            kecamatan = result.data?.getStringExtra("kecamatan") ?: ""
+            kabupaten = result.data?.getStringExtra("kabupaten") ?: ""
+            provinsi = result.data?.getStringExtra("provinsi") ?: ""
+
             if (lat != null && lon != null) {
                 inputLatitude.setText(lat.toString())
                 inputLongitude.setText(lon.toString())
+
+                // Auto-fill alamat jika kosong
+                if (inputAlamat.text.toString().isEmpty() && address.isNotEmpty()) {
+                    inputAlamat.setText(address)
+                }
+
+                // Update tampilan wilayah
+                updateWilayahDisplay()
+
+                // Update peta
                 val point = LatLng(lat, lon)
                 map.clear()
                 map.addMarker(MarkerOptions().position(point))
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 16.0))
             }
+        }
+    }
+
+    private fun updateWilayahDisplay() {
+        val wilayahParts = mutableListOf<String>()
+        if (kecamatan.isNotEmpty()) wilayahParts.add(kecamatan)
+        if (kabupaten.isNotEmpty()) wilayahParts.add(kabupaten)
+        if (provinsi.isNotEmpty()) wilayahParts.add(provinsi)
+
+        tvWilayah.text = if (wilayahParts.isNotEmpty()) {
+            wilayahParts.joinToString(", ")
+        } else {
+            "Wilayah belum dipilih"
         }
     }
 
@@ -168,7 +202,7 @@ class UbahTambahAlamatActivity(
         val det = inputDetail.text.toString().trim()
 
         if (nama.isEmpty() || noHp.isEmpty() || alamatRumah.isEmpty()) {
-            Toast.makeText(this, "Semua field harus diisi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Nama, No HP, dan Alamat harus diisi", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -195,9 +229,11 @@ class UbahTambahAlamatActivity(
                         isUtama = isUtama,
                         latitude = lat,
                         longitude = lon,
-                        detail = det
+                        detail = det,
+                        kecamatan = kecamatan,
+                        kabupaten = kabupaten,
+                        provinsi = provinsi
                     )
-
                 )
                 setResult(RESULT_OK)
                 Toast.makeText(
@@ -227,6 +263,7 @@ class UbahTambahAlamatActivity(
         inputDetail = findViewById(R.id.input_patokan)
         inputLatitude = findViewById(R.id.input_latitude)
         inputLongitude = findViewById(R.id.input_longitude)
+        tvWilayah = findViewById(R.id.tvWilayah)
     }
 
     private fun initListenerEdit() {
@@ -253,6 +290,12 @@ class UbahTambahAlamatActivity(
         cbAlamatUtama.isChecked = alamat?.isUtama ?: false
         btnHapus.visibility = Button.VISIBLE
 
+        // Load wilayah data
+        kecamatan = alamat?.kecamatan ?: ""
+        kabupaten = alamat?.kabupaten ?: ""
+        provinsi = alamat?.provinsi ?: ""
+        updateWilayahDisplay()
+
         findViewById<TextView>(R.id.judul_alamat).setText("Perbarui Alamat")
         initListenerEdit()
     }
@@ -266,7 +309,7 @@ class UbahTambahAlamatActivity(
         val det = inputDetail.text.toString().trim()
 
         if (nama.isEmpty() || noHp.isEmpty() || alamatRumah.isEmpty()) {
-            Toast.makeText(this, "Semua field harus diisi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Nama, No HP, dan Alamat harus diisi", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -281,6 +324,9 @@ class UbahTambahAlamatActivity(
                         set("latitude", lat)
                         set("longitude", lon)
                         set("detail_lain", det)
+                        set("kecamatan", kecamatan)
+                        set("kabupaten", kabupaten)
+                        set("provinsi", provinsi)
                     }
                 ) {
                     filter {
@@ -293,7 +339,7 @@ class UbahTambahAlamatActivity(
                     "Alamat berhasil diperbarui",
                     Toast.LENGTH_SHORT
                 ).show()
-                finish() // Tutup activity setelah berhasil
+                finish()
             } catch (e: Exception) {
                 Toast.makeText(
                     this@UbahTambahAlamatActivity,
@@ -358,5 +404,4 @@ class UbahTambahAlamatActivity(
         super.onLowMemory()
         mapView.onLowMemory()
     }
-
 }

@@ -71,6 +71,10 @@ class BerandaFragment : Fragment() {
     private lateinit var menuTerbaruAdapter: MenuTerbaruAdapter
     private val listProduk = mutableListOf<Produk>()
 
+    private lateinit var nameText : TextView
+    private lateinit var pointText: TextView
+
+
     private val parentActivity: DashboardActivity?
         get() = activity as? DashboardActivity
 
@@ -90,14 +94,9 @@ class BerandaFragment : Fragment() {
         rvMenuTerbaru = rootView.findViewById(R.id.iv_menu_terbaru)
         cardMenuTerbaru = rootView.findViewById(R.id.card_menu_terbaru)
 
-         val nameText = rootView.findViewById<TextView>(R.id.nickname)
-        val pointText = rootView.findViewById<TextView>(R.id.user_point)
+        nameText = rootView.findViewById<TextView>(R.id.nickname)
+        pointText = rootView.findViewById<TextView>(R.id.user_point)
 
-        val username = parentActivity?.profile?.username
-        val point = parentActivity?.profile?.point
-
-        nameText.text = "Hi, ${username?.let { ambilNamaPendek(it) } ?: "Pengguna"} !"
-        pointText.text = "${point ?: 0} Points"
 
         recyclerView = rootView.findViewById(R.id.rvPesananTerakhir)
         lastOrderAdapter = LastOrderAdapter(listLastOrder)
@@ -118,13 +117,22 @@ class BerandaFragment : Fragment() {
 
 //        fetchAndSubscribeCarouselData()
         loadSinglePromoTerbaru()
-        loadLastOrder()
+        loadUser()
         refetchCarouselData()
         loadSingleProdukTerbaru()
         fetchAndSubscribeCarouselData()
         return rootView
     }
 
+    private fun loadUser(){
+        val username = parentActivity?.profile?.username
+        val point = parentActivity?.profile?.point
+
+        nameText.text = "Hi, ${username?.let { ambilNamaPendek(it) } ?: "Pengguna"} !"
+        pointText.text = "${point ?: 0} Points"
+
+        loadLastOrder()
+    }
     private fun loadSingleProdukTerbaru() {
         lifecycleScope.launch {
             try {
@@ -163,7 +171,9 @@ class BerandaFragment : Fragment() {
                         // Anda perlu membuat DetailProdukActivity
                         val intent = Intent(context, DetailProdukActivity::class.java)
                         // Kirim objek produk ke activity detail
-                        intent.putExtra("data_produk", produkTerbaru)
+                        intent.putExtra("PRODUK", produkTerbaru)
+                        intent.putExtra("FROM", "menu")
+                        intent.putExtra("TIPE", "produk")
                         startActivity(intent)
                     }
                 } else {
@@ -318,6 +328,7 @@ class BerandaFragment : Fragment() {
         if (::carouselAdapter.isInitialized && carouselAdapter.itemCount > 0) {
             handler.postDelayed(autoScrollRunnable, 3000)
         }
+        loadUser()
     }
 
     override fun onPause() {

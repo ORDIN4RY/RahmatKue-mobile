@@ -34,7 +34,21 @@ class VoucherAdapter(
         val voucher = voucherList[position]
 
         holder.namaVoucher.text = voucher.nama_voucher
-        holder.deskripsiVoucher.text = voucher.deskripsi
+        var textDesk = ""
+        if(voucher.jenis_voucher == "ongkir"){
+            if(voucher.persentase_potongan != 0){
+                textDesk = "Diskon ${voucher.persentase_potongan}% Untuk biaya Pengiriman"
+            }else{
+                textDesk = "Gratis Ongkir"
+            }
+        }else if(voucher.jenis_voucher == "potongan"){
+            if(voucher.maksimal_potongan != 0){
+                textDesk = "Diskon ${voucher.persentase_potongan}% (maksimal Rp. ${voucher.maksimal_potongan})"
+            }else{
+                textDesk = "Diskon ${voucher.persentase_potongan}%"
+            }
+        }
+        holder.deskripsiVoucher.text = textDesk
 
         holder.voucherImage.load(voucher.foto_voucher) {
             crossfade(true)

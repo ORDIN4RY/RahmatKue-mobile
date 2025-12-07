@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,139 +8,184 @@
         android:id="@+id/card_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         android:backgroundTint="@color/cardview_light_background"
-        android:paddingTop="20dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp">
+            android:padding="16dp">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/productImg"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/logo"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded" />
+            <!-- Product Image with Badge -->
+            <RelativeLayout
+                android:id="@+id/image_container"
+                android:layout_width="70dp"
+                android:layout_height="70dp">
 
-            <TextView
-                android:id="@+id/productName"
-                android:layout_width="wrap_content"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/productImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/logo"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSizeRounded" />
+
+                <!-- Badge Diskon -->
+                <TextView
+                    android:id="@+id/badge_diskon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/badge_diskon"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="20%"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <!-- Badge Varian Mini -->
+                <TextView
+                    android:id="@+id/product_varian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/bg_radius"
+                    android:backgroundTint="@android:color/holo_green_light"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:text="mini"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <!-- Product Info -->
+            <LinearLayout
+                android:id="@+id/info_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@id/productImg"
-                android:text="Lemper"
-                android:textColor="@color/primary"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/image_container"
+                android:layout_toStartOf="@id/btn_pesan"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/product_varian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="mini"
-                android:textSize="8sp"
-                android:textColor="@color/card_light_bg"
-                android:layout_toEndOf="@id/productName"
-                android:paddingHorizontal="5dp"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
-                android:layout_alignTop="@id/productName"
-                android:background="@drawable/bg_radius"
-                android:backgroundTint="@android:color/holo_green_light"
-                android:visibility="gone"
-                />
+                <TextView
+                    android:id="@+id/productName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Lemper Ayam Special"
+                    android:textColor="@color/primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/productPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/productName"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@id/productImg"
-                android:text="Rp 75.000"
-                android:textColor="@color/primary" />
+                <!-- Price Container -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/discounted_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/productPrice"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@id/productImg"
-                android:text="Rp. 70.000"
-                android:textColor="@color/primary"
-                />
+                    <!-- Harga Asli (dicoret jika ada diskon) -->
+                    <TextView
+                        android:id="@+id/productPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 75.000"
+                        android:textColor="@color/primary"
+                        android:textSize="14sp" />
 
+                    <!-- Harga Diskon -->
+                    <TextView
+                        android:id="@+id/discounted_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Rp 60.000"
+                        android:textColor="@color/primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
 
+                <!-- Info Hemat -->
+                <TextView
+                    android:id="@+id/info_hemat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Hemat Rp 15.000"
+                    android:textColor="@color/status_aktif"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
 
+            <!-- Button Pesan -->
             <TextView
                 android:id="@+id/btn_pesan"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:layout_alignBottom="@+id/productImg"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
                 android:background="@drawable/btn_filter_produk"
-                android:textColor="@drawable/btn_filter_produk"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="7dp"
                 android:gravity="center"
+                android:paddingHorizontal="20dp"
                 android:text="Pesan"
-                android:textSize="13sp" />
+                android:textColor="@drawable/btn_filter_produk"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
+            <!-- Counter Container (hidden by default) -->
             <LinearLayout
                 android:id="@+id/counter_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
                 android:background="@drawable/btn_outline"
                 android:gravity="center"
                 android:padding="5dp"
-                android:visibility="gone"
-                android:layout_alignParentEnd="true"
-                android:layout_alignBottom="@+id/productImg">
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/icon_minus"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:background="@drawable/circle_outline"
                     android:src="@drawable/icon_minus" />
 
                 <EditText
-                    android:textColor="@color/primary"
-                    android:textStyle="bold"
                     android:id="@+id/input_count"
                     android:layout_width="50dp"
-                    android:layout_height="24dp"
+                    android:layout_height="28dp"
                     android:layout_marginHorizontal="4dp"
                     android:background="@drawable/bg_counter"
-                    android:text="15"
-                    android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:paddingHorizontal="5dp"
-                    android:layout_centerVertical="true"
                     android:gravity="center"
                     android:inputType="number"
-                    />
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/icon_plus"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:background="@drawable/circle_outline"
                     android:src="@drawable/icon_plus" />
-
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
     </androidx.cardview.widget.CardView>
-
-
 </RelativeLayout>

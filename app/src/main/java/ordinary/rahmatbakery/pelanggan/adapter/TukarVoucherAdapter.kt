@@ -40,7 +40,6 @@ class TukarVoucherAdapter(
         val voucherName: TextView = itemView.findViewById(R.id.nama_tukar_voucher)
         val voucherDeksripsi: TextView = itemView.findViewById(R.id.deskripsi_tukar_voucher)
         val poinVoucher: TextView = itemView.findViewById(R.id.jumlah_poin)
-        val btnDetailTukarVoucher: TextView = itemView.findViewById(R.id.btn_detail_tukar_voucher)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -69,7 +68,6 @@ class TukarVoucherAdapter(
         }
 
         holder.itemView.setOnClickListener { openDetail() }
-        holder.btnDetailTukarVoucher.setOnClickListener { openDetail() }
     }
 
     override fun getItemCount(): Int = displayList.size

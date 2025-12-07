@@ -2,24 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingHorizontal="10dp">
+    android:orientation="horizontal"
+    android:paddingVertical="8dp">
 
+    <!-- Nomor -->
     <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvNumber"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="#000000"
-        android:text="PlaceOlder"/>
-
-    <TextView
-        android:id="@+id/tvSub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="1."
         android:textSize="13sp"
-        android:layout_marginStart="5sp"
-        android:textColor="#555555"
-        android:text="placeYounger"/>
+        android:textColor="#666666"
+        android:gravity="start" />
 
+    <!-- Content -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:text="Masa Berlaku" />
+
+        <TextView
+            android:id="@+id/tvSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="13sp"
+            android:lineSpacingExtra="2dp"
+            android:textColor="#666666"
+            android:text="Voucher berlaku selama periode yang ditentukan" />
+    </LinearLayout>
 </LinearLayout>

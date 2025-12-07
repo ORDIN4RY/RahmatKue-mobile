@@ -4,99 +4,151 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.fragment.PesananFragment"
-    android:orientation="vertical">
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".pelanggan.fragment.PesananFragment">
+
+    <!-- Header -->
+
+    <!-- Filter Chips -->
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-    <!-- buttons -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:scrollbars="none"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="16dp">
 
-        <TextView
-            android:id="@+id/btn_semua"
-            android:layout_width="120dp"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_filter"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Semua"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_full"
-            android:textSize="16sp"
-            android:layout_marginHorizontal="10dp"
-            android:textAlignment="center"
-            />
+            app:singleSelection="true"
+            app:selectionRequired="true">
 
-        <TextView
-            android:id="@+id/btn_blm_dibayar"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Belum Dibayar"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_full"
-            android:layout_toRightOf="@id/btn_semua"
-            android:textSize="16sp"
-            android:layout_marginHorizontal="10dp"
-            android:textAlignment="center"
-            />
-        <TextView
-            android:id="@+id/btn_proses"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Proses"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_full"
-            android:layout_toRightOf="@id/btn_semua"
-            android:textSize="16sp"
-            android:layout_marginHorizontal="10dp"
-            android:textAlignment="center"
-            />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_semua"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Semua"
+                android:checked="true"
+                app:chipBackgroundColor="@color/chip_background_selector"
+                app:chipStrokeColor="@color/primary"
+                app:chipStrokeWidth="1dp" />
 
-        <TextView
-            android:id="@+id/btn_selesai"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Selesai"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_full"
-            android:layout_toRightOf="@id/btn_proses"
-            android:textSize="16sp"
-            android:layout_marginHorizontal="10dp"
-            android:textAlignment="center"
-            />
-        <TextView
-            android:id="@+id/btn_dibatalkan"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Dibatalkan"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_full"
-            android:layout_toRightOf="@id/btn_selesai"
-            android:textSize="16sp"
-            android:layout_marginHorizontal="10dp"
-            android:textAlignment="center"
-            />
-    </LinearLayout>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_belum_dibayar"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belum Dibayar"
+                app:chipBackgroundColor="@color/chip_background_selector"
+                app:chipStrokeColor="@color/primary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_dibayar"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menunggu Diproses"
+                app:chipBackgroundColor="@color/chip_background_selector"
+                app:chipStrokeColor="@color/primary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_proses"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sedang Diproses"
+                app:chipBackgroundColor="@color/chip_background_selector"
+                app:chipStrokeColor="@color/primary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selesai"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selesai"
+                app:chipBackgroundColor="@color/chip_background_selector"
+                app:chipStrokeColor="@color/primary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_dibatalkan"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dibatalkan"
+                app:chipBackgroundColor="@color/chip_background_selector"
+                app:chipStrokeColor="@color/primary"
+                app:chipStrokeWidth="1dp" />
+        </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
-
-        <LinearLayout
+    <!-- Content -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <!-- RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_pesanan"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="16dp" />
+
+            <!-- Empty State -->
+            <LinearLayout
+                android:id="@+id/empty_state"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"/>
-    </LinearLayout>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:alpha="0.5"
+                    android:src="@drawable/ic_empty_order"
+                    app:tint="@android:color/darker_gray" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Belum ada pesanan"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Yuk, pesan sekarang!"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Loading State -->
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

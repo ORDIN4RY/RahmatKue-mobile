@@ -10,38 +10,77 @@
     <org.maplibre.android.maps.MapView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mapView"
-        />
+        android:id="@+id/mapView" />
 
+    <!-- Info Card untuk menampilkan alamat yang dipilih -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardInfoAlamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        android:backgroundTint="@color/card_light_bg">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lokasi Terpilih"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:alpha="0.7"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvAlamatTerpilih"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Pilih titik di peta untuk melihat alamat"
+                android:textColor="@color/primary"
+                android:textSize="14sp"
+                android:lineSpacingExtra="2dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Button My Location -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/my_location"
-        android:padding="10dp"
+        android:padding="12dp"
         android:src="@drawable/location"
         android:background="@drawable/circle_outline"
         android:layout_above="@id/btnSimpanLokasi"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="20dp"
+        android:elevation="8dp"/>
 
-        />
-
+    <!-- Button Simpan -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnSimpanLokasi"
         android:text="Simpan Lokasi"
-        android:background="@drawable/btn_outline"
-        android:textColor="@color/primary"
+        android:background="@drawable/btn_full"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
         android:paddingVertical="15dp"
         android:paddingHorizontal="30dp"
-        />
+        android:elevation="8dp"/>
 
 </RelativeLayout>

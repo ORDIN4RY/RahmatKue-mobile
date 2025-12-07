@@ -3,7 +3,10 @@ package ordinary.rahmatbakery.pelanggan.activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,6 +15,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.slider.RangeSlider
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
@@ -28,6 +33,7 @@ class VoucherActivity : AppCompatActivity() {
 
     private lateinit var btnFilterVoucherSaya: TextView
     private lateinit var btnFilterTukarVoucher: TextView
+    private lateinit var btnFilter: ImageView
     private lateinit var userPoint: TextView
     private lateinit var voucherSayaAdapter: VoucherSayaAdapter
     private lateinit var tukarVoucherAdapter: TukarVoucherAdapter
@@ -43,6 +49,12 @@ class VoucherActivity : AppCompatActivity() {
     private val listVoucherSaya = mutableListOf<UserVoucher>()
     private val listTukarVoucher = mutableListOf<Voucher>()
 
+    // Filter state
+    private var filterJenisVoucher: String? = null // "potongan" atau "ongkir"
+    private var filterMinPoin: Int = 0
+    private var filterMaxPoin: Int = 1000
+    private var maxAvailablePoin: Int = 1000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_voucher)
@@ -54,6 +66,7 @@ class VoucherActivity : AppCompatActivity() {
 
         rvVoucher = findViewById(R.id.rvVoucher)
         etSearch = findViewById(R.id.etSearch)
+        btnFilter = findViewById(R.id.btnFilter)
 
         voucherSayaAdapter = VoucherSayaAdapter(listVoucherSaya)
         tukarVoucherAdapter = TukarVoucherAdapter(listTukarVoucher)
@@ -64,6 +77,7 @@ class VoucherActivity : AppCompatActivity() {
 
         setupFilterButtons()
         setupSearchListener()
+        setupFilterButton()
         loadUserPoint()
 
         applyFilter("voucherSaya")
@@ -71,7 +85,6 @@ class VoucherActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Refresh data saat kembali ke activity
         loadUserPoint()
         if (currentFilter == "voucherSaya") {
             loadVoucherSaya()
@@ -90,6 +103,101 @@ class VoucherActivity : AppCompatActivity() {
         })
     }
 
+    private fun setupFilterButton() {
+        btnFilter.setOnClickListener {
+            if (currentFilter == "tukarVoucher") {
+                showFilterBottomSheet()
+            }
+        }
+    }
+
+    private fun showFilterBottomSheet() {
+        val dialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_filter_voucher, null)
+
+        // Jenis Voucher Filter
+        val btnSemua = view.findViewById<TextView>(R.id.btnSemua)
+        val btnPotongan = view.findViewById<TextView>(R.id.btnPotongan)
+        val btnOngkir = view.findViewById<TextView>(R.id.btnOngkir)
+
+        // Range Poin
+        val rangeSlider = view.findViewById<RangeSlider>(R.id.rangeSliderPoin)
+        val tvRangePoin = view.findViewById<TextView>(R.id.tvRangePoin)
+
+        // Setup range slider
+        rangeSlider.valueFrom = 0f
+        rangeSlider.valueTo = maxAvailablePoin.toFloat()
+        rangeSlider.values = listOf(filterMinPoin.toFloat(), filterMaxPoin.toFloat())
+
+        rangeSlider.addOnChangeListener { slider, _, _ ->
+            val values = slider.values
+            tvRangePoin.text = "${values[0].toInt()} - ${values[1].toInt()} Poin"
+        }
+
+        // Set initial button states
+        updateJenisButtonStates(btnSemua, btnPotongan, btnOngkir)
+
+        // Jenis filter click listeners
+        btnSemua.setOnClickListener {
+            filterJenisVoucher = null
+            updateJenisButtonStates(btnSemua, btnPotongan, btnOngkir)
+        }
+
+        btnPotongan.setOnClickListener {
+            filterJenisVoucher = "potongan"
+            updateJenisButtonStates(btnSemua, btnPotongan, btnOngkir)
+        }
+
+        btnOngkir.setOnClickListener {
+            filterJenisVoucher = "ongkir"
+            updateJenisButtonStates(btnSemua, btnPotongan, btnOngkir)
+        }
+
+        // Reset & Apply buttons
+        view.findViewById<TextView>(R.id.btnReset).setOnClickListener {
+            filterJenisVoucher = null
+            filterMinPoin = 0
+            filterMaxPoin = maxAvailablePoin
+            rangeSlider.values = listOf(0f, maxAvailablePoin.toFloat())
+            updateJenisButtonStates(btnSemua, btnPotongan, btnOngkir)
+        }
+
+        view.findViewById<TextView>(R.id.btnApply).setOnClickListener {
+            val values = rangeSlider.values
+            filterMinPoin = values[0].toInt()
+            filterMaxPoin = values[1].toInt()
+
+            applyAdvancedFilter()
+            dialog.dismiss()
+        }
+
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+    private fun updateJenisButtonStates(btnSemua: TextView, btnPotongan: TextView, btnOngkir: TextView) {
+        btnSemua.isSelected = filterJenisVoucher == null
+        btnPotongan.isSelected = filterJenisVoucher == "potongan"
+        btnOngkir.isSelected = filterJenisVoucher == "ongkir"
+
+        // Update background colors
+        btnSemua.setBackgroundResource(if (filterJenisVoucher == null) R.drawable.btn_filter_produk else R.drawable.btn_filter_produk_outline)
+        btnPotongan.setBackgroundResource(if (filterJenisVoucher == "potongan") R.drawable.btn_filter_produk else R.drawable.btn_filter_produk_outline)
+        btnOngkir.setBackgroundResource(if (filterJenisVoucher == "ongkir") R.drawable.btn_filter_produk else R.drawable.btn_filter_produk_outline)
+
+        // Update text colors
+        val selectedColor = getColor(R.color.white)
+        val unselectedColor = getColor(R.color.primary)
+
+        btnSemua.setTextColor(if (filterJenisVoucher == null) selectedColor else unselectedColor)
+        btnPotongan.setTextColor(if (filterJenisVoucher == "potongan") selectedColor else unselectedColor)
+        btnOngkir.setTextColor(if (filterJenisVoucher == "ongkir") selectedColor else unselectedColor)
+    }
+
+    private fun applyAdvancedFilter() {
+        filterData(etSearch.text.toString())
+    }
+
     private fun filterData(query: String) {
         when (currentFilter) {
             "voucherSaya" -> {
@@ -104,13 +212,30 @@ class VoucherActivity : AppCompatActivity() {
             }
 
             "tukarVoucher" -> {
-                val filtered = if (query.isBlank()) TukarVoucher
-                else TukarVoucher.filter {
-                    it.nama_voucher.contains(query, true)
+                var filtered = TukarVoucher.asSequence()
+
+                // Apply search query
+                if (query.isNotBlank()) {
+                    filtered = filtered.filter {
+                        it.nama_voucher.contains(query, true)
+                    }
+                }
+
+                // Apply jenis filter
+                if (filterJenisVoucher != null) {
+                    filtered = filtered.filter {
+                        it.jenis_voucher == filterJenisVoucher
+                    }
+                }
+
+                // Apply poin range filter
+                filtered = filtered.filter {
+                    val poin = it.poin_tukar ?: 0
+                    poin in filterMinPoin..filterMaxPoin
                 }
 
                 listTukarVoucher.clear()
-                listTukarVoucher.addAll(filtered)
+                listTukarVoucher.addAll(filtered.toList())
                 tukarVoucherAdapter.notifyDataSetChanged()
             }
         }
@@ -123,16 +248,24 @@ class VoucherActivity : AppCompatActivity() {
 
     private fun applyFilter(filter: String) {
         currentFilter = filter
-        etSearch.text.clear() // Clear search when switching filter
+        etSearch.text.clear()
+
+        // Reset advanced filters when switching tabs
+        filterJenisVoucher = null
+        filterMinPoin = 0
+        filterMaxPoin = maxAvailablePoin
+
         updateButtonStates()
 
         when (filter) {
             "voucherSaya" -> {
+                btnFilter.visibility = View.GONE
                 rvVoucher.layoutManager = LinearLayoutManager(this)
                 rvVoucher.adapter = voucherSayaAdapter
                 loadVoucherSaya()
             }
             "tukarVoucher" -> {
+                btnFilter.visibility = View.VISIBLE
                 rvVoucher.layoutManager = GridLayoutManager(this, 2)
                 rvVoucher.adapter = tukarVoucherAdapter
                 loadVoucher()
@@ -194,7 +327,6 @@ class VoucherActivity : AppCompatActivity() {
                 val userId = SupabaseManager.client.auth.currentUserOrNull()?.id
                 if (userId == null) return@launch
 
-                // Ambil semua voucher aktif
                 val allVouchers = SupabaseManager.client.postgrest["voucher"]
                     .select(Columns.raw("*")) {
                         filter {
@@ -203,7 +335,6 @@ class VoucherActivity : AppCompatActivity() {
                     }
                     .decodeList<Voucher>()
 
-                // Ambil voucher yang sudah dimiliki user
                 val userVouchers = SupabaseManager.client.postgrest["user_voucher"]
                     .select(Columns.raw("id_voucher")) {
                         filter {
@@ -214,15 +345,17 @@ class VoucherActivity : AppCompatActivity() {
 
                 val ownedVoucherIds = userVouchers.mapNotNull { it["id_voucher"] }
 
-                // Filter voucher yang belum dimiliki
                 val availableVouchers = if (ownedVoucherIds.isEmpty()) {
                     allVouchers
                 } else {
                     allVouchers.filter { voucher ->
-                        // Cek apakah voucher.id_voucher ada di ownedVoucherIds
                         !ownedVoucherIds.contains(voucher.id_voucher.toString())
                     }
                 }
+
+                // Calculate max available poin
+                maxAvailablePoin = availableVouchers.maxOfOrNull { it.poin_tukar ?: 0 } ?: 1000
+                filterMaxPoin = maxAvailablePoin
 
                 TukarVoucher.clear()
                 TukarVoucher.addAll(availableVouchers)
@@ -263,7 +396,6 @@ class VoucherActivity : AppCompatActivity() {
         }
     }
 
-    // Fungsi untuk refresh data setelah menukar voucher
     fun refreshAfterExchange() {
         loadUserPoint()
         loadVoucherSaya()

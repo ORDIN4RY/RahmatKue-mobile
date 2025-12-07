@@ -67,16 +67,39 @@
                 android:visibility="gone" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
-    <EditText
-        android:id="@+id/etSearch"
-        android:layout_width="330dp"
+    <!-- Search Bar with Filter Button -->
+    <LinearLayout
+        android:id="@+id/searchContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Cari voucher..."
-        android:textSize="10sp"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/input_rounded"/>
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_search"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp"
+            android:hint="Cari voucher..."
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/btnFilter"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/btn_filter_produk"
+            android:padding="12dp"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            app:tint="@color/white"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
