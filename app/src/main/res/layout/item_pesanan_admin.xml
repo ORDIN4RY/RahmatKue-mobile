@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="?attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="12sp"
+        android:textColor="#333333"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvTanggal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="12/12"
+        android:textSize="12sp"
+        android:textColor="#333333"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvWaktu"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="10:30"
+        android:textSize="12sp"
+        android:textColor="#333333"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvNomor"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="001"
+        android:textSize="12sp"
+        android:textColor="#333333"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvJenis"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Tunai"
+        android:textSize="12sp"
+        android:textColor="#333333"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Selesai"
+        android:textSize="12sp"
+        android:textColor="#4CAF50"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+</LinearLayout>

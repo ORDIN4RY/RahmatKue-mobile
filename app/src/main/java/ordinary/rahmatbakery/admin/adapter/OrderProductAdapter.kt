@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.adapter
+package ordinary.rahmatbakery.admin.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.model.OrderPackage
-import ordinary.rahmatbakery.model.OrderProduct
+import ordinary.rahmatbakery.admin.model.OrderPackage
+import ordinary.rahmatbakery.admin.model.OrderProduct
 import java.text.NumberFormat
 import java.util.Locale
 

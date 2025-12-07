@@ -9,6 +9,13 @@
     <color name="primary">#8E5E48</color>
     <color name="coklatSikit">#784c38</color>
 
+    <color name="green_success">#4CAF50</color>
+    <color name="orange_warning">#FF9800</color>
+    <color name="red_error">#F44336</color>
+    <color name="text_dark">#333333</color>
+    <color name="text_gray">#666666</color>
+    <color name="gray_light">#E0E0E0</color>
+
     <color name="status_aktif">#14A44D</color>
     <color name="status_belum_aktif">#0F62FE</color>
     <color name="status_expired">#E70F0F</color>

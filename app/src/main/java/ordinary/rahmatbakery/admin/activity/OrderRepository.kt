@@ -2,8 +2,7 @@ package ordinary.rahmatbakery.admin.activity
 
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
-import ordinary.rahmatbakery.model.Cancellation
-import ordinary.rahmatbakery.model.OrderAdmin
+import ordinary.rahmatbakery.admin.model.OrderAdmin
 import io.github.jan.supabase.postgrest.query.Order
 import ordinary.rahmatbakery.util.SupabaseManager
 //import ordinary.rahmatbakery.api.SupabaseManager
@@ -32,7 +31,7 @@ class OrderRepository {
                         batal(*)
                     """.trimIndent())
                 ) {
-                    order("created_at", Order.ASCENDING)
+                    order("created_at", Order.DESCENDING)
                 }
                 .decodeList<OrderAdmin>()
         } catch (e: Exception) {
@@ -130,7 +129,7 @@ class OrderRepository {
         return updateOrderStatus(orderId, "Selesai")
     }
     suspend fun orderReady(orderId: String): Boolean {
-        return updateOrderStatus(orderId, "Siap Diantar/Diambil")
+        return updateOrderStatus(orderId, "Siap Diambil/Diantar")
     }
 
     /**
@@ -160,7 +159,7 @@ class OrderRepository {
                     filter {
                         eq("status", status)
                     }
-                    order("created_at", Order.ASCENDING)
+                    order("created_at", Order.DESCENDING)
                 }
                 .decodeList<Order>()
         } catch (e: Exception) {

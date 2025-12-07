@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ordinary.rahmatbakery.model.Profile
+import ordinary.rahmatbakery.admin.model.Profile
 import ordinary.rahmatbakery.util.AuthRepository
 
 class LoginViewModel(

@@ -4,16 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.adapter.OrderProductAdapter
 import ordinary.rahmatbakery.admin.activity.OrderDetailActivity
-import ordinary.rahmatbakery.model.OrderAdmin
-import java.text.NumberFormat
+import ordinary.rahmatbakery.admin.model.OrderAdmin
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -69,7 +64,7 @@ class OrderInfoFragment : Fragment() {
             "Menunggu Pembayaran" -> textView.setBackgroundResource(R.drawable.bg_status_waiting)
             "Menunggu Diproses" -> textView.setBackgroundResource(R.drawable.bg_status_waiting)
             "Sedang Diproses" -> textView.setBackgroundResource(R.drawable.bg_status_proses)
-            "Siap diambil/diantar" -> textView.setBackgroundResource(R.drawable.bg_status_proses)
+            "Siap Diambil/Diantar" -> textView.setBackgroundResource(R.drawable.bg_status_proses)
             "Selesai" -> textView.setBackgroundResource(R.drawable.bg_status_selesai)
             "Dibatalkan" -> textView.setBackgroundResource(R.drawable.bg_status_cancel)
         }

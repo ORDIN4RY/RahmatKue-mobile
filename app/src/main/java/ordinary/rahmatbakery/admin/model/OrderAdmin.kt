@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.model
+package ordinary.rahmatbakery.admin.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

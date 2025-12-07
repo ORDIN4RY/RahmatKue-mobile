@@ -1,10 +1,12 @@
-package ordinary.rahmatbakery.model
+package ordinary.rahmatbakery.admin.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 @Parcelize
-@kotlinx.serialization.Serializable
+@Serializable
 data class  Profile(
     val id: String,
     val username: String? = "pengguna",

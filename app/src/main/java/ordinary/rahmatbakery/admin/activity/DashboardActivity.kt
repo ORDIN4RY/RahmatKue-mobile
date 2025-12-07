@@ -1,6 +1,5 @@
 package ordinary.rahmatbakery.admin.activity
 
-import ordinary.rahmatbakery.admin.fragment.BerandaAdminFragment
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
@@ -17,14 +16,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
+import ordinary.rahmatbakery.admin.fragment.BerandaAdminFragment
 import ordinary.rahmatbakery.admin.fragment.OrderListFragment
-import ordinary.rahmatbakery.model.Profile
-import ordinary.rahmatbakery.pelanggan.activity.KeranjangActivity
-import ordinary.rahmatbakery.pelanggan.activity.NotifActivity
-import ordinary.rahmatbakery.pelanggan.fragment.BerandaFragment
-import ordinary.rahmatbakery.pelanggan.fragment.MenuFragment
-import ordinary.rahmatbakery.pelanggan.fragment.PengaturanFragment
-import ordinary.rahmatbakery.pelanggan.fragment.PesananFragment
+import ordinary.rahmatbakery.admin.model.Profile
+import ordinary.rahmatbakery.admin.activity.NotifActivity
 import ordinary.rahmatbakery.util.AuthRepository
 
 class DashboardActivity(
@@ -68,7 +63,7 @@ class DashboardActivity(
                     }
             }
             if (savedInstanceState == null) {
-//                replaceFragment(BerandaAdminFragment())
+              replaceFragment(BerandaAdminFragment())
                 judul.setText("Beranda Admin")
             }
         }
@@ -76,7 +71,7 @@ class DashboardActivity(
         navbar.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-//                    replaceFragment(BerandaAdminFragment())
+                   replaceFragment(BerandaAdminFragment())
                     judul.setText("Beranda")
                     true
                 }

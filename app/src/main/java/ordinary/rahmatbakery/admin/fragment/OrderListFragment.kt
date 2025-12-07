@@ -17,10 +17,10 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.adapter.OrderAdapter
+import ordinary.rahmatbakery.admin.adapter.OrderAdapter
 import ordinary.rahmatbakery.admin.activity.OrderDetailActivity
 import ordinary.rahmatbakery.admin.activity.OrderRepository
-import ordinary.rahmatbakery.model.OrderAdmin
+import ordinary.rahmatbakery.admin.model.OrderAdmin
 
 class OrderListFragment : Fragment() {
 

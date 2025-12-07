@@ -65,7 +65,7 @@
             android:name=".pelanggan.activity.AlamatActivity"
             android:exported="false" />
         <activity
-            android:name=".pelanggan.activity.NotifActivity"
+            android:name=".admin.activity.NotifActivity"
             android:exported="false" />
 
         <activity

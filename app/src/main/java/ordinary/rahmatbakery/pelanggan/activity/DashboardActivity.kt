@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.LoginActivity
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.model.Profile
+import ordinary.rahmatbakery.admin.model.Profile
 import ordinary.rahmatbakery.pelanggan.fragment.BerandaFragment
 import ordinary.rahmatbakery.pelanggan.fragment.MenuFragment
 import ordinary.rahmatbakery.pelanggan.fragment.PengaturanFragment

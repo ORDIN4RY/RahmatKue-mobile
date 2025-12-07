@@ -9,10 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.adapter.OrderProductAdapter
+import ordinary.rahmatbakery.admin.adapter.OrderProductAdapter
 import ordinary.rahmatbakery.admin.activity.OrderDetailActivity
-import ordinary.rahmatbakery.model.OrderAdmin
-import ordinary.rahmatbakery.pelanggan.model.Pesanan
+import ordinary.rahmatbakery.admin.model.OrderAdmin
 import java.text.NumberFormat
 import java.util.Locale
 

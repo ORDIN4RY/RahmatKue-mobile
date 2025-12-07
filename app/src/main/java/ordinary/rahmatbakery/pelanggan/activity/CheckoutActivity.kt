@@ -48,9 +48,8 @@ import android.app.ProgressDialog
 import android.net.Uri
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
-import ordinary.rahmatbakery.model.Profile
+import ordinary.rahmatbakery.admin.model.Profile
 import ordinary.rahmatbakery.pelanggan.helper.XenditHelper
-import java.util.UUID
 
 class CheckoutActivity(
     // Menggunakan AuthRepository untuk mendapatkan data user yang sedang login
