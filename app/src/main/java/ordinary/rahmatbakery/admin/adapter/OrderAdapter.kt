@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.adapter
+package ordinary.rahmatbakery.admin.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.model.OrderAdmin
+import ordinary.rahmatbakery.admin.model.OrderAdmin
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale

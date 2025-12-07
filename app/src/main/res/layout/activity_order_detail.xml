@@ -73,10 +73,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginEnd="8dp"
             android:text="Selesaikan"
             android:textColor="@android:color/white"
             app:backgroundTint="#10B981"
             app:cornerRadius="8dp"/>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReady"
             android:layout_width="0dp"

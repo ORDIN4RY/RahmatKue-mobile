@@ -4,7 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import ordinary.rahmatbakery.model.Profile
 
 @Parcelize
 @Serializable

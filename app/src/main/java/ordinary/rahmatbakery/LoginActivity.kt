@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -19,7 +18,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import ordinary.rahmatbakery.model.Profile
+import ordinary.rahmatbakery.admin.model.Profile
 import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity as db_pelanggan
 import ordinary.rahmatbakery.admin.activity.DashboardActivity as db_admin
 

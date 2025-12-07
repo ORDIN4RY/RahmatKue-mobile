@@ -1,4 +1,4 @@
-package ordinary.rahmatbakery.adapter
+package ordinary.rahmatbakery.admin.adapter
 
 
 import androidx.fragment.app.Fragment

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import ordinary.rahmatbakery.R
 import ordinary.rahmatbakery.admin.activity.OrderDetailActivity
-import ordinary.rahmatbakery.model.OrderAdmin
+import ordinary.rahmatbakery.admin.model.OrderAdmin
 import java.text.SimpleDateFormat
 import java.util.Locale
 

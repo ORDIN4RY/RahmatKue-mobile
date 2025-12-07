@@ -2,15 +2,12 @@ package ordinary.rahmatbakery
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import ordinary.rahmatbakery.model.Profile
-import ordinary.rahmatbakery.pelanggan.activity.DashboardActivity
 
 class MainActivity : AppCompatActivity() {
 

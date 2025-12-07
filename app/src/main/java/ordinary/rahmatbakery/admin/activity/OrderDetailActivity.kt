@@ -3,7 +3,6 @@ package ordinary.rahmatbakery.admin.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,10 +15,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
 import ordinary.rahmatbakery.R
-import ordinary.rahmatbakery.adapter.OrderDetailPagerAdapter
-import ordinary.rahmatbakery.admin.activity.OrderRepository
+import ordinary.rahmatbakery.admin.adapter.OrderDetailPagerAdapter
 //import ordinary.rahmatbakery.api.SupabaseManager
-import ordinary.rahmatbakery.model.OrderAdmin
+import ordinary.rahmatbakery.admin.model.OrderAdmin
 import ordinary.rahmatbakery.CancelOrderDialog
 import ordinary.rahmatbakery.util.SupabaseManager
 
